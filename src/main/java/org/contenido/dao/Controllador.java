@@ -2,12 +2,12 @@ package org.contenido.dao;
 
 import java.util.List;
 
-public interface Controllador <T> extends CRUD<T>, Listar<T> {
+public interface Controllador <T> extends CRUD<T>, Listable<T> {
     @Override
     void registrar(T entidad);
 
     @Override
-    T leerId(int idEntidad);
+    T leerPorId(int idEntidad);
 
     @Override
     void actualizar(T entidad);
@@ -16,5 +16,5 @@ public interface Controllador <T> extends CRUD<T>, Listar<T> {
     void eliminar(int idEntidad);
 
     @Override
-    List<T> listar();
+    List<T> listarTodo();
 }

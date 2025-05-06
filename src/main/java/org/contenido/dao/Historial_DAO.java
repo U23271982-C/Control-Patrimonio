@@ -2,7 +2,7 @@ package org.contenido.dao;
 
 import java.util.List;
 
-public interface Historial_DAO <T> extends CRUD<T>, Listar<T> {
+public interface Historial_DAO <T> extends Actualizable<T>, Eliminable<T>, Listable<T> {
     @Override
     void actualizar(T entidad);
 
@@ -10,5 +10,5 @@ public interface Historial_DAO <T> extends CRUD<T>, Listar<T> {
     void eliminar(int idEntidad);
 
     @Override
-    List<T> listar();
+    List<T> listarTodo();
 }
