@@ -7,7 +7,7 @@ public interface Servicio <T> extends CRUD<T>, Listable<T> {
     void registrar(T entidad);
 
     @Override
-    T leerId(int idEntidad);
+    T leerPorId(int idEntidad);
 
     @Override
     void actualizar(T entidad);
