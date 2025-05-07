@@ -1,4 +1,4 @@
-package org.contenido.mapper;
+package org.contenido.mapeo;
 
 import org.contenido.dto.CategoriaDTO;
 import org.contenido.model.Categoria;

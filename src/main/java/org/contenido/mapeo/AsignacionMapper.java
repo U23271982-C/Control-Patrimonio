@@ -1,4 +1,4 @@
-package org.contenido.mapper;
+package org.contenido.mapeo;
 
 import org.contenido.dto.AsignacionDTO;
 import org.contenido.model.Asignacion;

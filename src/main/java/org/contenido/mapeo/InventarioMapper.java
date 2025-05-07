@@ -1,4 +1,4 @@
-package org.contenido.mapper;
+package org.contenido.mapeo;
 
 import org.contenido.dto.InventarioDTO;
 import org.contenido.model.Inventario;

@@ -1,4 +1,4 @@
-package org.contenido.mapper;
+package org.contenido.mapeo;
 
 public interface Convertidor<T, D> {
     D convertidorDTO(T modelo);

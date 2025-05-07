@@ -1,4 +1,4 @@
-package org.contenido.mapper;
+package org.contenido.mapeo;
 
 import org.contenido.dto.Historial_EstadoDTO;
 import org.contenido.model.Historial_Estado;

@@ -1,4 +1,4 @@
-package org.contenido.mapper;
+package org.contenido.mapeo;
 
 import org.contenido.dto.Rol_ResponsableDTO;
 import org.contenido.model.Rol_Responsable;
