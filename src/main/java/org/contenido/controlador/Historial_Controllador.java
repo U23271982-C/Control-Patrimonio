@@ -1,4 +1,7 @@
-package org.contenido.dao;
+package org.contenido.controlador;
+
+import org.contenido.dao.CRUD;
+import org.contenido.dao.Listable;
 
 import java.util.List;
 

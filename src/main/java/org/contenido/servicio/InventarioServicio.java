@@ -1,8 +1,6 @@
 package org.contenido.servicio;
 
 import org.contenido.dao.DAO;
-import org.contenido.dao.Servicio;
-import org.contenido.dao.daoImplementado.InventarioDAO;
 import org.contenido.dto.InventarioDTO;
 
 import java.util.List;
