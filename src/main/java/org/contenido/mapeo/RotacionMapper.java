@@ -8,12 +8,12 @@ public class RotacionMapper implements Convertidor<Rotacion, RotacionDTO>{
     }
 
     @Override
-    public RotacionDTO convertidorDTO(Rotacion modelo) {
+    public RotacionDTO convertirDTO(Rotacion modelo) {
         return null;
     }
 
     @Override
-    public Rotacion convertidorModelo(RotacionDTO dto) {
+    public Rotacion convertirModelo(RotacionDTO dto) {
         return null;
     }
 }

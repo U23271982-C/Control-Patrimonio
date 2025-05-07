@@ -8,12 +8,12 @@ public class CategoriaMapper implements Convertidor<Categoria, CategoriaDTO>{
     }
 
     @Override
-    public CategoriaDTO convertidorDTO(Categoria modelo) {
+    public CategoriaDTO convertirDTO(Categoria modelo) {
         return null;
     }
 
     @Override
-    public Categoria convertidorModelo(CategoriaDTO dto) {
+    public Categoria convertirModelo(CategoriaDTO dto) {
         return null;
     }
 }

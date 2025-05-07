@@ -8,12 +8,12 @@ public class InmuebleMapper implements Convertidor<Inmueble, InmuebleDTO>{
     }
 
     @Override
-    public InmuebleDTO convertidorDTO(Inmueble modelo) {
+    public InmuebleDTO convertirDTO(Inmueble modelo) {
         return null;
     }
 
     @Override
-    public Inmueble convertidorModelo(InmuebleDTO dto) {
+    public Inmueble convertirModelo(InmuebleDTO dto) {
         return null;
     }
 }

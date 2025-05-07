@@ -8,12 +8,12 @@ public class Detalle_InventarioMapper implements Convertidor<Detalle_Inventario,
     }
 
     @Override
-    public Detalle_InventarioDTO convertidorDTO(Detalle_Inventario modelo) {
+    public Detalle_InventarioDTO convertirDTO(Detalle_Inventario modelo) {
         return null;
     }
 
     @Override
-    public Detalle_Inventario convertidorModelo(Detalle_InventarioDTO dto) {
+    public Detalle_Inventario convertirModelo(Detalle_InventarioDTO dto) {
         return null;
     }
 }

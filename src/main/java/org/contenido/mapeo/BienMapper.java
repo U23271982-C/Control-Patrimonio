@@ -8,12 +8,12 @@ public class BienMapper implements Convertidor<Bien, BienDTO>{
     }
 
     @Override
-    public BienDTO convertidorDTO(Bien modelo) {
+    public BienDTO convertirDTO(Bien modelo) {
         return null;
     }
 
     @Override
-    public Bien convertidorModelo(BienDTO dto) {
+    public Bien convertirModelo(BienDTO dto) {
         return null;
     }
 }

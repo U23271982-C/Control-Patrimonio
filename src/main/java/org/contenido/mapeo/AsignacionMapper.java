@@ -8,12 +8,12 @@ public class AsignacionMapper implements Convertidor<Asignacion, AsignacionDTO>{
     }
 
     @Override
-    public AsignacionDTO convertidorDTO(Asignacion modelo) {
+    public AsignacionDTO convertirDTO(Asignacion modelo) {
         return null;
     }
 
     @Override
-    public Asignacion convertidorModelo(AsignacionDTO dto) {
+    public Asignacion convertirModelo(AsignacionDTO dto) {
         return null;
     }
 }

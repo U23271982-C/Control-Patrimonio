@@ -8,12 +8,12 @@ public class ResponsableMapper implements Convertidor<Responsable, ResponsableDT
     }
 
     @Override
-    public ResponsableDTO convertidorDTO(Responsable modelo) {
+    public ResponsableDTO convertirDTO(Responsable modelo) {
         return null;
     }
 
     @Override
-    public Responsable convertidorModelo(ResponsableDTO dto) {
+    public Responsable convertirModelo(ResponsableDTO dto) {
         return null;
     }
 }

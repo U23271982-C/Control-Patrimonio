@@ -8,12 +8,12 @@ public class AmbienteMapper implements Convertidor<Ambiente, AmbienteDTO>{
     }
 
     @Override
-    public AmbienteDTO convertidorDTO(Ambiente modelo) {
+    public AmbienteDTO convertirDTO(Ambiente modelo) {
         return null;
     }
 
     @Override
-    public Ambiente convertidorModelo(AmbienteDTO dto) {
+    public Ambiente convertirModelo(AmbienteDTO dto) {
         return null;
     }
 }

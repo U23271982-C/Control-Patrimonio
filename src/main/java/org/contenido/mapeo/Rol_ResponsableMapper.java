@@ -8,12 +8,12 @@ public class Rol_ResponsableMapper implements Convertidor<Rol_Responsable, Rol_R
     }
 
     @Override
-    public Rol_ResponsableDTO convertidorDTO(Rol_Responsable modelo) {
+    public Rol_ResponsableDTO convertirDTO(Rol_Responsable modelo) {
         return null;
     }
 
     @Override
-    public Rol_Responsable convertidorModelo(Rol_ResponsableDTO dto) {
+    public Rol_Responsable convertirModelo(Rol_ResponsableDTO dto) {
         return null;
     }
 }
