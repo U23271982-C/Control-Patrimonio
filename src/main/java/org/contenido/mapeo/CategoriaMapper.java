@@ -1,7 +1,7 @@
 package org.contenido.mapeo;
 
 import org.contenido.dto.CategoriaDTO;
-import org.contenido.model.Categoria;
+import org.contenido.modelo.Categoria;
 
 public class CategoriaMapper implements Convertidor<Categoria, CategoriaDTO>{
     public CategoriaMapper() {

@@ -1,17 +1,21 @@
-package org.contenido.model;
+package org.contenido.modelo;
 
-public class Rotacion {
+import java.time.LocalDate;
+
+public class Historial_Estado {
     private int id;
     private Bien bien;
-    private Ambiente ambiente;
+    private Estado estado;
     private String motivo;
+    private LocalDate fecha_cambio;
     private Responsable responsable;
 
-    public Rotacion(int id, Bien bien, Ambiente ambiente, String motivo, Responsable responsable) {
+    public Historial_Estado(int id, Bien bien, Estado estado, String motivo, LocalDate fecha_cambio, Responsable responsable) {
         this.id = id;
         this.bien = bien;
-        this.ambiente = ambiente;
+        this.estado = estado;
         this.motivo = motivo;
+        this.fecha_cambio = fecha_cambio;
         this.responsable = responsable;
     }
 
@@ -31,12 +35,12 @@ public class Rotacion {
         this.bien = bien;
     }
 
-    public Ambiente getAmbiente() {
-        return ambiente;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setAmbiente(Ambiente ambiente) {
-        this.ambiente = ambiente;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
     public String getMotivo() {
@@ -45,6 +49,14 @@ public class Rotacion {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
+    }
+
+    public LocalDate getFecha_cambio() {
+        return fecha_cambio;
+    }
+
+    public void setFecha_cambio(LocalDate fecha_cambio) {
+        this.fecha_cambio = fecha_cambio;
     }
 
     public Responsable getResponsable() {

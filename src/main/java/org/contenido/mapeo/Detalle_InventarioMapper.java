@@ -1,7 +1,7 @@
 package org.contenido.mapeo;
 
 import org.contenido.dto.Detalle_InventarioDTO;
-import org.contenido.model.Detalle_Inventario;
+import org.contenido.modelo.Detalle_Inventario;
 
 public class Detalle_InventarioMapper implements Convertidor<Detalle_Inventario, Detalle_InventarioDTO>{
     public Detalle_InventarioMapper() {

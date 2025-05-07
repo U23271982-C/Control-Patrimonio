@@ -1,7 +1,7 @@
 package org.contenido.mapeo;
 
 import org.contenido.dto.ResponsableDTO;
-import org.contenido.model.Responsable;
+import org.contenido.modelo.Responsable;
 
 public class ResponsableMapper implements Convertidor<Responsable, ResponsableDTO>{
     public ResponsableMapper() {

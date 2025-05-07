@@ -1,7 +1,7 @@
 package org.contenido.mapeo;
 
 import org.contenido.dto.EstadoDTO;
-import org.contenido.model.Estado;
+import org.contenido.modelo.Estado;
 
 public class EstadoMapper implements Convertidor <Estado,EstadoDTO>{
     public EstadoMapper() {

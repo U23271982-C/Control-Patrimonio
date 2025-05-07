@@ -1,4 +1,4 @@
-package org.contenido.model;
+package org.contenido.modelo;
 
 public class Ambiente {
     private int id;

@@ -1,7 +1,7 @@
 package org.contenido.mapeo;
 
 import org.contenido.dto.BienDTO;
-import org.contenido.model.Bien;
+import org.contenido.modelo.Bien;
 
 public class BienMapper implements Convertidor<Bien, BienDTO>{
     public BienMapper() {
