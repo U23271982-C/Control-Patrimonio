@@ -1,19 +1,19 @@
-package org.contenido.mapper;
+package org.contenido.mapeo;
 
 import org.contenido.dto.CategoriaDTO;
-import org.contenido.model.Categoria;
+import org.contenido.modelo.Categoria;
 
 public class CategoriaMapper implements Convertidor<Categoria, CategoriaDTO>{
     public CategoriaMapper() {
     }
 
     @Override
-    public CategoriaDTO convertidorDTO(Categoria modelo) {
+    public CategoriaDTO convertirDTO(Categoria modelo) {
         return null;
     }
 
     @Override
-    public Categoria convertidorModelo(CategoriaDTO dto) {
+    public Categoria convertirModelo(CategoriaDTO dto) {
         return null;
     }
 }

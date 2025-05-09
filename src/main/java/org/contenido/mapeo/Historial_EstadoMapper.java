@@ -1,19 +1,19 @@
-package org.contenido.mapper;
+package org.contenido.mapeo;
 
 import org.contenido.dto.Historial_EstadoDTO;
-import org.contenido.model.Historial_Estado;
+import org.contenido.modelo.Historial_Estado;
 
 public class Historial_EstadoMapper implements Convertidor<Historial_Estado, Historial_EstadoDTO>{
     public Historial_EstadoMapper() {
     }
 
     @Override
-    public Historial_EstadoDTO convertidorDTO(Historial_Estado modelo) {
+    public Historial_EstadoDTO convertirDTO(Historial_Estado modelo) {
         return null;
     }
 
     @Override
-    public Historial_Estado convertidorModelo(Historial_EstadoDTO dto) {
+    public Historial_Estado convertirModelo(Historial_EstadoDTO dto) {
         return null;
     }
 }

@@ -1,19 +1,19 @@
-package org.contenido.mapper;
+package org.contenido.mapeo;
 
 import org.contenido.dto.EstadoDTO;
-import org.contenido.model.Estado;
+import org.contenido.modelo.Estado;
 
 public class EstadoMapper implements Convertidor <Estado,EstadoDTO>{
     public EstadoMapper() {
     }
 
     @Override
-    public EstadoDTO convertidorDTO(Estado modelo) {
+    public EstadoDTO convertirDTO(Estado modelo) {
         return null;
     }
 
     @Override
-    public Estado convertidorModelo(EstadoDTO dto) {
+    public Estado convertirModelo(EstadoDTO dto) {
         return null;
     }
 }

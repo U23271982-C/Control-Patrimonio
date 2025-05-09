@@ -1,19 +1,19 @@
-package org.contenido.mapper;
+package org.contenido.mapeo;
 
 import org.contenido.dto.BienDTO;
-import org.contenido.model.Bien;
+import org.contenido.modelo.Bien;
 
 public class BienMapper implements Convertidor<Bien, BienDTO>{
     public BienMapper() {
     }
 
     @Override
-    public BienDTO convertidorDTO(Bien modelo) {
+    public BienDTO convertirDTO(Bien modelo) {
         return null;
     }
 
     @Override
-    public Bien convertidorModelo(BienDTO dto) {
+    public Bien convertirModelo(BienDTO dto) {
         return null;
     }
 }
