@@ -8,39 +8,39 @@ import org.contenido.dto.InventarioDTO;
 import java.util.List;
 
 public class InventarioServicio implements Servicio<InventarioDTO> {
-    private DAO<InventarioDTO> dao;
+    private InventarioDAO inventarioDAO;
 
-    public InventarioServicio(DAO dao){
-        this.dao = dao;
+    public InventarioServicio() {
+        this.inventarioDAO = new InventarioDAO();
     }
 
     @Override
     public void registrar(InventarioDTO entidad) {
         // Falta lógica de negocio
-        dao.registrar(entidad);
+        inventarioDAO.registrar(entidad);
     }
 
     @Override
     public InventarioDTO leerPorId(int idEntidad) {
         // Falta lógica de negocio
-        return dao.leerPorId(idEntidad);
+        return inventarioDAO.leerPorId(idEntidad);
     }
 
     @Override
     public void actualizar(InventarioDTO entidad) {
         // Falta lógica de negocio
-        dao.actualizar(entidad);
+        inventarioDAO.actualizar(entidad);
     }
 
     @Override
     public void eliminar(int idEntidad) {
         // Falta lógica de negocio
-        dao.eliminar(idEntidad);
+        inventarioDAO.eliminar(idEntidad);
     }
 
     @Override
     public List<InventarioDTO> listarTodo() {
         // Falta lógica de negocio
-        return dao.listarTodo();
+        return inventarioDAO.listarTodo();
     }
 }
