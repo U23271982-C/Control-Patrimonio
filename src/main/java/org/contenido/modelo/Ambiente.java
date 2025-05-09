@@ -5,10 +5,7 @@ public class Ambiente {
     private String nombre;
     private Inmueble inmueble;
 
-    public Ambiente(int id, String nombre, Inmueble inmueble) {
-        this.id = id;
-        this.nombre = nombre;
-        this.inmueble = inmueble;
+    public Ambiente() {
     }
 
     public int getId() {

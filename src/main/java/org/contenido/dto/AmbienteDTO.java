@@ -5,10 +5,7 @@ public class AmbienteDTO {
     private String nombre;
     private int id_inmueble;
 
-    public AmbienteDTO(int id, String nombre, int id_inmueble) {
-        this.id = id;
-        this.nombre = nombre;
-        this.id_inmueble = id_inmueble;
+    public AmbienteDTO() {
     }
 
     public int getId() {
