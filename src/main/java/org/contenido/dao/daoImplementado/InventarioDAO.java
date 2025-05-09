@@ -1,23 +1,23 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
-import org.contenido.dto.InventarioDTO;
+import org.contenido.modelo.Inventario;
 
 import java.util.List;
 
-public class InventarioDAO implements DAO<InventarioDTO> {
+public class InventarioDAO implements DAO<Inventario> {
     @Override
-    public void registrar(InventarioDTO entidad) {
+    public void registrar(Inventario entidad) {
 
     }
 
     @Override
-    public InventarioDTO leerPorId(int idEntidad) {
+    public Inventario leerPorId(int idEntidad) {
         return null;
     }
 
     @Override
-    public void actualizar(InventarioDTO entidad) {
+    public void actualizar(Inventario entidad) {
 
     }
 
@@ -27,7 +27,7 @@ public class InventarioDAO implements DAO<InventarioDTO> {
     }
 
     @Override
-    public List<InventarioDTO> listarTodo() {
+    public List<Inventario> listarTodo() {
         return List.of();
     }
 }

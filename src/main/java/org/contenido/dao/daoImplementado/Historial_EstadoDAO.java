@@ -1,13 +1,13 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.Historial_DAO;
-import org.contenido.dto.Historial_EstadoDTO;
+import org.contenido.model.Historial_Estado;
 
 import java.util.List;
 
-public class Historial_EstadoDAO implements Historial_DAO<Historial_EstadoDTO> {
+public class Historial_EstadoDAO implements Historial_DAO<Historial_Estado> {
     @Override
-    public void actualizar(Historial_EstadoDTO entidad) {
+    public void actualizar(Historial_Estado entidad) {
 
     }
 
@@ -17,7 +17,7 @@ public class Historial_EstadoDAO implements Historial_DAO<Historial_EstadoDTO> {
     }
 
     @Override
-    public List<Historial_EstadoDTO> listarTodo() {
+    public List<Historial_Estado> listarTodo() {
         return List.of();
     }
 }

@@ -1,23 +1,23 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
-import org.contenido.dto.CategoriaDTO;
+import org.contenido.model.Categoria;
 
 import java.util.List;
 
-public class CategoriaDAO implements DAO<CategoriaDTO> {
+public class CategoriaDAO implements DAO<Categoria> {
     @Override
-    public void actualizar(CategoriaDTO entidad) {
+    public void registrar(Categoria entidad) {
 
     }
 
     @Override
-    public CategoriaDTO leerPorId(int idEntidad) {
+    public Categoria leerPorId(int idEntidad) {
         return null;
     }
 
     @Override
-    public void registrar(CategoriaDTO entidad) {
+    public void actualizar(Categoria entidad) {
 
     }
 
@@ -27,7 +27,7 @@ public class CategoriaDAO implements DAO<CategoriaDTO> {
     }
 
     @Override
-    public List<CategoriaDTO> listarTodo() {
+    public List<Categoria> listarTodo() {
         return List.of();
     }
 }

@@ -2,22 +2,23 @@ package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
 import org.contenido.dto.Rol_ResponsableDTO;
+import org.contenido.model.Rol_Responsable;
 
 import java.util.List;
 
-public class Rol_ResponsableDAO implements DAO<Rol_ResponsableDTO> {
+public class Rol_ResponsableDAO implements DAO<Rol_Responsable> {
     @Override
-    public void actualizar(Rol_ResponsableDTO entidad) {
+    public void registrar(Rol_Responsable entidad) {
 
     }
 
     @Override
-    public Rol_ResponsableDTO leerPorId(int idEntidad) {
+    public Rol_Responsable leerPorId(int idEntidad) {
         return null;
     }
 
     @Override
-    public void registrar(Rol_ResponsableDTO entidad) {
+    public void actualizar(Rol_Responsable entidad) {
 
     }
 
@@ -27,7 +28,7 @@ public class Rol_ResponsableDAO implements DAO<Rol_ResponsableDTO> {
     }
 
     @Override
-    public List<Rol_ResponsableDTO> listarTodo() {
+    public List<Rol_Responsable> listarTodo() {
         return List.of();
     }
 }

@@ -1,23 +1,23 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
-import org.contenido.dto.InmuebleDTO;
+import org.contenido.model.Inmueble;
 
 import java.util.List;
 
-public class InmuebleDAO implements DAO<InmuebleDTO> {
+public class InmuebleDAO implements DAO<Inmueble> {
     @Override
-    public void registrar(InmuebleDTO entidad) {
+    public void registrar(Inmueble entidad) {
 
     }
 
     @Override
-    public InmuebleDTO leerPorId(int idEntidad) {
+    public Inmueble leerPorId(int idEntidad) {
         return null;
     }
 
     @Override
-    public void actualizar(InmuebleDTO entidad) {
+    public void actualizar(Inmueble entidad) {
 
     }
 
@@ -27,7 +27,7 @@ public class InmuebleDAO implements DAO<InmuebleDTO> {
     }
 
     @Override
-    public List<InmuebleDTO> listarTodo() {
+    public List<Inmueble> listarTodo() {
         return List.of();
     }
 }

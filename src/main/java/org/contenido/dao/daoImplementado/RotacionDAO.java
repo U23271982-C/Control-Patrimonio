@@ -1,23 +1,15 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
+import org.contenido.dao.Historial_DAO;
 import org.contenido.dto.RotacionDTO;
+import org.contenido.model.Rotacion;
 
 import java.util.List;
 
-public class RotacionDAO implements DAO<RotacionDTO> {
+public class RotacionDAO implements Historial_DAO<Rotacion> {
     @Override
-    public void actualizar(RotacionDTO entidad) {
-
-    }
-
-    @Override
-    public RotacionDTO leerPorId(int idEntidad) {
-        return null;
-    }
-
-    @Override
-    public void registrar(RotacionDTO entidad) {
+    public void actualizar(Rotacion entidad) {
 
     }
 
@@ -27,7 +19,7 @@ public class RotacionDAO implements DAO<RotacionDTO> {
     }
 
     @Override
-    public List<RotacionDTO> listarTodo() {
+    public List<Rotacion> listarTodo() {
         return List.of();
     }
 }

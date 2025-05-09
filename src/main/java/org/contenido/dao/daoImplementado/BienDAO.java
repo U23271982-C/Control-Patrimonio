@@ -7,7 +7,7 @@ import java.util.List;
 
 public class BienDAO implements DAO<BienDTO> {
     @Override
-    public void actualizar(BienDTO entidad) {
+    public void registrar(BienDTO entidad) {
 
     }
 
@@ -17,7 +17,7 @@ public class BienDAO implements DAO<BienDTO> {
     }
 
     @Override
-    public void registrar(BienDTO entidad) {
+    public void actualizar(BienDTO entidad) {
 
     }
 
