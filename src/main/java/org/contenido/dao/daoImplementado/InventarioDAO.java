@@ -1,6 +1,8 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
+import org.contenido.mapeo.InventarioMapper;
+import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.modelo.Inventario;
 import org.contenido.persistencia.ConexionPool;
 
@@ -8,9 +10,16 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventarioDAO implements DAO<Inventario> {
+    private final ResultSetMapper<Inventario> mapper;
+
+    public InventarioDAO() {
+        this.mapper = new InventarioMapper();
+    }
+
     @Override
     public void registrar(Inventario entidad) {
         String sql = "{ CALL pa_Registrar_Inventario(?, ?, ?, ?) }";
@@ -33,7 +42,6 @@ public class InventarioDAO implements DAO<Inventario> {
 
     @Override
     public Inventario leerPorId(int idEntidad) {
-        Inventario entidad = null;
         String sql = "{ CALL pa_Leer_Inventario(?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
@@ -42,17 +50,12 @@ public class InventarioDAO implements DAO<Inventario> {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                entidad = new Inventario();
-                entidad.setId(rs.getInt(1));
-                entidad.setNombre(rs.getString(2));
-                entidad.setDescripcion(rs.getString(3));
-                entidad.setFechaInicio(rs.getDate(4).toLocalDate());
-                entidad.setFechaFin(rs.getDate(5).toLocalDate());
+                return mapper.mapDeResultSet(rs);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error al leer el inventario: " + e.getMessage(), e);
         }
-        return entidad;
+        return null;
     }
 
     @Override
@@ -92,7 +95,20 @@ public class InventarioDAO implements DAO<Inventario> {
 
     @Override
     public List<Inventario> listarTodo() {
-        // faltan los metodos de listar
-        return List.of();
+        String sql = "{ CALL pa_Listar_Inventario() }";
+        try (Connection conn = ConexionPool.getConnection();
+             CallableStatement stmt = conn.prepareCall(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+            List<Inventario> entidades = new ArrayList<>();
+            while (rs.next()) {
+                entidades.add(mapper.mapDeResultSet(rs));
+            }
+
+            stmt.executeUpdate();
+            return entidades;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al listar el inventario: " + e.getMessage(), e);
+        }
     }
 }
