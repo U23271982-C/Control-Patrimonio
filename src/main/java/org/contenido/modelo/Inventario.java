@@ -9,13 +9,7 @@ public class Inventario {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
 
-    public Inventario(int id, String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-    }
+    public Inventario() {}
 
     public int getId() {
         return id;
