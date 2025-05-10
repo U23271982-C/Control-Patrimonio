@@ -1,11 +1,11 @@
 package org.contenido.servicio;
 
-import org.contenido.dao.DAO;
 import org.contenido.dao.daoImplementado.InventarioDAO;
 import org.contenido.dto.InventarioDTO;
-import org.contenido.mapeo.BienMapper;
 import org.contenido.mapeo.InventarioMapper;
 import org.contenido.modelo.Inventario;
+import org.contenido.utilidades.ValidadorUtilidad;
+import org.contenido.validacion.EnCrear;
 
 import java.util.List;
 
@@ -21,6 +21,7 @@ public class InventarioServicio implements Servicio<InventarioDTO> {
     @Override
     public void registrar(InventarioDTO entidad) {
         // Falta lógica de negocio
+        ValidadorUtilidad.validar(entidad, EnCrear.class);
         Inventario modelo = inventarioMapper.convertirModelo(entidad);
         inventarioDAO.registrar(modelo);
     }

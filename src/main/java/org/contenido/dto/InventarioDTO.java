@@ -1,20 +1,26 @@
 package org.contenido.dto;
 
+import org.contenido.validacion.EnActualizar;
+import org.contenido.validacion.EnCrear;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class InventarioDTO {
+    @NotNull(message = "El id no puede ser nulo", groups = EnActualizar.class)
     private int id;
+    @NotNull(message = "El nombre no puede ser nulo", groups = EnCrear.class)
+    @Size(max = 50, message = "La descripción no debe exceder los 50 caracteres")
     private String nombre;
+    @NotNull(message = "La descripción no puede ser nula", groups = EnCrear.class)
+    @Size(max = 50, message = "La descripción no debe exceder los 50 caracteres")
     private String descripcion;
+    @NotNull(message = "La fecha de inicio no puede ser nula", groups = EnCrear.class)
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
 
-    public InventarioDTO(int id, String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+    public InventarioDTO() {
     }
 
     public int getId() {
