@@ -1,12 +1,13 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.Historial_DAO;
+import org.contenido.modelo.Asignacion;
 
 import java.util.List;
 
-public class AsignacionDAO implements Historial_DAO<AsignacionDAO> {
+public class AsignacionDAO implements Historial_DAO<Asignacion> {
     @Override
-    public void actualizar(AsignacionDAO entidad) {
+    public void actualizar(Asignacion entidad) {
 
     }
 
@@ -16,7 +17,7 @@ public class AsignacionDAO implements Historial_DAO<AsignacionDAO> {
     }
 
     @Override
-    public List<AsignacionDAO> listarTodo() {
+    public List<Asignacion> listarTodo() {
         return List.of();
     }
 }

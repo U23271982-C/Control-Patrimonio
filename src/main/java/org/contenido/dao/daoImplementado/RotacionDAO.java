@@ -1,9 +1,7 @@
 package org.contenido.dao.daoImplementado;
 
-import org.contenido.dao.DAO;
 import org.contenido.dao.Historial_DAO;
-import org.contenido.dto.RotacionDTO;
-import org.contenido.model.Rotacion;
+import org.contenido.modelo.Rotacion;
 
 import java.util.List;
 

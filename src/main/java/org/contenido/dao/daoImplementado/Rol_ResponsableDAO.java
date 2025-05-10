@@ -2,7 +2,7 @@ package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
 import org.contenido.dto.Rol_ResponsableDTO;
-import org.contenido.model.Rol_Responsable;
+import org.contenido.modelo.Rol_Responsable;
 
 import java.util.List;
 

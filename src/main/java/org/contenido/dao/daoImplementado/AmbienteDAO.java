@@ -1,7 +1,7 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
-import org.contenido.model.Ambiente;
+import org.contenido.modelo.Ambiente;
 import java.util.List;
 
 public class AmbienteDAO implements DAO<Ambiente> {

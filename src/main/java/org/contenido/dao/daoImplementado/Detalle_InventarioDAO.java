@@ -1,7 +1,7 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
-import org.contenido.model.Detalle_Inventario;
+import org.contenido.modelo.Detalle_Inventario;
 
 import java.util.List;
 

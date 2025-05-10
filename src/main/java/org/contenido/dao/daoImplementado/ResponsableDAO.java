@@ -1,8 +1,7 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
-import org.contenido.dto.ResponsableDTO;
-import org.contenido.model.Responsable;
+import org.contenido.modelo.Responsable;
 
 import java.util.List;
 
