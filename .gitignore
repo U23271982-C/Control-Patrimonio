@@ -37,3 +37,5 @@ build/
 ### Mac OS ###
 .DS_Store
 .idea/encodings.xml
+### Clase de prueba ###
+src/main/java/org/contenido/PruebaApp.java
