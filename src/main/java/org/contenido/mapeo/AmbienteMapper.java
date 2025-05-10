@@ -4,8 +4,7 @@ import org.contenido.dto.AmbienteDTO;
 import org.contenido.modelo.Ambiente;
 
 public class AmbienteMapper implements Convertidor<Ambiente, AmbienteDTO>{
-    public AmbienteMapper() {
-    }
+    public AmbienteMapper() {}
 
     @Override
     public AmbienteDTO convertirDTO(Ambiente modelo) {
@@ -23,6 +22,6 @@ public class AmbienteMapper implements Convertidor<Ambiente, AmbienteDTO>{
         model.setId(dto.getId());
         model.setNombre(dto.getNombre());
         model.setInmueble(null);
-        return null;
+        return model;
     }
 }
