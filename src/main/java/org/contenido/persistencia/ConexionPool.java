@@ -11,9 +11,10 @@ public class ConexionPool {
 
     static {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:mysql://localhost:3306/BDPatrimonioU");
-        config.setUsername("usuario");
-        config.setPassword("contraseña");
+        config.setJdbcUrl("jdbc:mysql://localhost:3306/BDPatrimonioU?useSSL=false&serverTimezone=UTC");
+        config.setUsername("root");
+        config.setPassword("123456789");
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
         config.setMaximumPoolSize(10); // conexiones máximas
         config.setMinimumIdle(2);      // conexiones mínimas en reposo
