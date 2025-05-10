@@ -1,8 +1,7 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
-import org.contenido.dto.EstadoDTO;
-import org.contenido.model.Estado;
+import org.contenido.modelo.Estado;
 
 import java.util.List;
 

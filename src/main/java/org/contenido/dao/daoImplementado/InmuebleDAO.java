@@ -1,7 +1,7 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
-import org.contenido.model.Inmueble;
+import org.contenido.modelo.Inmueble;
 
 import java.util.List;
 

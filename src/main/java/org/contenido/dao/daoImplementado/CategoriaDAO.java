@@ -1,7 +1,7 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
-import org.contenido.model.Categoria;
+import org.contenido.modelo.Categoria;
 
 import java.util.List;
 

@@ -1,23 +1,22 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
-import org.contenido.dto.BienDTO;
-
+import org.contenido.modelo.Bien;
 import java.util.List;
 
-public class BienDAO implements DAO<BienDTO> {
+public class BienDAO implements DAO<Bien> {
     @Override
-    public void registrar(BienDTO entidad) {
+    public void registrar(Bien entidad) {
 
     }
 
     @Override
-    public BienDTO leerPorId(int idEntidad) {
+    public Bien leerPorId(int idEntidad) {
         return null;
     }
 
     @Override
-    public void actualizar(BienDTO entidad) {
+    public void actualizar(Bien entidad) {
 
     }
 
@@ -27,7 +26,7 @@ public class BienDAO implements DAO<BienDTO> {
     }
 
     @Override
-    public List<BienDTO> listarTodo() {
+    public List<Bien> listarTodo() {
         return List.of();
     }
 }

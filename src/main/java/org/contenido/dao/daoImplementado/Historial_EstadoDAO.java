@@ -1,7 +1,7 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.Historial_DAO;
-import org.contenido.model.Historial_Estado;
+import org.contenido.modelo.Historial_Estado;
 
 import java.util.List;
 
