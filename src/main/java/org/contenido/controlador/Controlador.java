@@ -5,7 +5,7 @@ import org.contenido.dao.Listable;
 
 import java.util.List;
 
-public interface Controllador <T> extends CRUD<T>, Listable<T> {
+public interface Controlador<T> extends CRUD<T>, Listable<T> {
     @Override
     void registrar(T entidad);
 
