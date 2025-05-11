@@ -1,13 +1,19 @@
 package org.contenido.dto;
 
+import org.contenido.validacion.EnActualizar;
+import org.contenido.validacion.EnCrear;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class EstadoDTO {
+    @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class})
     private int id;
+    @NotNull(message = "El tipo no puede ser nulo", groups = {EnCrear.class})
+    @Size(max = 30, message = "El tipo no debe exceder los 30 caracteres")
     private String tipo;
 
-    public EstadoDTO(int id, String tipo) {
-        this.id = id;
-        this.tipo = tipo;
-    }
+    public EstadoDTO() {}
 
     public int getId() {
         return id;

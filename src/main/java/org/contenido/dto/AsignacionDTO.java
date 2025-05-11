@@ -1,21 +1,23 @@
 package org.contenido.dto;
 
+import org.contenido.validacion.EnActualizar;
+import org.contenido.validacion.EnCrear;
+
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class AsignacionDTO {
+    @NotNull(message = "El id no puede ser nulo", groups = EnActualizar.class)
     private int id;
+    @NotNull(message = "El id del bien no puede ser nulo", groups = EnCrear.class)
     private int id_bien;
+    @NotNull(message = "El id del responsable no puede ser nulo", groups = EnCrear.class)
     private int id_bien_responsable;
+    @NotNull(message = "La fecha de inicio no puede ser nula", groups = EnCrear.class)
     private LocalDate fecha_inicio;
     private LocalDate fecha_fin;
 
-    public AsignacionDTO(int id, int id_bien, int id_bien_responsable, LocalDate fecha_inicio, LocalDate fecha_fin) {
-        this.id = id;
-        this.id_bien = id_bien;
-        this.id_bien_responsable = id_bien_responsable;
-        this.fecha_inicio = fecha_inicio;
-        this.fecha_fin = fecha_fin;
-    }
+    public AsignacionDTO() {}
 
     public int getId() {
         return id;

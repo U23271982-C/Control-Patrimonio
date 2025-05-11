@@ -1,15 +1,20 @@
 package org.contenido.dto;
 
+import org.contenido.validacion.EnActualizar;
+import org.contenido.validacion.EnCrear;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Rol_ResponsableDTO {
+    @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class})
     private int id;
+    @Size(max = 80, message = "La descripción no debe exceder los 80 caracteres")
     private String descripcion;
+    @Size(max = 80, message = "La descripción no debe exceder los 80 caracteres")
     private String nombreRol;
 
-    public Rol_ResponsableDTO(int id, String descripcion, String nombreRol) {
-        this.id = id;
-        this.descripcion = descripcion;
-        this.nombreRol = nombreRol;
-    }
+    public Rol_ResponsableDTO() {}
 
     public int getId() {
         return id;

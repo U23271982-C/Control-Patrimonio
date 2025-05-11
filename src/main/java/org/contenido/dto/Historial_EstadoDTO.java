@@ -1,23 +1,27 @@
 package org.contenido.dto;
 
+import org.contenido.validacion.EnActualizar;
+import org.contenido.validacion.EnCrear;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class Historial_EstadoDTO {
+    @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class})
     private int id;
+    @NotNull(message = "El id del bien no puede ser nulo", groups = {EnCrear.class})
     private int id_bien;
+    @NotNull(message = "El id del estado no puede ser nulo", groups = {EnCrear.class})
     private int id_estado;
+    @Size(max = 30, message = "El motivo no debe exceder los 30 caracteres")
     private String motivo;
+    @NotNull(message = "La fecha de cambio no puede ser nula", groups = {EnCrear.class})
     private LocalDate fecha_cambio;
+    @NotNull(message = "El id del responsable no puede ser nulo", groups = {EnCrear.class})
     private int id_responsable_encargado;
 
-    public Historial_EstadoDTO(int id, int id_bien, int id_estado, String motivo, LocalDate fecha_cambio, int id_responsable_encargado) {
-        this.id = id;
-        this.id_bien = id_bien;
-        this.id_estado = id_estado;
-        this.motivo = motivo;
-        this.fecha_cambio = fecha_cambio;
-        this.id_responsable_encargado = id_responsable_encargado;
-    }
+    public Historial_EstadoDTO() {}
 
     public int getId() {
         return id;

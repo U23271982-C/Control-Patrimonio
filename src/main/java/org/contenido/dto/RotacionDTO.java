@@ -1,19 +1,25 @@
 package org.contenido.dto;
 
+import org.contenido.validacion.EnActualizar;
+import org.contenido.validacion.EnCrear;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class RotacionDTO {
+    @NotNull( message = "El id no puede ser nulo",  groups = {EnActualizar.class})
     private int id;
+    @NotNull( message = "El id del bien no puede ser nulo",  groups = {EnCrear.class})
     private int id_bien;
+    @NotNull( message = "El id del ambiente no puede ser nulo",  groups = {EnCrear.class})
     private int id_ambiente;
+    @NotNull( message = "El id del responsable no puede ser nulo",  groups = {EnCrear.class})
+    @Size(max = 30, message = "El motivo no debe exceder los 30 caracteres")
     private String motivo;
+    @NotNull( message = "El id del responsable no puede ser nulo",  groups = {EnCrear.class})
     private int id_responsable;
 
-    public RotacionDTO(int id, int id_bien, int id_ambiente, String motivo, int id_responsable) {
-        this.id = id;
-        this.id_bien = id_bien;
-        this.id_ambiente = id_ambiente;
-        this.motivo = motivo;
-        this.id_responsable = id_responsable;
-    }
+    public RotacionDTO() {}
 
     public int getId() {
         return id;

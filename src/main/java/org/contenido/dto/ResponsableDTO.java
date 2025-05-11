@@ -1,19 +1,27 @@
 package org.contenido.dto;
 
-public class ResponsableDTO {
-    private int id;
-    private String nombre;
-    private String dni;
-    private String email;
-    private String cargo;
+import org.contenido.validacion.EnActualizar;
+import org.contenido.validacion.EnCrear;
 
-    public ResponsableDTO(int id, String nombre, String dni, String email, String cargo) {
-        this.id = id;
-        this.nombre = nombre;
-        this.dni = dni;
-        this.email = email;
-        this.cargo = cargo;
-    }
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+public class ResponsableDTO {
+    @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class})
+    private int id;
+    @NotNull(message = "El nombre no puede ser nulo", groups = {EnCrear.class})
+    @Size(max = 30, message = "El nombre no debe exceder los 30 caracteres")
+    private String nombre;
+    @Size(max = 8, message = "El dni no debe exceder los 8 caracteres")
+    private String dni;
+    @Email(message = "El email no es valido")
+    private String email;
+    @Size(max = 30, message = "El cargo no debe exceder los 30 caracteres")
+    private String cargo;
+    // corroborar Rol_Responsble
+
+    public ResponsableDTO() {}
 
     public int getId() {
         return id;

@@ -20,8 +20,7 @@ public class InventarioDTO {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
 
-    public InventarioDTO() {
-    }
+    public InventarioDTO() {}
 
     public int getId() {
         return id;

@@ -1,15 +1,22 @@
 package org.contenido.dto;
 
+import org.contenido.validacion.EnActualizar;
+import org.contenido.validacion.EnCrear;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class CategoriaDTO {
+    @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class})
     private int id;
+    @NotNull(message = "El nombre no puede ser nulo", groups = {EnCrear.class})
+    @Size(max = 60, message = "La descripción no debe exceder los 60 caracteres")
     private String nombre;
+    @NotNull(message = "La descripción no puede ser nula", groups = {EnCrear.class})
+    @Size(max = 60, message = "La descripción no debe exceder los 60 caracteres")
     private String descripcion;
 
-    public CategoriaDTO(int id, String nombre, String descripcion) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
+    public CategoriaDTO() {}
 
     public int getId() {
         return id;

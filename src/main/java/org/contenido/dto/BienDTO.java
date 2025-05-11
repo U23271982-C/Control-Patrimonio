@@ -1,27 +1,33 @@
 package org.contenido.dto;
 
+import org.contenido.validacion.EnActualizar;
+import org.contenido.validacion.EnCrear;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class BienDTO {
+    @NotNull( message = "El id no puede ser nulo", groups = {EnActualizar.class})
     private int id;
+    @NotNull( message = "El nombre no puede ser nulo", groups = {EnCrear.class})
+    @Size(max = 50, message = "La descripción no debe exceder los 50 caracteres")
     private String nombre;
+    @NotNull( message = "La descripción no puede ser nula", groups = {EnCrear.class})
+    @Size(max = 50, message = "La descripción no debe exceder los 50 caracteres")
     private String descripcion;
+    @NotNull( message = "La fecha de registro no puede ser nula", groups = {EnCrear.class})
     private LocalDate fecha_registro;
+    @NotNull( message = "El id del estado actual no puede ser nulo", groups = {EnCrear.class})
     private int id_estado_actual;
+    @NotNull( message = "El id del responsable actual no puede ser nulo", groups = {EnCrear.class})
     private int id_categoria;
+    @NotNull( message = "El id del responsable actual no puede ser nulo", groups = {EnCrear.class})
     private int id_ambiente;
+    @NotNull( message = "El id del responsable actual no puede ser nulo", groups = {EnCrear.class})
     private int id_responsable_actual;
 
-    public BienDTO(int id, String nombre, String descripcion, LocalDate fecha_registro, int id_estado_actual, int id_categoria, int id_ambiente, int id_responsable_actual) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.fecha_registro = fecha_registro;
-        this.id_estado_actual = id_estado_actual;
-        this.id_categoria = id_categoria;
-        this.id_ambiente = id_ambiente;
-        this.id_responsable_actual = id_responsable_actual;
-    }
+    public BienDTO() {}
 
     public int getId() {
         return id;
