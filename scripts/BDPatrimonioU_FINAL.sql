@@ -11,12 +11,12 @@ CREATE TABLE Rol_Responsable(
 -- Tabla Responsable
 CREATE TABLE Responsable(
     idResponsable INT PRIMARY KEY,
-    nombre VARCHAR(30),
-    dni VARCHAR(12),
-    mail VARCHAR(30),
-    usuario VARCHAR(30),
-    contraseña VARCHAR(30),
-    cargo VARCHAR(30)
+    nombre VARCHAR(30) NOT NULL,
+    dni VARCHAR(8),
+    mail VARCHAR(30) NOT NULL,
+    usuario VARCHAR(30) NOT NULL,
+    contraseña VARCHAR(30) NOT NULL,
+    cargo VARCHAR(30) NOT NULL
 );
 
 -- Tabla Inventario
