@@ -2,12 +2,13 @@ package org.contenido.dto;
 
 import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
+import org.contenido.validacion.EnLeer;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class InmuebleDTO {
-    @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class})
+    @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class, EnLeer.class})
     private int id;
     @NotNull(message = "El nombre no puede ser nulo", groups = {EnCrear.class})
     @Size(max = 50, message = "El nombre no debe exceder los 50 caracteres")

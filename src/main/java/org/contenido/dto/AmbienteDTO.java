@@ -2,18 +2,21 @@ package org.contenido.dto;
 
 import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
+import org.contenido.validacion.EnLeer;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class AmbienteDTO {
-    @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class})
+    @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class, EnLeer.class})
     private int id;
     @NotNull(message = "El nombre no puede ser nulo", groups = {EnCrear.class})
     @Size(max = 40, message = "La descripción no debe exceder los 40 caracteres")
     private String nombre;
     @NotNull(message = "El id del inmueble no puede ser nulo", groups = {EnCrear.class})
-    private int id_inmueble;
+    @Valid
+    private InmuebleDTO inmuebleDTO;
 
     public AmbienteDTO() {}
 
@@ -33,11 +36,11 @@ public class AmbienteDTO {
         this.nombre = nombre;
     }
 
-    public int getId_inmueble() {
-        return id_inmueble;
+    public InmuebleDTO getInmuebleDTO() {
+        return inmuebleDTO;
     }
 
-    public void setId_inmueble(int id_inmueble) {
-        this.id_inmueble = id_inmueble;
+    public void setInmuebleDTO(InmuebleDTO inmuebleDTO) {
+        this.inmuebleDTO = inmuebleDTO;
     }
 }
