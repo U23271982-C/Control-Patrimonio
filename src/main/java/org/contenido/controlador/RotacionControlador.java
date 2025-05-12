@@ -2,10 +2,11 @@ package org.contenido.controlador;
 
 import org.contenido.dto.RotacionDTO;
 import org.contenido.servicio.RotacionServicio;
+import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;
 
-public class RotacionControlador implements Controlador<RotacionDTO> {
+public class RotacionControlador implements Historial_Controlador<RotacionDTO> {
     private RotacionServicio rotacionServicio;
 
     public RotacionControlador() {
@@ -13,27 +14,34 @@ public class RotacionControlador implements Controlador<RotacionDTO> {
     }
 
     @Override
-    public void registrar(RotacionDTO entidad) {
-
+    public void actualizar(RotacionDTO dto) {
+        try {
+            rotacionServicio.actualizar(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Rotación actualizada correctamente.");
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override
-    public RotacionDTO leerPorId(int idEntidad) {
-        return null;
-    }
-
-    @Override
-    public void actualizar(RotacionDTO entidad) {
-
-    }
-
-    @Override
-    public void eliminar(int idEntidad) {
-
+    public void eliminar(int idDto) {
+        try {
+            rotacionServicio.eliminar(idDto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Rotación eliminada correctamente.");
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override
     public List<RotacionDTO> listarTodo() {
-        return List.of();
+        try {
+            List<RotacionDTO> rotaciones = rotacionServicio.listarTodo();
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Rotaciones listadas correctamente.");
+            return rotaciones;
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
+        return null;
     }
 }

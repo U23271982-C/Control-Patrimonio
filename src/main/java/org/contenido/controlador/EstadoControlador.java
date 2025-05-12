@@ -2,6 +2,7 @@ package org.contenido.controlador;
 
 import org.contenido.dto.EstadoDTO;
 import org.contenido.servicio.EstadoServicio;
+import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;
 
@@ -13,27 +14,56 @@ public class EstadoControlador implements Controlador<EstadoDTO>{
     }
 
     @Override
-    public void registrar(EstadoDTO entidad) {
-
+    public void registrar(EstadoDTO dto) {
+        try {
+            estadoServicio.registrar(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Estado registrado correctamente.");
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override
-    public EstadoDTO leerPorId(int idEntidad) {
+    public EstadoDTO leerPorId(int idDto) {
+        try {
+            EstadoDTO newDTO = estadoServicio.leerPorId(idDto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Estado leído correctamente.");
+            return newDTO;
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
         return null;
     }
 
     @Override
-    public void actualizar(EstadoDTO entidad) {
-
+    public void actualizar(EstadoDTO dto) {
+        try {
+            estadoServicio.actualizar(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Estado actualizado correctamente.");
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override
-    public void eliminar(int idEntidad) {
-
+    public void eliminar(int idDto) {
+        try {
+            estadoServicio.eliminar(idDto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Estado eliminado correctamente.");
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override
     public List<EstadoDTO> listarTodo() {
-        return List.of();
+        try {
+            List<EstadoDTO> estados = estadoServicio.listarTodo();
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Estados listados correctamente.");
+            return estados;
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
+        return null;
     }
 }

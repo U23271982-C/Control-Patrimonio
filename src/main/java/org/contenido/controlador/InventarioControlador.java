@@ -2,6 +2,7 @@ package org.contenido.controlador;
 
 import org.contenido.dto.InventarioDTO;
 import org.contenido.servicio.InventarioServicio;
+import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;
 
@@ -13,27 +14,56 @@ public class InventarioControlador implements Controlador<InventarioDTO> {
     }
 
     @Override
-    public void registrar(InventarioDTO entidad) {
-
+    public void registrar(InventarioDTO dto) {
+        try {
+            inventarioServicio.registrar(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Inventario registrado correctamente.");
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override
-    public InventarioDTO leerPorId(int idEntidad) {
+    public InventarioDTO leerPorId(int idDto) {
+        try {
+            InventarioDTO newDTO = inventarioServicio.leerPorId(idDto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Inventario leído correctamente.");
+            return newDTO;
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
         return null;
     }
 
     @Override
-    public void actualizar(InventarioDTO entidad) {
-
+    public void actualizar(InventarioDTO dto) {
+        try {
+            inventarioServicio.actualizar(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Inventario actualizado correctamente.");
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override
-    public void eliminar(int idEntidad) {
-
+    public void eliminar(int idDto) {
+        try {
+            inventarioServicio.eliminar(idDto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Inventario eliminado correctamente.");
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override
     public List<InventarioDTO> listarTodo() {
-        return List.of();
+        try {
+            List<InventarioDTO> inventarios = inventarioServicio.listarTodo();
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Inventarios listados correctamente.");
+            return inventarios;
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
+        return null;
     }
 }

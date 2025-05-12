@@ -1,7 +1,9 @@
 package org.contenido.controlador;
 
+import org.contenido.dto.AmbienteDTO;
 import org.contenido.dto.BienDTO;
 import org.contenido.servicio.BienServicio;
+import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;
 
@@ -13,27 +15,56 @@ public class BienControlador implements Controlador<BienDTO>{
     }
 
     @Override
-    public void registrar(BienDTO entidad) {
-
+    public void registrar(BienDTO dto) {
+        try {
+            bienServicio.registrar(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Bien registrado correctamente.");
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override
-    public BienDTO leerPorId(int idEntidad) {
+    public BienDTO leerPorId(int idDto) {
+        try {
+            BienDTO newDTO = bienServicio.leerPorId(idDto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Bien leído correctamente.");
+            return newDTO;
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
         return null;
     }
 
     @Override
-    public void actualizar(BienDTO entidad) {
-
+    public void actualizar(BienDTO dto) {
+        try {
+            bienServicio.actualizar(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Bien actualizado correctamente.");
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override
-    public void eliminar(int idEntidad) {
-
+    public void eliminar(int idDto) {
+        try {
+            bienServicio.eliminar(idDto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Bien eliminado correctamente.");
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override
     public List<BienDTO> listarTodo() {
-        return List.of();
+        try {
+            List<BienDTO> bienes = bienServicio.listarTodo();
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Bienes listados correctamente.");
+            return bienes;
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
+        return null;
     }
 }

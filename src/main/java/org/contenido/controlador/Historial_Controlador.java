@@ -9,10 +9,10 @@ import java.util.List;
 
 public interface Historial_Controlador<T> extends Eliminable<T>, Actualizable<T>, Listable<T> {
     @Override
-    void actualizar(T entidad);
+    void actualizar(T dto);
 
     @Override
-    void eliminar(int idEntidad);
+    void eliminar(int idDto);
 
     @Override
     List<T> listarTodo();

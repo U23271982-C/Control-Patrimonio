@@ -1,6 +1,8 @@
 package org.contenido.excepcion;
 
-public class BaseDatosExcepcion extends RuntimeException {
+import java.sql.SQLException;
+
+public class BaseDatosExcepcion extends RuntimeException, SQLException {
     public BaseDatosExcepcion(String message) {
         super(message);
     }
