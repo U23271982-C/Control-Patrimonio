@@ -1,6 +1,6 @@
 package org.contenido.utilidad;
 
-import org.contenido.excepcion.BaseDatosExcepcion;
+import org.contenido.excepcion.PersistenciaExcepcion;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.excepcion.ValidacionExcepcion;
 
@@ -13,7 +13,7 @@ public class NotificacionUtil {
     private static final Map<Class<? extends Exception>, TipoError> MAPEO_ERRORES = Map.of(
             ValidacionExcepcion.class, new TipoError("Error de validación", JOptionPane.WARNING_MESSAGE),
             NegocioExcepcion.class, new TipoError("Error de negocio", JOptionPane.WARNING_MESSAGE),
-            BaseDatosExcepcion.class, new TipoError("Error en la base de datos", JOptionPane.ERROR_MESSAGE)
+            PersistenciaExcepcion.class, new TipoError("Error en la base de datos", JOptionPane.ERROR_MESSAGE)
     );
 
     public static void mostrarMensajeAfirmacion(String mensaje) {
