@@ -1,4 +1,6 @@
-package org.contenido.utilidades;
+package org.contenido.utilidad;
+
+import org.contenido.excepcion.ValidacionExcepcion;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -18,7 +20,7 @@ public class ValidadorUtilidad {
             for (ConstraintViolation<T> error : errores) {
                 sb.append("- ").append(error.getMessage()).append("\n");
             }
-            throw new IllegalArgumentException(sb.toString());
+            throw new ValidacionExcepcion(sb.toString());
         }
     }
 }
