@@ -1,27 +1,56 @@
 package org.contenido.mapeo;
 
 import org.contenido.dto.AmbienteDTO;
+import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.modelo.Ambiente;
 
-public class AmbienteMapper implements Convertidor<Ambiente, AmbienteDTO>{
-    public AmbienteMapper() {}
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Objects;
+
+public class AmbienteMapper implements Convertidor<Ambiente, AmbienteDTO>, ResultSetMapper<Ambiente>{
+    private final InmuebleMapper inmuebleMapper;
+    public AmbienteMapper() {
+        this.inmuebleMapper = new InmuebleMapper();
+    }
 
     @Override
     public AmbienteDTO convertirDTO(Ambiente modelo) {
+        if (modelo == null) throw new NegocioExcepcion("El objeto ambiente es nulo");
+
         AmbienteDTO dto = new AmbienteDTO();
         dto.setId(modelo.getId());
         dto.setNombre(modelo.getNombre());
-        if (modelo.getInmueble() != null) dto.setId_inmueble(modelo.getInmueble().getId());
+        dto.setInmuebleDTO(
+                // Si el inmueble es nulo, se deja en null en el DTO
+                // Si no es nulo, se convierte a DTO
+                modelo.getInmueble() != null ? inmuebleMapper.convertirDTO(modelo.getInmueble()) : null
+        );
 
         return dto;
     }
 
     @Override
     public Ambiente convertirModelo(AmbienteDTO dto) {
+        if (dto == null) throw new NegocioExcepcion("El objeto ambienteDTO es nulo");
+
         Ambiente model = new Ambiente();
         model.setId(dto.getId());
         model.setNombre(dto.getNombre());
-        model.setInmueble(null);
+        model.setInmueble(
+                // Si el inmuebleDTO es nulo, se deja en null en el modelo
+                // Si no es nulo, se convierte a modelo
+                dto.getInmuebleDTO() != null ?
+                        inmuebleMapper.convertirModelo(dto.getInmuebleDTO()) : null
+        );
         return model;
+    }
+    @Override
+    public Ambiente mapDeResultSet(ResultSet rs) throws SQLException {
+        Ambiente entidad = new Ambiente();
+        entidad.setId(rs.getInt(1));
+        entidad.setNombre(rs.getString(2));
+        entidad.setInmueble(inmuebleMapper.mapDeResultSet(rs));
+        return entidad;
     }
 }

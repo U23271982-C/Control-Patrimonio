@@ -16,22 +16,22 @@ public class BienServicio implements Servicio<BienDTO> {
     }
 
     @Override
-    public void registrar(BienDTO entidad) {
+    public void registrar(BienDTO dto) {
 
     }
 
     @Override
-    public BienDTO leerPorId(int idEntidad) {
+    public BienDTO leerPorId(int idDto) {
         return null;
     }
 
     @Override
-    public void actualizar(BienDTO entidad) {
+    public void actualizar(BienDTO dto) {
 
     }
 
     @Override
-    public void eliminar(int idEntidad) {
+    public void eliminar(int idDto) {
 
     }
 

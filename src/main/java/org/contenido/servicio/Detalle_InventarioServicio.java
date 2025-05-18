@@ -16,22 +16,22 @@ public class Detalle_InventarioServicio implements Servicio<Detalle_InventarioDT
     }
 
     @Override
-    public void registrar(Detalle_InventarioDTO entidad) {
+    public void registrar(Detalle_InventarioDTO dto) {
 
     }
 
     @Override
-    public Detalle_InventarioDTO leerPorId(int idEntidad) {
+    public Detalle_InventarioDTO leerPorId(int idDto) {
         return null;
     }
 
     @Override
-    public void actualizar(Detalle_InventarioDTO entidad) {
+    public void actualizar(Detalle_InventarioDTO dto) {
 
     }
 
     @Override
-    public void eliminar(int idEntidad) {
+    public void eliminar(int idDto) {
 
     }
 

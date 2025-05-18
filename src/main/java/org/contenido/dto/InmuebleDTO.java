@@ -3,18 +3,19 @@ package org.contenido.dto;
 import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
-
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 public class InmuebleDTO {
     @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class, EnLeer.class})
+    @Positive(message = "El id debe ser positivo", groups = {EnActualizar.class, EnLeer.class})
     private int id;
-    @NotNull(message = "El nombre no puede ser nulo", groups = {EnCrear.class})
-    @Size(max = 50, message = "El nombre no debe exceder los 50 caracteres")
+    @NotBlank(message = "El nombre no puede estar vacio", groups = {EnCrear.class})
+    @Size(max = 50, message = "El nombre no debe exceder los 50 caracteres", groups = {EnActualizar.class, EnCrear.class})
     private String nombre;
-    @NotNull(message = "La descripción no puede ser nula", groups = {EnCrear.class})
-    @Size(max = 50, message = "La descripción no debe exceder los 50 caracteres")
+    @Size(max = 50, message = "La descripción no debe exceder los 50 caracteres", groups = {EnActualizar.class, EnCrear.class})
     private String descripcion;
 
     public InmuebleDTO() {}

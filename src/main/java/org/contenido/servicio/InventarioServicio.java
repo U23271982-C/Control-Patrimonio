@@ -4,7 +4,7 @@ import org.contenido.dao.daoImplementado.InventarioDAO;
 import org.contenido.dto.InventarioDTO;
 import org.contenido.mapeo.InventarioMapper;
 import org.contenido.modelo.Inventario;
-import org.contenido.utilidades.ValidadorUtilidad;
+import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;
 
 import java.util.List;
@@ -19,30 +19,29 @@ public class InventarioServicio implements Servicio<InventarioDTO> {
     }
 
     @Override
-    public void registrar(InventarioDTO entidad) {
-        // Falta lógica de negocio
-        ValidadorUtilidad.validar(entidad, EnCrear.class);
-        Inventario modelo = inventarioMapper.convertirModelo(entidad);
+    public void registrar(InventarioDTO dto) {
+        ValidadorUtilidad.validar(dto, EnCrear.class);
+        Inventario modelo = inventarioMapper.convertirModelo(dto);
         inventarioDAO.registrar(modelo);
     }
 
     @Override
-    public InventarioDTO leerPorId(int idEntidad) {
+    public InventarioDTO leerPorId(int idDto) {
         // Falta lógica de negocio
-        return inventarioMapper.convertirDTO(inventarioDAO.leerPorId(idEntidad));
+        return inventarioMapper.convertirDTO(inventarioDAO.leerPorId(idDto));
     }
 
     @Override
-    public void actualizar(InventarioDTO entidad) {
+    public void actualizar(InventarioDTO dto) {
         // Falta lógica de negocio
-        Inventario modelo = inventarioMapper.convertirModelo(entidad);
+        Inventario modelo = inventarioMapper.convertirModelo(dto);
         inventarioDAO.actualizar(modelo);
     }
 
     @Override
-    public void eliminar(int idEntidad) {
+    public void eliminar(int idDto) {
         // Falta lógica de negocio
-        inventarioDAO.eliminar(idEntidad);
+        inventarioDAO.eliminar(idDto);
     }
 
     @Override

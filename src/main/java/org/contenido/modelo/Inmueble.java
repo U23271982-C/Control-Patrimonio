@@ -5,11 +5,7 @@ public class Inmueble {
     private String nombre;
     private String descripcion;
 
-    public Inmueble(int id, String nombre, String descripcion) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
+    public Inmueble() {}
 
     public int getId() {
         return id;

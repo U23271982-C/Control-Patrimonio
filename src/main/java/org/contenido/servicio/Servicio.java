@@ -7,16 +7,16 @@ import java.util.List;
 
 public interface Servicio <T> extends CRUD<T>, Listable<T> {
     @Override
-    void registrar(T entidad);
+    void registrar(T dto);
 
     @Override
-    T leerPorId(int idEntidad);
+    T leerPorId(int idDto);
 
     @Override
-    void actualizar(T entidad);
+    void actualizar(T dto);
 
     @Override
-    void eliminar(int idEntidad);
+    void eliminar(int idDto);
 
     @Override
     List<T> listarTodo();

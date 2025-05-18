@@ -16,22 +16,22 @@ public class EstadoServicio implements Servicio<EstadoDTO>{
     }
 
     @Override
-    public void registrar(EstadoDTO entidad) {
+    public void registrar(EstadoDTO dto) {
 
     }
 
     @Override
-    public EstadoDTO leerPorId(int idEntidad) {
+    public EstadoDTO leerPorId(int idDto) {
         return null;
     }
 
     @Override
-    public void actualizar(EstadoDTO entidad) {
+    public void actualizar(EstadoDTO dto) {
 
     }
 
     @Override
-    public void eliminar(int idEntidad) {
+    public void eliminar(int idDto) {
 
     }
 

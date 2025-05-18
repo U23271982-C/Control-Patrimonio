@@ -16,22 +16,22 @@ public class Rol_ResponsableServicio implements Servicio<Rol_ResponsableDTO>{
     }
 
     @Override
-    public void registrar(Rol_ResponsableDTO entidad) {
+    public void registrar(Rol_ResponsableDTO dto) {
 
     }
 
     @Override
-    public Rol_ResponsableDTO leerPorId(int idEntidad) {
+    public Rol_ResponsableDTO leerPorId(int idDto) {
         return null;
     }
 
     @Override
-    public void actualizar(Rol_ResponsableDTO entidad) {
+    public void actualizar(Rol_ResponsableDTO dto) {
 
     }
 
     @Override
-    public void eliminar(int idEntidad) {
+    public void eliminar(int idDto) {
 
     }
 

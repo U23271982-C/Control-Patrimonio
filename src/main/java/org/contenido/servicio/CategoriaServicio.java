@@ -16,22 +16,22 @@ public class CategoriaServicio implements Servicio<CategoriaDTO> {
     }
 
     @Override
-    public void registrar(CategoriaDTO entidad) {
+    public void registrar(CategoriaDTO dto) {
 
     }
 
     @Override
-    public CategoriaDTO leerPorId(int idEntidad) {
+    public CategoriaDTO leerPorId(int idDto) {
         return null;
     }
 
     @Override
-    public void actualizar(CategoriaDTO entidad) {
+    public void actualizar(CategoriaDTO dto) {
 
     }
 
     @Override
-    public void eliminar(int idEntidad) {
+    public void eliminar(int idDto) {
 
     }
 
