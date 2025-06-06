@@ -2,7 +2,12 @@ package org.contenido.servicio;
 
 import org.contenido.dao.daoImplementado.CategoriaDAO;
 import org.contenido.dto.CategoriaDTO;
+import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.CategoriaMapper;
+import org.contenido.modelo.Categoria;
+import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnCrear;
+import org.contenido.validacion.EnLeer;
 
 import java.util.List;
 
@@ -17,26 +22,38 @@ public class CategoriaServicio implements Servicio<CategoriaDTO> {
 
     @Override
     public void registrar(CategoriaDTO dto) {
-
+        ValidadorUtilidad.validar(dto, EnCrear.class); //  Validamos todos los campos del DTO
+        categoriaDAO.registrar(categoriaMapper.convertirModelo(dto)); //  Convertimos el DTO en un modelo, y se registra en la base de datos
     }
 
     @Override
     public CategoriaDTO leerPorId(int idDto) {
-        return null;
+        return (categoriaDAO.leerPorId(idDto) != null) ?
+                categoriaMapper.convertirDTO(categoriaDAO.leerPorId(idDto)) : null;
     }
 
     @Override
     public void actualizar(CategoriaDTO dto) {
-
+        ValidadorUtilidad.validar(dto, EnLeer.class); //  Validamos todos los campos del DTO
+        Categoria modelo = categoriaMapper.convertirModelo(dto); //  Convertimos el DTO en un modelo
+        if (categoriaDAO.leerPorId(modelo.getId()) == null) {
+            throw new NegocioExcepcion("La categoría con el id " + modelo.getId() + " no existe.");
+        }
+        categoriaDAO.actualizar(modelo); //  Actualizamos el modelo en la base de datos
     }
 
     @Override
     public void eliminar(int idDto) {
-
+        if (categoriaDAO.leerPorId(idDto) == null) {
+            throw new NegocioExcepcion("La categoría con el id " + idDto + " no existe.");
+        }
+        categoriaDAO.eliminar(idDto);
     }
 
     @Override
     public List<CategoriaDTO> listarTodo() {
-        return List.of();
+        return categoriaDAO.listarTodo().stream()
+                .map(categoriaMapper::convertirDTO)
+                .toList();
     }
 }

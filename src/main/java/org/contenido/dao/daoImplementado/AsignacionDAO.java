@@ -12,6 +12,11 @@ public class AsignacionDAO implements Historial_DAO<Asignacion> {
     }
 
     @Override
+    public Asignacion leerPorId(int idEntidad) {
+        return null;
+    }
+
+    @Override
     public void eliminar(int idEntidad) {
 
     }

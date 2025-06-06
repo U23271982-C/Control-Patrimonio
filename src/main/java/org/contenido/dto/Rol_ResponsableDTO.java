@@ -11,7 +11,7 @@ public class Rol_ResponsableDTO {
     private int id;
     @Size(max = 80, message = "La descripción no debe exceder los 80 caracteres")
     private String descripcion;
-    @Size(max = 80, message = "La descripción no debe exceder los 80 caracteres")
+    @Size(max = 80, message = "El nombre rol no debe exceder los 80 caracteres")
     private String nombreRol;
 
     public Rol_ResponsableDTO() {}

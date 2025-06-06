@@ -18,14 +18,14 @@ public class BienDTO {
     private String descripcion;
     @NotNull( message = "La fecha de registro no puede ser nula", groups = {EnCrear.class})
     private LocalDate fecha_registro;
-    @NotNull( message = "El id del estado actual no puede ser nulo", groups = {EnCrear.class})
-    private int id_estado_actual;
-    @NotNull( message = "El id del responsable actual no puede ser nulo", groups = {EnCrear.class})
-    private int id_categoria;
-    @NotNull( message = "El id del responsable actual no puede ser nulo", groups = {EnCrear.class})
-    private int id_ambiente;
-    @NotNull( message = "El id del responsable actual no puede ser nulo", groups = {EnCrear.class})
-    private int id_responsable_actual;
+    @NotNull( message = "El estado actual no puede ser nulo", groups = {EnCrear.class})
+    private EstadoDTO estado_actualDTO;
+    @NotNull( message = "La categoría no puede ser nulo", groups = {EnCrear.class})
+    private CategoriaDTO categoriaDTO;
+    @NotNull( message = "El ambiente no puede ser nulo", groups = {EnCrear.class})
+    private AmbienteDTO ambienteDTO;
+    @NotNull( message = "El responsable actual no puede ser nulo", groups = {EnCrear.class})
+    private ResponsableDTO responsableDTO;
 
     public BienDTO() {}
 
@@ -61,35 +61,35 @@ public class BienDTO {
         this.fecha_registro = fecha_registro;
     }
 
-    public int getId_estado_actual() {
-        return id_estado_actual;
+    public EstadoDTO getEstado_actualDTO() {
+        return estado_actualDTO;
     }
 
-    public void setId_estado_actual(int id_estado_actual) {
-        this.id_estado_actual = id_estado_actual;
+    public void setEstado_actualDTO(EstadoDTO estado_actualDTO) {
+        this.estado_actualDTO = estado_actualDTO;
     }
 
-    public int getId_categoria() {
-        return id_categoria;
+    public CategoriaDTO getCategoriaDTO() {
+        return categoriaDTO;
     }
 
-    public void setId_categoria(int id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setCategoriaDTO(CategoriaDTO categoriaDTO) {
+        this.categoriaDTO = categoriaDTO;
     }
 
-    public int getId_ambiente() {
-        return id_ambiente;
+    public AmbienteDTO getAmbienteDTO() {
+        return ambienteDTO;
     }
 
-    public void setId_ambiente(int id_ambiente) {
-        this.id_ambiente = id_ambiente;
+    public void setAmbienteDTO(AmbienteDTO ambienteDTO) {
+        this.ambienteDTO = ambienteDTO;
     }
 
-    public int getId_responsable_actual() {
-        return id_responsable_actual;
+    public ResponsableDTO getResponsableDTO() {
+        return responsableDTO;
     }
 
-    public void setId_responsable_actual(int id_responsable_actual) {
-        this.id_responsable_actual = id_responsable_actual;
+    public void setResponsableDTO(ResponsableDTO responsableDTO) {
+        this.responsableDTO = responsableDTO;
     }
 }

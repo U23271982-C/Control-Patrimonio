@@ -12,6 +12,11 @@ public class Historial_EstadoDAO implements Historial_DAO<Historial_Estado> {
     }
 
     @Override
+    public Historial_Estado leerPorId(int idEntidad) {
+        return null;
+    }
+
+    @Override
     public void eliminar(int idEntidad) {
 
     }

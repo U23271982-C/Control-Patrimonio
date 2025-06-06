@@ -12,6 +12,11 @@ public class RotacionDAO implements Historial_DAO<Rotacion> {
     }
 
     @Override
+    public Rotacion leerPorId(int idEntidad) {
+        return null;
+    }
+
+    @Override
     public void eliminar(int idEntidad) {
 
     }
