@@ -1,5 +1,6 @@
 package org.contenido.dto;
 
+import org.contenido.modelo.Bien;
 import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 
@@ -10,16 +11,16 @@ import java.time.LocalDate;
 public class Historial_EstadoDTO {
     @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class})
     private int id;
-    @NotNull(message = "El id del bien no puede ser nulo", groups = {EnCrear.class})
-    private int id_bien;
-    @NotNull(message = "El id del estado no puede ser nulo", groups = {EnCrear.class})
-    private int id_estado;
+    @NotNull(message = "El bien no puede ser nulo", groups = {EnCrear.class})
+    private BienDTO bienDTO;
+    @NotNull(message = "El estado no puede ser nulo", groups = {EnCrear.class})
+    private EstadoDTO estadoDTO;
     @Size(max = 30, message = "El motivo no debe exceder los 30 caracteres")
     private String motivo;
     @NotNull(message = "La fecha de cambio no puede ser nula", groups = {EnCrear.class})
     private LocalDate fecha_cambio;
     @NotNull(message = "El id del responsable no puede ser nulo", groups = {EnCrear.class})
-    private int id_responsable_encargado;
+    private ResponsableDTO responsableDTO;
 
     public Historial_EstadoDTO() {}
 
@@ -31,20 +32,28 @@ public class Historial_EstadoDTO {
         this.id = id;
     }
 
-    public int getId_bien() {
-        return id_bien;
+    public BienDTO getBienDTO() {
+        return bienDTO;
     }
 
-    public void setId_bien(int id_bien) {
-        this.id_bien = id_bien;
+    public void setBienDTO(BienDTO bienDTO) {
+        this.bienDTO = bienDTO;
     }
 
-    public int getId_estado() {
-        return id_estado;
+    public EstadoDTO getEstadoDTO() {
+        return estadoDTO;
     }
 
-    public void setId_estado(int id_estado) {
-        this.id_estado = id_estado;
+    public void setEstadoDTO(EstadoDTO estadoDTO) {
+        this.estadoDTO = estadoDTO;
+    }
+
+    public ResponsableDTO getResponsableDTO() {
+        return responsableDTO;
+    }
+
+    public void setResponsableDTO(ResponsableDTO responsableDTO) {
+        this.responsableDTO = responsableDTO;
     }
 
     public String getMotivo() {
@@ -63,11 +72,4 @@ public class Historial_EstadoDTO {
         this.fecha_cambio = fecha_cambio;
     }
 
-    public int getId_responsable_encargado() {
-        return id_responsable_encargado;
-    }
-
-    public void setId_responsable_encargado(int id_responsable_encargado) {
-        this.id_responsable_encargado = id_responsable_encargado;
-    }
 }

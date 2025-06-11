@@ -9,10 +9,10 @@ import java.time.LocalDate;
 public class AsignacionDTO {
     @NotNull(message = "El id no puede ser nulo", groups = EnActualizar.class)
     private int id;
-    @NotNull(message = "El id del bien no puede ser nulo", groups = EnCrear.class)
-    private int id_bien;
-    @NotNull(message = "El id del responsable no puede ser nulo", groups = EnCrear.class)
-    private int id_bien_responsable;
+    @NotNull(message = "El bien no puede ser nulo", groups = EnCrear.class)
+    private BienDTO bienDTO;
+    @NotNull(message = "El responsable no puede ser nulo", groups = EnCrear.class)
+    private ResponsableDTO responsableDTO;
     @NotNull(message = "La fecha de inicio no puede ser nula", groups = EnCrear.class)
     private LocalDate fecha_inicio;
     private LocalDate fecha_fin;
@@ -27,20 +27,20 @@ public class AsignacionDTO {
         this.id = id;
     }
 
-    public int getId_bien() {
-        return id_bien;
+    public BienDTO getBienDTO() {
+        return bienDTO;
     }
 
-    public void setId_bien(int id_bien) {
-        this.id_bien = id_bien;
+    public void setBienDTO(BienDTO bienDTO) {
+        this.bienDTO = bienDTO;
     }
 
-    public int getId_bien_responsable() {
-        return id_bien_responsable;
+    public ResponsableDTO getResponsableDTO() {
+        return responsableDTO;
     }
 
-    public void setId_bien_responsable(int id_bien_responsable) {
-        this.id_bien_responsable = id_bien_responsable;
+    public void setResponsableDTO(ResponsableDTO responsableDTO) {
+        this.responsableDTO = responsableDTO;
     }
 
     public LocalDate getFecha_inicio() {
