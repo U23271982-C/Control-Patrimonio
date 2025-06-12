@@ -1,13 +1,15 @@
-package org.contenido.mapeo;
+package org.contenido.mapeo.mapeoImpl;
 
 import org.contenido.dto.InmuebleDTO;
 import org.contenido.excepcion.NegocioExcepcion;
+import org.contenido.mapeo.Convertidor;
+import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.modelo.Inmueble;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class InmuebleMapper implements Convertidor<Inmueble, InmuebleDTO>, ResultSetMapper<Inmueble>{
+public class InmuebleMapper implements Convertidor<Inmueble, InmuebleDTO>, ResultSetMapper<Inmueble> {
 
     public InmuebleMapper() {}
 

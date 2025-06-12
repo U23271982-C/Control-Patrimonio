@@ -3,7 +3,7 @@ package org.contenido.servicio;
 import org.contenido.dao.daoImplementado.InmuebleDAO;
 import org.contenido.dto.InmuebleDTO;
 import org.contenido.excepcion.NegocioExcepcion;
-import org.contenido.mapeo.InmuebleMapper;
+import org.contenido.mapeo.mapeoImpl.InmuebleMapper;
 import org.contenido.modelo.Inmueble;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;

@@ -1,12 +1,14 @@
-package org.contenido.mapeo;
+package org.contenido.mapeo.mapeoImpl;
 
 import org.contenido.dto.InventarioDTO;
+import org.contenido.mapeo.Convertidor;
+import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.modelo.Inventario;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class InventarioMapper implements Convertidor<Inventario, InventarioDTO>, ResultSetMapper<Inventario>{
+public class InventarioMapper implements Convertidor<Inventario, InventarioDTO>, ResultSetMapper<Inventario> {
     public InventarioMapper() {}
 
     @Override

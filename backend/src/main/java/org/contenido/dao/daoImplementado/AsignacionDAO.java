@@ -1,11 +1,10 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.Historial_DAO;
-import org.contenido.mapeo.AsignacionMapper;
+import org.contenido.mapeo.mapeoImpl.AsignacionMapper;
 import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.modelo.Asignacion;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 public class AsignacionDAO implements Historial_DAO<Asignacion> {

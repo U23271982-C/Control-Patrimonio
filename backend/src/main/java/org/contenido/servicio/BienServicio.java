@@ -3,7 +3,7 @@ package org.contenido.servicio;
 import org.contenido.dao.daoImplementado.BienDAO;
 import org.contenido.dto.BienDTO;
 import org.contenido.excepcion.NegocioExcepcion;
-import org.contenido.mapeo.BienMapper;
+import org.contenido.mapeo.mapeoImpl.BienMapper;
 import org.contenido.modelo.Bien;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;

@@ -1,7 +1,9 @@
-package org.contenido.mapeo;
+package org.contenido.mapeo.mapeoImpl;
 
 import org.contenido.dto.CategoriaDTO;
 import org.contenido.excepcion.NegocioExcepcion;
+import org.contenido.mapeo.Convertidor;
+import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.modelo.Categoria;
 
 import java.sql.ResultSet;

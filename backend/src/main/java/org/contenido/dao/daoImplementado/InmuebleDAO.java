@@ -2,7 +2,7 @@ package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
 import org.contenido.excepcion.PersistenciaExcepcion;
-import org.contenido.mapeo.InmuebleMapper;
+import org.contenido.mapeo.mapeoImpl.InmuebleMapper;
 import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.modelo.Inmueble;
 import org.contenido.persistencia.ConexionPool;

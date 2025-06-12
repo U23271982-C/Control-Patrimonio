@@ -3,6 +3,7 @@ package org.contenido.dto;
 import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -10,16 +11,14 @@ public class RotacionDTO {
     @NotNull( message = "El id no puede ser nulo",  groups = {EnActualizar.class})
     private int id;
     @NotNull( message = "El id del bien no puede ser nulo",  groups = {EnCrear.class})
-    private int id_bien;
+    private BienDTO bienDTO;
     @NotNull( message = "El id del ambiente no puede ser nulo",  groups = {EnCrear.class})
-    private int id_ambiente;
-    @NotNull( message = "El id del responsable no puede ser nulo",  groups = {EnCrear.class})
+    private AmbienteDTO ambienteDTO;
+    @NotBlank( message = "El id del responsable no puede ser nulo",  groups = {EnCrear.class})
     @Size(max = 30, message = "El motivo no debe exceder los 30 caracteres")
     private String motivo;
     @NotNull( message = "El id del responsable no puede ser nulo",  groups = {EnCrear.class})
-    private int id_responsable;
-
-    public RotacionDTO() {}
+    private ResponsableDTO responsableDTO;
 
     public int getId() {
         return id;
@@ -29,20 +28,20 @@ public class RotacionDTO {
         this.id = id;
     }
 
-    public int getId_bien() {
-        return id_bien;
+    public BienDTO getBienDTO() {
+        return bienDTO;
     }
 
-    public void setId_bien(int id_bien) {
-        this.id_bien = id_bien;
+    public void setBienDTO(BienDTO bienDTO) {
+        this.bienDTO = bienDTO;
     }
 
-    public int getId_ambiente() {
-        return id_ambiente;
+    public AmbienteDTO getAmbienteDTO() {
+        return ambienteDTO;
     }
 
-    public void setId_ambiente(int id_ambiente) {
-        this.id_ambiente = id_ambiente;
+    public void setAmbienteDTO(AmbienteDTO ambienteDTO) {
+        this.ambienteDTO = ambienteDTO;
     }
 
     public String getMotivo() {
@@ -53,11 +52,11 @@ public class RotacionDTO {
         this.motivo = motivo;
     }
 
-    public int getId_responsable() {
-        return id_responsable;
+    public ResponsableDTO getResponsableDTO() {
+        return responsableDTO;
     }
 
-    public void setId_responsable(int id_responsable) {
-        this.id_responsable = id_responsable;
+    public void setResponsableDTO(ResponsableDTO responsableDTO) {
+        this.responsableDTO = responsableDTO;
     }
 }

@@ -1,14 +1,15 @@
-package org.contenido.mapeo;
+package org.contenido.mapeo.mapeoImpl;
 
 import org.contenido.dto.AmbienteDTO;
 import org.contenido.excepcion.NegocioExcepcion;
+import org.contenido.mapeo.Convertidor;
+import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.modelo.Ambiente;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 
-public class AmbienteMapper implements Convertidor<Ambiente, AmbienteDTO>, ResultSetMapper<Ambiente>{
+public class AmbienteMapper implements Convertidor<Ambiente, AmbienteDTO>, ResultSetMapper<Ambiente> {
     private final InmuebleMapper inmuebleMapper;
     public AmbienteMapper() {
         this.inmuebleMapper = new InmuebleMapper();

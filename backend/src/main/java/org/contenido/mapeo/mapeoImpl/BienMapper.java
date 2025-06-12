@@ -1,7 +1,9 @@
-package org.contenido.mapeo;
+package org.contenido.mapeo.mapeoImpl;
 
 import org.contenido.dto.BienDTO;
 import org.contenido.excepcion.NegocioExcepcion;
+import org.contenido.mapeo.Convertidor;
+import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.modelo.Bien;
 
 import java.sql.ResultSet;

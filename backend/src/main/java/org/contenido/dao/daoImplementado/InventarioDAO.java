@@ -1,7 +1,7 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
-import org.contenido.mapeo.InventarioMapper;
+import org.contenido.mapeo.mapeoImpl.InventarioMapper;
 import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.modelo.Inventario;
 import org.contenido.persistencia.ConexionPool;

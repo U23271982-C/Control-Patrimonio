@@ -3,7 +3,7 @@ package org.contenido.servicio;
 import org.contenido.dao.daoImplementado.Detalle_InventarioDAO;
 import org.contenido.dto.Detalle_InventarioDTO;
 import org.contenido.excepcion.NegocioExcepcion;
-import org.contenido.mapeo.Detalle_InventarioMapper;
+import org.contenido.mapeo.mapeoImpl.Detalle_InventarioMapper;
 import org.contenido.modelo.Detalle_Inventario;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;

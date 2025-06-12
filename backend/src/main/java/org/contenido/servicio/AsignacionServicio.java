@@ -3,7 +3,7 @@ package org.contenido.servicio;
 import org.contenido.dao.daoImplementado.AsignacionDAO;
 import org.contenido.dto.AsignacionDTO;
 import org.contenido.excepcion.NegocioExcepcion;
-import org.contenido.mapeo.AsignacionMapper;
+import org.contenido.mapeo.mapeoImpl.AsignacionMapper;
 import org.contenido.modelo.Asignacion;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnLeer;

@@ -3,7 +3,7 @@ package org.contenido.servicio;
 import org.contenido.dao.daoImplementado.AmbienteDAO;
 import org.contenido.dto.AmbienteDTO;
 import org.contenido.excepcion.NegocioExcepcion;
-import org.contenido.mapeo.AmbienteMapper;
+import org.contenido.mapeo.mapeoImpl.AmbienteMapper;
 import org.contenido.modelo.Ambiente;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;

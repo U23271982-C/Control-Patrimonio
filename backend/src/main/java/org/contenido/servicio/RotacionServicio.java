@@ -3,7 +3,7 @@ package org.contenido.servicio;
 import org.contenido.dao.daoImplementado.RotacionDAO;
 import org.contenido.dto.RotacionDTO;
 import org.contenido.excepcion.NegocioExcepcion;
-import org.contenido.mapeo.RotacionMapper;
+import org.contenido.mapeo.mapeoImpl.RotacionMapper;
 import org.contenido.modelo.Rotacion;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnLeer;

@@ -3,7 +3,7 @@ package org.contenido.servicio;
 import org.contenido.dao.daoImplementado.CategoriaDAO;
 import org.contenido.dto.CategoriaDTO;
 import org.contenido.excepcion.NegocioExcepcion;
-import org.contenido.mapeo.CategoriaMapper;
+import org.contenido.mapeo.mapeoImpl.CategoriaMapper;
 import org.contenido.modelo.Categoria;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;

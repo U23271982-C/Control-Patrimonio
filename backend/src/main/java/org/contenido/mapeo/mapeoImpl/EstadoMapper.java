@@ -1,13 +1,15 @@
-package org.contenido.mapeo;
+package org.contenido.mapeo.mapeoImpl;
 
 import org.contenido.dto.EstadoDTO;
 import org.contenido.excepcion.NegocioExcepcion;
+import org.contenido.mapeo.Convertidor;
+import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.modelo.Estado;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class EstadoMapper implements Convertidor <Estado,EstadoDTO>, ResultSetMapper<Estado> {
+public class EstadoMapper implements Convertidor<Estado,EstadoDTO>, ResultSetMapper<Estado> {
 
     public EstadoMapper() {
     }

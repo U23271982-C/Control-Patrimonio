@@ -3,7 +3,7 @@ package org.contenido.servicio;
 import org.contenido.dao.daoImplementado.ResponsableDAO;
 import org.contenido.dto.ResponsableDTO;
 import org.contenido.excepcion.NegocioExcepcion;
-import org.contenido.mapeo.ResponsableMapper;
+import org.contenido.mapeo.mapeoImpl.ResponsableMapper;
 import org.contenido.modelo.Responsable;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;
