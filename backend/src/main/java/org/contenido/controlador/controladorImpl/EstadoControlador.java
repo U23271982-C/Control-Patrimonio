@@ -1,12 +1,13 @@
-package org.contenido.controlador;
+package org.contenido.controlador.controladorImpl;
 
+import org.contenido.controlador.Controlador;
 import org.contenido.dto.EstadoDTO;
 import org.contenido.servicio.servicioImpl.EstadoServicio;
 import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;
 
-public class EstadoControlador implements Controlador<EstadoDTO>{
+public class EstadoControlador implements Controlador<EstadoDTO> {
     private EstadoServicio estadoServicio;
 
     public EstadoControlador() {
