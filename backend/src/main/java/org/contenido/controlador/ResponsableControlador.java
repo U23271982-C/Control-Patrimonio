@@ -1,7 +1,7 @@
 package org.contenido.controlador;
 
 import org.contenido.dto.ResponsableDTO;
-import org.contenido.servicio.ResponsableServicio;
+import org.contenido.servicio.servicioImpl.ResponsableServicio;
 import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;

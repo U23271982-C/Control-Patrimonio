@@ -1,18 +1,19 @@
-package org.contenido.servicio;
+package org.contenido.servicio.servicioImpl;
 
 import org.contenido.dao.daoImplementado.RotacionDAO;
 import org.contenido.dto.RotacionDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.RotacionMapper;
 import org.contenido.modelo.Rotacion;
+import org.contenido.servicio.Historial_Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
 
-public class RotacionServicio implements Historial_Servicio<RotacionDTO>{
-    private RotacionDAO rotacionDAO;
-    private RotacionMapper rotacionMapper;
+public class RotacionServicio implements Historial_Servicio<RotacionDTO> {
+    private final RotacionDAO rotacionDAO;
+    private final RotacionMapper rotacionMapper;
 
     public RotacionServicio() {
         this.rotacionDAO = new RotacionDAO();

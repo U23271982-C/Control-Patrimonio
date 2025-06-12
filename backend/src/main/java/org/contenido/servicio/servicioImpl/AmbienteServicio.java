@@ -1,19 +1,20 @@
-package org.contenido.servicio;
+package org.contenido.servicio.servicioImpl;
 
 import org.contenido.dao.daoImplementado.AmbienteDAO;
 import org.contenido.dto.AmbienteDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.AmbienteMapper;
 import org.contenido.modelo.Ambiente;
+import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
 
-public class AmbienteServicio implements Servicio <AmbienteDTO>{
-    private AmbienteDAO ambienteDAO;
-    private AmbienteMapper ambienteMapper;
+public class AmbienteServicio implements Servicio<AmbienteDTO> {
+    private final AmbienteDAO ambienteDAO;
+    private final AmbienteMapper ambienteMapper;
 
     public AmbienteServicio() {
         this.ambienteDAO = new AmbienteDAO();

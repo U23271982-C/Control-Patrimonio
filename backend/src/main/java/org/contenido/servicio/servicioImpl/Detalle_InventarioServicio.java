@@ -1,19 +1,20 @@
-package org.contenido.servicio;
+package org.contenido.servicio.servicioImpl;
 
 import org.contenido.dao.daoImplementado.Detalle_InventarioDAO;
 import org.contenido.dto.Detalle_InventarioDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.Detalle_InventarioMapper;
 import org.contenido.modelo.Detalle_Inventario;
+import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
 
-public class Detalle_InventarioServicio implements Servicio<Detalle_InventarioDTO>{
-    private Detalle_InventarioDAO detalleInventarioDAO;
-    private Detalle_InventarioMapper detalle_InventarioMapper;
+public class Detalle_InventarioServicio implements Servicio<Detalle_InventarioDTO> {
+    private final Detalle_InventarioDAO detalleInventarioDAO;
+    private final Detalle_InventarioMapper detalle_InventarioMapper;
 
     public Detalle_InventarioServicio() {
         this.detalleInventarioDAO = new Detalle_InventarioDAO();

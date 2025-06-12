@@ -1,18 +1,19 @@
-package org.contenido.servicio;
+package org.contenido.servicio.servicioImpl;
 
 import org.contenido.dao.daoImplementado.AsignacionDAO;
 import org.contenido.dto.AsignacionDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.AsignacionMapper;
 import org.contenido.modelo.Asignacion;
+import org.contenido.servicio.Historial_Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
 
-public class AsignacionServicio implements Historial_Servicio<AsignacionDTO>{
-    private AsignacionDAO asignacionDAO;
-    private AsignacionMapper asignacionMapper;
+public class AsignacionServicio implements Historial_Servicio<AsignacionDTO> {
+    private final AsignacionDAO asignacionDAO;
+    private final AsignacionMapper asignacionMapper;
 
     public AsignacionServicio() {
         this.asignacionDAO = new AsignacionDAO();

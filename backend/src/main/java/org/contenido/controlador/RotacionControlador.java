@@ -1,7 +1,7 @@
 package org.contenido.controlador;
 
 import org.contenido.dto.RotacionDTO;
-import org.contenido.servicio.RotacionServicio;
+import org.contenido.servicio.servicioImpl.RotacionServicio;
 import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;

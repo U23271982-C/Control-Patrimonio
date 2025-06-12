@@ -1,19 +1,20 @@
-package org.contenido.servicio;
+package org.contenido.servicio.servicioImpl;
 
 import org.contenido.dao.daoImplementado.ResponsableDAO;
 import org.contenido.dto.ResponsableDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.ResponsableMapper;
 import org.contenido.modelo.Responsable;
+import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
 
-public class ResponsableServicio implements Servicio<ResponsableDTO>{
-    private ResponsableDAO responsableDAO;
-    private ResponsableMapper responsableMapper;
+public class ResponsableServicio implements Servicio<ResponsableDTO> {
+    private final ResponsableDAO responsableDAO;
+    private final ResponsableMapper responsableMapper;
 
     public ResponsableServicio() {
         this.responsableDAO = new ResponsableDAO();

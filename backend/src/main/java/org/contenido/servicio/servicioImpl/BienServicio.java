@@ -1,10 +1,11 @@
-package org.contenido.servicio;
+package org.contenido.servicio.servicioImpl;
 
 import org.contenido.dao.daoImplementado.BienDAO;
 import org.contenido.dto.BienDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.BienMapper;
 import org.contenido.modelo.Bien;
+import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
@@ -12,8 +13,8 @@ import org.contenido.validacion.EnLeer;
 import java.util.List;
 
 public class BienServicio implements Servicio<BienDTO> {
-    private BienDAO bienDAO;
-    private BienMapper bienMapper;
+    private final BienDAO bienDAO;
+    private final BienMapper bienMapper;
 
     public BienServicio() {
         this.bienDAO = new BienDAO();

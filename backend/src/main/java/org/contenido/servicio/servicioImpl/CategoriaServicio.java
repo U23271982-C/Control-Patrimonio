@@ -1,10 +1,11 @@
-package org.contenido.servicio;
+package org.contenido.servicio.servicioImpl;
 
 import org.contenido.dao.daoImplementado.CategoriaDAO;
 import org.contenido.dto.CategoriaDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.CategoriaMapper;
 import org.contenido.modelo.Categoria;
+import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
@@ -12,8 +13,8 @@ import org.contenido.validacion.EnLeer;
 import java.util.List;
 
 public class CategoriaServicio implements Servicio<CategoriaDTO> {
-    private CategoriaDAO categoriaDAO;
-    private CategoriaMapper categoriaMapper;
+    private final CategoriaDAO categoriaDAO;
+    private final CategoriaMapper categoriaMapper;
 
     public CategoriaServicio() {
         this.categoriaDAO = new CategoriaDAO();

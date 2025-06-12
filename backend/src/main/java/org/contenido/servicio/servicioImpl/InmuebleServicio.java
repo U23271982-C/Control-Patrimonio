@@ -1,19 +1,20 @@
-package org.contenido.servicio;
+package org.contenido.servicio.servicioImpl;
 
 import org.contenido.dao.daoImplementado.InmuebleDAO;
 import org.contenido.dto.InmuebleDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.InmuebleMapper;
 import org.contenido.modelo.Inmueble;
+import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
 
-public class InmuebleServicio implements Servicio<InmuebleDTO>{
-    private InmuebleDAO inmuebleDAO;
-    private InmuebleMapper inmuebleMapper;
+public class InmuebleServicio implements Servicio<InmuebleDTO> {
+    private final InmuebleDAO inmuebleDAO;
+    private final InmuebleMapper inmuebleMapper;
 
     public InmuebleServicio() {
         this.inmuebleDAO = new InmuebleDAO();

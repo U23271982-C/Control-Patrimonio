@@ -1,7 +1,7 @@
 package org.contenido.controlador;
 
 import org.contenido.dto.InmuebleDTO;
-import org.contenido.servicio.InmuebleServicio;
+import org.contenido.servicio.servicioImpl.InmuebleServicio;
 import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;

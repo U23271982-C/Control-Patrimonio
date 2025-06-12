@@ -1,7 +1,7 @@
 package org.contenido.controlador;
 
 import org.contenido.dto.InventarioDTO;
-import org.contenido.servicio.InventarioServicio;
+import org.contenido.servicio.servicioImpl.InventarioServicio;
 import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;

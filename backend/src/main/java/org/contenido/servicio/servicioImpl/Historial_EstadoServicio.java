@@ -1,19 +1,20 @@
-package org.contenido.servicio;
+package org.contenido.servicio.servicioImpl;
 
 import org.contenido.dao.daoImplementado.Historial_EstadoDAO;
 import org.contenido.dto.Historial_EstadoDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.Historial_EstadoMapper;
 import org.contenido.modelo.Historial_Estado;
+import org.contenido.servicio.Historial_Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
 
-public class Historial_EstadoServicio implements Historial_Servicio<Historial_EstadoDTO>{
+public class Historial_EstadoServicio implements Historial_Servicio<Historial_EstadoDTO> {
 
-    private Historial_EstadoDAO historial_estadoDAO;
-    private Historial_EstadoMapper historial_estadoMapper;
+    private final Historial_EstadoDAO historial_estadoDAO;
+    private final Historial_EstadoMapper historial_estadoMapper;
 
     public Historial_EstadoServicio() {
         this.historial_estadoDAO = new Historial_EstadoDAO();
