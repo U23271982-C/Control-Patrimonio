@@ -1,5 +1,6 @@
-package org.contenido.controlador;
+package org.contenido.controlador.controladorImpl;
 
+import org.contenido.controlador.Controlador;
 import org.contenido.dto.InmuebleDTO;
 import org.contenido.servicio.servicioImpl.InmuebleServicio;
 import org.contenido.utilidad.NotificacionUtil;

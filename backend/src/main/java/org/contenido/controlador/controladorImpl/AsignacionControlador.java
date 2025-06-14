@@ -1,12 +1,13 @@
-package org.contenido.controlador;
+package org.contenido.controlador.controladorImpl;
 
+import org.contenido.controlador.Historial_Controlador;
 import org.contenido.dto.AsignacionDTO;
 import org.contenido.servicio.servicioImpl.AsignacionServicio;
 import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;
 
-public class AsignacionControlador implements Historial_Controlador<AsignacionDTO>{
+public class AsignacionControlador implements Historial_Controlador<AsignacionDTO> {
     private AsignacionServicio asignacionServicio;
 
     public AsignacionControlador() {

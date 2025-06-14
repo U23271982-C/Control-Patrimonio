@@ -1,12 +1,13 @@
-package org.contenido.controlador;
+package org.contenido.controlador.controladorImpl;
 
+import org.contenido.controlador.Controlador;
 import org.contenido.dto.BienDTO;
 import org.contenido.servicio.servicioImpl.BienServicio;
 import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;
 
-public class BienControlador implements Controlador<BienDTO>{
+public class BienControlador implements Controlador<BienDTO> {
     private BienServicio bienServicio;
 
     public BienControlador() {

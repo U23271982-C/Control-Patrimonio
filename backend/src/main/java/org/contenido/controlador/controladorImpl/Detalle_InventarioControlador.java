@@ -1,12 +1,13 @@
-package org.contenido.controlador;
+package org.contenido.controlador.controladorImpl;
 
+import org.contenido.controlador.Controlador;
 import org.contenido.dto.Detalle_InventarioDTO;
 import org.contenido.servicio.servicioImpl.Detalle_InventarioServicio;
 import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;
 
-public class Detalle_InventarioControlador implements Controlador<Detalle_InventarioDTO>{
+public class Detalle_InventarioControlador implements Controlador<Detalle_InventarioDTO> {
     private Detalle_InventarioServicio detalle_InventarioServicio;
 
     public Detalle_InventarioControlador() {

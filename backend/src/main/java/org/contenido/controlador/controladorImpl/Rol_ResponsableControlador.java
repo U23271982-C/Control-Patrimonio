@@ -1,5 +1,6 @@
-package org.contenido.controlador;
+package org.contenido.controlador.controladorImpl;
 
+import org.contenido.controlador.Controlador;
 import org.contenido.dto.Rol_ResponsableDTO;
 import org.contenido.servicio.servicioImpl.Rol_ResponsableServicio;
 import org.contenido.utilidad.NotificacionUtil;

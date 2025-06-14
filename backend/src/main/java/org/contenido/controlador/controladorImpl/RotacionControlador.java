@@ -1,5 +1,6 @@
-package org.contenido.controlador;
+package org.contenido.controlador.controladorImpl;
 
+import org.contenido.controlador.Historial_Controlador;
 import org.contenido.dto.RotacionDTO;
 import org.contenido.servicio.servicioImpl.RotacionServicio;
 import org.contenido.utilidad.NotificacionUtil;

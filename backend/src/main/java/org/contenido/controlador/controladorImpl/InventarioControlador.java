@@ -1,5 +1,6 @@
-package org.contenido.controlador;
+package org.contenido.controlador.controladorImpl;
 
+import org.contenido.controlador.Controlador;
 import org.contenido.dto.InventarioDTO;
 import org.contenido.servicio.servicioImpl.InventarioServicio;
 import org.contenido.utilidad.NotificacionUtil;
