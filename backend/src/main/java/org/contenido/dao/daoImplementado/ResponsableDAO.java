@@ -24,7 +24,6 @@ public class ResponsableDAO implements DAO<Responsable> {
             stmt.setString(4, entidad.getUsuario());
             stmt.setString(5, entidad.getContrasena());
             stmt.setInt(6, entidad.getRol_responsable().getId());
-            // Falta la relacion con Rol_Responsable?
 
             stmt.executeUpdate();
 
