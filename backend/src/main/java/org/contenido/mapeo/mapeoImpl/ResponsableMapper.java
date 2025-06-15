@@ -42,7 +42,9 @@ public class ResponsableMapper implements Convertidor<Responsable, ResponsableDT
                 dto.getEmail(),
                 dto.getCargo(),
                 dto.getRol_ResponsableDTO() != null ?
-                        rolResponsableMapper.convertirModelo(dto.getRol_ResponsableDTO()) : null
+                        rolResponsableMapper.convertirModelo(dto.getRol_ResponsableDTO()) : null,
+                dto.getUsuario(),
+                dto.getPassword()
         );
     }
 

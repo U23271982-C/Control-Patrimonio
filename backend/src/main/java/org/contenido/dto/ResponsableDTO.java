@@ -4,6 +4,7 @@ import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -22,6 +23,10 @@ public class ResponsableDTO {
     @NotNull(message = "El Rol Responsable no puede ser nulo", groups = {EnCrear.class})
     private Rol_ResponsableDTO rol_responsableDTO;
     // corroborar Rol_Responsble
+    @NotBlank(message = "El usuario no puede estar en blanco", groups = {EnCrear.class, EnActualizar.class})
+    private String usuario;
+    @NotBlank(message = "La contraseña no puede estar en blanco", groups = {EnCrear.class, EnActualizar.class})
+    private String password;
 
     public ResponsableDTO() {}
 
@@ -71,5 +76,25 @@ public class ResponsableDTO {
 
     public void setRol_responsableDTO(Rol_ResponsableDTO rolResponsableDTO) {
         this.rol_responsableDTO = rolResponsableDTO;
+    }
+
+    public Rol_ResponsableDTO getRol_responsableDTO() {
+        return rol_responsableDTO;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -6,15 +6,19 @@ public class Responsable {
     private String dni;
     private String email;
     private String cargo;
+    private String usuario;
+    private String contrasena;
     private Rol_Responsable rol_responsable;
 
-    public Responsable(int id, String nombre, String dni, String email, String cargo, Rol_Responsable rol_responsable) {
+    public Responsable(int id, String nombre, String dni, String email, String cargo, Rol_Responsable rol_responsable, String usuario, String contrasena) {
         this.id = id;
         this.nombre = nombre;
         this.dni = dni;
         this.email = email;
         this.cargo = cargo;
         this.rol_responsable = rol_responsable;
+        this.usuario = usuario;
+        this.contrasena = contrasena;
     }
 
     public int getId() {
@@ -63,5 +67,21 @@ public class Responsable {
 
     public void setRol_responsable(Rol_Responsable rol_responsable) {
         this.rol_responsable = rol_responsable;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }
