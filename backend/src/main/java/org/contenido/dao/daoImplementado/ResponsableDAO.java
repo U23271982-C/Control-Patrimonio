@@ -14,17 +14,16 @@ import java.util.List;
 public class ResponsableDAO implements DAO<Responsable> {
     @Override
     public void registrar(Responsable entidad) {
-        String sql = "{ CALL pa_Registrar_Responsable(?, ?, ?, ?, ?, ?, ?) }";
+        String sql = "{ CALL pa_Registrar_Responsable(?, ?, ?, ?, ?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
-            //stmt.setInt(1, entidad.getInmueble().getId());
             stmt.setString(1, entidad.getNombre());
             stmt.setString(2, entidad.getDni());
             stmt.setString(3, entidad.getEmail());
             stmt.setString(4, entidad.getUsuario());
             stmt.setString(5, entidad.getContrasena());
-            stmt.setString(6, entidad.getCargo());
+            stmt.setInt(6, entidad.getRol_responsable().getId());
             // Falta la relacion con Rol_Responsable?
 
             stmt.executeUpdate();

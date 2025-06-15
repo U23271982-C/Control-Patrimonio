@@ -19,7 +19,6 @@ public class ResponsableMapper implements Convertidor<Responsable, ResponsableDT
     public ResponsableDTO convertirDTO(Responsable modelo) {
         ResponsableDTO dto = new ResponsableDTO();
         dto.setId(modelo.getId());
-        dto.setCargo(modelo.getCargo());
         dto.setNombre(modelo.getNombre());
         dto.setDni(modelo.getDni());
         dto.setEmail(modelo.getEmail());
@@ -27,6 +26,8 @@ public class ResponsableMapper implements Convertidor<Responsable, ResponsableDT
                 modelo.getRol_responsable() != null ?
                         rolResponsableMapper.convertirDTO(modelo.getRol_responsable()) : null
         );
+        dto.setUsuario(modelo.getUsuario());
+        dto.setContrsena(modelo.getContrasena());
 
         return dto;
     }
@@ -40,11 +41,10 @@ public class ResponsableMapper implements Convertidor<Responsable, ResponsableDT
                 dto.getNombre(),
                 dto.getDni(),
                 dto.getEmail(),
-                dto.getCargo(),
                 dto.getRol_ResponsableDTO() != null ?
                         rolResponsableMapper.convertirModelo(dto.getRol_ResponsableDTO()) : null,
                 dto.getUsuario(),
-                dto.getPassword()
+                dto.getContrsena()
         );
     }
 

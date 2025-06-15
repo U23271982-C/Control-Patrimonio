@@ -26,7 +26,7 @@ public class ResponsableDTO {
     @NotBlank(message = "El usuario no puede estar en blanco", groups = {EnCrear.class, EnActualizar.class})
     private String usuario;
     @NotBlank(message = "La contraseña no puede estar en blanco", groups = {EnCrear.class, EnActualizar.class})
-    private String password;
+    private String contrsena;
 
     public ResponsableDTO() {}
 
@@ -90,11 +90,11 @@ public class ResponsableDTO {
         this.usuario = usuario;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContrsena() {
+        return contrsena;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContrsena(String contrsena) {
+        this.contrsena = contrsena;
     }
 }
