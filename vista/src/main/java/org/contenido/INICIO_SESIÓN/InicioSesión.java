@@ -4,6 +4,8 @@
  */
 package org.contenido.INICIO_SESIÓN;
 
+import org.contenido.PANEL_INICIO.PanelInicio;
+
 /**
  *
  * @author SERT
@@ -54,6 +56,11 @@ public class InicioSesión extends javax.swing.JFrame {
         iniciarSesión.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
         iniciarSesión.setForeground(new java.awt.Color(255, 255, 255));
         iniciarSesión.setText("Iniciar sesión");
+        iniciarSesión.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iniciarSesiónActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel5.setText("Contraseña");
@@ -145,7 +152,15 @@ public class InicioSesión extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void iniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesiónActionPerformed
+        // TODO add your handling code here:
+        PanelInicio obj = new PanelInicio();
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_iniciarSesiónActionPerformed
 
     /**
      * @param args the command line arguments
