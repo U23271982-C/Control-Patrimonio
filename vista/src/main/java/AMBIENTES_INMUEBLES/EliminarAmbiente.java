@@ -46,6 +46,12 @@ public class EliminarAmbiente extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Eliminar registro de ambiente");
 
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
         GuardarRegistro.setBackground(new java.awt.Color(204, 102, 0));
         GuardarRegistro.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro.setText("Eliminar");
@@ -158,11 +164,22 @@ public class EliminarAmbiente extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
+        //permitir seguir eliminando en la interfaz
+        PanelAmbienteInmuebles obj = new PanelAmbienteInmuebles();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 
     private void GuardarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistro1ActionPerformed
         // TODO add your handling code here:
+        PanelAmbienteInmuebles obj = new PanelAmbienteInmuebles();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GuardarRegistro1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments

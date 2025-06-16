@@ -158,10 +158,16 @@ public class EliminarInmueble extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
+        PanelAmbienteInmuebles obj = new PanelAmbienteInmuebles();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 
     private void GuardarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistro1ActionPerformed
         // TODO add your handling code here:
+        PanelAmbienteInmuebles obj = new PanelAmbienteInmuebles();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GuardarRegistro1ActionPerformed
 
     /**

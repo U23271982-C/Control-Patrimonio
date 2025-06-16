@@ -55,6 +55,9 @@ public class BienesPrincipal extends javax.swing.JFrame {
 
         jLabel3.setText("Accede al historial completo de los bienes asignados");
 
+        jButton3.setBackground(new java.awt.Color(255, 102, 0));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Atrás");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +104,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(255, 243, 239));
 
         jButton1.setBackground(new java.awt.Color(255, 102, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Añadir bien");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -142,6 +146,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
         jLabel4.setText("Buscar por nombre o código de identificación:");
 
         jButton2.setBackground(new java.awt.Color(255, 102, 0));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Modificar bien");
         jButton2.addActionListener(new java.awt.event.ActionListener() {

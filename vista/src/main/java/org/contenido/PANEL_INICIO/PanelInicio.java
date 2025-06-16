@@ -12,6 +12,7 @@ import PERSONAL_RESPONSABLE.PanelResponsables;
 import REPORTES.Reportes;
 import BAJA_BIENES.bajadebienes;
 import MOVIMIENTOS.PanelMovimientos;
+import org.contenido.INICIO_SESIÓN.InicioSesion;
 
 /**
  *
@@ -206,6 +207,11 @@ public class PanelInicio extends javax.swing.JFrame {
         jButton6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Cerrar sesión");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton15.setBackground(new java.awt.Color(204, 102, 0));
         jButton15.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
@@ -345,6 +351,13 @@ public class PanelInicio extends javax.swing.JFrame {
         dispose();
         
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        InicioSesion obj =new InicioSesion();
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
