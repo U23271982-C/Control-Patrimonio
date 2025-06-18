@@ -9,7 +9,9 @@ import org.contenido.persistencia.ConexionPool;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AsignacionDAO implements DAO<Asignacion> {
@@ -21,7 +23,20 @@ public class AsignacionDAO implements DAO<Asignacion> {
 
     @Override
     public void registrar(Asignacion entidad) {
+        String sql = "{ CALL pa_Insertar_Asignacion(?, ?, ?, ?) }";
+        try (Connection conn = ConexionPool.getConnection();
+             CallableStatement stmt = conn.prepareCall(sql)) {
 
+            stmt.setInt(1, entidad.getBien().getId());
+            stmt.setInt(2, entidad.getResponsable().getId());
+            stmt.setDate(3, java.sql.Date.valueOf(entidad.getFechaInicio()));
+            stmt.setDate(4, java.sql.Date.valueOf(entidad.getFechaFin()));
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new PersistenciaExcepcion(String.format("Error al registrar %s: ", Asignacion.class.getName()), e);
+        }
     }
 
     @Override
@@ -45,6 +60,20 @@ public class AsignacionDAO implements DAO<Asignacion> {
 
     @Override
     public Asignacion leerPorId(int idEntidad) {
+        String sql = "{ CALL pa_Leer_Asignacion(?) }";
+        try (Connection conn = ConexionPool.getConnection();
+             CallableStatement stmt = conn.prepareCall(sql)){
+
+            stmt.setInt(1, idEntidad);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return mapper.mapDeResultSet(rs);
+            }
+
+        } catch (SQLException e) {
+            throw new PersistenciaExcepcion(String.format("Error al leer %s: ", Asignacion.class.getName()), e);
+        }
         return null;
     }
 
@@ -64,6 +93,21 @@ public class AsignacionDAO implements DAO<Asignacion> {
 
     @Override
     public List<Asignacion> listarTodo() {
-        return List.of();
+        String sql = "{ CALL pa_Listar_Asignacion() }";
+        try (Connection conn = ConexionPool.getConnection();
+             CallableStatement stmt = conn.prepareCall(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+            List<Asignacion> entidades = new ArrayList<>();
+            while (rs.next()) {
+                entidades.add(mapper.mapDeResultSet(rs));
+            }
+
+            stmt.executeUpdate();
+            return entidades;
+
+        } catch (SQLException e) {
+            throw new PersistenciaExcepcion(String.format("Error al listar %s: ", Asignacion.class.getName()), e);
+        }
     }
 }
