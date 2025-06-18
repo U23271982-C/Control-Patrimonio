@@ -10,13 +10,13 @@ CREATE TABLE Rol_Responsable(
 
 -- Tabla Responsable
 CREATE TABLE Responsable(
-    idResponsable INT PRIMARY KEY,
+    idResponsable INT AUTO_INCREMENT PRIMARY KEY,
+    idRol_Responsable INT NOT NULL,
     nombre VARCHAR(30),
     dni VARCHAR(12),
     mail VARCHAR(30),
     usuario VARCHAR(30),
-    contraseña VARCHAR(30),
-    cargo VARCHAR(30)
+    contrasena VARBINARY(255)
 );
 
 -- Tabla Inventario
@@ -111,7 +111,7 @@ CREATE TABLE HistorialEstado(
 
 -- Responsable 1-1 Rol
 ALTER TABLE Responsable
-ADD CONSTRAINT fk_Responsable_Rol FOREIGN KEY (idResponsable) REFERENCES Rol_Responsable(idRol_Responsable);
+ADD CONSTRAINT fk_Responsable_Rol FOREIGN KEY (idRol_Responsable) REFERENCES Rol_Responsable(idRol_Responsable);
 
 -- Relaciones de la tabla Ambiente
 ALTER TABLE Ambiente
@@ -145,5 +145,3 @@ ALTER TABLE HistorialEstado
 ADD CONSTRAINT fk_HistorialEstado_Bien FOREIGN KEY (idBien) REFERENCES Bien(idBien),
 ADD CONSTRAINT fk_HistorialEstado_Estado FOREIGN KEY (idEstado) REFERENCES Estado(idEstado),
 ADD CONSTRAINT fk_HistorialEstado_Responsable FOREIGN KEY (idResponsable) REFERENCES Responsable(idResponsable);
-
-

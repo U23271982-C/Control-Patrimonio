@@ -236,7 +236,7 @@ public class PanelCategoria extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        ModificarCategoría obj = new ModificarCategoría();
+        ModificarCategoria obj = new ModificarCategoria();
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed

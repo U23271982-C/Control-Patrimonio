@@ -1,6 +1,7 @@
 package PERSONAL_RESPONSABLE;
 
 import PERSONAL_RESPONSABLE.ModuloRegistroResponsables;
+import org.contenido.PANEL_INICIO.PanelInicio;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -86,6 +87,7 @@ public class PanelResponsables extends javax.swing.JFrame {
         Cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cargo" }));
 
         Buscar.setBackground(new java.awt.Color(204, 0, 0));
+        Buscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Buscar.setForeground(new java.awt.Color(255, 255, 255));
         Buscar.setText("Buscar");
         Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -188,6 +190,9 @@ public class PanelResponsables extends javax.swing.JFrame {
                 .addGap(28, 28, 28))
         );
 
+        jButton1.setBackground(new java.awt.Color(255, 102, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Atrás");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,6 +281,9 @@ public class PanelResponsables extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        PanelInicio obj = new PanelInicio();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

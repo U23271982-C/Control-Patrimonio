@@ -70,6 +70,7 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         GuardarRegistro.setBackground(new java.awt.Color(204, 102, 0));
+        GuardarRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro.setText("Guardar");
         GuardarRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +79,15 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 102, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Cerrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(204, 204, 204));
@@ -101,8 +110,14 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
         jLabel13.setText("Responsable a cargo");
 
         Cancelar.setBackground(new java.awt.Color(0, 0, 0));
+        Cancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Cancelar.setForeground(new java.awt.Color(255, 255, 255));
         Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -224,11 +239,28 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
+        BienesPrincipal obj = new BienesPrincipal();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        BienesPrincipal obj = new BienesPrincipal();
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+        // TODO add your handling code here:
+        BienesPrincipal obj = new BienesPrincipal();
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CancelarActionPerformed
 
     /**
      * @param args the command line arguments

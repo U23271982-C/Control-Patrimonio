@@ -130,6 +130,11 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 102, 0));
 
         jButton1.setText("Cerrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -171,6 +176,9 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
+        PanelAmbienteInmuebles obj = new PanelAmbienteInmuebles();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 
     private void GuardarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistro1ActionPerformed
@@ -179,7 +187,17 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
 
     private void GuardarRegistro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistro2ActionPerformed
         // TODO add your handling code here:
+        PanelAmbienteInmuebles obj = new PanelAmbienteInmuebles();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GuardarRegistro2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        PanelAmbienteInmuebles obj = new PanelAmbienteInmuebles();
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

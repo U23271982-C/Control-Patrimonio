@@ -53,6 +53,7 @@ public class EliminarResponsable extends javax.swing.JFrame {
         jLabel2.setText("Eliminar registro de responsable");
 
         GuardarRegistro.setBackground(new java.awt.Color(204, 102, 0));
+        GuardarRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro.setText("Eliminar responsable");
         GuardarRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +71,7 @@ public class EliminarResponsable extends javax.swing.JFrame {
         jLabel10.setText("Estás a punto de eliminar al siguiente personal:");
 
         GuardarRegistro1.setBackground(new java.awt.Color(102, 102, 102));
+        GuardarRegistro1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro1.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro1.setText("Cancelar");
         GuardarRegistro1.addActionListener(new java.awt.event.ActionListener() {
@@ -196,10 +198,16 @@ public class EliminarResponsable extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
+        PanelResponsables obj = new PanelResponsables();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 
     private void GuardarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistro1ActionPerformed
         // TODO add your handling code here:
+        PanelResponsables obj = new PanelResponsables();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GuardarRegistro1ActionPerformed
 
     /**
