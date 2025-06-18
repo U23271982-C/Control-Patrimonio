@@ -1,10 +1,9 @@
 package org.contenido.dao.daoImplementado;
 
-import org.contenido.dao.Historial_DAO;
+import org.contenido.dao.DAO;
 import org.contenido.excepcion.PersistenciaExcepcion;
 import org.contenido.mapeo.mapeoImpl.AsignacionMapper;
 import org.contenido.mapeo.ResultSetMapper;
-import org.contenido.modelo.Ambiente;
 import org.contenido.modelo.Asignacion;
 import org.contenido.persistencia.ConexionPool;
 
@@ -13,11 +12,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AsignacionDAO implements Historial_DAO<Asignacion> {
+public class AsignacionDAO implements DAO<Asignacion> {
     private final ResultSetMapper<Asignacion> mapper;
 
     public AsignacionDAO() {
         this.mapper = new AsignacionMapper();
+    }
+
+    @Override
+    public void registrar(Asignacion entidad) {
+
     }
 
     @Override

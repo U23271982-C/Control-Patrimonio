@@ -1,11 +1,17 @@
 package org.contenido.dao.daoImplementado;
 
-import org.contenido.dao.Historial_DAO;
+import org.contenido.dao.DAO;
 import org.contenido.modelo.Rotacion;
 
 import java.util.List;
 
-public class RotacionDAO implements Historial_DAO<Rotacion> {
+public class RotacionDAO implements DAO<Rotacion> {
+
+    @Override
+    public void registrar(Rotacion entidad) {
+
+    }
+
     @Override
     public void actualizar(Rotacion entidad) {
 
