@@ -7,6 +7,7 @@ import org.contenido.mapeo.mapeoImpl.AsignacionMapper;
 import org.contenido.modelo.Asignacion;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
@@ -22,7 +23,10 @@ public class AsignacionServicio implements Servicio<AsignacionDTO> {
 
     @Override
     public void registrar(AsignacionDTO dto) {
-
+        ValidadorUtilidad.validar(dto, EnCrear.class);
+        ValidadorUtilidad.validar(dto.getBienDTO(), EnLeer.class);
+        ValidadorUtilidad.validar(dto.getResponsableDTO(), EnLeer.class);
+        asignacionDAO.registrar(asignacionMapper.convertirModelo(dto));
     }
 
     @Override

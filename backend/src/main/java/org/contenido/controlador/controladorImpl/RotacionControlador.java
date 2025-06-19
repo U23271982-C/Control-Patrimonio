@@ -16,7 +16,12 @@ public class RotacionControlador implements Controlador<RotacionDTO> {
 
     @Override
     public void registrar(RotacionDTO dto) {
-
+        try {
+            rotacionServicio.registrar(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Rotación creada correctamente.");
+        } catch (Exception e){
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override

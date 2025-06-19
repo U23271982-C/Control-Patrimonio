@@ -16,7 +16,12 @@ public class Historial_EstadoControlador implements Controlador<Historial_Estado
 
     @Override
     public void registrar(Historial_EstadoDTO dto) {
-
+        try {
+            historial_EstadoServicio.registrar(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Historial Estado creada correctamente.");
+        } catch (Exception e){
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override

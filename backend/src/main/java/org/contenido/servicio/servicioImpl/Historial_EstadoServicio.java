@@ -7,6 +7,7 @@ import org.contenido.mapeo.mapeoImpl.Historial_EstadoMapper;
 import org.contenido.modelo.Historial_Estado;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
@@ -23,7 +24,11 @@ public class Historial_EstadoServicio implements Servicio<Historial_EstadoDTO> {
 
     @Override
     public void registrar(Historial_EstadoDTO dto) {
-
+        ValidadorUtilidad.validar(dto, EnCrear.class);
+        ValidadorUtilidad.validar(dto.getBienDTO(), EnLeer.class);
+        ValidadorUtilidad.validar(dto.getEstadoDTO(), EnLeer.class);
+        ValidadorUtilidad.validar(dto.getResponsableDTO(), EnLeer.class);
+        historial_estadoDAO.registrar(historial_estadoMapper.convertirModelo(dto));
     }
 
     @Override

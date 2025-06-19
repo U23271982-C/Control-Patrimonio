@@ -7,6 +7,7 @@ import org.contenido.mapeo.mapeoImpl.RotacionMapper;
 import org.contenido.modelo.Rotacion;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
@@ -22,7 +23,11 @@ public class RotacionServicio implements Servicio<RotacionDTO> {
 
     @Override
     public void registrar(RotacionDTO dto) {
-
+        ValidadorUtilidad.validar(dto, EnCrear.class);
+        ValidadorUtilidad.validar(dto.getBienDTO(), EnLeer.class);
+        ValidadorUtilidad.validar(dto.getAmbienteDTO(), EnLeer.class);
+        ValidadorUtilidad.validar(dto.getResponsableDTO(), EnLeer.class);
+        rotacionDAO.registrar(rotacionMapper.convertirModelo(dto));
     }
 
     @Override

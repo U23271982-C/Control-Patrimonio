@@ -16,7 +16,12 @@ public class AsignacionControlador implements Controlador<AsignacionDTO> {
 
     @Override
     public void registrar(AsignacionDTO dto) {
-
+        try {
+            asignacionServicio.registrar(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Asignación creada correctamente.");
+        } catch (Exception e){
+            NotificacionUtil.mostrarError(e);
+        }
     }
 
     @Override
