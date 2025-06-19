@@ -5,9 +5,13 @@ import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.Convertidor;
 import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.modelo.Asignacion;
+import org.contenido.modelo.Bien;
+import org.contenido.modelo.Responsable;
+import org.contenido.modelo.Rol_Responsable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class AsignacionMapper implements Convertidor<Asignacion, AsignacionDTO>, ResultSetMapper<Asignacion> {
     private final BienMapper bienMapper;
@@ -49,15 +53,17 @@ public class AsignacionMapper implements Convertidor<Asignacion, AsignacionDTO>,
 
     @Override
     public Asignacion mapDeResultSet(ResultSet rs) throws SQLException {
-        // Falta porque no estan los procedimientos almacenados listar
-        // El orden segun como se liste en el procedimiento almacenado
-        /*return new Asignacion(
+        Bien bien = new Bien(rs.getInt(2),rs.getString(3), null,null,null,null,null,null);
+        Rol_Responsable rol_responsable =new Rol_Responsable(rs.getInt(10),rs.getString(12),rs.getString(11));
+        Responsable responsable = new Responsable(rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rol_responsable,rs.getString(8),rs.getString(9));
+        Asignacion entidad = new Asignacion(
                 rs.getInt(1),
-                bienMapper.mapDeResultSet(rs),
-                responsableMapper.mapDeResultSet(rs),
-                rs.getObject(4, java.time.LocalDate.class),
-                rs.getObject(5, java.time.LocalDate.class)
-        );*/
-        return null;
+                bien,
+                responsable,
+                (rs.getDate(13)).toLocalDate(),
+                (rs.getDate(14)).toLocalDate()
+
+        );
+        return entidad;
     }
 }

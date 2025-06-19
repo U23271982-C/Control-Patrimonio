@@ -8,6 +8,12 @@ public class Ambiente {
     public Ambiente() {
     }
 
+    public Ambiente(int id, String nombre, Inmueble inmueble) {
+        this.id = id;
+        this.nombre = nombre;
+        this.inmueble = inmueble;
+    }
+
     public int getId() {
         return id;
     }

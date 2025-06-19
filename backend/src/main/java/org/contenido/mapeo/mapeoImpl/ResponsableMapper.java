@@ -5,6 +5,7 @@ import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.Convertidor;
 import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.modelo.Responsable;
+import org.contenido.modelo.Rol_Responsable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,6 +51,8 @@ public class ResponsableMapper implements Convertidor<Responsable, ResponsableDT
 
     @Override
     public Responsable mapDeResultSet(ResultSet rs) throws SQLException {
-        return null;
+        Rol_Responsable rol_responsable = new Rol_Responsable(rs.getInt(2),rs.getString(4),rs.getString(3));
+        Responsable entidad = new Responsable(rs.getInt(1),rs.getString(5),rs.getString(6),rs.getString(7),rol_responsable,rs.getString(8),rs.getString(9));
+        return entidad;
     }
 }

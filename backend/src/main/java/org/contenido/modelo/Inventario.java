@@ -11,6 +11,14 @@ public class Inventario {
 
     public Inventario() {}
 
+    public Inventario(int id, String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+    }
+
     public int getId() {
         return id;
     }

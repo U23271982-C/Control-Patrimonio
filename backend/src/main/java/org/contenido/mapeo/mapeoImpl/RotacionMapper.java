@@ -3,7 +3,7 @@ package org.contenido.mapeo.mapeoImpl;
 import org.contenido.dto.RotacionDTO;
 import org.contenido.mapeo.Convertidor;
 import org.contenido.mapeo.ResultSetMapper;
-import org.contenido.modelo.Rotacion;
+import org.contenido.modelo.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,6 +53,11 @@ public class RotacionMapper implements Convertidor<Rotacion, RotacionDTO>, Resul
 
     @Override
     public Rotacion mapDeResultSet(ResultSet rs) throws SQLException {
-        return null;
+        Rol_Responsable rol_responsable= new Rol_Responsable(rs.getInt(13),rs.getString(15),rs.getString(14));
+        Responsable responsable= new Responsable(rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),rol_responsable,rs.getString(11),rs.getString(12));
+        Ambiente ambiente= new Ambiente(rs.getInt(4),rs.getString(5),null);
+        Bien bien = new Bien(rs.getInt(2),rs.getString(3),null,null,null,null,null,null);
+        Rotacion entidad = new Rotacion(rs.getInt(1),bien,ambiente,rs.getString(6),responsable);
+        return entidad;
     }
 }

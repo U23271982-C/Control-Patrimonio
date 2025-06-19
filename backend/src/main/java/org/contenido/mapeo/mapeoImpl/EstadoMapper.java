@@ -34,6 +34,7 @@ public class EstadoMapper implements Convertidor<Estado,EstadoDTO>, ResultSetMap
 
     @Override
     public Estado mapDeResultSet(ResultSet rs) throws SQLException {
-        return null;
+        Estado entidad = new Estado(rs.getInt(1),rs.getString(2));
+        return entidad;
     }
 }

@@ -32,6 +32,9 @@ public class CategoriaMapper implements Convertidor<Categoria, CategoriaDTO>, Re
 
     @Override
     public Categoria mapDeResultSet(ResultSet rs) throws SQLException {
-        return null;
+        Categoria entidad = new Categoria(
+                rs.getInt(1),rs.getString(2),rs.getString(3)
+        );
+        return entidad;
     }
 }

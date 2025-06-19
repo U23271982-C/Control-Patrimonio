@@ -30,6 +30,7 @@ public class Rol_ResponsableMapper implements Convertidor<Rol_Responsable, Rol_R
 
     @Override
     public Rol_Responsable mapDeResultSet(ResultSet rs) throws SQLException {
-        return null;
+        Rol_Responsable entidad = new Rol_Responsable(rs.getInt(1),rs.getString(2),rs.getString(3));
+        return entidad;
     }
 }
