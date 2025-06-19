@@ -23,7 +23,7 @@ public class AsignacionDAO implements DAO<Asignacion> {
 
     @Override
     public void registrar(Asignacion entidad) {
-        String sql = "{ CALL pa_Insertar_Asignacion(?, ?, ?, ?) }";
+        String sql = "{ CALL pa_Registrar_Asignacion(?, ?, ?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)) {
 
