@@ -5,19 +5,29 @@ import org.contenido.dto.AsignacionDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.AsignacionMapper;
 import org.contenido.modelo.Asignacion;
-import org.contenido.servicio.Historial_Servicio;
+import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
 
-public class AsignacionServicio implements Historial_Servicio<AsignacionDTO> {
+public class AsignacionServicio implements Servicio<AsignacionDTO> {
     private final AsignacionDAO asignacionDAO;
     private final AsignacionMapper asignacionMapper;
 
     public AsignacionServicio() {
         this.asignacionDAO = new AsignacionDAO();
         this.asignacionMapper = new AsignacionMapper();
+    }
+
+    @Override
+    public void registrar(AsignacionDTO dto) {
+
+    }
+
+    @Override
+    public AsignacionDTO leerPorId(int idDto) {
+        return null;
     }
 
     @Override

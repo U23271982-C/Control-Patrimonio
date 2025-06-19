@@ -1,17 +1,27 @@
 package org.contenido.controlador.controladorImpl;
 
-import org.contenido.controlador.Historial_Controlador;
+import org.contenido.controlador.Controlador;
 import org.contenido.dto.RotacionDTO;
 import org.contenido.servicio.servicioImpl.RotacionServicio;
 import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;
 
-public class RotacionControlador implements Historial_Controlador<RotacionDTO> {
+public class RotacionControlador implements Controlador<RotacionDTO> {
     private RotacionServicio rotacionServicio;
 
     public RotacionControlador() {
         this.rotacionServicio = new RotacionServicio();
+    }
+
+    @Override
+    public void registrar(RotacionDTO dto) {
+
+    }
+
+    @Override
+    public RotacionDTO leerPorId(int idDto) {
+        return null;
     }
 
     @Override

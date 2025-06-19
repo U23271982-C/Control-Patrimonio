@@ -5,13 +5,13 @@ import org.contenido.dto.Historial_EstadoDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.Historial_EstadoMapper;
 import org.contenido.modelo.Historial_Estado;
-import org.contenido.servicio.Historial_Servicio;
+import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
 
-public class Historial_EstadoServicio implements Historial_Servicio<Historial_EstadoDTO> {
+public class Historial_EstadoServicio implements Servicio<Historial_EstadoDTO> {
 
     private final Historial_EstadoDAO historial_estadoDAO;
     private final Historial_EstadoMapper historial_estadoMapper;
@@ -19,6 +19,16 @@ public class Historial_EstadoServicio implements Historial_Servicio<Historial_Es
     public Historial_EstadoServicio() {
         this.historial_estadoDAO = new Historial_EstadoDAO();
         this.historial_estadoMapper = new Historial_EstadoMapper();
+    }
+
+    @Override
+    public void registrar(Historial_EstadoDTO dto) {
+
+    }
+
+    @Override
+    public Historial_EstadoDTO leerPorId(int idDto) {
+        return null;
     }
 
     @Override
