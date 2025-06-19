@@ -18,8 +18,6 @@ public class ResponsableDTO {
     private String dni;
     @Email(message = "El email no es valido")
     private String email;
-    @Size(max = 30, message = "El cargo no debe exceder los 30 caracteres")
-    private String cargo;
     @NotNull(message = "El Rol Responsable no puede ser nulo", groups = {EnCrear.class})
     private Rol_ResponsableDTO rol_responsableDTO;
     // corroborar Rol_Responsble
@@ -60,14 +58,6 @@ public class ResponsableDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
     }
 
     public Rol_ResponsableDTO getRol_ResponsableDTO() {
