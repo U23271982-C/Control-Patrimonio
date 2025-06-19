@@ -1,17 +1,32 @@
 package org.contenido.controlador.controladorImpl;
 
-import org.contenido.controlador.Historial_Controlador;
+import org.contenido.controlador.Controlador;
 import org.contenido.dto.AsignacionDTO;
 import org.contenido.servicio.servicioImpl.AsignacionServicio;
 import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;
 
-public class AsignacionControlador implements Historial_Controlador<AsignacionDTO> {
+public class AsignacionControlador implements Controlador<AsignacionDTO> {
     private AsignacionServicio asignacionServicio;
 
     public AsignacionControlador() {
         this.asignacionServicio = new AsignacionServicio();
+    }
+
+    @Override
+    public void registrar(AsignacionDTO dto) {
+        try {
+            asignacionServicio.registrar(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Asignación creada correctamente.");
+        } catch (Exception e){
+            NotificacionUtil.mostrarError(e);
+        }
+    }
+
+    @Override
+    public AsignacionDTO leerPorId(int idDto) {
+        return null;
     }
 
     @Override

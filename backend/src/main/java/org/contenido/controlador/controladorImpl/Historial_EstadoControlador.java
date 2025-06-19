@@ -1,17 +1,32 @@
 package org.contenido.controlador.controladorImpl;
 
-import org.contenido.controlador.Historial_Controlador;
+import org.contenido.controlador.Controlador;
 import org.contenido.dto.Historial_EstadoDTO;
 import org.contenido.servicio.servicioImpl.Historial_EstadoServicio;
 import org.contenido.utilidad.NotificacionUtil;
 
 import java.util.List;
 
-public class Historial_EstadoControlador implements Historial_Controlador<Historial_EstadoDTO> {
+public class Historial_EstadoControlador implements Controlador<Historial_EstadoDTO> {
     private Historial_EstadoServicio historial_EstadoServicio;
 
     public Historial_EstadoControlador() {
         this.historial_EstadoServicio = new Historial_EstadoServicio();
+    }
+
+    @Override
+    public void registrar(Historial_EstadoDTO dto) {
+        try {
+            historial_EstadoServicio.registrar(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion("✅ Historial Estado creada correctamente.");
+        } catch (Exception e){
+            NotificacionUtil.mostrarError(e);
+        }
+    }
+
+    @Override
+    public Historial_EstadoDTO leerPorId(int idDto) {
+        return null;
     }
 
     @Override

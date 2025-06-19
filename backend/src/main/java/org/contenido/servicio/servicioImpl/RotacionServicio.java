@@ -5,19 +5,34 @@ import org.contenido.dto.RotacionDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.RotacionMapper;
 import org.contenido.modelo.Rotacion;
-import org.contenido.servicio.Historial_Servicio;
+import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
 
-public class RotacionServicio implements Historial_Servicio<RotacionDTO> {
+public class RotacionServicio implements Servicio<RotacionDTO> {
     private final RotacionDAO rotacionDAO;
     private final RotacionMapper rotacionMapper;
 
     public RotacionServicio() {
         this.rotacionDAO = new RotacionDAO();
         this.rotacionMapper = new RotacionMapper();
+    }
+
+    @Override
+    public void registrar(RotacionDTO dto) {
+        ValidadorUtilidad.validar(dto, EnCrear.class);
+        ValidadorUtilidad.validar(dto.getBienDTO(), EnLeer.class);
+        ValidadorUtilidad.validar(dto.getAmbienteDTO(), EnLeer.class);
+        ValidadorUtilidad.validar(dto.getResponsableDTO(), EnLeer.class);
+        rotacionDAO.registrar(rotacionMapper.convertirModelo(dto));
+    }
+
+    @Override
+    public RotacionDTO leerPorId(int idDto) {
+        return null;
     }
 
     @Override
