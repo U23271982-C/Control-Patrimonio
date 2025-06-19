@@ -68,7 +68,7 @@ public class InmuebleDAO implements DAO<Inmueble> {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion("Error al Inmueble:", e);
+            throw new PersistenciaExcepcion("Error al actualizar Inmueble:", e);
         }
     }
 
