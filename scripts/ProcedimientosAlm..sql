@@ -16,7 +16,6 @@ END //
 
 -- 2. Procedimientos para Responsable
 CREATE PROCEDURE pa_Registrar_Responsable(
-    IN p_idResponsable INT,
     IN p_idRol_Responsable INT,
     IN p_nombre VARCHAR(30),
     IN p_dni VARCHAR(12),
@@ -24,8 +23,8 @@ CREATE PROCEDURE pa_Registrar_Responsable(
     IN p_usuario VARCHAR(30),
     IN p_contrasena VARBINARY(255)
 BEGIN
-    INSERT INTO Responsable(idResponsable, idRol_Responsable, nombre, dni, mail, usuario, contrasena)
-    VALUES(p_idResponsable, p_idRol_Responsable, p_nombre, p_dni, p_mail, p_usuario, AES_ENCRYPT(p_contrasena,'Clave123');
+    INSERT INTO Responsable(idRol_Responsable, nombre, dni, mail, usuario, contrasena)
+    VALUES(p_idRol_Responsable, p_nombre, p_dni, p_mail, p_usuario, AES_ENCRYPT(p_contrasena,'Clave123');
 END //
 
 -- 3. Procedimientos para Inventario
@@ -319,8 +318,7 @@ CREATE PROCEDURE pa_Actualizar_Responsable(
     IN p_dni VARCHAR(12),
     IN p_mail VARCHAR(30),
     IN p_usuario VARCHAR(30),
-    IN p_contrasena VARBINARY(255),
-    IN p_clave VARBINARY(255)
+    IN p_contrasena VARBINARY(255)
 BEGIN
     UPDATE Responsable
     SET nombre = COALESCE(NULLIF(p_nombre, ''), nombre),
@@ -329,7 +327,7 @@ BEGIN
         mail = COALESCE(NULLIF(p_mail, ''), mail),
         usuario = COALESCE(NULLIF(p_usuario, ''), usuario),
         contrasena = COALESCE(
-            NULLIF(AES_ENCRYPT(p_contrasena, p_clave), AES_ENCRYPT('', p_clave)),
+            NULLIF(AES_ENCRYPT(p_contrasena, 'Clave123'), AES_ENCRYPT('', 'Clave123')),
             contrasena
         )
     WHERE idResponsable = p_idResponsable;

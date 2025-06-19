@@ -36,7 +36,7 @@ public class InventarioDAO implements DAO<Inventario> {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error al registrar inventario: " + e.getMessage(), e);
+            throw new RuntimeException("Error al registrar " + Inventario.class.getSimpleName(), e);
         }
     }
 
@@ -53,7 +53,7 @@ public class InventarioDAO implements DAO<Inventario> {
                 return mapper.mapDeResultSet(rs);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al leer el inventario: " + e.getMessage(), e);
+            throw new RuntimeException("Error al leer " + Inventario.class.getSimpleName(), e);
         }
         return null;
     }
@@ -75,7 +75,7 @@ public class InventarioDAO implements DAO<Inventario> {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error al actualizar inventario: " + e.getMessage(), e);
+            throw new RuntimeException("Error al actualizar " + Inventario.class.getSimpleName(), e);
         }
     }
 
@@ -89,7 +89,7 @@ public class InventarioDAO implements DAO<Inventario> {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("Error al eliminar inventario: " + e.getMessage(), e);
+            throw new RuntimeException("Error al eliminar " + Inventario.class.getSimpleName(), e);
         }
     }
 
@@ -108,7 +108,7 @@ public class InventarioDAO implements DAO<Inventario> {
             stmt.executeUpdate();
             return entidades;
         } catch (SQLException e) {
-            throw new RuntimeException("Error al listar el inventario: " + e.getMessage(), e);
+            throw new RuntimeException("Error al listar " + Inventario.class.getSimpleName(), e);
         }
     }
 }
