@@ -1,11 +1,9 @@
 package org.contenido.dao.daoImplementado;
 
 import org.contenido.dao.DAO;
-import org.contenido.dto.Rol_ResponsableDTO;
 import org.contenido.excepcion.PersistenciaExcepcion;
 import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.mapeo.mapeoImpl.Rol_ResponsableMapper;
-import org.contenido.modelo.Ambiente;
 import org.contenido.modelo.Responsable;
 import org.contenido.modelo.Rol_Responsable;
 import org.contenido.persistencia.ConexionPool;
@@ -14,6 +12,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rol_ResponsableDAO implements DAO<Rol_Responsable> {
@@ -91,6 +90,21 @@ public class Rol_ResponsableDAO implements DAO<Rol_Responsable> {
 
     @Override
     public List<Rol_Responsable> listarTodo() {
-        return List.of();
+        String sql = "{ CALL pa_Listar_RolResponsable() }";
+        try (Connection conn = ConexionPool.getConnection();
+             CallableStatement stmt = conn.prepareCall(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+            List<Rol_Responsable> entidades = new ArrayList<>();
+            while (rs.next()) {
+                entidades.add(mapper.mapDeResultSet(rs));
+            }
+
+            stmt.executeUpdate();
+            return entidades;
+
+        } catch (SQLException e) {
+            throw new PersistenciaExcepcion(String.format("Error al listar %s: ", Rol_Responsable.class.getName()), e);
+        }
     }
 }
