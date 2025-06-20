@@ -34,7 +34,7 @@ public class Rol_ResponsableDAO implements DAO<Rol_Responsable> {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al registrar %s: ", Responsable.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al registrar %s: ", Rol_Responsable.class.getName()), e);
         }
     }
 
