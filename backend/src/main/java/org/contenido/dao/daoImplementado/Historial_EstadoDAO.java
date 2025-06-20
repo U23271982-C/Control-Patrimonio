@@ -59,7 +59,7 @@ public class Historial_EstadoDAO implements DAO<Historial_Estado> {
 
     @Override
     public void actualizar(Historial_Estado entidad) {
-        String sql = "{ CALL pa_Actualizar_Ambiente(?, ?, ?, ?, ?, ?) }";
+        String sql = "{ CALL pa_Actualizar_HistorialEstado(?, ?, ?, ?, ?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
