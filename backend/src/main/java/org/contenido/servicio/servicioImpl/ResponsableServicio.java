@@ -34,6 +34,14 @@ public class ResponsableServicio implements Servicio<ResponsableDTO> {
                 responsableMapper.convertirDTO(responsableDAO.leerPorId(idDto)) : null;
     }
 
+    public ResponsableDTO leerPorUsuarioContrasena(ResponsableDTO dto) {
+        Responsable responsable = responsableDAO.leerPorUsuarioContrasena(responsableMapper.convertirModelo(dto));
+
+        return responsable != null ?
+                responsableMapper.convertirDTO(responsable) : null;
+
+    }
+
     @Override
     public void actualizar(ResponsableDTO dto) {
         ValidadorUtilidad.validar(dto, EnLeer.class); //  Validamos todos los campos del DTO

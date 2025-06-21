@@ -2,6 +2,7 @@ package org.contenido.utilidad;
 
 import org.contenido.excepcion.PersistenciaExcepcion;
 import org.contenido.excepcion.NegocioExcepcion;
+import org.contenido.excepcion.SuperAdminExcepcion;
 import org.contenido.excepcion.ValidacionExcepcion;
 
 import javax.swing.*;
@@ -15,7 +16,8 @@ public class NotificacionUtil {
             // Por cada tipo de excepción creada en /excepcion, se debe agregar aquí
             ValidacionExcepcion.class, new TipoError("Error de validación", JOptionPane.WARNING_MESSAGE),
             NegocioExcepcion.class, new TipoError("Error de negocio", JOptionPane.WARNING_MESSAGE),
-            PersistenciaExcepcion.class, new TipoError("Error en la base de datos", JOptionPane.ERROR_MESSAGE)
+            PersistenciaExcepcion.class, new TipoError("Error en la base de datos", JOptionPane.ERROR_MESSAGE),
+            SuperAdminExcepcion.class, new TipoError("Error en los permisos de Super Admin", JOptionPane.ERROR_MESSAGE)
     );
 
     public static void mostrarMensajeAfirmacion(String mensaje) {
@@ -35,4 +37,13 @@ public class NotificacionUtil {
         JOptionPane.showMessageDialog(null, e.getMessage(), tipoError.titulo(), tipoError.tipo());
     }
 
+    public static void mostrarMensajeAfirmacionLogueo(String rolResponsable, String nombreResponsable, String nombreApp) {
+        String mensaje = """
+                ¡Bienvenido a %s!
+                
+                ¡Hola! %s
+                Tienes el Rol de %s
+                """;
+        mostrarMensajeAfirmacion(String.format(mensaje, nombreApp,nombreResponsable, rolResponsable));
+    }
 }

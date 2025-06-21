@@ -61,6 +61,26 @@ public class ResponsableDAO implements DAO<Responsable> {
         return null;
     }
 
+    public Responsable leerPorUsuarioContrasena(Responsable entidad) {
+        String sql = "CALL pa_validarCredenciales(?, ?)";
+
+        try (Connection conn = ConexionPool.getConnection();
+             CallableStatement stmt = conn.prepareCall(sql)) {
+
+            stmt.setString(1, entidad.getUsuario());
+            stmt.setString(2, entidad.getContrasena());
+
+            ResultSet rs = stmt.executeQuery();
+            Responsable responsable = null;
+
+            if (rs.next()) responsable = mapper.mapDeResultSet(rs);
+
+            return responsable; // Si esta registrado, devuelve todas las columnas del responsable
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void actualizar(Responsable entidad) {
         String sql = "{ CALL pa_Actualizar_Responsable(?, ?, ?, ?, ?, ?, ?, ?) }";
