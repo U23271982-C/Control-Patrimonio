@@ -57,7 +57,7 @@ public class EstadoDAO implements DAO<Estado> {
 
     @Override
     public void actualizar(Estado entidad) {
-        String sql = "{ CALL pa_Actualizar_Ambiente(?, ?) }";
+        String sql = "{ CALL pa_Actualizar_Estado(?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 

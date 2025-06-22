@@ -83,7 +83,7 @@ public class ResponsableDAO implements DAO<Responsable> {
 
     @Override
     public void actualizar(Responsable entidad) {
-        String sql = "{ CALL pa_Actualizar_Responsable(?, ?, ?, ?, ?, ?, ?, ?) }";
+        String sql = "{ CALL pa_Actualizar_Responsable(?, ?, ?, ?, ?, ?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
@@ -98,7 +98,7 @@ public class ResponsableDAO implements DAO<Responsable> {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al actualizar %s: ", Ambiente.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al actualizar %s: ", Responsable.class.getName()), e);
         }
     }
 

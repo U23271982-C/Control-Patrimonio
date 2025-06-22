@@ -757,4 +757,30 @@ BEGIN
     INNER JOIN Rol_Responsable RR ON RES.idRol_Responsable = RR.idRol_Responsable;
 END //
 
+-- =========================================
+--      PROCEDIMIENTOS VERIFICAR CONTRASEÑA
+-- =========================================
+
+CREATE PROCEDURE pa_validarCredenciales(
+    IN p_usuario VARCHAR(30),
+    IN p_contrasena VARBINARY(255)
+)
+BEGIN
+    SELECT
+        R.idResponsable,
+        R.idRol_Responsable,
+        RR.nombrerol AS Rol,
+        RR.descripcion AS Rol_descripcion,
+        R.nombre AS Responsable_nombre,
+        R.dni,
+        R.mail,
+        R.usuario,
+        CAST(AES_DECRYPT(R.contrasena, 'Clave123') AS VARBINARY) AS Contrasena
+    FROM Responsable R
+    INNER JOIN Rol_Responsable RR ON R.idRol_Responsable = RR.idRol_Responsable
+    WHERE R.usuario = p_usuario
+      AND CAST(AES_DECRYPT(R.contrasena, 'Clave123') AS VARBINARY) = p_contrasena;
+END;
+//
+
 DELIMITER ;

@@ -36,7 +36,7 @@ public class CategoriaDAO implements DAO<Categoria> {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al registrar %s: ", Responsable.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al registrar %s: ", Categoria.class.getName()), e);
         }
     }
 
@@ -54,7 +54,7 @@ public class CategoriaDAO implements DAO<Categoria> {
             }
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al leer %s: ", Bien.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al leer %s: ", Categoria.class.getName()), e);
         }
         return null;
     }
@@ -78,7 +78,7 @@ public class CategoriaDAO implements DAO<Categoria> {
 
     @Override
     public void eliminar(int idEntidad) {
-        String sql = "{ CALL pa_Eliminar_Ambiente(?) }";
+        String sql = "{ CALL pa_Eliminar_Categoria(?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)) {
 
@@ -86,7 +86,7 @@ public class CategoriaDAO implements DAO<Categoria> {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al eliminar %s: ", Ambiente.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al eliminar %s: ", Categoria.class.getName()), e);
         }
     }
 
