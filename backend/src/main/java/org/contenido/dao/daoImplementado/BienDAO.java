@@ -62,13 +62,18 @@ public class BienDAO implements DAO<Bien> {
 
     @Override
     public void actualizar(Bien entidad) {
-        String sql = "{ CALL pa_Actualizar_Bien(?, ?, ?) }";
+        String sql = "{ CALL pa_Actualizar_Bien(?, ?, ?, ?, ?, ?, ?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
             stmt.setInt(1, entidad.getId());
-            stmt.setString(2, entidad.getEstado().getTipo());
-            stmt.setString(3, entidad.getNombre());
+            stmt.setString(2, entidad.getNombre());
+            stmt.setString(3, entidad.getDescripcion());
+            stmt.setDate(4, java.sql.Date.valueOf(entidad.getFecha_registro()));
+            stmt.setInt(5, entidad.getEstado().getId());
+            stmt.setInt(6, entidad.getCategoria().getId());
+            stmt.setInt(7, entidad.getAmbiente().getId());
+            stmt.setInt(8, entidad.getResponsable().getId());
 
             stmt.executeUpdate();
 
