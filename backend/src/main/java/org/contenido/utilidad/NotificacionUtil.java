@@ -1,9 +1,6 @@
 package org.contenido.utilidad;
 
-import org.contenido.excepcion.PersistenciaExcepcion;
-import org.contenido.excepcion.NegocioExcepcion;
-import org.contenido.excepcion.SuperAdminExcepcion;
-import org.contenido.excepcion.ValidacionExcepcion;
+import org.contenido.excepcion.*;
 
 import javax.swing.*;
 import java.util.Map;
@@ -17,7 +14,8 @@ public class NotificacionUtil {
             ValidacionExcepcion.class, new TipoError("Error de validación", JOptionPane.WARNING_MESSAGE),
             NegocioExcepcion.class, new TipoError("Error de negocio", JOptionPane.WARNING_MESSAGE),
             PersistenciaExcepcion.class, new TipoError("Error en la base de datos", JOptionPane.ERROR_MESSAGE),
-            SuperAdminExcepcion.class, new TipoError("Error en los permisos de Super Admin", JOptionPane.ERROR_MESSAGE)
+            SuperAdminExcepcion.class, new TipoError("Error en los permisos de Super Admin", JOptionPane.ERROR_MESSAGE),
+            LoginExcepcion.class, new TipoError("Error en Iniciar Sesión", JOptionPane.ERROR_MESSAGE)
     );
 
     public static void mostrarMensajeAfirmacion(String mensaje) {
