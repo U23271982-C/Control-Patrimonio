@@ -48,6 +48,7 @@ public class EditarInmueble extends javax.swing.JFrame {
         jLabel2.setText("Modificar el registro de Inmuebles");
 
         GuardarRegistro.setBackground(new java.awt.Color(204, 102, 0));
+        GuardarRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro.setText("Guardar cambios");
         GuardarRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +66,7 @@ public class EditarInmueble extends javax.swing.JFrame {
         jLabel10.setText("Descripción");
 
         GuardarRegistro1.setBackground(new java.awt.Color(102, 102, 102));
+        GuardarRegistro1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro1.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro1.setText("Cancelar");
         GuardarRegistro1.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +123,13 @@ public class EditarInmueble extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 0));
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Cerrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -169,7 +177,17 @@ public class EditarInmueble extends javax.swing.JFrame {
 
     private void GuardarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistro1ActionPerformed
         // TODO add your handling code here:
+        PanelAmbienteInmuebles obj = new PanelAmbienteInmuebles();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GuardarRegistro1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        PanelAmbienteInmuebles obj = new PanelAmbienteInmuebles();
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

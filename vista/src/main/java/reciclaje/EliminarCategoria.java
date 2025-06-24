@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package org.contenido.CATEGORIA;
+package reciclaje;
+
+import org.contenido.CATEGORIA.PanelCategoria;
 
 /**
  *
@@ -56,6 +58,7 @@ public class EliminarCategoria extends javax.swing.JFrame {
         });
 
         jButton2.setBackground(new java.awt.Color(255, 102, 0));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Aceptar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +68,7 @@ public class EliminarCategoria extends javax.swing.JFrame {
         });
 
         jButton3.setBackground(new java.awt.Color(153, 153, 153));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Cancelar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +118,7 @@ public class EliminarCategoria extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 0));
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Cerrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

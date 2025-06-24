@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package AMBIENTES_INMUEBLES;
+package reciclaje;
 
+import AMBIENTES_INMUEBLES.PanelAmbienteInmuebles;
 import org.contenido.BIENES.*;
 
 /**
@@ -46,13 +47,8 @@ public class EliminarAmbiente extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Eliminar registro de ambiente");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
         GuardarRegistro.setBackground(new java.awt.Color(204, 102, 0));
+        GuardarRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro.setText("Eliminar");
         GuardarRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +66,7 @@ public class EliminarAmbiente extends javax.swing.JFrame {
         jLabel10.setText("¿Estás seguro que deseas eliminar el ambiente?");
 
         GuardarRegistro1.setBackground(new java.awt.Color(102, 102, 102));
+        GuardarRegistro1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro1.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro1.setText("Cancelar");
         GuardarRegistro1.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +161,6 @@ public class EliminarAmbiente extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
-        //permitir seguir eliminando en la interfaz
         PanelAmbienteInmuebles obj = new PanelAmbienteInmuebles();
         obj.setVisible(true);
         dispose();
@@ -176,10 +172,6 @@ public class EliminarAmbiente extends javax.swing.JFrame {
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_GuardarRegistro1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
