@@ -5,6 +5,7 @@
 package REPORTES;
 
 import REPORTES.Reportes;
+import org.contenido.PANEL_INICIO.PanelInicio;
 
 /**
  *
@@ -152,13 +153,16 @@ public class Tabla_Reportes extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Reportes obj = new Reportes();
+        PanelInicio obj = new PanelInicio();
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        Reportes obj = new Reportes();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
