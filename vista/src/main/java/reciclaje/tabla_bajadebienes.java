@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package BAJA_BIENES;
+package reciclaje;
+
+import reciclaje.bajadebienes;
 
 /**
  *
@@ -107,10 +109,10 @@ public class tabla_bajadebienes extends javax.swing.JFrame {
                 .addGap(263, 263, 263))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton2)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(48, 48, 48)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
