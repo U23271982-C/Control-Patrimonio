@@ -46,6 +46,7 @@ public class AñadirRegistroInmueble extends javax.swing.JFrame {
         jLabel2.setText("Registro de Inmuebles");
 
         GuardarRegistro.setBackground(new java.awt.Color(204, 102, 0));
+        GuardarRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro.setText("Guardar");
         GuardarRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -63,6 +64,7 @@ public class AñadirRegistroInmueble extends javax.swing.JFrame {
         jLabel10.setText("Descripción");
 
         GuardarRegistro2.setBackground(new java.awt.Color(102, 102, 102));
+        GuardarRegistro2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro2.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro2.setText("Cancelar");
         GuardarRegistro2.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +119,7 @@ public class AñadirRegistroInmueble extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 0));
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Cerrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,11 +154,13 @@ public class AñadirRegistroInmueble extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 37, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 376, Short.MAX_VALUE)))
+                    .addGap(0, 413, Short.MAX_VALUE)))
         );
 
         pack();

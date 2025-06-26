@@ -22,7 +22,9 @@ public class ResponsableDTO {
     private Rol_ResponsableDTO rol_responsableDTO;
     // corroborar Rol_Responsble
     @NotBlank(message = "El usuario no puede estar en blanco", groups = {EnCrear.class, EnActualizar.class})
+    @Size(max = 30, message = "El usuario no debe exceder los 30 caracteres")
     private String usuario;
+    @Size(max = 255, message = "La contraseña no debe exceder los 255 caracteres")
     @NotBlank(message = "La contraseña no puede estar en blanco", groups = {EnCrear.class, EnActualizar.class})
     private String contrsena;
 

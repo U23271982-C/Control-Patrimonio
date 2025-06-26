@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package AMBIENTES_INMUEBLES;
+package reciclaje;
 
+import AMBIENTES_INMUEBLES.PanelAmbienteInmuebles;
 import org.contenido.BIENES.*;
 
 /**
@@ -47,6 +48,7 @@ public class EliminarInmueble extends javax.swing.JFrame {
         jLabel2.setText("Eliminar registro de Inmueble");
 
         GuardarRegistro.setBackground(new java.awt.Color(204, 102, 0));
+        GuardarRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro.setText("Eliminar inmueble");
         GuardarRegistro.addActionListener(new java.awt.event.ActionListener() {
@@ -64,6 +66,7 @@ public class EliminarInmueble extends javax.swing.JFrame {
         jLabel10.setText("Esta acción no se puede deshacer");
 
         GuardarRegistro1.setBackground(new java.awt.Color(102, 102, 102));
+        GuardarRegistro1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro1.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro1.setText("Cancelar");
         GuardarRegistro1.addActionListener(new java.awt.event.ActionListener() {
