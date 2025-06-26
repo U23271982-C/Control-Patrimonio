@@ -786,7 +786,7 @@ END//
 --      PROCEDIMIENTOS REPORTES
 -- =========================================
 -- 1. Reporte Masivo Personalizado
-CREATE PROCEDURE pa_Reporte_Masivo_General(
+CREATE PROCEDURE pa_Reporte_Masivo_Personalizado(
     IN pEstado VARCHAR(30),
     IN pNombreBien VARCHAR(50),
     IN pFechaRegistro DATE,
