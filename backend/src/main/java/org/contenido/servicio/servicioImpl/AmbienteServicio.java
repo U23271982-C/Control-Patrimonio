@@ -1,6 +1,5 @@
 package org.contenido.servicio.servicioImpl;
 
-import org.contenido.dao.daoImplementado.AmbienteDAO;
 import org.contenido.dto.AmbienteDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.AmbienteMapper;
@@ -11,6 +10,7 @@ import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
+import org.contenido.dao.daoImplementadoModelo.AmbienteDAO;
 
 public class AmbienteServicio implements Servicio<AmbienteDTO> {
     private final AmbienteDAO ambienteDAO;
