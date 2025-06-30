@@ -344,7 +344,7 @@ public class PanelInicio extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
                 int option= JOptionPane.showOptionDialog(null, panel(), "Ingreso de contraseña", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, optiones, optiones[1]);
-
+ 
         PanelResponsables obj = new PanelResponsables();
         obj.setVisible(true);
         dispose();

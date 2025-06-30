@@ -20,4 +20,4 @@ public interface Servicio <T> extends CRUD<T>, Listable<T> {
 
     @Override
     List<T> listarTodo();
-}
+} 

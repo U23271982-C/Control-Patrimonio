@@ -4,6 +4,10 @@
  */
 package AMBIENTES_INMUEBLES;
 
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.InmuebleControlador;
+import org.contenido.dto.InmuebleDTO;
+
 /**
  *
  * @author SERT
@@ -28,8 +32,8 @@ public class AñadirRegistroInmueble extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        nombre_inmueble = new javax.swing.JTextField();
+        descripcion_inmueble = new javax.swing.JTextField();
         GuardarRegistro = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -44,6 +48,18 @@ public class AñadirRegistroInmueble extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Registro de Inmuebles");
+
+        nombre_inmueble.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombre_inmuebleActionPerformed(evt);
+            }
+        });
+
+        descripcion_inmueble.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descripcion_inmuebleActionPerformed(evt);
+            }
+        });
 
         GuardarRegistro.setBackground(new java.awt.Color(204, 102, 0));
         GuardarRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -87,8 +103,8 @@ public class AñadirRegistroInmueble extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField2)
+                            .addComponent(descripcion_inmueble)
+                            .addComponent(nombre_inmueble)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -105,11 +121,11 @@ public class AñadirRegistroInmueble extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nombre_inmueble, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(descripcion_inmueble, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GuardarRegistro)
@@ -169,9 +185,12 @@ public class AñadirRegistroInmueble extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
-        PanelAmbienteInmuebles obj = new PanelAmbienteInmuebles();
-        obj.setVisible(true);
-        dispose();
+        Controlador<InmuebleDTO> controlador = new InmuebleControlador();
+        InmuebleDTO dto = new InmuebleDTO();
+
+        dto.setNombre(nombre_inmueble.getText());
+        dto.setDescripcion(descripcion_inmueble.getText());
+        controlador.registrar(dto);
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 
     private void GuardarRegistro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistro2ActionPerformed
@@ -187,6 +206,15 @@ public class AñadirRegistroInmueble extends javax.swing.JFrame {
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void nombre_inmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_inmuebleActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_nombre_inmuebleActionPerformed
+
+    private void descripcion_inmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcion_inmuebleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descripcion_inmuebleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,13 +255,13 @@ public class AñadirRegistroInmueble extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GuardarRegistro;
     private javax.swing.JButton GuardarRegistro2;
+    private javax.swing.JTextField descripcion_inmueble;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField nombre_inmueble;
     // End of variables declaration//GEN-END:variables
 }
