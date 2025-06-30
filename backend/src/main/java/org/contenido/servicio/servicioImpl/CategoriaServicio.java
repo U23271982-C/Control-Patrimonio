@@ -1,6 +1,5 @@
 package org.contenido.servicio.servicioImpl;
 
-
 import org.contenido.dto.CategoriaDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.CategoriaMapper;
