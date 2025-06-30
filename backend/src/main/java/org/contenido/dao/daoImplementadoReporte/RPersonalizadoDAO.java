@@ -1,8 +1,11 @@
 package org.contenido.dao.daoImplementadoReporte;
 
-import org.contenido.dao.Consultable;
+import org.contenido.dao.ConsultableConParametros;
+import org.contenido.dto.BienDTO;
 
-public interface RPersonalizadoDAO extends Consultable<String> {
+import java.util.List;
+
+public interface RPersonalizadoDAO extends ConsultableConParametros<BienDTO> {
     @Override
-    String[][] consultar();
+    List<Object[]> consultarParametros(BienDTO param);
 }

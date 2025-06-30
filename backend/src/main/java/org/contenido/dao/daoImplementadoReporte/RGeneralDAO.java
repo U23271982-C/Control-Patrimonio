@@ -1,8 +1,11 @@
 package org.contenido.dao.daoImplementadoReporte;
 
-import org.contenido.dao.Consultable;
+import org.contenido.dao.ConsultableSinParametros;
 
-public interface RGeneralDAO extends Consultable<String> {
+import java.util.List;
+
+
+public interface RGeneralDAO extends ConsultableSinParametros {
     @Override
-    String[][] consultar();
+    List<Object[]> consultarSinParametros();
 }
