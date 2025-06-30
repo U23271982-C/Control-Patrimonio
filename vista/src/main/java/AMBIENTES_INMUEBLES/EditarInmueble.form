@@ -64,7 +64,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jTextField2" min="-2" pref="323" max="-2" attributes="0"/>
+                                  <Component id="nombre_inmueble" min="-2" pref="323" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -78,7 +78,7 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="GuardarRegistro1" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jTextField3" min="-2" pref="491" max="-2" attributes="0"/>
+                              <Component id="descripcion_inmueble" min="-2" pref="491" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="92" max="32767" attributes="0"/>
                       </Group>
@@ -94,12 +94,12 @@
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="nombre_inmueble" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextField3" pref="70" max="32767" attributes="0"/>
+                  <Component id="descripcion_inmueble" pref="70" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="GuardarRegistro" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -122,9 +122,9 @@
             <Property name="text" type="java.lang.String" value="Modificar el registro de Inmuebles"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="nombre_inmueble">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="descripcion_inmueble">
         </Component>
         <Component class="javax.swing.JButton" name="GuardarRegistro">
           <Properties>
