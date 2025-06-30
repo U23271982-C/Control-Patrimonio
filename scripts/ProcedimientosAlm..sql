@@ -780,6 +780,76 @@ BEGIN
     INNER JOIN Rol_Responsable RR ON R.idRol_Responsable = RR.idRol_Responsable
     WHERE R.usuario = p_usuario
       AND CAST(AES_DECRYPT(R.contrasena, 'Clave123') AS VARBINARY) = p_contrasena;
+END//
+
+-- =========================================
+--      PROCEDIMIENTOS REPORTES
+-- =========================================
+-- 1. Reporte Masivo Personalizado
+CREATE PROCEDURE pa_Reporte_Masivo_Personalizado(
+    IN pEstado VARCHAR(30),
+    IN pNombreBien VARCHAR(50),
+    IN pFechaRegistro DATE,
+    IN pResponsableActual VARCHAR(30),
+    IN pTipoCategoria VARCHAR(60),
+    IN pNombreAmbiente VARCHAR(40),
+    IN pNombreInmueble VARCHAR(50),
+    IN pNombreInventario VARCHAR(50)
+)
+BEGIN
+    SELECT
+        b.idBien as idbien,
+        b.nombre AS nombre_bien,
+        b.descripcion as descripcion_bien,
+        b.fecharegistro as fecharegistro_bien,
+        e.tipo AS estado_actual_bien,
+        c.nombre AS tipo_categoria,
+        a.nombre AS ambiente,
+        i.nombre AS inmueble,
+        r.nombre AS responsable_actual,
+        inv.nombre AS inventario_asociado
+    FROM Bien b
+    LEFT JOIN Estado e ON b.idEstadoActual = e.idEstado
+    LEFT JOIN Categoria c ON b.idCategoria = c.idCategoria
+    LEFT JOIN Ambiente a ON b.idAmbiente = a.idAmbiente
+    LEFT JOIN Inmueble i ON a.idInmueble = i.idInmueble
+    LEFT JOIN Responsable r ON b.idResponsableActual = r.idResponsable
+    LEFT JOIN Detalle_Inventario di ON b.idBien = di.idBien
+    LEFT JOIN Inventario inv ON di.idInventario = inv.idInventario
+    WHERE
+        (e.tipo = pEstado OR pEstado IS NULL)
+        AND (b.nombre = pNombreBien OR pNombreBien IS NULL)
+        AND (b.fecharegistro = pFechaRegistro OR pFechaRegistro IS NULL)
+        AND (r.nombre = pResponsableActual OR pResponsableActual IS NULL)
+        AND (c.nombre = pTipoCategoria OR pTipoCategoria IS NULL)
+        AND (a.nombre = pNombreAmbiente OR pNombreAmbiente IS NULL)
+        AND (i.nombre = pNombreInmueble OR pNombreInmueble IS NULL)
+        AND (inv.nombre = pNombreInventario OR pNombreInventario IS NULL);
+END//
+
+-- 2. Reporte Masivo General
+CREATE PROCEDURE pa_Reporte_Masivo_General(
+)
+BEGIN
+    SELECT
+        b.idBien as idbien,
+        b.nombre AS nombre_bien,
+        b.descripcion as descripcion_bien,
+        b.fecharegistro as fecharegistro_bien,
+        e.tipo AS estado_actual_bien,
+        c.nombre AS tipo_categoria,
+        a.nombre AS ambiente,
+        i.nombre AS inmueble,
+        r.nombre AS responsable_actual,
+        inv.nombre AS inventario_asociado
+    FROM Bien b
+    LEFT JOIN Estado e ON b.idEstadoActual = e.idEstado
+    LEFT JOIN Categoria c ON b.idCategoria = c.idCategoria
+    LEFT JOIN Ambiente a ON b.idAmbiente = a.idAmbiente
+    LEFT JOIN Inmueble i ON a.idInmueble = i.idInmueble
+    LEFT JOIN Responsable r ON b.idResponsableActual = r.idResponsable
+    LEFT JOIN Detalle_Inventario di ON b.idBien = di.idBien
+    LEFT JOIN Inventario inv ON di.idInventario = inv.idInventario
 END;
 //
 
