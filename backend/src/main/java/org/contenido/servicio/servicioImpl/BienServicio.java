@@ -1,6 +1,6 @@
 package org.contenido.servicio.servicioImpl;
 
-import org.contenido.dao.daoImplementado.BienDAO;
+import org.contenido.dao.daoImplementadoModelo.BienDAO;
 import org.contenido.dto.BienDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.BienMapper;

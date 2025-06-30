@@ -1,6 +1,6 @@
 package org.contenido.servicio.servicioImpl;
 
-import org.contenido.dao.daoImplementado.ResponsableDAO;
+import org.contenido.dao.daoImplementadoModelo.ResponsableDAO;
 import org.contenido.dto.ResponsableDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.ResponsableMapper;

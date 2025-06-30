@@ -1,6 +1,6 @@
 package org.contenido.servicio.servicioImpl;
 
-import org.contenido.dao.daoImplementado.RotacionDAO;
+import org.contenido.dao.daoImplementadoModelo.RotacionDAO;
 import org.contenido.dto.RotacionDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.RotacionMapper;

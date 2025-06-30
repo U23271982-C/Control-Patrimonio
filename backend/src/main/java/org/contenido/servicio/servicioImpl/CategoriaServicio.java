@@ -1,6 +1,6 @@
 package org.contenido.servicio.servicioImpl;
 
-import org.contenido.dao.daoImplementado.CategoriaDAO;
+import org.contenido.dao.daoImplementadoModelo.CategoriaDAO;
 import org.contenido.dto.CategoriaDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.CategoriaMapper;

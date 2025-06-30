@@ -1,6 +1,6 @@
 package org.contenido.servicio.servicioImpl;
 
-import org.contenido.dao.daoImplementado.InventarioDAO;
+import org.contenido.dao.daoImplementadoModelo.InventarioDAO;
 import org.contenido.dto.InventarioDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.InventarioMapper;
