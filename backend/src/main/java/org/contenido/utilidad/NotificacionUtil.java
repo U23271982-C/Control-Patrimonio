@@ -15,7 +15,9 @@ public class NotificacionUtil {
             NegocioExcepcion.class, new TipoError("Error de negocio", JOptionPane.WARNING_MESSAGE),
             PersistenciaExcepcion.class, new TipoError("Error en la base de datos", JOptionPane.ERROR_MESSAGE),
             SuperAdminExcepcion.class, new TipoError("Error en los permisos de Super Admin", JOptionPane.ERROR_MESSAGE),
-            LoginExcepcion.class, new TipoError("Error en Iniciar Sesión", JOptionPane.ERROR_MESSAGE)
+            LoginExcepcion.class, new TipoError("Error en Iniciar Sesión", JOptionPane.ERROR_MESSAGE),
+            ExportarExcepcion.class, new TipoError("Error en Exportación de Archivos", JOptionPane.ERROR_MESSAGE),
+            FormatoExportacionExcepcion.class, new TipoError("Error en Formato de Exportar", JOptionPane.ERROR_MESSAGE)
     );
 
     public static void mostrarMensajeAfirmacion(String mensaje) {
