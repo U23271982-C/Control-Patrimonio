@@ -52,7 +52,7 @@ public class CambioEstado extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Estados");
 
-        cambio_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cambio_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Mantenimiento", "De baja" }));
 
         jButton1.setBackground(new java.awt.Color(204, 102, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N

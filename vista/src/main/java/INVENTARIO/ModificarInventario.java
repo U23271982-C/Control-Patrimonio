@@ -287,10 +287,16 @@ public class ModificarInventario extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        ModuloDeInventario obj = new ModuloDeInventario();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        ModuloDeInventario obj = new ModuloDeInventario();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void nombre_inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_inventarioActionPerformed

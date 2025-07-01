@@ -2,7 +2,9 @@ package PERSONAL_RESPONSABLE;
 
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.ResponsableControlador;
+import org.contenido.controlador.controladorImpl.Rol_ResponsableControlador;
 import org.contenido.dto.ResponsableDTO;
+import org.contenido.dto.Rol_ResponsableDTO;
 
 public class ModificarPersonal extends javax.swing.JFrame {
     public ModificarPersonal() {
@@ -66,7 +68,7 @@ public class ModificarPersonal extends javax.swing.JFrame {
             }
         });
 
-        cargo_personal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "cargo1", "cargo2", "cargo3", "cargo4", " " }));
+        cargo_personal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Empleado", " " }));
         cargo_personal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cargo_personalMouseClicked(evt);
@@ -236,9 +238,13 @@ public class ModificarPersonal extends javax.swing.JFrame {
         dto.setNombre(nombre_personal.getText());
         dto.setDni(dni_personal.getText());
         dto.setEmail(correo_personal.getText());
-        //dto.setRol_responsableDTO(cargo_personal.getToolTipText());
         dto.setUsuario(usuario_personal.getText());
         dto.setContrsena(contrasena_personal.getText());
+        controlador.actualizar(dto);
+
+
+        Rol_ResponsableDTO rol = new Rol_ResponsableDTO();
+        dto.setRol_responsableDTO(rol);
         controlador.actualizar(dto);
     }//GEN-LAST:event_RegistrarActionPerformed
 
