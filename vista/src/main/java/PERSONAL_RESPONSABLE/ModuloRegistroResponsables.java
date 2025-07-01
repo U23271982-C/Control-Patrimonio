@@ -116,7 +116,7 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
             }
         });
 
-        cargo_personal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "cargo1", "cargo2", "cargo3", "cargo4", " " }));
+        cargo_personal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Empleado", " " }));
         cargo_personal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cargo_personalMouseClicked(evt);

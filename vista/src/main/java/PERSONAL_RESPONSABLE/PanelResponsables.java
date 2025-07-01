@@ -45,6 +45,7 @@ public class PanelResponsables extends javax.swing.JFrame {
         Modificar1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jXTable1 = new org.jdesktop.swingx.JXTable();
+        Modificar2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,7 +72,7 @@ public class PanelResponsables extends javax.swing.JFrame {
             }
         });
 
-        Cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cargo" }));
+        Cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Empleado" }));
 
         Buscar.setBackground(new java.awt.Color(204, 0, 0));
         Buscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -135,6 +136,18 @@ public class PanelResponsables extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jXTable1);
 
+        Modificar2.setBackground(new java.awt.Color(255, 102, 0));
+        Modificar2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Modificar2.setForeground(new java.awt.Color(255, 255, 255));
+        Modificar2.setText("Crear rol");
+        Modificar2.setActionCommand("✓ Modificar");
+        Modificar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Modificar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Modificar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -146,7 +159,9 @@ public class PanelResponsables extends javax.swing.JFrame {
                         .addComponent(AñadirRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
                         .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(415, 415, 415)
+                        .addGap(49, 49, 49)
+                        .addComponent(Modificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(194, 194, 194)
                         .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(43, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -188,7 +203,8 @@ public class PanelResponsables extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AñadirRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Modificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
         );
 
@@ -288,6 +304,10 @@ public class PanelResponsables extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BuscarActionPerformed
 
+    private void Modificar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Modificar2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -332,6 +352,7 @@ public class PanelResponsables extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Cargo;
     private javax.swing.JButton Modificar;
     private javax.swing.JButton Modificar1;
+    private javax.swing.JButton Modificar2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
