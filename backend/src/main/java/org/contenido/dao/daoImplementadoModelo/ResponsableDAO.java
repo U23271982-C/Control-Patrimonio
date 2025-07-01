@@ -1,10 +1,9 @@
-package org.contenido.dao.daoImplementado;
+package org.contenido.dao.daoImplementadoModelo;
 
 import org.contenido.dao.DAO;
 import org.contenido.excepcion.PersistenciaExcepcion;
 import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.mapeo.mapeoImpl.ResponsableMapper;
-import org.contenido.modelo.Ambiente;
 import org.contenido.modelo.Responsable;
 import org.contenido.persistencia.ConexionPool;
 

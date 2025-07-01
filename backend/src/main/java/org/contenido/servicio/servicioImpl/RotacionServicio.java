@@ -1,6 +1,5 @@
 package org.contenido.servicio.servicioImpl;
 
-import org.contenido.dao.daoImplementado.RotacionDAO;
 import org.contenido.dto.RotacionDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.RotacionMapper;
@@ -11,6 +10,7 @@ import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
+import org.contenido.dao.daoImplementadoModelo.RotacionDAO;
 
 public class RotacionServicio implements Servicio<RotacionDTO> {
     private final RotacionDAO rotacionDAO;

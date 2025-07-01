@@ -1,4 +1,4 @@
-package org.contenido.dao.daoImplementado;
+package org.contenido.dao.daoImplementadoModelo;
 
 import org.contenido.dao.DAO;
 import org.contenido.excepcion.PersistenciaExcepcion;

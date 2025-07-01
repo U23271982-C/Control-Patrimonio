@@ -1,10 +1,10 @@
-package org.contenido.dao.daoImplementado;
+package org.contenido.dao.daoImplementadoModelo;
 
 import org.contenido.dao.DAO;
 import org.contenido.excepcion.PersistenciaExcepcion;
 import org.contenido.mapeo.ResultSetMapper;
-import org.contenido.mapeo.mapeoImpl.EstadoMapper;
-import org.contenido.modelo.Estado;
+import org.contenido.mapeo.mapeoImpl.CategoriaMapper;
+import org.contenido.modelo.Categoria;
 import org.contenido.persistencia.ConexionPool;
 
 import java.sql.CallableStatement;
@@ -14,31 +14,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EstadoDAO implements DAO<Estado> {
-    private final ResultSetMapper<Estado> mapper;
+public class CategoriaDAO implements DAO<Categoria> {
+    private final ResultSetMapper<Categoria> mapper;
 
-    public EstadoDAO() {
-        this.mapper = new EstadoMapper();
+    public CategoriaDAO() {
+        this.mapper = new CategoriaMapper();
     }
 
     @Override
-    public void registrar(Estado entidad) {
-        String sql = "{ CALL pa_Registrar_Estado(?) }";
+    public void registrar(Categoria entidad) {
+        String sql = "{ CALL pa_Registrar_Categoria(?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
-            stmt.setString(1, entidad.getTipo());
+            stmt.setString(1, entidad.getNombre());
+            stmt.setString(2, entidad.getDescripcion());
 
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al registrar %s: ", Estado.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al registrar %s: ", Categoria.class.getName()), e);
         }
     }
 
     @Override
-    public Estado leerPorId(int idEntidad) {
-        String sql = "{ CALL pa_Leer_Estado(?) }";
+    public Categoria leerPorId(int idEntidad) {
+        String sql = "{ CALL pa_Leer_Categoria(?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
@@ -50,30 +51,31 @@ public class EstadoDAO implements DAO<Estado> {
             }
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al leer %s: ", Estado.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al leer %s: ", Categoria.class.getName()), e);
         }
         return null;
     }
 
     @Override
-    public void actualizar(Estado entidad) {
-        String sql = "{ CALL pa_Actualizar_Estado(?, ?) }";
+    public void actualizar(Categoria entidad) {
+        String sql = "{ CALL pa_Actualizar_Categoria(?, ?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
             stmt.setInt(1, entidad.getId());
-            stmt.setString(2, entidad.getTipo());
+            stmt.setString(2, entidad.getNombre());
+            stmt.setString(3, entidad.getDescripcion());
 
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al actualizar %s: ", Estado.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al actualizar %s: ", Categoria.class.getName()), e);
         }
     }
 
     @Override
     public void eliminar(int idEntidad) {
-        String sql = "{ CALL pa_Eliminar_Estado(?) }";
+        String sql = "{ CALL pa_Eliminar_Categoria(?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)) {
 
@@ -81,18 +83,18 @@ public class EstadoDAO implements DAO<Estado> {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al eliminar %s: ", Estado.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al eliminar %s: ", Categoria.class.getName()), e);
         }
     }
 
     @Override
-    public List<Estado> listarTodo() {
-        String sql = "{ CALL pa_Listar_Estado() }";
+    public List<Categoria> listarTodo() {
+        String sql = "{ CALL pa_Listar_Categoria() }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)) {
 
             ResultSet rs = stmt.executeQuery();
-            List<Estado> entidades = new ArrayList<>();
+            List<Categoria> entidades = new ArrayList<>();
             while (rs.next()) {
                 entidades.add(mapper.mapDeResultSet(rs));
             }
@@ -101,7 +103,7 @@ public class EstadoDAO implements DAO<Estado> {
             return entidades;
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al listar %s: ", Estado.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al listar %s: ", Categoria.class.getName()), e);
         }
     }
 }

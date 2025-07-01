@@ -1,6 +1,5 @@
 package org.contenido.servicio.servicioImpl;
 
-import org.contenido.dao.daoImplementado.Historial_EstadoDAO;
 import org.contenido.dto.Historial_EstadoDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.Historial_EstadoMapper;
@@ -11,6 +10,7 @@ import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
+import org.contenido.dao.daoImplementadoModelo.Historial_EstadoDAO;
 
 public class Historial_EstadoServicio implements Servicio<Historial_EstadoDTO> {
 

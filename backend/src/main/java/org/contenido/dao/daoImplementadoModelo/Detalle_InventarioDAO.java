@@ -1,11 +1,12 @@
-package org.contenido.dao.daoImplementado;
+package org.contenido.dao.daoImplementadoModelo;
 
 import org.contenido.dao.DAO;
 import org.contenido.excepcion.PersistenciaExcepcion;
-import org.contenido.mapeo.mapeoImpl.AmbienteMapper;
 import org.contenido.mapeo.ResultSetMapper;
-import org.contenido.modelo.Ambiente;
+import org.contenido.mapeo.mapeoImpl.Detalle_InventarioMapper;
+import org.contenido.modelo.Detalle_Inventario;
 import org.contenido.persistencia.ConexionPool;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,32 +14,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AmbienteDAO implements DAO<Ambiente> {
-    private final ResultSetMapper<Ambiente> mapper;
+public class Detalle_InventarioDAO implements DAO<Detalle_Inventario> {
+    private final ResultSetMapper<Detalle_Inventario> mapper;
 
-    public AmbienteDAO() {
-        this.mapper = new AmbienteMapper();
+    public Detalle_InventarioDAO() {
+        this.mapper = new Detalle_InventarioMapper();
     }
 
     @Override
-    public void registrar(Ambiente entidad) {
-        String sql = "{ CALL pa_Registrar_Ambiente(?, ?) }";
+    public void registrar(Detalle_Inventario entidad) {
+        String sql = "{ CALL pa_Registrar_Detalle_Inventario(?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
-            stmt.setInt(1, entidad.getInmueble().getId());
-            stmt.setString(2, entidad.getNombre());
+            stmt.setInt(1, entidad.getBien().getId());
+            stmt.setInt(2, entidad.getInventario().getId());
 
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al registrar %s: ", Ambiente.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al registrar %s: ", Detalle_Inventario.class.getName()), e);
         }
     }
 
     @Override
-    public Ambiente leerPorId(int idEntidad) {
-        String sql = "{ CALL pa_Leer_Ambiente(?) }";
+    public Detalle_Inventario leerPorId(int idEntidad) {
+        String sql = "{ CALL pa_Leer_Detalle_Inventario(?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
@@ -50,31 +51,31 @@ public class AmbienteDAO implements DAO<Ambiente> {
             }
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al leer %s: ", Ambiente.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al leer %s: ", Detalle_Inventario.class.getName()), e);
         }
         return null;
     }
 
     @Override
-    public void actualizar(Ambiente entidad) {
-        String sql = "{ CALL pa_Actualizar_Ambiente(?, ?, ?) }";
+    public void actualizar(Detalle_Inventario entidad) {
+        String sql = "{ CALL pa_Actualizar_Detalle_Inventario(?, ?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
             stmt.setInt(1, entidad.getId());
-            stmt.setInt(2, entidad.getInmueble().getId());
-            stmt.setString(3, entidad.getNombre());
+            stmt.setInt(2, entidad.getBien().getId());
+            stmt.setInt(3, entidad.getInventario().getId());
 
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al actualizar %s: ", Ambiente.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al actualizar %s: ", Detalle_Inventario.class.getName()), e);
         }
     }
 
     @Override
     public void eliminar(int idEntidad) {
-        String sql = "{ CALL pa_Eliminar_Ambiente(?) }";
+        String sql = "{ CALL pa_Eliminar_Detalle_Inventario(?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)) {
 
@@ -82,18 +83,18 @@ public class AmbienteDAO implements DAO<Ambiente> {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al eliminar %s: ", Ambiente.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al eliminar %s: ", Detalle_Inventario.class.getName()), e);
         }
     }
 
     @Override
-    public List<Ambiente> listarTodo() {
-        String sql = "{ CALL pa_Listar_Ambiente() }";
+    public List<Detalle_Inventario> listarTodo() {
+        String sql = "{ CALL pa_Listar_DetalleInventario() }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)) {
 
             ResultSet rs = stmt.executeQuery();
-            List<Ambiente> entidades = new ArrayList<>();
+            List<Detalle_Inventario> entidades = new ArrayList<>();
             while (rs.next()) {
                 entidades.add(mapper.mapDeResultSet(rs));
             }
@@ -102,7 +103,7 @@ public class AmbienteDAO implements DAO<Ambiente> {
             return entidades;
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al listar %s: ", Ambiente.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al listar %s: ", Detalle_Inventario.class.getName()), e);
         }
     }
 }

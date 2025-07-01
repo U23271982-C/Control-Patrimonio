@@ -1,6 +1,5 @@
 package org.contenido.servicio.servicioImpl;
 
-import org.contenido.dao.daoImplementado.Rol_ResponsableDAO;
 import org.contenido.dto.Rol_ResponsableDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.Rol_ResponsableMapper;
@@ -11,6 +10,7 @@ import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
+import org.contenido.dao.daoImplementadoModelo.Rol_ResponsableDAO;
 
 public class Rol_ResponsableServicio implements Servicio<Rol_ResponsableDTO> {
     private final Rol_ResponsableDAO rol_responsableDAO;

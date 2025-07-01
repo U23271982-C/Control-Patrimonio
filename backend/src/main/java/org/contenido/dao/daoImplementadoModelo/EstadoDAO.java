@@ -1,10 +1,10 @@
-package org.contenido.dao.daoImplementado;
+package org.contenido.dao.daoImplementadoModelo;
 
 import org.contenido.dao.DAO;
 import org.contenido.excepcion.PersistenciaExcepcion;
-import org.contenido.mapeo.mapeoImpl.InmuebleMapper;
 import org.contenido.mapeo.ResultSetMapper;
-import org.contenido.modelo.Inmueble;
+import org.contenido.mapeo.mapeoImpl.EstadoMapper;
+import org.contenido.modelo.Estado;
 import org.contenido.persistencia.ConexionPool;
 
 import java.sql.CallableStatement;
@@ -14,31 +14,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InmuebleDAO implements DAO<Inmueble> {
-    private final ResultSetMapper<Inmueble> mapper;
+public class EstadoDAO implements DAO<Estado> {
+    private final ResultSetMapper<Estado> mapper;
 
-    public InmuebleDAO() {
-        this.mapper = new InmuebleMapper();
+    public EstadoDAO() {
+        this.mapper = new EstadoMapper();
     }
+
     @Override
-    public void registrar(Inmueble entidad) {
-        String sql = "{ CALL pa_Registrar_Inmueble(?, ?) }";
+    public void registrar(Estado entidad) {
+        String sql = "{ CALL pa_Registrar_Estado(?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
-            stmt.setString(1, entidad.getNombre());
-            stmt.setString(2, entidad.getDescripcion());
+            stmt.setString(1, entidad.getTipo());
 
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion("Error al registrar Inmueble:" + Inmueble.class.getSimpleName(), e);
+            throw new PersistenciaExcepcion(String.format("Error al registrar %s: ", Estado.class.getName()), e);
         }
     }
 
     @Override
-    public Inmueble leerPorId(int idEntidad) {
-        String sql = "{ CALL pa_Leer_Inmueble(?) }";
+    public Estado leerPorId(int idEntidad) {
+        String sql = "{ CALL pa_Leer_Estado(?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
@@ -50,31 +50,30 @@ public class InmuebleDAO implements DAO<Inmueble> {
             }
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion("Error al leer Inmueble:", e);
+            throw new PersistenciaExcepcion(String.format("Error al leer %s: ", Estado.class.getName()), e);
         }
         return null;
     }
 
     @Override
-    public void actualizar(Inmueble entidad) {
-        String sql = "{ CALL pa_Actualizar_Inmueble(?, ?, ?) }";
+    public void actualizar(Estado entidad) {
+        String sql = "{ CALL pa_Actualizar_Estado(?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
             stmt.setInt(1, entidad.getId());
-            stmt.setString(2, entidad.getNombre());
-            stmt.setString(3, entidad.getDescripcion());
+            stmt.setString(2, entidad.getTipo());
 
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion("Error al actualizar Inmueble:", e);
+            throw new PersistenciaExcepcion(String.format("Error al actualizar %s: ", Estado.class.getName()), e);
         }
     }
 
     @Override
     public void eliminar(int idEntidad) {
-        String sql = "{ CALL pa_Eliminar_Inmueble(?) }";
+        String sql = "{ CALL pa_Eliminar_Estado(?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)) {
 
@@ -82,18 +81,18 @@ public class InmuebleDAO implements DAO<Inmueble> {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion("Error al eliminar Inmueble:", e);
+            throw new PersistenciaExcepcion(String.format("Error al eliminar %s: ", Estado.class.getName()), e);
         }
     }
 
     @Override
-    public List<Inmueble> listarTodo() {
-        String sql = "{ CALL pa_Listar_Inmueble() }";
+    public List<Estado> listarTodo() {
+        String sql = "{ CALL pa_Listar_Estado() }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)) {
 
             ResultSet rs = stmt.executeQuery();
-            List<Inmueble> entidades = new ArrayList<>();
+            List<Estado> entidades = new ArrayList<>();
             while (rs.next()) {
                 entidades.add(mapper.mapDeResultSet(rs));
             }
@@ -102,7 +101,7 @@ public class InmuebleDAO implements DAO<Inmueble> {
             return entidades;
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion("Error al listar Inmueble:", e);
+            throw new PersistenciaExcepcion(String.format("Error al listar %s: ", Estado.class.getName()), e);
         }
     }
 }
