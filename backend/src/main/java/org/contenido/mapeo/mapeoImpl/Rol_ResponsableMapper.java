@@ -17,15 +17,15 @@ public class Rol_ResponsableMapper implements Convertidor<Rol_Responsable, Rol_R
 
         Rol_ResponsableDTO dto = new Rol_ResponsableDTO();
         dto.setId(modelo.getId());
-        dto.setNombreRol(modelo.getNombreRol());
         dto.setDescripcion(modelo.getDescripcion());
+        dto.setNombreRol(modelo.getNombreRol());
 
         return dto;
     }
 
     @Override
     public Rol_Responsable convertirModelo(Rol_ResponsableDTO dto) {
-        return new Rol_Responsable(dto.getId(), dto.getNombreRol(), dto.getDescripcion());
+        return new Rol_Responsable(dto.getId(), dto.getDescripcion(),  dto.getNombreRol());
     }
 
     @Override

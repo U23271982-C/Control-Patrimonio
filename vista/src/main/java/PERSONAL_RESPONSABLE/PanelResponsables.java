@@ -1,7 +1,16 @@
 package PERSONAL_RESPONSABLE;
 
+import java.util.List;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 import reciclaje.EliminarResponsable;
 import org.contenido.PANEL_INICIO.PanelInicio;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.ResponsableControlador;
+import org.contenido.controlador.controladorImpl.Rol_ResponsableControlador;
+import org.contenido.dto.ResponsableDTO;
+import org.contenido.dto.Rol_ResponsableDTO;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -19,7 +28,38 @@ public class PanelResponsables extends javax.swing.JFrame {
      */
     public PanelResponsables() {
         initComponents();
+        cargarResponsablesEnTabla();
+        cargarRolesAlComboBox();
+    };
+    
+
+    
+    Controlador<ResponsableDTO> controlador = new ResponsableControlador();
+    List<ResponsableDTO> listaResponsables = controlador.listarTodo();
+    
+    private void cargarResponsablesEnTabla() {
+    // Crear el modelo de la tabla con los nombres de columnas
+    DefaultTableModel modelo = new DefaultTableModel(
+        new String[]{"Nombre", "DNI", "Correo", "Cargo", "Usuario", "Contraseña", "Descripción"}, 0
+    );
+
+    for (ResponsableDTO responsable : listaResponsables) {
+        modelo.addRow(new Object[]{
+            responsable.getNombre(),
+            responsable.getDni(),
+            responsable.getEmail(),
+            responsable.getRol_responsableDTO().getNombreRol(),
+            responsable.getUsuario(),
+            responsable.getContrsena(),
+            responsable.getRol_ResponsableDTO().getDescripcion()
+        });
     }
+
+    Tabla_Lista_Responsable.setModel(modelo);
+    }
+
+   
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,7 +76,7 @@ public class PanelResponsables extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        Nombre_Filtro = new javax.swing.JTextField();
         Cargo = new javax.swing.JComboBox<>();
         Buscar = new javax.swing.JButton();
         AñadirRegistro = new javax.swing.JButton();
@@ -44,7 +84,7 @@ public class PanelResponsables extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         Modificar1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jXTable1 = new org.jdesktop.swingx.JXTable();
+        Tabla_Lista_Responsable = new org.jdesktop.swingx.JXTable();
         Modificar2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
@@ -66,13 +106,18 @@ public class PanelResponsables extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Buscar por nombre del encargado");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        Nombre_Filtro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                Nombre_FiltroActionPerformed(evt);
             }
         });
 
-        Cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Empleado" }));
+        Cargo.setModel(null);
+        Cargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargoActionPerformed(evt);
+            }
+        });
 
         Buscar.setBackground(new java.awt.Color(204, 0, 0));
         Buscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -123,18 +168,15 @@ public class PanelResponsables extends javax.swing.JFrame {
             }
         });
 
-        jXTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla_Lista_Responsable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Nombre", "DNI", "Correo electrónico", "Cargo", "Fercha de registro", "Usuario", "Contraseña"
+                "Nombre", "DNI", "Correo electrónico", "Cargo", "Usuario", "Contraseña"
             }
         ));
-        jScrollPane2.setViewportView(jXTable1);
+        jScrollPane2.setViewportView(Tabla_Lista_Responsable);
 
         Modificar2.setBackground(new java.awt.Color(255, 102, 0));
         Modificar2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -163,14 +205,14 @@ public class PanelResponsables extends javax.swing.JFrame {
                         .addComponent(Modificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(194, 194, 194)
                         .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(43, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Nombre_Filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -195,7 +237,7 @@ public class PanelResponsables extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Nombre_Filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
@@ -235,7 +277,10 @@ public class PanelResponsables extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,9 +313,10 @@ public class PanelResponsables extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void Nombre_FiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nombre_FiltroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        
+    }//GEN-LAST:event_Nombre_FiltroActionPerformed
 
     private void AñadirRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadirRegistroActionPerformed
         // TODO add your handling code here:
@@ -302,11 +348,19 @@ public class PanelResponsables extends javax.swing.JFrame {
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
+        // Obtener el rol seleccionado del combo box
+        
+       
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void Modificar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Modificar2ActionPerformed
+
+    private void CargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargoActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_CargoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,14 +399,27 @@ public class PanelResponsables extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void cargarRolesAlComboBox() {
+    Controlador<Rol_ResponsableDTO> controladorRol = new Rol_ResponsableControlador();
+    List<Rol_ResponsableDTO> listaRoles = controladorRol.listarTodo();
 
+    Cargo.removeAllItems(); // Limpiamos antes
+    for (Rol_ResponsableDTO rol : listaRoles) {
+        Cargo.addItem(rol); // Agregamos cada rol al combo
+        }
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AñadirRegistro;
     private javax.swing.JButton Buscar;
-    private javax.swing.JComboBox<String> Cargo;
+    private javax.swing.JComboBox<Rol_ResponsableDTO> Cargo;
     private javax.swing.JButton Modificar;
     private javax.swing.JButton Modificar1;
     private javax.swing.JButton Modificar2;
+    private javax.swing.JTextField Nombre_Filtro;
+    private org.jdesktop.swingx.JXTable Tabla_Lista_Responsable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -362,7 +429,5 @@ public class PanelResponsables extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private org.jdesktop.swingx.JXTable jXTable1;
     // End of variables declaration//GEN-END:variables
 }

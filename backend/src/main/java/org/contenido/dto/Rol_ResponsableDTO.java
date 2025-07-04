@@ -14,6 +14,8 @@ public class Rol_ResponsableDTO {
     @Size(max = 80, message = "El nombre rol no debe exceder los 80 caracteres")
     private String nombreRol;
 
+
+
     public Rol_ResponsableDTO() {}
 
     public int getId() {
@@ -38,5 +40,9 @@ public class Rol_ResponsableDTO {
 
     public void setNombreRol(String nombreRol) {
         this.nombreRol = nombreRol;
+    }
+    @Override
+    public String toString() {
+        return this.getNombreRol();
     }
 }

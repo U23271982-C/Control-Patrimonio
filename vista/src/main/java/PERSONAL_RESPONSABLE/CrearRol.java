@@ -183,8 +183,9 @@ public class CrearRol extends javax.swing.JFrame {
         Controlador<Rol_ResponsableDTO> controlador = new Rol_ResponsableControlador();
          Rol_ResponsableDTO dto = new Rol_ResponsableDTO();
 
-        dto.setNombreRol(nombre_rol.getText());
+
         dto.setDescripcion(descripcion_rol.getText());
+        dto.setNombreRol(nombre_rol.getText());
         controlador.registrar(dto);
     }//GEN-LAST:event_GuardarActionPerformed
 

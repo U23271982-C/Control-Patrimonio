@@ -51,8 +51,8 @@ public class ResponsableMapper implements Convertidor<Responsable, ResponsableDT
 
     @Override
     public Responsable mapDeResultSet(ResultSet rs) throws SQLException {
-        Rol_Responsable rol_responsable = new Rol_Responsable(rs.getInt(2),rs.getString(4),rs.getString(3));
-        Responsable entidad = new Responsable(rs.getInt(1),rs.getString(5),rs.getString(6),rs.getString(7),rol_responsable,rs.getString(8),rs.getString(9));
+        Rol_Responsable rol_responsable = new Rol_Responsable(rs.getInt(2),rs.getString(8),rs.getString(9));
+        Responsable entidad = new Responsable(rs.getInt(1),rs.getString(3),rs.getString(4),rs.getString(5),rol_responsable,rs.getString(6),rs.getString(7));
         return entidad;
     }
 }

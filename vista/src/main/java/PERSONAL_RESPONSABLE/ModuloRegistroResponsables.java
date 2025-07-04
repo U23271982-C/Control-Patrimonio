@@ -1,13 +1,19 @@
 package PERSONAL_RESPONSABLE;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.ResponsableControlador;
+import org.contenido.controlador.controladorImpl.Rol_ResponsableControlador;
 import org.contenido.dto.ResponsableDTO;
+import org.contenido.dto.Rol_ResponsableDTO;
 
 public class ModuloRegistroResponsables extends javax.swing.JFrame {
     public ModuloRegistroResponsables() {
         initComponents();
+        cargarRolesAlComboBox();
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -26,14 +32,13 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
         correo_personal = new javax.swing.JTextField();
         usuario_personal = new javax.swing.JTextField();
         cargo_personal = new javax.swing.JComboBox<>();
-        Limpiar = new javax.swing.JButton();
         Registrar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         dni_personal = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         contrasena_personal = new javax.swing.JPasswordField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        Tabla_CrearResponsable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -116,7 +121,6 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
             }
         });
 
-        cargo_personal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Empleado", " " }));
         cargo_personal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cargo_personalMouseClicked(evt);
@@ -125,14 +129,6 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
         cargo_personal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cargo_personalActionPerformed(evt);
-            }
-        });
-
-        Limpiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Limpiar.setText("Limpiar");
-        Limpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LimpiarActionPerformed(evt);
             }
         });
 
@@ -162,18 +158,23 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
             .addGap(0, 32, Short.MAX_VALUE)
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla_CrearResponsable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Nombre", "DNI", "Correo E.", "Cargo", "Fecha de registro", "Usuario", "Contraseña"
+                "Nombre", "DNI", "Correo E.", "Cargo", "Usuario", "Contraseña"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(Tabla_CrearResponsable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -181,38 +182,38 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(usuario_personal))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(cargo_personal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(correo_personal))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dni_personal))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(28, 28, 28)
-                        .addComponent(nombre_personal, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(57, 57, 57)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(Limpiar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Registrar))
-                            .addComponent(contrasena_personal))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(usuario_personal))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(cargo_personal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(correo_personal))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dni_personal, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(28, 28, 28)
+                                .addComponent(nombre_personal))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(contrasena_personal))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(Registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
@@ -222,7 +223,7 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addGap(45, 45, 45)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(nombre_personal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -246,10 +247,8 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(contrasena_personal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Limpiar)
-                            .addComponent(Registrar)))
+                        .addGap(69, 69, 69)
+                        .addComponent(Registrar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -283,26 +282,44 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cargo_personalMouseClicked
 
-    private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LimpiarActionPerformed
-
     private void cargo_personalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargo_personalActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_cargo_personalActionPerformed
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
         // TODO add your handling code here:
         Controlador<ResponsableDTO> controlador = new ResponsableControlador();
-         ResponsableDTO dto = new ResponsableDTO();
+        ResponsableDTO dto = new ResponsableDTO();
 
         dto.setNombre(nombre_personal.getText());
         dto.setDni(dni_personal.getText());
         dto.setEmail(correo_personal.getText());
-        //dto.setRol_responsableDTO(cargo_personal.getToolTipText());
+        // Obtener el rol seleccionado del combo box
+        Rol_ResponsableDTO rolSeleccionado = (Rol_ResponsableDTO) cargo_personal.getSelectedItem();
+        dto.setRol_responsableDTO(rolSeleccionado); // Asignar el rol al responsable
         dto.setUsuario(usuario_personal.getText());
         dto.setContrsena(contrasena_personal.getText());
+
         controlador.registrar(dto);
+        
+        DefaultTableModel modelo = (DefaultTableModel) Tabla_CrearResponsable.getModel();
+        modelo.addRow(new Object[]{
+            dto.getNombre(),
+            dto.getDni(),
+            dto.getEmail(),
+            rolSeleccionado.getNombreRol(), // Aquí se muestra el nombre del rol
+            dto.getUsuario(),
+            dto.getContrsena()
+        });
+        
+        
+        nombre_personal.setText("");
+        dni_personal.setText("");
+        correo_personal.setText("");
+        usuario_personal.setText("");
+        contrasena_personal.setText("");
     }//GEN-LAST:event_RegistrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -347,11 +364,21 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void cargarRolesAlComboBox() {
+    Controlador<Rol_ResponsableDTO> controladorRol = new Rol_ResponsableControlador();
+    List<Rol_ResponsableDTO> listaRoles = controladorRol.listarTodo();
 
+    cargo_personal.removeAllItems(); // Limpiamos antes
+    for (Rol_ResponsableDTO rol : listaRoles) {
+        cargo_personal.addItem(rol); // Agregamos cada rol al combo
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Limpiar;
     private javax.swing.JButton Registrar;
-    private javax.swing.JComboBox<String> cargo_personal;
+    private javax.swing.JTable Tabla_CrearResponsable;
+    private javax.swing.JComboBox<Rol_ResponsableDTO> cargo_personal;
     private javax.swing.JPasswordField contrasena_personal;
     private javax.swing.JTextField correo_personal;
     private javax.swing.JTextField dni_personal;
@@ -367,7 +394,6 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField nombre_personal;
     private javax.swing.JLabel titulo;
     private javax.swing.JTextField usuario_personal;
