@@ -1,6 +1,7 @@
 package PERSONAL_RESPONSABLE;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
@@ -146,6 +147,12 @@ public class PanelResponsables extends javax.swing.JFrame {
             }
         });
 
+
+        Cargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargoActionPerformed(evt);
+            }
+        });
 
         Buscar.setBackground(new java.awt.Color(204, 0, 0));
         Buscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -348,13 +355,34 @@ public class PanelResponsables extends javax.swing.JFrame {
         ModuloRegistroResponsables obj = new ModuloRegistroResponsables();
         obj.setVisible(true);
         dispose();
+        
     }//GEN-LAST:event_AñadirRegistroActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         // TODO add your handling code here:
-        ModificarPersonal obj = new ModificarPersonal();
-        obj.setVisible(true);
-        dispose();
+        int filaSeleccionada = Tabla_Lista_Responsable.getSelectedRow();
+    
+        if (filaSeleccionada != -1) {
+            // Buscar el nombre del responsable en la tabla seleccionada
+            String nombreSeleccionado = Tabla_Lista_Responsable.getValueAt(filaSeleccionada, 0).toString();
+
+            // Buscar en la lista original el responsable que tiene ese nombre (u otro campo único)
+            ResponsableDTO seleccionado = null;
+            for (ResponsableDTO r : listaResponsables) {
+                if (r.getNombre().equals(nombreSeleccionado)) {
+                    seleccionado = r;
+                    break;
+                }
+            }
+
+
+            // Abrir la nueva interfaz y pasarle el objeto
+            ModificarPersonal obj = new ModificarPersonal(seleccionado);
+            obj.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un responsable primero.");
+        }
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void Modificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar1ActionPerformed

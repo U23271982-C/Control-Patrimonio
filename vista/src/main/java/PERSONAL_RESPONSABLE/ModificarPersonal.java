@@ -1,5 +1,6 @@
 package PERSONAL_RESPONSABLE;
 
+import java.util.List;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.ResponsableControlador;
 import org.contenido.controlador.controladorImpl.Rol_ResponsableControlador;
@@ -9,6 +10,23 @@ import org.contenido.dto.Rol_ResponsableDTO;
 public class ModificarPersonal extends javax.swing.JFrame {
     public ModificarPersonal() {
         initComponents();
+        cargarRolesAlComboBox();
+    }
+    private ResponsableDTO responsableSeleccionado;
+
+    public ModificarPersonal(ResponsableDTO dto) {
+        initComponents();
+        cargarRolesAlComboBox();
+        this.responsableSeleccionado = dto;
+
+        // Rellenar los campos automáticamente
+        nombre_personal.setText(dto.getNombre());
+        dni_personal.setText(dto.getDni());
+        correo_personal.setText(dto.getEmail());
+        usuario_personal.setText(dto.getUsuario());
+        contrasena_personal.setText(dto.getContrsena());
+
+         cargo_personal.setSelectedItem(dto.getRol_responsableDTO());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -68,7 +86,6 @@ public class ModificarPersonal extends javax.swing.JFrame {
             }
         });
 
-        cargo_personal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Empleado", " " }));
         cargo_personal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cargo_personalMouseClicked(evt);
@@ -232,22 +249,30 @@ public class ModificarPersonal extends javax.swing.JFrame {
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
         // TODO add your handling code here:
-         Controlador<ResponsableDTO> controlador = new ResponsableControlador();
-         ResponsableDTO dto = new ResponsableDTO();
+        
+        responsableSeleccionado.setNombre(nombre_personal.getText());
+        responsableSeleccionado.setDni(dni_personal.getText());
+        responsableSeleccionado.setEmail(correo_personal.getText());
+        responsableSeleccionado.setUsuario(usuario_personal.getText());
+        responsableSeleccionado.setContrsena(contrasena_personal.getText());
 
-        dto.setNombre(nombre_personal.getText());
-        dto.setDni(dni_personal.getText());
-        dto.setEmail(correo_personal.getText());
-        dto.setUsuario(usuario_personal.getText());
-        dto.setContrsena(contrasena_personal.getText());
-        controlador.actualizar(dto);
-
-
-        Rol_ResponsableDTO rol = new Rol_ResponsableDTO();
-        dto.setRol_responsableDTO(rol);
-        controlador.actualizar(dto);
+        Rol_ResponsableDTO rolSeleccionado = (Rol_ResponsableDTO) cargo_personal.getSelectedItem();
+        responsableSeleccionado.setRol_responsableDTO(rolSeleccionado);
+        
+        Controlador<ResponsableDTO> controlador = new ResponsableControlador();
+        controlador.actualizar(responsableSeleccionado);
     }//GEN-LAST:event_RegistrarActionPerformed
 
+    private void cargarRolesAlComboBox() {
+    Controlador<Rol_ResponsableDTO> controladorRol = new Rol_ResponsableControlador();
+    List<Rol_ResponsableDTO> listaRoles = controladorRol.listarTodo();
+
+    cargo_personal.removeAllItems(); // Limpiamos antes
+    for (Rol_ResponsableDTO rol : listaRoles) {
+        cargo_personal.addItem(rol); // Agregamos cada rol al combo
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -289,7 +314,7 @@ public class ModificarPersonal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Limpiar;
     private javax.swing.JButton Registrar;
-    private javax.swing.JComboBox<String> cargo_personal;
+    private javax.swing.JComboBox<Rol_ResponsableDTO> cargo_personal;
     private javax.swing.JPasswordField contrasena_personal;
     private javax.swing.JTextField correo_personal;
     private javax.swing.JTextField dni_personal;
