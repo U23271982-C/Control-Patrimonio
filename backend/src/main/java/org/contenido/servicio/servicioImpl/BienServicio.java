@@ -1,5 +1,6 @@
 package org.contenido.servicio.servicioImpl;
 
+import org.contenido.dao.daoImplementadoModelo.BienDAO;
 import org.contenido.dto.BienDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.BienMapper;
@@ -10,7 +11,6 @@ import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
-import org.contenido.dao.daoImplementadoModelo.BienDAO;
 
 public class BienServicio implements Servicio<BienDTO> {
     private final BienDAO bienDAO;

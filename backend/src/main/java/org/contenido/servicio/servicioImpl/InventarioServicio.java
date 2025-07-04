@@ -1,5 +1,6 @@
 package org.contenido.servicio.servicioImpl;
 
+import org.contenido.dao.daoImplementadoModelo.InventarioDAO;
 import org.contenido.dto.InventarioDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.InventarioMapper;
@@ -10,7 +11,6 @@ import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
-import org.contenido.dao.daoImplementadoModelo.InventarioDAO;
 
 public class InventarioServicio implements Servicio<InventarioDTO> {
     private final InventarioDAO inventarioDAO;

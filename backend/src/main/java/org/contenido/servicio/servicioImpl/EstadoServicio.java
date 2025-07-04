@@ -1,5 +1,6 @@
 package org.contenido.servicio.servicioImpl;
 
+import org.contenido.dao.daoImplementadoModelo.EstadoDAO;
 import org.contenido.dto.EstadoDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.EstadoMapper;
@@ -10,7 +11,6 @@ import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
-import org.contenido.dao.daoImplementadoModelo.EstadoDAO;
 
 public class EstadoServicio implements Servicio<EstadoDTO> {
     private final EstadoDAO estadoDAO;

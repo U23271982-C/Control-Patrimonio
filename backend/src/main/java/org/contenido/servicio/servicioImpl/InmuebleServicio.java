@@ -1,5 +1,6 @@
 package org.contenido.servicio.servicioImpl;
 
+import org.contenido.dao.daoImplementadoModelo.InmuebleDAO;
 import org.contenido.dto.InmuebleDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.InmuebleMapper;
@@ -10,7 +11,6 @@ import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
-import org.contenido.dao.daoImplementadoModelo.InmuebleDAO;
 
 public class InmuebleServicio implements Servicio<InmuebleDTO> {
     private final InmuebleDAO inmuebleDAO;

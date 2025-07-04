@@ -1,5 +1,6 @@
 package org.contenido.servicio.servicioImpl;
 
+import org.contenido.dao.daoImplementadoModelo.AsignacionDAO;
 import org.contenido.dto.AsignacionDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.AsignacionMapper;
@@ -10,7 +11,6 @@ import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
 import java.util.List;
-import org.contenido.dao.daoImplementadoModelo.AsignacionDAO;
 
 public class AsignacionServicio implements Servicio<AsignacionDTO> {
     private final AsignacionDAO asignacionDAO;
