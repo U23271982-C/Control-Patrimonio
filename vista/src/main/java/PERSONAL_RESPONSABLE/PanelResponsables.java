@@ -30,7 +30,14 @@ public class PanelResponsables extends javax.swing.JFrame {
         initComponents();
         cargarResponsablesEnTabla();
         cargarRolesAlComboBox();
-    };
+        Nombre_Filtro.getDocument().addDocumentListener(new DocumentListener() {
+        public void insertUpdate(DocumentEvent e){ filtrarResponsables();}
+        public void removeUpdate(DocumentEvent e){ filtrarResponsables();}
+        public void changedUpdate(DocumentEvent e){ filtrarResponsables();}
+
+        });
+    
+    }
     
 
     
@@ -57,8 +64,35 @@ public class PanelResponsables extends javax.swing.JFrame {
 
     Tabla_Lista_Responsable.setModel(modelo);
     }
+    
+    private void filtrarResponsables(){
+    String nombreFiltro = Nombre_Filtro.getText().trim().toLowerCase();
+    Rol_ResponsableDTO rolSeleccionado = (Rol_ResponsableDTO) Cargo.getSelectedItem();
+    
+    //crear un modelo vacio con las columnas
+    DefaultTableModel modelo = new DefaultTableModel(
+    new String[] {"Nombre", "DNI", "Correo", "Cargo", "Usuario", "Contraseña", "Descripción"}, 0
+    );
 
+    for (ResponsableDTO responsable : listaResponsables) {
+    boolean coincideNombre =responsable.getNombre().toLowerCase().contains(nombreFiltro);
+    boolean coincideRol = (rolSeleccionado == null || responsable.getRol_responsableDTO().getId() == rolSeleccionado.getId());
+    
+        if (coincideNombre && coincideRol){
+            modelo.addRow(new Object[]{
+                responsable.getNombre(),
+                responsable.getDni(),
+                responsable.getEmail(),
+                responsable.getRol_responsableDTO().getNombreRol(),
+                responsable.getUsuario(),
+                responsable.getContrsena(),
+                responsable.getRol_responsableDTO().getDescripcion()
+            });
+        }
+        Tabla_Lista_Responsable.setModel(modelo);
+    }
    
+}
 
 
     /**
@@ -112,12 +146,6 @@ public class PanelResponsables extends javax.swing.JFrame {
             }
         });
 
-        Cargo.setModel(null);
-        Cargo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CargoActionPerformed(evt);
-            }
-        });
 
         Buscar.setBackground(new java.awt.Color(204, 0, 0));
         Buscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -173,7 +201,7 @@ public class PanelResponsables extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "DNI", "Correo electrónico", "Cargo", "Usuario", "Contraseña"
+                "Nombre", "DNI", "Correo electrónico", "Cargo", "Usuario", "Contraseña", "Descripción"
             }
         ));
         jScrollPane2.setViewportView(Tabla_Lista_Responsable);
@@ -240,7 +268,7 @@ public class PanelResponsables extends javax.swing.JFrame {
                             .addComponent(Nombre_Filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -267,7 +295,7 @@ public class PanelResponsables extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 390, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,10 +305,7 @@ public class PanelResponsables extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +319,7 @@ public class PanelResponsables extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -349,8 +374,7 @@ public class PanelResponsables extends javax.swing.JFrame {
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
         // Obtener el rol seleccionado del combo box
-        
-       
+        filtrarResponsables();
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void Modificar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar2ActionPerformed

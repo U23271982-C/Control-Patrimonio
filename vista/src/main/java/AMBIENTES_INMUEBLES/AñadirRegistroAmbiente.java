@@ -149,7 +149,7 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 102, 0));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setText("Cerrar");
+        jButton1.setText("Atrás");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
