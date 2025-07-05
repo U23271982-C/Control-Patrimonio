@@ -4,10 +4,13 @@
  */
 package AMBIENTES_INMUEBLES;
 
+import java.util.List;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.AmbienteControlador;
 import org.contenido.controlador.controladorImpl.CategoriaControlador;
+import org.contenido.controlador.controladorImpl.InmuebleControlador;
 import org.contenido.dto.AmbienteDTO;
+import org.contenido.dto.InmuebleDTO;
 
 /**
  *
@@ -20,6 +23,7 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
      */
     public AñadirRegistroAmbiente() {
         initComponents();
+        cargarInmueblesAlComboBox();
     }
 
     /**
@@ -35,13 +39,11 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
         JPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         nombre_ambiente = new javax.swing.JTextField();
-        inmueble_ambiente = new javax.swing.JTextField();
         GuardarRegistro = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         GuardarRegistro2 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        descripcion_ambiente = new javax.swing.JTextField();
+        nombre_inmueble = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
@@ -61,6 +63,12 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Registro de Ambientes");
+
+        nombre_ambiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombre_ambienteActionPerformed(evt);
+            }
+        });
 
         GuardarRegistro.setBackground(new java.awt.Color(204, 102, 0));
         GuardarRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -90,9 +98,11 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel11.setText("Descripción");
+        nombre_inmueble.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombre_inmuebleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout JPanel1Layout = new javax.swing.GroupLayout(JPanel1);
         JPanel1.setLayout(JPanel1Layout);
@@ -103,47 +113,39 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
                     .addGroup(JPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(GuardarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
+                        .addGap(51, 51, 51)
                         .addComponent(GuardarRegistro2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPanel1Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(JPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(inmueble_ambiente)
+                            .addComponent(nombre_inmueble, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(nombre_ambiente)
                             .addGroup(JPanel1Layout.createSequentialGroup()
                                 .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE))
-                            .addComponent(descripcion_ambiente))))
-                .addGap(0, 70, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)))))
+                .addGap(70, 70, 70))
         );
         JPanel1Layout.setVerticalGroup(
             JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPanel1Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addGap(51, 51, 51)
                 .addComponent(jLabel2)
-                .addGap(39, 39, 39)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(nombre_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(descripcion_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inmueble_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
+                .addGap(28, 28, 28)
+                .addComponent(nombre_inmueble, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
                 .addGroup(JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GuardarRegistro)
                     .addComponent(GuardarRegistro2))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 0));
@@ -161,9 +163,9 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(587, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addGap(21, 21, 21))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,19 +179,15 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(JPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 36, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addComponent(JPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 453, Short.MAX_VALUE)))
         );
 
         pack();
@@ -202,8 +200,8 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
         AmbienteDTO dto = new AmbienteDTO();
 
         dto.setNombre(nombre_ambiente.getText());
-        //dto.setDescripcion(descripcion_ambiente.getText());
-        //dto.setInmueble(inmueble_ambiente.getText());
+        InmuebleDTO inmuebleSeleccionado = (InmuebleDTO) nombre_inmueble.getSelectedItem();
+        dto.setInmuebleDTO(inmuebleSeleccionado); 
         controlador.registrar(dto);
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 
@@ -224,6 +222,14 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void nombre_ambienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_ambienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombre_ambienteActionPerformed
+
+    private void nombre_inmuebleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_inmuebleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombre_inmuebleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,20 +268,28 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void cargarInmueblesAlComboBox() {
+    Controlador<InmuebleDTO> controladorRol = new InmuebleControlador();
+    List<InmuebleDTO> listaRoles = controladorRol.listarTodo();
+
+    nombre_inmueble.removeAllItems(); // Limpiamos antes
+    for (InmuebleDTO rol : listaRoles) {
+        nombre_inmueble.addItem(rol); // Agregamos cada rol al combo
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GuardarRegistro;
     private javax.swing.JButton GuardarRegistro1;
     private javax.swing.JButton GuardarRegistro2;
     private javax.swing.JPanel JPanel1;
-    private javax.swing.JTextField descripcion_ambiente;
-    private javax.swing.JTextField inmueble_ambiente;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField nombre_ambiente;
+    private javax.swing.JComboBox<InmuebleDTO> nombre_inmueble;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,12 @@ public class Inmueble {
 
     public Inmueble() {}
 
+    public Inmueble(int id, String nombre, String descripcion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
     public int getId() {
         return id;
     }

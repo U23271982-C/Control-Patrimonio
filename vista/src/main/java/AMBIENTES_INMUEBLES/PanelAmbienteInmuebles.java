@@ -4,8 +4,19 @@
  */
 package AMBIENTES_INMUEBLES;
 
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 import org.contenido.PANEL_INICIO.PanelInicio;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.AmbienteControlador;
+import org.contenido.controlador.controladorImpl.InmuebleControlador;
+import org.contenido.controlador.controladorImpl.ResponsableControlador;
+import org.contenido.dto.AmbienteDTO;
+import org.contenido.dto.InmuebleDTO;
+import org.contenido.dto.ResponsableDTO;
 
 /**
  *
@@ -18,8 +29,100 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
      */
     public PanelAmbienteInmuebles() {
         initComponents();
+        cargarInmueblesEnTabla();
+        cargarAmbientesEnTabla();
+        buscar_inmuebles.getDocument().addDocumentListener(new DocumentListener() {
+        public void insertUpdate(DocumentEvent e){ filtrarInmuebles();}
+        public void removeUpdate(DocumentEvent e){ filtrarInmuebles();}
+        public void changedUpdate(DocumentEvent e){ filtrarInmuebles();}
+        });
+        buscar_ambientes.getDocument().addDocumentListener(new DocumentListener() {
+        public void insertUpdate(DocumentEvent e){ filtrarAmbientes();}
+        public void removeUpdate(DocumentEvent e){ filtrarAmbientes();}
+        public void changedUpdate(DocumentEvent e){ filtrarAmbientes();}
+        
+        });
     }
+    
+    Controlador<InmuebleDTO> controlador = new InmuebleControlador();
+    List<InmuebleDTO> listaInmuebles = controlador.listarTodo();
+    
+    private void cargarInmueblesEnTabla() {
+    // Crear el modelo de la tabla con los nombres de columnas
+    DefaultTableModel modelo = new DefaultTableModel(
+        new String[]{"Nombre","Descripción"}, 0
+    );
 
+    for (InmuebleDTO inmuebles : listaInmuebles) {
+        modelo.addRow(new Object[]{
+            inmuebles.getNombre(),
+            inmuebles.getDescripcion()
+            });
+        }
+    tabla_listarInmuebles.setModel(modelo);
+    }
+    private void filtrarInmuebles(){
+    String nombreFiltro = buscar_inmuebles.getText().trim().toLowerCase();
+    
+    //crear un modelo vacio con las columnas
+    DefaultTableModel modelo = new DefaultTableModel(
+    new String[] {"Inmueble", "Descripción"}, 0
+    );
+
+    for (InmuebleDTO inmuebles : listaInmuebles) {
+    boolean coincideNombre =inmuebles.getNombre().toLowerCase().contains(nombreFiltro);
+    
+        if (coincideNombre ){
+            modelo.addRow(new Object[]{
+                inmuebles.getNombre(),
+                inmuebles.getDescripcion()
+            });
+        }
+        tabla_listarInmuebles.setModel(modelo);
+    }
+   
+}
+    
+    Controlador<AmbienteDTO> controlador2 = new AmbienteControlador();
+    List<AmbienteDTO> listaAmbiente = controlador2.listarTodo();
+    
+    private void cargarAmbientesEnTabla() {
+    // Crear el modelo de la tabla con los nombres de columnas
+    DefaultTableModel modelo = new DefaultTableModel(
+        new String[]{"Ambiente","Vinculado a"}, 0
+    );
+
+    for (AmbienteDTO ambientes : listaAmbiente) {
+        modelo.addRow(new Object[]{
+            ambientes.getNombre(),
+            ambientes.getInmuebleDTO().getNombre()
+            });
+        }
+    tabla_listarAmbientes.setModel(modelo);
+    }
+    
+    private void filtrarAmbientes(){
+    String nombreFiltro = buscar_ambientes.getText().trim().toLowerCase();
+    
+    //crear un modelo vacio con las columnas
+    DefaultTableModel modelo = new DefaultTableModel(
+    new String[] {"Ambiente", "Vinculado a"}, 0
+    );
+
+    for (AmbienteDTO ambientes : listaAmbiente) {
+    boolean coincideNombre =ambientes.getNombre().toLowerCase().contains(nombreFiltro);
+    
+        if (coincideNombre ){
+            modelo.addRow(new Object[]{
+                ambientes.getNombre(),
+                ambientes.getInmuebleDTO().getNombre()
+            });
+        }
+        tabla_listarAmbientes.setModel(modelo);
+    }
+   
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,19 +141,17 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        buscar_ambientes = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
+        buscar_inmuebles = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jXTable1 = new org.jdesktop.swingx.JXTable();
+        tabla_listarInmuebles = new org.jdesktop.swingx.JXTable();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jXTable2 = new org.jdesktop.swingx.JXTable();
+        tabla_listarAmbientes = new org.jdesktop.swingx.JXTable();
         jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,7 +181,7 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 9, Short.MAX_VALUE)
+            .addGap(0, 13, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,10 +212,9 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(204, 204, 204));
         jLabel4.setText("Ambientes del inmueble seleccionado");
 
-        jButton3.setText("Buscar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        buscar_ambientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                buscar_ambientesActionPerformed(evt);
             }
         });
 
@@ -152,10 +252,9 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Inmuebles disponibles");
 
-        jButton7.setText("Buscar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        buscar_inmuebles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                buscar_inmueblesActionPerformed(evt);
             }
         });
 
@@ -169,7 +268,7 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
             }
         });
 
-        jXTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_listarInmuebles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -180,59 +279,59 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
                 "Inmueble", "Descripción"
             }
         ));
-        jScrollPane3.setViewportView(jXTable1);
+        jScrollPane3.setViewportView(tabla_listarInmuebles);
 
-        jXTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_listarAmbientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Ambiente", "Descripción", "Vinculado a"
+                "Ambiente", "Vinculado a"
             }
         ));
-        jScrollPane1.setViewportView(jXTable2);
+        jScrollPane1.setViewportView(tabla_listarAmbientes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42)
+                        .addComponent(buscar_inmuebles, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addGap(46, 46, 46))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1)
+                        .addComponent(buscar_ambientes)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,10 +340,8 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(buscar_inmuebles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -253,13 +350,11 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
                     .addComponent(jButton8))
                 .addGap(34, 34, 34))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buscar_ambientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +381,7 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,14 +431,31 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        EditarInmueble obj = new EditarInmueble();
-        obj.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        int filaSeleccionada = tabla_listarInmuebles.getSelectedRow();
+    
+        if (filaSeleccionada != -1) {
+            // Buscar el nombre del responsable en la tabla seleccionada
+            String nombreSeleccionado = tabla_listarInmuebles.getValueAt(filaSeleccionada, 0).toString();
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+            // Buscar en la lista original el responsable que tiene ese nombre (u otro campo único)
+            InmuebleDTO seleccionado = null;
+            for (InmuebleDTO r : listaInmuebles) {
+                if (r.getNombre().equals(nombreSeleccionado)) {
+                    seleccionado = r;
+                    break;
+                }
+            }
+
+
+            // Abrir la nueva interfaz y pasarle el objeto
+            EditarInmueble obj = new EditarInmueble(seleccionado);
+            obj.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un inmueble primero.");
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -351,10 +463,6 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
@@ -365,23 +473,89 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int resultado= JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este inmueble?","Confirmar eliminación",JOptionPane.OK_CANCEL_OPTION);
+        int filaSeleccionada = tabla_listarInmuebles.getSelectedRow();
+    
+        if (filaSeleccionada != -1) {
+            // Buscar el nombre del responsable en la tabla seleccionada
+            String nombreSeleccionado = tabla_listarInmuebles.getValueAt(filaSeleccionada, 0).toString();
+
+            // Buscar en la lista original el responsable que tiene ese nombre (u otro campo único)
+            InmuebleDTO seleccionado = null;
+            for (InmuebleDTO r : listaInmuebles) {
+                if (r.getNombre().equals(nombreSeleccionado)) {
+                    seleccionado = r;
+                    break;
+                }
+            }
+
+            int resultado= JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este inmueble?","Confirmar eliminación",JOptionPane.OK_CANCEL_OPTION);
         //si el usuario hace click en aceptar
         if(resultado == JOptionPane.OK_OPTION){
-         
+             Controlador<InmuebleDTO> controlador = new InmuebleControlador();
+        controlador.eliminar(seleccionado.getId());
         }
+        
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un inmueble primero.");
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        EditarAmbiente obj = new EditarAmbiente();
-        obj.setVisible(true);
-        dispose();
+        int filaSeleccionada = tabla_listarAmbientes.getSelectedRow();
+    
+        if (filaSeleccionada != -1) {
+            // Buscar el nombre del responsable en la tabla seleccionada
+            String nombreSeleccionado = tabla_listarAmbientes.getValueAt(filaSeleccionada, 0).toString();
+
+            // Buscar en la lista original el responsable que tiene ese nombre (u otro campo único)
+            AmbienteDTO seleccionado = null;
+            for (AmbienteDTO r : listaAmbiente) {
+                if (r.getNombre().equals(nombreSeleccionado)) {
+                    seleccionado = r;
+                    break;
+                }
+            }
+
+
+            // Abrir la nueva interfaz y pasarle el objeto
+            EditarAmbiente obj = new EditarAmbiente(seleccionado);
+            obj.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un ambiente primero.");
+        }
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        int filaSeleccionada = tabla_listarAmbientes.getSelectedRow();
+    
+        if (filaSeleccionada != -1) {
+            // Buscar el nombre del responsable en la tabla seleccionada
+            String nombreSeleccionado = tabla_listarAmbientes.getValueAt(filaSeleccionada, 0).toString();
+
+            // Buscar en la lista original el responsable que tiene ese nombre (u otro campo único)
+            AmbienteDTO seleccionado = null;
+            for (AmbienteDTO r : listaAmbiente) {
+                if (r.getNombre().equals(nombreSeleccionado)) {
+                    seleccionado = r;
+                    break;
+                }
+            }
+
+            int resultado= JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este ambiente?","Confirmar eliminación",JOptionPane.OK_CANCEL_OPTION);
+        //si el usuario hace click en aceptar
+        if(resultado == JOptionPane.OK_OPTION){
+             Controlador<AmbienteDTO> controlador = new AmbienteControlador();
+        controlador.eliminar(seleccionado.getId());
+        }
         
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un ambiente primero.");
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -390,6 +564,15 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void buscar_inmueblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_inmueblesActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_buscar_inmueblesActionPerformed
+
+    private void buscar_ambientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_ambientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscar_ambientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -428,13 +611,13 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField buscar_ambientes;
+    private javax.swing.JTextField buscar_inmuebles;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel3;
@@ -446,10 +629,8 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private org.jdesktop.swingx.JXTable jXTable1;
-    private org.jdesktop.swingx.JXTable jXTable2;
+    private org.jdesktop.swingx.JXTable tabla_listarAmbientes;
+    private org.jdesktop.swingx.JXTable tabla_listarInmuebles;
     private javax.swing.JLabel titulo4;
     // End of variables declaration//GEN-END:variables
 }

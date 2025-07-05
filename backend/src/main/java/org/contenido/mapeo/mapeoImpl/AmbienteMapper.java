@@ -8,6 +8,7 @@ import org.contenido.modelo.Ambiente;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.contenido.modelo.Inmueble;
 
 public class AmbienteMapper implements Convertidor<Ambiente, AmbienteDTO>, ResultSetMapper<Ambiente> {
     private final InmuebleMapper inmuebleMapper;
@@ -48,10 +49,8 @@ public class AmbienteMapper implements Convertidor<Ambiente, AmbienteDTO>, Resul
     }
     @Override
     public Ambiente mapDeResultSet(ResultSet rs) throws SQLException {
-        Ambiente entidad = new Ambiente();
-        entidad.setId(rs.getInt(1));
-        entidad.setNombre(rs.getString(2));
-        entidad.setInmueble(inmuebleMapper.mapDeResultSet(rs));
+        Inmueble inmueble = new Inmueble(rs.getInt(3),rs.getString(4),rs.getString(5));
+        Ambiente entidad = new Ambiente(rs.getInt(1),rs.getString(2),inmueble);
         return entidad;
     }
 }

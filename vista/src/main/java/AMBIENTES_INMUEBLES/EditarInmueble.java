@@ -21,7 +21,15 @@ public class EditarInmueble extends javax.swing.JFrame {
     public EditarInmueble() {
         initComponents();
     }
+    private InmuebleDTO inmuebleSeleccionado;
+    public EditarInmueble(InmuebleDTO dto) {
+        initComponents();
+        this.inmuebleSeleccionado = dto;
 
+        // Rellenar los campos automáticamente
+        nombre_inmueble.setText(dto.getNombre());
+        descripcion_inmueble.setText(dto.getDescripcion());     
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -176,12 +184,12 @@ public class EditarInmueble extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
+        inmuebleSeleccionado.setNombre(nombre_inmueble.getText());
+        inmuebleSeleccionado.setDescripcion(descripcion_inmueble.getText());
+        
+        
         Controlador<InmuebleDTO> controlador = new InmuebleControlador();
-        InmuebleDTO dto = new InmuebleDTO();
-
-        dto.setNombre(nombre_inmueble.getText());
-        dto.setDescripcion(descripcion_inmueble.getText());
-        controlador.actualizar(dto);
+        controlador.actualizar(inmuebleSeleccionado);
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 
     private void GuardarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistro1ActionPerformed

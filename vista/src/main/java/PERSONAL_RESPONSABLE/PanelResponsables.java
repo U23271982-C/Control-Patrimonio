@@ -431,6 +431,9 @@ public class PanelResponsables extends javax.swing.JFrame {
 
     private void Modificar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar2ActionPerformed
         // TODO add your handling code here:
+        CrearRol obj = new CrearRol();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_Modificar2ActionPerformed
 
     private void CargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargoActionPerformed
