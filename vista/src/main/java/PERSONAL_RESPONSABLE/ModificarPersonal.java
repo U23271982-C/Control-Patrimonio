@@ -25,8 +25,15 @@ public class ModificarPersonal extends javax.swing.JFrame {
         correo_personal.setText(dto.getEmail());
         usuario_personal.setText(dto.getUsuario());
         contrasena_personal.setText(dto.getContrsena());
-
-         cargo_personal.setSelectedItem(dto.getRol_responsableDTO());
+        // Para asignar el rol en el combo, asumiendo que ya está cargado el combo
+        for (int i = 0; i < cargo_personal.getItemCount(); i++) {
+            Rol_ResponsableDTO rol = (Rol_ResponsableDTO) cargo_personal.getItemAt(i);
+            if (rol.getId() == dto.getRol_responsableDTO().getId()) {
+                cargo_personal.setSelectedIndex(i);
+                break;
+            }
+        }
+         
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

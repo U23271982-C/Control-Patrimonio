@@ -5,6 +5,10 @@
 package reciclaje;
 
 import PERSONAL_RESPONSABLE.PanelResponsables;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.ResponsableControlador;
+import org.contenido.dto.ResponsableDTO;
+import org.contenido.dto.Rol_ResponsableDTO;
 
 /**
  *
@@ -18,6 +22,16 @@ public class EliminarResponsable extends javax.swing.JFrame {
     public EliminarResponsable() {
         initComponents();
     }
+    private ResponsableDTO responsableSeleccionado;
+    public EliminarResponsable(ResponsableDTO dto) {
+        initComponents();
+        this.responsableSeleccionado = dto;
+
+        nombre_responsable.setText(dto.getNombre());
+        correo_responsable.setText(dto.getEmail());
+        cargo_responsable.setText(dto.getRol_responsableDTO().getNombreRol());
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,16 +44,16 @@ public class EliminarResponsable extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        nombre_responsable = new javax.swing.JTextField();
         GuardarRegistro = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         GuardarRegistro1 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        correo_responsable = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        cargo_responsable = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
@@ -117,12 +131,12 @@ public class EliminarResponsable extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel13)
                             .addGap(31, 31, 31)
-                            .addComponent(jTextField4))
-                        .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cargo_responsable))
+                        .addComponent(correo_responsable, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel9)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))))
+                            .addComponent(nombre_responsable, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))))
                 .addContainerGap(77, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -135,17 +149,17 @@ public class EliminarResponsable extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombre_responsable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(correo_responsable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cargo_responsable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addComponent(jLabel11)
                         .addGap(2, 2, 2)
@@ -197,6 +211,10 @@ public class EliminarResponsable extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
+
+        Controlador<ResponsableDTO> controlador = new ResponsableControlador();
+        controlador.eliminar(responsableSeleccionado.getId());
+
         PanelResponsables obj = new PanelResponsables();
         obj.setVisible(true);
         dispose();
@@ -278,6 +296,8 @@ public class EliminarResponsable extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GuardarRegistro;
     private javax.swing.JButton GuardarRegistro1;
+    private javax.swing.JTextField cargo_responsable;
+    private javax.swing.JTextField correo_responsable;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -287,8 +307,6 @@ public class EliminarResponsable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField nombre_responsable;
     // End of variables declaration//GEN-END:variables
 }

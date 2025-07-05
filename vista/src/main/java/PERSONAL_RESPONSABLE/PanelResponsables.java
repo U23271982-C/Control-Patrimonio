@@ -387,9 +387,33 @@ public class PanelResponsables extends javax.swing.JFrame {
 
     private void Modificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar1ActionPerformed
         // TODO add your handling code here:
-        EliminarResponsable obj = new EliminarResponsable();
-        obj.setVisible(true);
-        dispose();
+
+        // TODO add your handling code here:
+        int filaSeleccionada = Tabla_Lista_Responsable.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            // Buscar el nombre del responsable en la tabla seleccionada
+            String nombreSeleccionado = Tabla_Lista_Responsable.getValueAt(filaSeleccionada, 0).toString();
+
+            // Buscar en la lista original el responsable que tiene ese nombre (u otro campo único)
+            ResponsableDTO seleccionado = null;
+            for (ResponsableDTO r : listaResponsables) {
+                if (r.getNombre().equals(nombreSeleccionado)) {
+                    seleccionado = r;
+                    break;
+                }
+            }
+
+
+            // Abrir la nueva interfaz y pasarle el objeto
+            EliminarResponsable obj = new EliminarResponsable(seleccionado);
+            obj.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un responsable primero.");
+        }
+
+
     }//GEN-LAST:event_Modificar1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
