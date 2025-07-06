@@ -7,6 +7,7 @@ import org.contenido.excepcion.SuperAdminExcepcion;
 public class LoginServicio {
     private final ResponsableServicio servicio;
     private ResponsableDTO dto;
+    private ResponsableDTO getDtoDevuelve;
 
     public LoginServicio(ResponsableDTO dto) {
         this.servicio = new ResponsableServicio();
@@ -14,9 +15,9 @@ public class LoginServicio {
     }
 
     public boolean validarCredenciales() throws LoginExcepcion{
-        ResponsableDTO r = servicio.leerPorUsuarioContrasena(dto);
+        this.getDtoDevuelve = servicio.leerPorUsuarioContrasena(dto);
         // Si no esta registrado las credenciales, arroga una excepcion
-        if (r == null) throw new LoginExcepcion(
+        if (getDtoDevuelve == null) throw new LoginExcepcion(
                     "Usuario o contraseña equivocadas. Intente de nuevamente.");
 
         return true;
@@ -35,6 +36,6 @@ public class LoginServicio {
     }
 
     public ResponsableDTO getDto() {
-        return dto;
+        return getDtoDevuelve;
     }
 }
