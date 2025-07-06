@@ -4,6 +4,7 @@
  */
 package AMBIENTES_INMUEBLES;
 
+import java.util.List;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.InmuebleControlador;
 import org.contenido.dto.InmuebleDTO;
@@ -251,6 +252,7 @@ public class AñadirRegistroInmueble extends javax.swing.JFrame {
         });
     }
 
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GuardarRegistro;
     private javax.swing.JButton GuardarRegistro2;

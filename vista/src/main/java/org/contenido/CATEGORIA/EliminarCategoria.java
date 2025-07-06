@@ -5,6 +5,9 @@
 package reciclaje;
 
 import org.contenido.CATEGORIA.PanelCategoria;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.CategoriaControlador;
+import org.contenido.dto.CategoriaDTO;
 
 /**
  *
@@ -15,8 +18,16 @@ public class EliminarCategoria extends javax.swing.JFrame {
     /**
      * Creates new form PanelCategoria
      */
+    Controlador<CategoriaDTO> controlador = new CategoriaControlador();
+    CategoriaDTO dto;
     public EliminarCategoria() {
         initComponents();
+    }
+     public EliminarCategoria(CategoriaDTO categoria){
+        initComponents(); // Esto lo llama NetBeans
+        this.dto = categoria;
+        // Mostrar los datos en los campos
+        NombreCategoria.setText(categoria.getNombre());
     }
 
     /**
@@ -31,7 +42,7 @@ public class EliminarCategoria extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        NombreCategoria = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
@@ -51,9 +62,10 @@ public class EliminarCategoria extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(204, 204, 204));
         jLabel10.setText("Nombre de la categoría");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        NombreCategoria.setEditable(false);
+        NombreCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                NombreCategoriaActionPerformed(evt);
             }
         });
 
@@ -95,7 +107,7 @@ public class EliminarCategoria extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -106,7 +118,7 @@ public class EliminarCategoria extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(NombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
@@ -163,9 +175,9 @@ public class EliminarCategoria extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void NombreCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreCategoriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_NombreCategoriaActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -182,9 +194,9 @@ public class EliminarCategoria extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        PanelCategoria obj = new PanelCategoria();
-        obj.setVisible(true);
+        controlador.eliminar(dto.getId());
+        PanelCategoria regresar = new PanelCategoria();
+        regresar.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -227,6 +239,7 @@ public class EliminarCategoria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField NombreCategoria;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -235,6 +248,5 @@ public class EliminarCategoria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

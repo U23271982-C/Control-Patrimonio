@@ -4,8 +4,16 @@
  */
 package org.contenido.CATEGORIA;
 
-import reciclaje.EliminarCategoria;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 import org.contenido.PANEL_INICIO.PanelInicio;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.CategoriaControlador;
+import org.contenido.dto.CategoriaDTO;
+import reciclaje.EliminarCategoria;
 
 
 
@@ -18,8 +26,21 @@ public class PanelCategoria extends javax.swing.JFrame {
     /**
      * Creates new form BienesPrincipal
      */
+    Controlador<CategoriaDTO> controlador = new CategoriaControlador();
+    List<CategoriaDTO> listacategorias = controlador.listarTodo();
+
+    
     public PanelCategoria() {
         initComponents();
+        cargarCategoriaTabla();
+        FiltrarPorNombre.getDocument().addDocumentListener(new DocumentListener() {
+        @Override
+        public void insertUpdate(DocumentEvent e){ filtrarCategoria();}
+        @Override
+        public void removeUpdate(DocumentEvent e){ filtrarCategoria();}
+        @Override
+        public void changedUpdate(DocumentEvent e){ filtrarCategoria();}
+        });
     }
 
     /**
@@ -36,14 +57,14 @@ public class PanelCategoria extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        FiltrarPorNombre = new javax.swing.JTextField();
+        BotonAñadir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        BotonModificar = new javax.swing.JButton();
+        BotonEliminar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jXTable1 = new org.jdesktop.swingx.JXTable();
+        jXTableCategoria = new org.jdesktop.swingx.JXTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 102, 0));
@@ -90,36 +111,42 @@ public class PanelCategoria extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setForeground(new java.awt.Color(255, 243, 239));
 
-        jButton1.setBackground(new java.awt.Color(255, 102, 0));
-        jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Añadir categoria");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        FiltrarPorNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                FiltrarPorNombreActionPerformed(evt);
+            }
+        });
+
+        BotonAñadir.setBackground(new java.awt.Color(255, 102, 0));
+        BotonAñadir.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        BotonAñadir.setForeground(new java.awt.Color(255, 255, 255));
+        BotonAñadir.setText("Añadir categoria");
+        BotonAñadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAñadirActionPerformed(evt);
             }
         });
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Buscar por nombre de la categoria:");
 
-        jButton4.setBackground(new java.awt.Color(255, 102, 0));
-        jButton4.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Modificar categoria");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        BotonModificar.setBackground(new java.awt.Color(255, 102, 0));
+        BotonModificar.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        BotonModificar.setForeground(new java.awt.Color(255, 255, 255));
+        BotonModificar.setText("Modificar categoria");
+        BotonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                BotonModificarActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(255, 102, 0));
-        jButton5.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Eliminar categoría");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        BotonEliminar.setBackground(new java.awt.Color(255, 102, 0));
+        BotonEliminar.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        BotonEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        BotonEliminar.setText("Eliminar categoría");
+        BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                BotonEliminarActionPerformed(evt);
             }
         });
 
@@ -131,7 +158,7 @@ public class PanelCategoria extends javax.swing.JFrame {
             }
         });
 
-        jXTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jXTableCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -142,7 +169,7 @@ public class PanelCategoria extends javax.swing.JFrame {
                 "ID", "Nombre", "Descripción"
             }
         ));
-        jScrollPane2.setViewportView(jXTable1);
+        jScrollPane2.setViewportView(jXTableCategoria);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -156,19 +183,19 @@ public class PanelCategoria extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+                            .addComponent(FiltrarPorNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
                             .addComponent(jScrollPane2))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BotonAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(20, 20, 20))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                                        .addComponent(BotonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(BotonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap())))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -179,15 +206,15 @@ public class PanelCategoria extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(FiltrarPorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BotonAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BotonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BotonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -212,23 +239,52 @@ public class PanelCategoria extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BotonAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAñadirActionPerformed
         // TODO add your handling code here:
         AñadirCategoria obj = new AñadirCategoria();
         obj.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BotonAñadirActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        ModificarCategoria obj = new ModificarCategoria();
-        obj.setVisible(true);
+    private void BotonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModificarActionPerformed
+        int filaVisual = jXTableCategoria.getSelectedRow();  // Fila seleccionada en la vista
+
+        if (filaVisual == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione una categoría.");
+            return;
+        }
+
+        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        int filaModelo = jXTableCategoria.convertRowIndexToModel(filaVisual);
+
+        // Obtenemos el objeto DTO desde la lista
+        CategoriaDTO categoriaSeleccionada = listacategorias.get(filaModelo);
+
+        // Abrimos la ventana de modificación y le pasamos la categoría
+        ModificarCategoria modificar = new ModificarCategoria(categoriaSeleccionada);
+        modificar.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_BotonModificarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
+        int filaVisual = jXTableCategoria.getSelectedRow();  // Fila seleccionada en la vista
+
+        if (filaVisual == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione una categoría.");
+            return;
+        }
+
+        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        int filaModelo = jXTableCategoria.convertRowIndexToModel(filaVisual);
+
+        // Obtenemos el objeto DTO desde la lista
+        CategoriaDTO categoriaSeleccionada = listacategorias.get(filaModelo);
+
+        // Abrimos la ventana de modificación y le pasamos la categoría
+        EliminarCategoria eliminar = new EliminarCategoria(categoriaSeleccionada);
+        eliminar.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_BotonEliminarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -237,6 +293,47 @@ public class PanelCategoria extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void FiltrarPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FiltrarPorNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FiltrarPorNombreActionPerformed
+    
+    private void cargarCategoriaTabla() {
+    DefaultTableModel modelo = new DefaultTableModel(
+    new String[]{"ID", "Nombre", "Descripcion"}, 0
+    );
+    
+    for (CategoriaDTO categoria : listacategorias) {
+        modelo.addRow(new Object[]{
+            categoria.getId(),
+            categoria.getNombre(),
+            categoria.getDescripcion()
+        });
+    }
+    jXTableCategoria.setModel(modelo);
+    }
+    
+    private void filtrarCategoria(){
+    String nombreFiltro = FiltrarPorNombre.getText().trim().toLowerCase();
+    
+    DefaultTableModel modelo = new DefaultTableModel(
+    new String[]{"ID", "Nombre", "Descripcion"}, 0
+    );
+    
+    for (CategoriaDTO categoria : listacategorias) {
+    boolean coincideNombre =categoria.getNombre().toLowerCase().contains(nombreFiltro);
+
+        if (coincideNombre){
+            modelo.addRow(new Object[]{
+                categoria.getId(),
+                categoria.getNombre(),
+                categoria.getDescripcion(),
+            });
+        }
+        jXTableCategoria.setModel(modelo);
+    }
+}
+    
+        
     /**
      * @param args the command line arguments
      */
@@ -276,10 +373,11 @@ public class PanelCategoria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BotonAñadir;
+    private javax.swing.JButton BotonEliminar;
+    private javax.swing.JButton BotonModificar;
+    private javax.swing.JTextField FiltrarPorNombre;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -287,7 +385,6 @@ public class PanelCategoria extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private org.jdesktop.swingx.JXTable jXTable1;
+    private org.jdesktop.swingx.JXTable jXTableCategoria;
     // End of variables declaration//GEN-END:variables
 }

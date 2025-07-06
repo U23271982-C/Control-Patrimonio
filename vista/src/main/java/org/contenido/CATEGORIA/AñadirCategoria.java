@@ -4,6 +4,7 @@
  */
 package org.contenido.CATEGORIA;
 
+import PERSONAL_RESPONSABLE.PanelResponsables;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.CategoriaControlador;
 import org.contenido.dto.CategoriaDTO;
@@ -17,6 +18,8 @@ public class AñadirCategoria extends javax.swing.JFrame {
     /**
      * Creates new form PanelCategoria
      */
+    Controlador<CategoriaDTO> controlador = new CategoriaControlador();
+    CategoriaDTO dto = new CategoriaDTO();
     public AñadirCategoria() {
         initComponents();
     }
@@ -202,12 +205,12 @@ public class AñadirCategoria extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Controlador<CategoriaDTO> controlador = new CategoriaControlador();
-        CategoriaDTO dto = new CategoriaDTO();
-
         dto.setNombre(nombre_categoria.getText());
         dto.setDescripcion(descripcion_categoria.getText());
         controlador.registrar(dto);
+        PanelResponsables obj = new PanelResponsables();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

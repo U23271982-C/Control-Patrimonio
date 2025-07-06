@@ -17,8 +17,19 @@ public class ModificarCategoria extends javax.swing.JFrame {
     /**
      * Creates new form PanelCategoria
      */
+    Controlador<CategoriaDTO> controlador = new CategoriaControlador();
+    CategoriaDTO dto;
     public ModificarCategoria() {
         initComponents();
+    }
+    
+    public ModificarCategoria(CategoriaDTO categoria){
+            initComponents(); // Esto lo llama NetBeans
+            this.dto = categoria;
+
+            // Mostrar los datos en los campos
+            nombre_categoria.setText(categoria.getNombre());
+            descripcion_categoria.setText(categoria.getDescripcion());
     }
 
     /**
@@ -173,13 +184,13 @@ public class ModificarCategoria extends javax.swing.JFrame {
     }//GEN-LAST:event_descripcion_categoriaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        Controlador<CategoriaDTO> controlador = new CategoriaControlador();
-        CategoriaDTO dto = new CategoriaDTO();
 
         dto.setNombre(nombre_categoria.getText());
         dto.setDescripcion(descripcion_categoria.getText());
-        controlador.registrar(dto);
+        controlador.actualizar(dto);
+        PanelCategoria regresar = new PanelCategoria();
+        regresar.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

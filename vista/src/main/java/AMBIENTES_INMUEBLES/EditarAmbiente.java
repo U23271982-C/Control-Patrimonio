@@ -4,10 +4,16 @@
  */
 package AMBIENTES_INMUEBLES;
 
+import java.util.List;
 import org.contenido.BIENES.*;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.AmbienteControlador;
+import org.contenido.controlador.controladorImpl.InmuebleControlador;
+import org.contenido.controlador.controladorImpl.ResponsableControlador;
 import org.contenido.dto.AmbienteDTO;
+import org.contenido.dto.InmuebleDTO;
+import org.contenido.dto.ResponsableDTO;
+import org.contenido.dto.Rol_ResponsableDTO;
 
 /**
  *
@@ -20,8 +26,24 @@ public class EditarAmbiente extends javax.swing.JFrame {
      */
     public EditarAmbiente() {
         initComponents();
+        cargarInmueblesAlComboBox();
     }
+    private AmbienteDTO ambienteSeleccionado;
+    public EditarAmbiente(AmbienteDTO dto) {
+        initComponents();
+        cargarInmueblesAlComboBox();
+        this.ambienteSeleccionado = dto;
 
+        // Rellenar los campos automáticamente
+        nombre_ambiente.setText(dto.getNombre());
+        for (int i = 0; i < inmueble_ambiente.getItemCount(); i++) {
+            InmuebleDTO inmueble = (InmuebleDTO) inmueble_ambiente.getItemAt(i);
+            if (inmueble.getId() == dto.getInmuebleDTO().getId()) {
+                inmueble_ambiente.setSelectedIndex(i);
+                break;
+            }
+        }     
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,9 +60,7 @@ public class EditarAmbiente extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         GuardarRegistro1 = new javax.swing.JButton();
-        inmueble_ambiente = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        descripcion_ambiente = new javax.swing.JTextField();
+        inmueble_ambiente = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
@@ -80,39 +100,30 @@ public class EditarAmbiente extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel11.setText("Descripción");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(89, 89, 89)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(nombre_ambiente))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, Short.MAX_VALUE))
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(nombre_ambiente))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(84, 84, 84)
-                        .addComponent(descripcion_ambiente))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(GuardarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(43, 43, 43)
                                 .addComponent(GuardarRegistro1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(inmueble_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(103, 103, 103))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(inmueble_ambiente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addGap(176, 176, 176))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,22 +134,15 @@ public class EditarAmbiente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nombre_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel10)
-                        .addGap(46, 46, 46))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(descripcion_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(inmueble_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)))
+                .addGap(49, 49, 49)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10)
+                    .addComponent(inmueble_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GuardarRegistro1)
                     .addComponent(GuardarRegistro))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 0));
@@ -156,7 +160,7 @@ public class EditarAmbiente extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(577, Short.MAX_VALUE)
+                .addContainerGap(648, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -165,7 +169,7 @@ public class EditarAmbiente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,12 +183,12 @@ public class EditarAmbiente extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 34, Short.MAX_VALUE)
+                .addGap(0, 40, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 354, Short.MAX_VALUE)))
+                    .addGap(0, 351, Short.MAX_VALUE)))
         );
 
         pack();
@@ -193,13 +197,14 @@ public class EditarAmbiente extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
-        Controlador<AmbienteDTO> controlador = new AmbienteControlador();
-        AmbienteDTO dto = new AmbienteDTO();
+        ambienteSeleccionado.setNombre(nombre_ambiente.getText());
+        
 
-        dto.setNombre(nombre_ambiente.getText());
-        //dto.setDescripcion(descripcion_ambiente.getText());
-        //dto.setInmueble(inmueble_ambiente.getText());
-        controlador.actualizar(dto);
+        InmuebleDTO rolSeleccionado = (InmuebleDTO) inmueble_ambiente.getSelectedItem();
+        ambienteSeleccionado.setInmuebleDTO(rolSeleccionado);
+        
+        Controlador<AmbienteDTO> controlador = new AmbienteControlador();
+        controlador.actualizar(ambienteSeleccionado);
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 
     private void GuardarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistro1ActionPerformed
@@ -215,7 +220,16 @@ public class EditarAmbiente extends javax.swing.JFrame {
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void cargarInmueblesAlComboBox() {
+    Controlador<InmuebleDTO> controladorRol = new InmuebleControlador();
+    List<InmuebleDTO> listaRoles = controladorRol.listarTodo();
 
+    inmueble_ambiente.removeAllItems(); // Limpiamos antes
+    for (InmuebleDTO rol : listaRoles) {
+        inmueble_ambiente.addItem(rol); // Agregamos cada rol al combo
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -261,11 +275,9 @@ public class EditarAmbiente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GuardarRegistro;
     private javax.swing.JButton GuardarRegistro1;
-    private javax.swing.JTextField descripcion_ambiente;
-    private javax.swing.JTextField inmueble_ambiente;
+    private javax.swing.JComboBox<InmuebleDTO> inmueble_ambiente;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
