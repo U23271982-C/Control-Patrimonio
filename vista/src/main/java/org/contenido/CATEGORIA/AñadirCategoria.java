@@ -208,7 +208,7 @@ public class AñadirCategoria extends javax.swing.JFrame {
         dto.setNombre(nombre_categoria.getText());
         dto.setDescripcion(descripcion_categoria.getText());
         controlador.registrar(dto);
-        PanelResponsables obj = new PanelResponsables();
+        PanelCategoria obj = new PanelCategoria();
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

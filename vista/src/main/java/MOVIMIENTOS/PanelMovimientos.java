@@ -213,7 +213,7 @@ public class PanelMovimientos extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        ModuloEstado obj = new ModuloEstado();
+        HistorialEstado obj = new HistorialEstado();
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
