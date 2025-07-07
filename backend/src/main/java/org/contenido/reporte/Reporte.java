@@ -3,11 +3,10 @@ package org.contenido.reporte;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.contenido.utilidad.NotificacionUtil;
-import org.contenido.utilidad.exportar.Extenciones;
+import org.contenido.utilidad.exportar.TipoDocumento;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Reporte {
@@ -18,10 +17,10 @@ public abstract class Reporte {
     protected Workbook workbook;
     protected Sheet hoja;
     protected List<Object[]> datos;
-    protected final Extenciones extencion;
+    protected final TipoDocumento extencion;
     protected String direccionGuardado;
 
-    public Reporte (String tituloHoja, Extenciones extencion) {
+    public Reporte (String tituloHoja, TipoDocumento extencion) {
         this.workbook = extencion.getWorkbook();
         this.hoja = workbook.createSheet(tituloHoja);
         this.extencion = extencion;

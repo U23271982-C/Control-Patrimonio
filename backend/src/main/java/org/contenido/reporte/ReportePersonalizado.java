@@ -5,7 +5,7 @@ import org.contenido.dao.daoImplementadoReporte.RPersonalizadoDAO;
 import org.contenido.dao.daoImplementadoReporte.RPersonalizadoDAOImpl;
 import org.contenido.dto.BienDTO;
 import org.contenido.utilidad.NotificacionUtil;
-import org.contenido.utilidad.exportar.Extenciones;
+import org.contenido.utilidad.exportar.TipoDocumento;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public abstract class ReportePersonalizado extends Reporte {
     private final RPersonalizadoDAO rPersonalizadoDAO = new RPersonalizadoDAOImpl();
     private BienDTO bienDTO;
 
-    public ReportePersonalizado(String tituloHoja, Extenciones extencion, BienDTO param) {
+    public ReportePersonalizado(String tituloHoja, TipoDocumento extencion, BienDTO param) {
         super(tituloHoja, extencion);
         
         this.bienDTO = param;

@@ -1,18 +1,17 @@
 package org.contenido.utilidad.exportar;
 
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public enum Extenciones {
+public enum TipoDocumento {
     XLSX(new ExportarExcel(), new XSSFWorkbook(), ".xlsx");
 
     private Exportador exportador;
-    private Workbook workbook;
+    private Object documento; // Puede recibir cualquier tipo de documento, haciendolo más flexible
     private String extension;
 
-    Extenciones(Exportador exportador, Workbook workbook, String extension) {
+    TipoDocumento(Exportador exportador, Object documento, String extension) {
         this.exportador = exportador;
-        this.workbook = workbook;
+        this.documento = documento;
         this.extension = extension;
     }
 
@@ -24,12 +23,13 @@ public enum Extenciones {
         this.exportador = exportador;
     }
 
-    public Workbook getWorkbook() {
-        return workbook;
+    @SuppressWarnings("unchecked")
+    public <T> T getDocumento() {
+        return (T) documento;
     }
 
-    public void setWorkbook(Workbook workbook) {
-        this.workbook = workbook;
+    public void setDocumento(Object documento) {
+        this.documento = documento;
     }
 
     public String getExtension() {

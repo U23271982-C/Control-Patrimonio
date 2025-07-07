@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import org.contenido.dao.daoImplementadoReporte.RGeneralDAO;
 import org.contenido.dao.daoImplementadoReporte.RGeneralDAOImpl;
 import org.contenido.utilidad.NotificacionUtil;
-import org.contenido.utilidad.exportar.Extenciones;
-
-import java.util.List;
+import org.contenido.utilidad.exportar.TipoDocumento;
 
 public abstract class ReporteGeneral extends Reporte {
     private final RGeneralDAO rGeneralDAO = new RGeneralDAOImpl();
 
-    public ReporteGeneral(String tituloHoja, Extenciones extencion) {
+    public ReporteGeneral(String tituloHoja, TipoDocumento extencion) {
         super(tituloHoja, extencion);
         rellenarDatos();
         formatearReporte();

@@ -5,15 +5,15 @@ import org.contenido.dto.BienDTO;
 import org.contenido.utilidad.NotificacionUtil;
 import org.contenido.utilidad.exportar.Exportador;
 import org.contenido.utilidad.exportar.ExportarExcel;
-import org.contenido.utilidad.exportar.Extenciones;
+import org.contenido.utilidad.exportar.TipoDocumento;
 
 public class ReportePersonalizadoXLSX extends ReportePersonalizado {
     Row filaEncabezado;
 
     public ReportePersonalizadoXLSX(String tituloHoja, String tituloLibro, String direccionGuardadp, BienDTO param) {
-        super(tituloHoja, Extenciones.XLSX, param);
+        super(tituloHoja, TipoDocumento.XLSX, param);
         super.direccionGuardado = String.format
-                ("%s%s%s", direccionGuardadp, tituloLibro, Extenciones.XLSX.getExtension());
+                ("%s%s%s", direccionGuardadp, tituloLibro, TipoDocumento.XLSX.getExtension());
     }
 
     private void formatearEncabezadoHojaCalculo() {

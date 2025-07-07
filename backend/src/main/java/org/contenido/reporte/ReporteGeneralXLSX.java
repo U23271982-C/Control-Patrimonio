@@ -4,15 +4,15 @@ import org.apache.poi.ss.usermodel.Row;
 import org.contenido.utilidad.NotificacionUtil;
 import org.contenido.utilidad.exportar.Exportador;
 import org.contenido.utilidad.exportar.ExportarExcel;
-import org.contenido.utilidad.exportar.Extenciones;
+import org.contenido.utilidad.exportar.TipoDocumento;
 
 public class ReporteGeneralXLSX extends ReporteGeneral{
     Row filaEncabezado;
 
     public ReporteGeneralXLSX(String tituloHoja, String tituloLibro, String direccionGuardadp) {
-        super(tituloHoja, Extenciones.XLSX);
+        super(tituloHoja, TipoDocumento.XLSX);
         super.direccionGuardado = String.format
-                ("%s%s%s", direccionGuardadp, tituloLibro, Extenciones.XLSX.getExtension());
+                ("%s%s%s", direccionGuardadp, tituloLibro, TipoDocumento.XLSX.getExtension());
 
     }
 
