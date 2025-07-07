@@ -342,6 +342,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        System.out.println("Hola hvon");
         PanelInicio obj = new PanelInicio();
         obj.setVisible(true);
         dispose();
