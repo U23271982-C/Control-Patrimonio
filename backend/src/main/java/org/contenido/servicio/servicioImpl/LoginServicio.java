@@ -23,8 +23,13 @@ public class LoginServicio {
         return true;
     }
 
-    public void accesoSoloSuperUsuario() {
-        String rol = dto.getRol_ResponsableDTO().getNombreRol();
+    public void accesoSoloSuperUsuario(String contrasenaIngresada) {
+        // Verifica que la contraseña ingresada coincida con la del usuario actual
+        if (!getDtoDevuelve.getContrsena().equals(contrasenaIngresada)) {
+            throw new LoginExcepcion("Contraseña incorrecta.");
+        }
+
+        String rol = getDtoDevuelve.getRol_ResponsableDTO().getNombreRol();
         if (!rol.toLowerCase().contains("super")) {
             throw new SuperAdminExcepcion(String.format(
                     "Solo para 'Super Usuario'. Usted tiene permiso de '%s'", rol));

@@ -146,7 +146,7 @@ public class PanelResponsables extends javax.swing.JFrame {
             }
         });
 
-        Cargo.setModel(null);
+
         Cargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CargoActionPerformed(evt);
@@ -402,7 +402,7 @@ public class PanelResponsables extends javax.swing.JFrame {
         // TODO add your handling code here:
         PanelInicio obj = new PanelInicio();
         obj.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed

@@ -13,26 +13,26 @@ public class LoginControlador {
 
     public boolean validarCredenciales(ResponsableDTO dto) {
         try {
-            // valida las credeciales del servicio
-            // si es correcto lanza una notificación personalizada
-            servicio.validarCredenciales();
-            NotificacionUtil.mostrarMensajeAfirmacionLogueo(
-                    servicio.getDto().getRol_ResponsableDTO().getNombreRol(),
-                    servicio.getDto().getNombre(),
-                    "ASSET CONTROL");
-            return true;
+            boolean validado = servicio.validarCredenciales();
+            if (validado) {
+                NotificacionUtil.mostrarMensajeAfirmacionLogueo(
+                        servicio.getDto().getRol_ResponsableDTO().getNombreRol(),
+                        servicio.getDto().getNombre(),
+                        "ASSET CONTROL");
+                return true;
+            }
         } catch (Exception e) {
-            // captura de excepcion
             NotificacionUtil.mostrarError(e);
         }
         return false;
     }
 
-    public void accesoSoloSuperUsuario() {
+    public void accesoSoloSuperUsuario(String contrasenaIngresada) {
         try {
-            servicio.accesoSoloSuperUsuario();
+            servicio.accesoSoloSuperUsuario(contrasenaIngresada);
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);
+            throw e; // vuelve a lanzar para que no se abra la interfaz
         }
     }
 

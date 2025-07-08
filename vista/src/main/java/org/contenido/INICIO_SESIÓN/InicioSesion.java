@@ -134,7 +134,7 @@ public class InicioSesion extends javax.swing.JFrame {
 
         // Si las credenciales son válidas, abrir la siguiente ventana
         if (credencialesValidas) {
-            PanelInicio obj = new PanelInicio();
+            PanelInicio obj = new PanelInicio(controlador); // PASAS EL CONTROLADOR
             obj.setVisible(true);
             dispose(); // cerrar la ventana de login
         }
