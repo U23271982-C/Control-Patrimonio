@@ -156,13 +156,13 @@ public class BienesPrincipal extends javax.swing.JFrame {
 
         jXTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Inventario", "Categoría", "Estado", "Responsable a cargo", "Ambiente", "Fecha de Registro"
+                "ID", "Nombre", "Descripción", "Inventario", "Categoría", "Estado", "Responsable a cargo", "Ambiente", "Fecha de Registro"
             }
         ));
         jScrollPane2.setViewportView(jXTable1);

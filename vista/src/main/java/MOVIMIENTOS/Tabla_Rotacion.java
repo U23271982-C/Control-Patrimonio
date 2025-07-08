@@ -65,13 +65,13 @@ public class Tabla_Rotacion extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Bien", "Responsable Actual", "Nuevo Responsable", "Fecha de Rotación", "Estado"
+                "Bien", "Responsable ", "Fecha de Rotación", "Motivo", "Ambiente", "Inmueble"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
