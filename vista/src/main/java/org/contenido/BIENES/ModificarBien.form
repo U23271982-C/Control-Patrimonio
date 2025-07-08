@@ -83,9 +83,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -96,8 +94,6 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="ambiente_bien" alignment="0" max="32767" attributes="0"/>
-                              <Component id="responsable_bien" alignment="0" max="32767" attributes="0"/>
                               <Component id="categoria_bien" alignment="0" max="32767" attributes="0"/>
                               <Component id="descripcion_bien" alignment="0" max="32767" attributes="0"/>
                               <Component id="id_bien" alignment="0" max="32767" attributes="0"/>
@@ -134,15 +130,7 @@
                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="categoria_bien" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="responsable_bien" min="-2" pref="28" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="ambiente_bien" min="-2" pref="28" max="-2" attributes="0"/>
-                  <EmptySpace pref="41" max="32767" attributes="0"/>
+                  <EmptySpace pref="206" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Cancelar" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="Guardar" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
@@ -230,8 +218,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GuardarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="responsable_bien">
-        </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -298,31 +284,7 @@
             <Property name="text" type="java.lang.String" value="Categor&#xed;a"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel14">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Semibold" size="15" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Responsable a cargo"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="descripcion_bien">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel15">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Semibold" size="15" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ambiente"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="ambiente_bien">
         </Component>
       </SubComponents>
     </Container>

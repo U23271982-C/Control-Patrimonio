@@ -5,6 +5,11 @@
 package org.contenido.BIENES;
 
 import org.contenido.PANEL_INICIO.PanelInicio;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.BienControlador;
+import org.contenido.dto.BienDTO;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 /**
  *
@@ -15,8 +20,12 @@ public class BienesPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form BienesPrincipal
      */
+    Controlador<BienDTO> controlador = new BienControlador();
+    List<BienDTO> listabien = controlador.listarTodo();
+    
     public BienesPrincipal() {
         initComponents();
+        cargarBien();
     }
 
     /**
@@ -40,21 +49,21 @@ public class BienesPrincipal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jXTable1 = new org.jdesktop.swingx.JXTable();
+        TablaBien = new org.jdesktop.swingx.JXTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txt_id_bien = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txt_inventario = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
+        txt_estado = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txt_ambiente = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
 
@@ -154,7 +163,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jXTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TablaBien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -165,7 +174,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
                 "ID", "Nombre", "Descripción", "Inventario", "Categoría", "Estado", "Responsable a cargo", "Ambiente", "Fecha de Registro"
             }
         ));
-        jScrollPane2.setViewportView(jXTable1);
+        jScrollPane2.setViewportView(TablaBien);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -219,7 +228,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2))
+                        .addComponent(txt_id_bien))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -233,7 +242,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
@@ -243,13 +252,13 @@ public class BienesPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addGap(18, 18, 18)
@@ -279,13 +288,13 @@ public class BienesPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_id_bien, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -354,7 +363,25 @@ public class BienesPrincipal extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+    private void cargarBien(){
+            DefaultTableModel modelo = new DefaultTableModel(
+            new String[]{"ID", "Nombre","Descripcion", "Categoria","Estado","Responsable","Ambiente","Fecha Registro"}, 0
+            );
 
+            for (BienDTO bien : listabien) {
+                modelo.addRow(new Object[]{
+                    bien.getId(),
+                    bien.getNombre(),
+                    bien.getDescripcion(),
+                    bien.getCategoriaDTO().getNombre(),
+                    bien.getEstado_actualDTO().getTipo(),
+                    bien.getResponsableDTO().getNombre(),
+                    bien.getAmbienteDTO().getNombre(),
+                    bien.getFecha_registro(),
+                });
+            }
+            TablaBien.setModel(modelo);
+    }
     /**
      * @param args the command line arguments
      */
@@ -391,6 +418,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.jdesktop.swingx.JXTable TablaBien;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -412,13 +440,12 @@ public class BienesPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
-    private org.jdesktop.swingx.JXTable jXTable1;
+    private javax.swing.JTextField txt_ambiente;
+    private javax.swing.JTextField txt_estado;
+    private javax.swing.JTextField txt_id_bien;
+    private javax.swing.JTextField txt_inventario;
     // End of variables declaration//GEN-END:variables
 }

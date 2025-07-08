@@ -4,9 +4,19 @@
  */
 package org.contenido.BIENES;
 
+import java.util.List;
+import javax.swing.JOptionPane;
 import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.AmbienteControlador;
 import org.contenido.controlador.controladorImpl.BienControlador;
+import org.contenido.controlador.controladorImpl.CategoriaControlador;
+import org.contenido.controlador.controladorImpl.EstadoControlador;
+import org.contenido.controlador.controladorImpl.ResponsableControlador;
+import org.contenido.dto.AmbienteDTO;
 import org.contenido.dto.BienDTO;
+import org.contenido.dto.CategoriaDTO;
+import org.contenido.dto.EstadoDTO;
+import org.contenido.dto.ResponsableDTO;
 
 /**
  *
@@ -17,9 +27,19 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
     /**
      * Creates new form AñadirRegistroBien
      */
+        Controlador<BienDTO> controlador = new BienControlador();
+        BienDTO dto = new BienDTO();
+        
+        Controlador<CategoriaDTO> controladorc = new CategoriaControlador();
+        List<CategoriaDTO> listaCategoria = controladorc.listarTodo();
+        
+        
     public AñadirRegistroBien() {
         initComponents();
+        cargarCategoria();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,8 +52,6 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        id_bien = new javax.swing.JTextField();
         nombre_bien = new javax.swing.JTextField();
         descripcion_bien = new javax.swing.JTextField();
         categoria_bien = new javax.swing.JComboBox<>();
@@ -57,17 +75,6 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Registro de Bienes");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel3.setText("Identificación");
-
-        id_bien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                id_bienActionPerformed(evt);
-            }
-        });
-
-        categoria_bien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Equipos Tecnológicos", "Mobiliario", "Infraestructura", "Material Didáctico", "Dispositivos Electrónicos", "Equipos de oficina", "Herramientas de mantenimiento", "Bienes en almacenamiento" }));
         categoria_bien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoria_bienActionPerformed(evt);
@@ -153,24 +160,21 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ambiente_bien)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(responsable_bien)
-                        .addComponent(descripcion_bien)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(nombre_bien, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(responsable_bien)
+                    .addComponent(descripcion_bien)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel14)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(nombre_bien, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(id_bien, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel11)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel9)
-                                    .addComponent(jLabel10))))
-                        .addComponent(categoria_bien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jLabel10))
+                                .addGap(169, 169, 169))))
+                    .addComponent(categoria_bien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -180,11 +184,7 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(21, 21, 21)
                 .addComponent(jLabel2)
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(id_bien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(38, 38, 38)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nombre_bien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,7 +208,7 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ambiente_bien, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GuardarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -253,20 +253,59 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
-        Controlador<BienDTO> controlador = new BienControlador();
-         BienDTO dto = new BienDTO();
-        //dto.setId(id_bien.get);
         dto.setNombre(nombre_bien.getText());
         dto.setDescripcion(descripcion_bien.getText());
-        //dto.setCategoria(categoria_bien.getToolTipText());
-        //dto.setResponsableDTO(responsable_bien.getText());
-        //dto.setAmbienteDTO(ambiente_bien.getText());
-        controlador.registrar(dto);
+        
+        
+        CategoriaDTO categoriaseleccionada = (CategoriaDTO) categoria_bien.getSelectedItem();
+        dto.setCategoriaDTO(categoriaseleccionada);
+        
+        Controlador<EstadoDTO> controlamesta = new EstadoControlador();
+        EstadoDTO estado = new EstadoDTO();
+        estado = controlamesta.leerPorId(1);
+        dto.setEstado_actualDTO(estado);
+        
+        
+        String DNIresponsable = responsable_bien.getText();
+        String ambienteN = ambiente_bien.getText();
+        Controlador<ResponsableDTO> controladorR = new ResponsableControlador();
+        
+        List<ResponsableDTO> listaresponsable = controladorR.listarTodo(); 
+        
+        Controlador<AmbienteDTO> controladorA = new AmbienteControlador();
+        List<AmbienteDTO> listaambiente = controladorA.listarTodo();    
+        AmbienteDTO ambienteEncontrado = null;
+        ResponsableDTO responsableEncontrado = null;
+        for (ResponsableDTO r : listaresponsable) {
+            if (r.getDni().equals(DNIresponsable)) {
+                responsableEncontrado = r;
+                break; // Salimos del bucle al encontrar coincidencia
+            }
+        }
+        if(responsableEncontrado!= null){
+            dto.setResponsableDTO(responsableEncontrado);
+            for (AmbienteDTO a : listaambiente) {
+                if (a.getNombre().equals(ambienteN)) {
+                    ambienteEncontrado = a;
+                    break; // Salimos del bucle al encontrar coincidencia
+                }
+            }
+            if(ambienteEncontrado != null){ 
+                dto.setAmbienteDTO(ambienteEncontrado);
+                controlador.registrar(dto);
+            } else{
+                JOptionPane.showMessageDialog(null,
+                    "No se encontró un ambiente con el nombre: " + ambienteN,
+                    "Ambiente no encontrado",
+                    JOptionPane.WARNING_MESSAGE);
+            }    
+        } else {
+            JOptionPane.showMessageDialog(null,
+                "No se encontró un responsable con el DNI: " + DNIresponsable,
+                "DNI no encontrado",
+                JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_GuardarRegistroActionPerformed
-
-    private void id_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_bienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_id_bienActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -294,6 +333,12 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ambiente_bienActionPerformed
 
+    private void cargarCategoria(){
+            categoria_bien.removeAllItems(); // Limpiamos antes
+            for (CategoriaDTO cat : listaCategoria) {
+                categoria_bien.addItem(cat); // Agregamos cada rol al combo
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -333,16 +378,14 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton GuardarRegistro;
     private javax.swing.JTextField ambiente_bien;
-    private javax.swing.JComboBox<String> categoria_bien;
+    private javax.swing.JComboBox<CategoriaDTO> categoria_bien;
     private javax.swing.JTextField descripcion_bien;
-    private javax.swing.JTextField id_bien;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

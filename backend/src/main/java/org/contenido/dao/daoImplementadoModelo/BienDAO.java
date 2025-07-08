@@ -22,17 +22,16 @@ public class BienDAO implements DAO<Bien> {
 
     @Override
     public void registrar(Bien entidad) {
-        String sql = "{ CALL pa_Registrar_Bien(?, ?, ?, ?, ?, ?, ?) }";
+        String sql = "{ CALL pa_Registrar_Bien(?, ?, ?, ?, ?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
             stmt.setString(1, entidad.getNombre());
             stmt.setString(2, entidad.getDescripcion());
-            stmt.setDate(3, java.sql.Date.valueOf(entidad.getFecha_registro()));
-            stmt.setInt(4, entidad.getEstado().getId());
-            stmt.setInt(5, entidad.getCategoria().getId());
-            stmt.setInt(6, entidad.getAmbiente().getId());
-            stmt.setInt(7, entidad.getResponsable().getId());
+            stmt.setInt(3, entidad.getEstado().getId());
+            stmt.setInt(4, entidad.getCategoria().getId());
+            stmt.setInt(5, entidad.getAmbiente().getId());
+            stmt.setInt(6, entidad.getResponsable().getId());
 
             stmt.executeUpdate();
 

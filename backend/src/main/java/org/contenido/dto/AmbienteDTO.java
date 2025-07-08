@@ -44,4 +44,9 @@ public class AmbienteDTO {
     public void setInmuebleDTO(InmuebleDTO inmuebleDTO) {
         this.inmuebleDTO = inmuebleDTO;
     }
+
+    @Override
+    public String toString() {
+        return this.getNombre();
+    }
 }

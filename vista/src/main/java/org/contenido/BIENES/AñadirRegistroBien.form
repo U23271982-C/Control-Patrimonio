@@ -74,29 +74,25 @@
                   <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="ambiente_bien" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="responsable_bien" max="32767" attributes="0"/>
-                          <Component id="descripcion_bien" alignment="0" max="32767" attributes="0"/>
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="nombre_bien" alignment="0" max="32767" attributes="0"/>
+                      <Component id="responsable_bien" max="32767" attributes="0"/>
+                      <Component id="descripcion_bien" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="nombre_bien" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="id_bien" min="-2" pref="320" max="-2" attributes="0"/>
-                                      </Group>
                                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="categoria_bien" alignment="0" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="categoria_bien" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
@@ -109,12 +105,7 @@
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="id_bien" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="jLabel9" min="-2" pref="12" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="nombre_bien" min="-2" max="-2" attributes="0"/>
@@ -142,7 +133,7 @@
                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="ambiente_bien" min="-2" pref="33" max="-2" attributes="0"/>
-                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                  <EmptySpace pref="92" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="GuardarRegistro" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="Cancelar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
@@ -164,22 +155,6 @@
             <Property name="text" type="java.lang.String" value="Registro de Bienes"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Semibold" size="14" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Identificaci&#xf3;n"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="id_bien">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="id_bienActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JTextField" name="nombre_bien">
         </Component>
         <Component class="javax.swing.JTextField" name="descripcion_bien">
@@ -187,23 +162,15 @@
         <Component class="javax.swing.JComboBox" name="categoria_bien">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="8">
-                <StringItem index="0" value="Equipos Tecnol&#xf3;gicos"/>
-                <StringItem index="1" value="Mobiliario"/>
-                <StringItem index="2" value="Infraestructura"/>
-                <StringItem index="3" value="Material Did&#xe1;ctico"/>
-                <StringItem index="4" value="Dispositivos Electr&#xf3;nicos"/>
-                <StringItem index="5" value="Equipos de oficina"/>
-                <StringItem index="6" value="Herramientas de mantenimiento"/>
-                <StringItem index="7" value="Bienes en almacenamiento"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="categoria_bienActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="A&#xf1;adirRegistroBien_categoria_bien"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;CategoriaDTO&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="GuardarRegistro">
