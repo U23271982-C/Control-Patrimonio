@@ -4,9 +4,12 @@
  */
 package org.contenido.BIENES;
 
+import java.util.List;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.BienControlador;
+import org.contenido.controlador.controladorImpl.CategoriaControlador;
 import org.contenido.dto.BienDTO;
+import org.contenido.dto.CategoriaDTO;
 
 /**
  *
@@ -17,8 +20,26 @@ public class ModificarBien extends javax.swing.JFrame {
     /**
      * Creates new form ModificarBien
      */
+    
+    Controlador<BienDTO> controlador = new BienControlador();
+    BienDTO dto = new BienDTO();
+    
+    Controlador<CategoriaDTO> controladorc = new CategoriaControlador();
+    List<CategoriaDTO> listaCategoria = controladorc.listarTodo();
     public ModificarBien() {
         initComponents();
+        cargarCategoria();
+    }
+    public ModificarBien(BienDTO bienseleccionado) {
+        initComponents();
+        cargarCategoria();
+        this.dto = bienseleccionado;
+        id_bien.setText(String.valueOf(dto.getId()));
+        nombre_bien.setText(dto.getNombre());
+        descripcion_bien.setText(dto.getDescripcion());
+        BienesPrincipal obj = new BienesPrincipal();
+        obj.setVisible(true);
+        obj.dispose();
     }
 
     /**
@@ -53,13 +74,13 @@ public class ModificarBien extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
+        id_bien.setEditable(false);
         id_bien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 id_bienActionPerformed(evt);
             }
         });
 
-        categoria_bien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Equipos Tecnológicos", "Mobiliario", "Infraestructura", "Material Didáctico", "Dispositivos Electrónicos", "Equipos de oficina", "Herramientas de mantenimiento", "Bienes en almacenamiento" }));
         categoria_bien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoria_bienActionPerformed(evt);
@@ -241,14 +262,14 @@ public class ModificarBien extends javax.swing.JFrame {
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
-        Controlador<BienDTO> controlador = new BienControlador();
-         BienDTO dto = new BienDTO();
+        
+        
         //dto.setId(id_bien.get);
+
         dto.setNombre(nombre_bien.getText());
         dto.setDescripcion(descripcion_bien.getText());
-        //dto.setCategoria(categoria_bien.getToolTipText());
-        //dto.setResponsableDTO(responsable_bien.getText());
-        //dto.setAmbienteDTO(ambiente_bien.getText());
+        CategoriaDTO categoriaseleccionada = (CategoriaDTO) categoria_bien.getSelectedItem();
+        dto.setCategoriaDTO(categoriaseleccionada);
         controlador.actualizar(dto);
     }//GEN-LAST:event_GuardarActionPerformed
 
@@ -256,6 +277,12 @@ public class ModificarBien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_categoria_bienActionPerformed
 
+    private void cargarCategoria(){
+            categoria_bien.removeAllItems(); // Limpiamos antes
+            for (CategoriaDTO cat : listaCategoria) {
+                categoria_bien.addItem(cat); // Agregamos cada rol al combo
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -294,7 +321,7 @@ public class ModificarBien extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton Guardar;
-    private javax.swing.JComboBox<String> categoria_bien;
+    private javax.swing.JComboBox<CategoriaDTO> categoria_bien;
     private javax.swing.JTextField descripcion_bien;
     private javax.swing.JTextField id_bien;
     private javax.swing.JButton jButton1;

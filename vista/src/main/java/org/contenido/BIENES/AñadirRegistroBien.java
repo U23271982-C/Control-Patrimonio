@@ -305,6 +305,10 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
                 "DNI no encontrado",
                 JOptionPane.WARNING_MESSAGE);
         }
+        nombre_bien.setText("");
+        descripcion_bien.setText("");
+        responsable_bien.setText("");
+        ambiente_bien.setText("");
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

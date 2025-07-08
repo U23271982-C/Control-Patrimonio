@@ -4,20 +4,42 @@
  */
 package MOVIMIENTOS;
 
-import javax.swing.JFrame;
-import org.contenido.PANEL_INICIO.PanelInicio;
+import java.util.List;
+import javax.swing.JOptionPane;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.AsignacionControlador;
+import org.contenido.controlador.controladorImpl.BienControlador;
+import org.contenido.controlador.controladorImpl.ResponsableControlador;
+import org.contenido.dto.AsignacionDTO;
+import org.contenido.dto.BienDTO;
+import org.contenido.dto.ResponsableDTO;
 
 /**
  *
  * @author renzo
  */
-public class HacerAsignación extends javax.swing.JFrame {
+public class HacerAsignacion extends javax.swing.JFrame {
 
     /**
      * Creates new form HacerAsignación
      */
-    public HacerAsignación() {
+    Controlador<ResponsableDTO> controladorr = new ResponsableControlador();
+    List<ResponsableDTO> listares = controladorr.listarTodo();
+    
+    Controlador<BienDTO> controlador = new BienControlador();
+    BienDTO dto = new BienDTO();
+    
+    Controlador<AsignacionDTO> controladora = new AsignacionControlador();
+    AsignacionDTO dtoa = new AsignacionDTO();
+    
+    public HacerAsignacion() {
         initComponents();
+    }
+    public HacerAsignacion(BienDTO b) {
+        initComponents();
+        this.dto=b;
+        bien_id.setText(String.valueOf(dto.getId()));
+        bien_responsable.setText(dto.getResponsableDTO().getDni());
     }
 
     /**
@@ -35,14 +57,10 @@ public class HacerAsignación extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
+        bien_id = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        bien_responsable = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,9 +91,9 @@ public class HacerAsignación extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setForeground(new java.awt.Color(51, 51, 51));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        bien_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                bien_idActionPerformed(evt);
             }
         });
 
@@ -83,29 +101,15 @@ public class HacerAsignación extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Bien");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Motivo del Traslado");
-
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Responsable");
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        bien_responsable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                bien_responsableActionPerformed(evt);
             }
         });
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Fecha");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -114,19 +118,11 @@ public class HacerAsignación extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField2)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField5)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
-                        .addGap(53, 53, 53))))
+                    .addComponent(bien_id)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bien_responsable)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE))
+                .addGap(53, 53, 53))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,20 +130,12 @@ public class HacerAsignación extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bien_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel10)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(bien_responsable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jButton1.setBackground(new java.awt.Color(255, 102, 0));
@@ -183,7 +171,7 @@ public class HacerAsignación extends javax.swing.JFrame {
                                 .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(13, 13, 13))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(228, 228, 228)
+                .addGap(241, 241, 241)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -202,10 +190,10 @@ public class HacerAsignación extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 115, Short.MAX_VALUE)))
                 .addGap(26, 26, 26)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(53, 53, 53))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,7 +204,9 @@ public class HacerAsignación extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,29 +215,48 @@ public class HacerAsignación extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Tabla_Rotacion obj = new Tabla_Rotacion();
+        BienDTO continuacion = dto;
+        ModuloAsignacion obj = new ModuloAsignacion(continuacion);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void bien_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bien_idActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_bien_idActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void bien_responsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bien_responsableActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_bien_responsableActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        PanelInicio obj = new PanelInicio();
+        String responsable = bien_responsable.getText();
+        ResponsableDTO resEncontrado = null;
+        for(ResponsableDTO r : listares){
+            if(r.getDni().equals(responsable)){
+                resEncontrado = r;
+                break;
+            }
+        }
+        if(resEncontrado!=null){
+            dto.setResponsableDTO(resEncontrado);
+            controlador.actualizar(dto);
+            dtoa.setBienDTO(dto);
+            dtoa.setResponsableDTO(resEncontrado);
+            controladora.registrar(dtoa);
+        }else{
+            JOptionPane.showMessageDialog(null,
+            "No se encontró un responsable con el DNI: " + responsable,
+            "DNI no encontrado",
+            JOptionPane.WARNING_MESSAGE);
+        }
+        
+        
+        PanelMovimientos obj = new PanelMovimientos();
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,39 +275,36 @@ public class HacerAsignación extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HacerAsignación.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HacerAsignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HacerAsignación.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HacerAsignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HacerAsignación.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HacerAsignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HacerAsignación.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HacerAsignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HacerAsignación().setVisible(true);
+                new HacerAsignacion().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField bien_id;
+    private javax.swing.JTextField bien_responsable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }

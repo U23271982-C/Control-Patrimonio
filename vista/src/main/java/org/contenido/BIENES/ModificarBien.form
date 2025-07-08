@@ -142,6 +142,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="id_bien">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="id_bienActionPerformed"/>
           </Events>
@@ -151,23 +154,14 @@
         <Component class="javax.swing.JComboBox" name="categoria_bien">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="8">
-                <StringItem index="0" value="Equipos Tecnol&#xf3;gicos"/>
-                <StringItem index="1" value="Mobiliario"/>
-                <StringItem index="2" value="Infraestructura"/>
-                <StringItem index="3" value="Material Did&#xe1;ctico"/>
-                <StringItem index="4" value="Dispositivos Electr&#xf3;nicos"/>
-                <StringItem index="5" value="Equipos de oficina"/>
-                <StringItem index="6" value="Herramientas de mantenimiento"/>
-                <StringItem index="7" value="Bienes en almacenamiento"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="categoria_bienActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;CategoriaDTO&gt;"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="Cancelar">

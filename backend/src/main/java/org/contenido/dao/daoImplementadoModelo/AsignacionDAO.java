@@ -23,14 +23,12 @@ public class AsignacionDAO implements DAO<Asignacion> {
 
     @Override
     public void registrar(Asignacion entidad) {
-        String sql = "{ CALL pa_Registrar_Asignacion(?, ?, ?, ?) }";
+        String sql = "{ CALL pa_Registrar_Asignacion(?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)) {
 
             stmt.setInt(1, entidad.getBien().getId());
             stmt.setInt(2, entidad.getResponsable().getId());
-            stmt.setDate(3, java.sql.Date.valueOf(entidad.getFechaInicio()));
-            stmt.setDate(4, java.sql.Date.valueOf(entidad.getFechaFin()));
 
             stmt.executeUpdate();
 
@@ -49,7 +47,6 @@ public class AsignacionDAO implements DAO<Asignacion> {
             stmt.setInt(2, entidad.getBien().getId());
             stmt.setInt(3, entidad.getResponsable().getId());
             stmt.setDate(4, java.sql.Date.valueOf(entidad.getFechaInicio()));
-            stmt.setDate(5, java.sql.Date.valueOf(entidad.getFechaFin()));
 
             stmt.executeUpdate();
 
