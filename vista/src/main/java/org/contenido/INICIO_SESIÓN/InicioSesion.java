@@ -18,6 +18,10 @@ public class InicioSesion extends javax.swing.JFrame {
     /**
      * Creates new form InicioDeSesión
      */
+
+    public static ResponsableDTO dto;
+    public static LoginControlador controlador;
+
     public InicioSesion() {
         initComponents();
     }
@@ -121,20 +125,21 @@ public class InicioSesion extends javax.swing.JFrame {
         String contrasena = new String(control_contraseña.getPassword()).trim();
 
         // Crear el DTO con los datos ingresados
-        ResponsableDTO dto = new ResponsableDTO();
+        dto = new ResponsableDTO();
         dto.setUsuario(usuario);
         dto.setContrsena(contrasena);
 
         // Crear el servicio y controlador
         LoginServicio servicio = new LoginServicio(dto);
-        LoginControlador controlador = new LoginControlador(servicio);
+        controlador = new LoginControlador(servicio);
+
 
         // Validar credenciales
         boolean credencialesValidas = controlador.validarCredenciales(dto);
 
         // Si las credenciales son válidas, abrir la siguiente ventana
         if (credencialesValidas) {
-            PanelInicio obj = new PanelInicio(controlador); // PASAS EL CONTROLADOR
+            PanelInicio obj = new PanelInicio(); // PASAS EL CONTROLADOR
             obj.setVisible(true);
             dispose(); // cerrar la ventana de login
         }

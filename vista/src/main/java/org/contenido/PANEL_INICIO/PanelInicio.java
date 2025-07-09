@@ -29,11 +29,12 @@ public class PanelInicio extends javax.swing.JFrame {
     /**
      * Creates new form PanelInicio
      */
+    private LoginControlador controlador;
+
     public PanelInicio() {
         initComponents();
+        this.controlador = InicioSesion.controlador;
     }
-
-    private LoginControlador controlador;
 
     public PanelInicio(LoginControlador controlador) {
         this.controlador = controlador;
@@ -362,15 +363,10 @@ public class PanelInicio extends javax.swing.JFrame {
 
         if (option == JOptionPane.OK_OPTION) {
             String contrasena = new String(passwordField.getPassword());
-
-            try {
-                controlador.accesoSoloSuperUsuario(contrasena); // ahora sí verifica la contraseña y el rol
-                PanelResponsables obj = new PanelResponsables();
-                obj.setVisible(true);
-                this.setVisible(false); // o dispose() si ya no la quieres mostrar
-            } catch (Exception ex) {
-                // Ya se mostró el error dentro del controlador
-            }
+            controlador.accesoSoloSuperUsuario(contrasena);
+            PanelResponsables obj = new PanelResponsables();
+            obj.setVisible(true);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
