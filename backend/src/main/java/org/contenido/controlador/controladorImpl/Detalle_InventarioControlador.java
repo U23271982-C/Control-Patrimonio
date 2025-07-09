@@ -2,6 +2,8 @@ package org.contenido.controlador.controladorImpl;
 
 import org.contenido.controlador.Controlador;
 import org.contenido.dto.Detalle_InventarioDTO;
+import org.contenido.excepcion.NegocioExcepcion;
+import org.contenido.modelo.Detalle_Inventario;
 import org.contenido.servicio.servicioImpl.Detalle_InventarioServicio;
 import org.contenido.utilidad.NotificacionUtil;
 
@@ -66,5 +68,15 @@ public class Detalle_InventarioControlador implements Controlador<Detalle_Invent
             NotificacionUtil.mostrarError(e);
         }
         return null;
+    }
+
+    public void registrarDetalleInventarioBienesActivos(Detalle_InventarioDTO dto) {
+        try {
+            detalle_InventarioServicio.registrarDetalleInventarioBienesActivos(dto);
+            NotificacionUtil.mostrarMensajeAfirmacion
+                    ("✅ Se registraron correctamente el detalle de inventarios bienes activos correctamente.");
+        } catch (Exception e) {
+            NotificacionUtil.mostrarError(e);
+        }
     }
 }

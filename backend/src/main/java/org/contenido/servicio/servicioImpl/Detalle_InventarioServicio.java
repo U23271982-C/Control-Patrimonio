@@ -59,4 +59,12 @@ public class Detalle_InventarioServicio implements Servicio<Detalle_InventarioDT
                 .map(detalle_InventarioMapper::convertirDTO)
                 .toList();
     }
+
+    public void registrarDetalleInventarioBienesActivos(Detalle_InventarioDTO dto) {
+        if (dto.getInventarioDTO().getId() >= 0) {
+            throw new NegocioExcepcion("No se selecciono el id del Inventario para los bienes activos.");
+        }
+        Detalle_Inventario model =detalle_InventarioMapper.convertirModelo(dto);
+        detalleInventarioDAO.registrarDetalleInventarioBienesActivos(model);
+    }
 }

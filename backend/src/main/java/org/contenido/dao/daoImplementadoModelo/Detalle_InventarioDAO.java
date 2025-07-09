@@ -106,4 +106,21 @@ public class Detalle_InventarioDAO implements DAO<Detalle_Inventario> {
             throw new PersistenciaExcepcion(String.format("Error al listar %s: ", Detalle_Inventario.class.getName()), e);
         }
     }
+    /*CREATE PROCEDURE pa_Registrar_Bienes_Activos_en_DetalleInventario(
+    IN p_idInventario INT
+) el procedimiento de registrar activos en detalle*/
+
+    public void registrarDetalleInventarioBienesActivos(Detalle_Inventario entidad) {
+        String sql = "{ CALL pa_Registrar_Bienes_Activos_en_DetalleInventario(?) }";
+        try (Connection conn = ConexionPool.getConnection();
+             CallableStatement stmt = conn.prepareCall(sql)){
+
+            stmt.setInt(1, entidad.getInventario().getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new PersistenciaExcepcion(String.format("Error al registrar %s con Bienes Activos: ", Detalle_Inventario.class.getName()), e);
+        }
+    }
 }
