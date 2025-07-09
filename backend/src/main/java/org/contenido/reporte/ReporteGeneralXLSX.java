@@ -9,10 +9,10 @@ import org.contenido.utilidad.exportar.TipoDocumento;
 public class ReporteGeneralXLSX extends ReporteGeneral{
     Row filaEncabezado;
 
-    public ReporteGeneralXLSX(String tituloHoja, String tituloLibro, String direccionGuardadp) {
+    public ReporteGeneralXLSX(String tituloHoja, String tituloLibro, String direccionGuardado) {
         super(tituloHoja, TipoDocumento.XLSX);
         super.direccionGuardado = String.format
-                ("%s%s%s", direccionGuardadp, tituloLibro, TipoDocumento.XLSX.getExtension());
+                ("%s%s%s", direccionGuardado, tituloLibro, TipoDocumento.XLSX.getExtension());
 
     }
 

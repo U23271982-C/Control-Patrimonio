@@ -21,14 +21,9 @@ public abstract class Reporte {
     protected String direccionGuardado;
 
     public Reporte (String tituloHoja, TipoDocumento extencion) {
-        this.workbook = extencion.getWorkbook();
+        this.workbook = extencion.getDocumento();
         this.hoja = workbook.createSheet(tituloHoja);
         this.extencion = extencion;
-        try {
-            //formatearReporte();
-        }  catch (Exception e) {
-            NotificacionUtil.mostrarError(e);
-        }
     }
 
     abstract protected void cortarEncabezado();
