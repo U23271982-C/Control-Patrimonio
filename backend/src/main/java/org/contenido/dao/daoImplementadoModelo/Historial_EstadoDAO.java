@@ -20,16 +20,14 @@ public class Historial_EstadoDAO implements DAO<Historial_Estado> {
 
     @Override
     public void registrar(Historial_Estado entidad) {
-        String sql = "{ CALL pa_Registrar_HistorialEstado(?, ?, ?, ?, ?) }";
+        String sql = "{ CALL pa_Registrar_HistorialEstado(?, ?, ?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
-            stmt.setInt(1, entidad.getId());
+            stmt.setInt(1, entidad.getBien().getId());
             stmt.setInt(2, entidad.getEstado().getId());
             stmt.setInt(3, entidad.getResponsable().getId());
             stmt.setString(4, entidad.getMotivo());
-            stmt.setDate(5, java.sql.Date.valueOf(entidad.getFecha_cambio()));
-
             stmt.executeUpdate();
 
         } catch (SQLException e) {

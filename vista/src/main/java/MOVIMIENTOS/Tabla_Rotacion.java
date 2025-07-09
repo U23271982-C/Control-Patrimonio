@@ -4,6 +4,15 @@
  */
 package MOVIMIENTOS;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.BienControlador;
+import org.contenido.controlador.controladorImpl.RotacionControlador;
+
+import org.contenido.dto.BienDTO;
+import org.contenido.dto.RotacionDTO;
+
 /**
  *
  * @author renzo
@@ -13,8 +22,20 @@ public class Tabla_Rotacion extends javax.swing.JFrame {
     /**
      * Creates new form Tabla_Rotación
      */
+    BienDTO dto = new BienDTO();
+    
+    Controlador<RotacionDTO> controladorr = new RotacionControlador();
+    
+    List<RotacionDTO> listarotacion = controladorr.listarTodo();
+    
     public Tabla_Rotacion() {
         initComponents();
+        cargarBien(dto);
+    }
+    public Tabla_Rotacion(BienDTO b) {
+        initComponents();
+        this.dto=b;
+        cargarBien(dto);
     }
 
     /**
@@ -135,11 +156,32 @@ public class Tabla_Rotacion extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        ModuloRotacion obj = new ModuloRotacion();
+        ModuloRotacion obj = new ModuloRotacion(dto);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    
+    private void cargarBien(BienDTO b){
+            DefaultTableModel modelo = new DefaultTableModel(
+            new String[]{"Bien", "Responsable","Fecha Rotacion", "Motivo","Ambiente", "Inmueble"}, 0
+            );
+            for(RotacionDTO rot : listarotacion.stream()
+                .filter(a -> a.getBienDTO().getId() == dto.getId())
+                    .toList()){
+                    modelo.addRow(new Object[]{
+                        rot.getBienDTO().getNombre(),
+                        rot.getResponsableDTO().getNombre(),
+                        rot.getFecha(),
+                        rot.getMotivo(),
+                        rot.getAmbienteDTO().getNombre(),
+                        rot.getAmbienteDTO().getInmuebleDTO().getNombre(),
+                    });
+        }
+            jTable1.setModel(modelo);
+    }
+        
+    
     /**
      * @param args the command line arguments
      */

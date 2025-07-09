@@ -215,8 +215,7 @@ public class HacerAsignacion extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        BienDTO continuacion = dto;
-        ModuloAsignacion obj = new ModuloAsignacion(continuacion);
+        ModuloAsignacion obj = new ModuloAsignacion(dto);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -253,7 +252,7 @@ public class HacerAsignacion extends javax.swing.JFrame {
         }
         
         
-        PanelMovimientos obj = new PanelMovimientos();
+        ModuloAsignacion obj = new ModuloAsignacion(dto);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

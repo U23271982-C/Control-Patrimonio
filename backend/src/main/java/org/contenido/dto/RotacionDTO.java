@@ -6,6 +6,7 @@ import org.contenido.validacion.EnCrear;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 
 public class RotacionDTO {
     @NotNull( message = "El id no puede ser nulo",  groups = {EnActualizar.class})
@@ -19,6 +20,8 @@ public class RotacionDTO {
     private String motivo;
     @NotNull( message = "El id del responsable no puede ser nulo",  groups = {EnCrear.class})
     private ResponsableDTO responsableDTO;
+
+    private LocalDate fecha;
 
     public int getId() {
         return id;
@@ -58,5 +61,12 @@ public class RotacionDTO {
 
     public void setResponsableDTO(ResponsableDTO responsableDTO) {
         this.responsableDTO = responsableDTO;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 }

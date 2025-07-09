@@ -209,7 +209,19 @@ public class PanelMovimientos extends javax.swing.JFrame {
 
     private void rotacion_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotacion_bienActionPerformed
         // TODO add your handling code here:
-        Tabla_Rotacion obj = new Tabla_Rotacion();
+        int filaVisual = tabla_bien.getSelectedRow();  // Fila seleccionada en la vista
+
+        if (filaVisual == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un bien.");
+            return;
+        }
+
+        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        int filaModelo = tabla_bien.convertRowIndexToModel(filaVisual);
+
+        // Obtenemos el objeto DTO desde la lista
+        BienDTO BienSeleccionada = listabien.get(filaModelo);
+        Tabla_Rotacion obj = new Tabla_Rotacion(BienSeleccionada);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_rotacion_bienActionPerformed
@@ -234,8 +246,19 @@ public class PanelMovimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_asignacion_bienActionPerformed
 
     private void estado_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estado_bienActionPerformed
-        // TODO add your handling code here:
-        HistorialEstado obj = new HistorialEstado();
+        int filaVisual = tabla_bien.getSelectedRow();  // Fila seleccionada en la vista
+
+        if (filaVisual == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un bien.");
+            return;
+        }
+
+        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        int filaModelo = tabla_bien.convertRowIndexToModel(filaVisual);
+
+        // Obtenemos el objeto DTO desde la lista
+        BienDTO BienSeleccionada = listabien.get(filaModelo);
+        HistorialEstado obj = new HistorialEstado(BienSeleccionada);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_estado_bienActionPerformed

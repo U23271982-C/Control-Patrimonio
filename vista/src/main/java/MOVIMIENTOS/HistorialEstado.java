@@ -4,6 +4,14 @@
  */
 package MOVIMIENTOS;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.BienControlador;
+import org.contenido.controlador.controladorImpl.Historial_EstadoControlador;
+import org.contenido.dto.BienDTO;
+import org.contenido.dto.Historial_EstadoDTO;
+
 /**
  *
  * @author renzo
@@ -13,8 +21,23 @@ public class HistorialEstado extends javax.swing.JFrame {
     /**
      * Creates new form ModuloEstado
      */
+    Controlador<BienDTO> controlador = new BienControlador();
+    BienDTO dto = new BienDTO();
+    
+    Controlador<Historial_EstadoDTO> controladorhe = new Historial_EstadoControlador();
+    Historial_EstadoDTO dtohe = new Historial_EstadoDTO();
+    
+    List<Historial_EstadoDTO> listaestado = controladorhe.listarTodo();
+    
     public HistorialEstado() {
         initComponents();
+        cargarBien(dto);
+    }
+    public HistorialEstado(BienDTO dtorescatado) {
+        initComponents();
+        this.dto=dtorescatado;
+        cargarBien(dto);
+
     }
 
     /**
@@ -133,7 +156,7 @@ public class HistorialEstado extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-       CambioEstado obj = new CambioEstado();
+       CambioEstado obj = new CambioEstado(dto);
        obj.setVisible(true);
        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -145,6 +168,23 @@ public class HistorialEstado extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void cargarBien(BienDTO b){
+            DefaultTableModel modelo = new DefaultTableModel(
+            new String[]{"Bien", "Etsado","Motivo", "Fecha", "Responsable"}, 0
+            );
+            for(Historial_EstadoDTO he : listaestado.stream()
+                .filter(a -> a.getBienDTO().getId() == dto.getId())
+                    .toList()){
+                    modelo.addRow(new Object[]{
+                        he.getBienDTO().getNombre(),
+                        he.getEstadoDTO().getTipo(),
+                        he.getMotivo(),
+                        he.getFecha_cambio(),
+                        he.getResponsableDTO().getNombre(),
+                    });
+            }
+            jTable5.setModel(modelo);
+    }
     /**
      * @param args the command line arguments
      */

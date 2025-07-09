@@ -1,17 +1,21 @@
 package org.contenido.modelo;
 
+import java.time.LocalDate;
+
 public class Rotacion {
     private int id;
     private Bien bien;
     private Ambiente ambiente;
     private String motivo;
     private Responsable responsable;
+    private LocalDate fecha;
 
-    public Rotacion(int id, Bien bien, Ambiente ambiente, String motivo, Responsable responsable) {
+    public Rotacion(int id, Bien bien, Ambiente ambiente, String motivo, Responsable responsable,LocalDate Fecha ) {
         this.id = id;
+        this.motivo = motivo;
+        this.fecha = Fecha;
         this.bien = bien;
         this.ambiente = ambiente;
-        this.motivo = motivo;
         this.responsable = responsable;
     }
 
@@ -53,5 +57,13 @@ public class Rotacion {
 
     public void setResponsable(Responsable responsable) {
         this.responsable = responsable;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 }

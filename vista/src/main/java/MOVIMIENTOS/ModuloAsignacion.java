@@ -21,12 +21,9 @@ public class ModuloAsignacion extends javax.swing.JFrame {
     /**
      * Creates new form ModuloAsignacion
      */
-    Controlador<BienDTO> controlador = new BienControlador();
     BienDTO dto = new BienDTO();
     
     Controlador<AsignacionDTO> controladora = new AsignacionControlador();
-    AsignacionDTO asig = new AsignacionDTO();
-    
     List<AsignacionDTO> listaasignacion = controladora.listarTodo(); 
     
     public ModuloAsignacion() {
@@ -207,6 +204,7 @@ public class ModuloAsignacion extends javax.swing.JFrame {
         BienDTO continuacion = dto;
         HacerAsignacion obj = new HacerAsignacion(continuacion);
         obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cargarBien(BienDTO b){
