@@ -7,14 +7,12 @@ public class Asignacion {
     private Bien bien;
     private Responsable responsable;
     private LocalDate fechaInicio;
-    private LocalDate fechaFin;
 
-    public Asignacion(int id, Bien bien, Responsable responsable, LocalDate fechaInicio, LocalDate fechaFin) {
+    public Asignacion(int id, Bien bien, Responsable responsable, LocalDate fechaInicio) {
         this.id = id;
         this.bien = bien;
         this.responsable = responsable;
         this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
     }
 
     public int getId() {
@@ -47,13 +45,5 @@ public class Asignacion {
 
     public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
-    }
-
-    public LocalDate getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(LocalDate fechaFin) {
-        this.fechaFin = fechaFin;
     }
 }

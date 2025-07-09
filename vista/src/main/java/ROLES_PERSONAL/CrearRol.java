@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package PERSONAL_RESPONSABLE;
+package ROLES_PERSONAL;
 
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.Rol_ResponsableControlador;
@@ -173,7 +173,7 @@ public class CrearRol extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        PanelResponsables obj = new PanelResponsables();
+        PanelRol obj = new PanelRol();
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -182,16 +182,15 @@ public class CrearRol extends javax.swing.JFrame {
         // TODO add your handling code here:
         Controlador<Rol_ResponsableDTO> controlador = new Rol_ResponsableControlador();
          Rol_ResponsableDTO dto = new Rol_ResponsableDTO();
-
-
-        dto.setDescripcion(descripcion_rol.getText());
+  
         dto.setNombreRol(nombre_rol.getText());
+        dto.setDescripcion(descripcion_rol.getText());
         controlador.registrar(dto);
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         // TODO add your handling code here:
-        PanelResponsables obj = new PanelResponsables();
+        PanelRol obj = new PanelRol();
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_CancelarActionPerformed

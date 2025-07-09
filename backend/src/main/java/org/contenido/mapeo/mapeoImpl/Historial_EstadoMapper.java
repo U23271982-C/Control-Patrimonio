@@ -33,10 +33,10 @@ public class Historial_EstadoMapper implements Convertidor<Historial_Estado, His
                 modelo.getEstado() != null ? estadoMapper.convertirDTO(modelo.getEstado()) : null
         );
         dto.setMotivo(modelo.getMotivo());
-        dto.setFecha_cambio(modelo.getFecha_cambio());
         dto.setResponsableDTO(
                 modelo.getResponsable() != null ? responsableMapper.convertirDTO(modelo.getResponsable()) : null
         );
+        dto.setFecha_cambio(modelo.getFecha_cambio());
         return dto;
     }
 

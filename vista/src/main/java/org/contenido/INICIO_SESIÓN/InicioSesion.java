@@ -5,6 +5,9 @@
 package org.contenido.INICIO_SESIÓN;
 
 import org.contenido.PANEL_INICIO.PanelInicio;
+import org.contenido.controlador.controladorImpl.LoginControlador;
+import org.contenido.dto.ResponsableDTO;
+import org.contenido.servicio.servicioImpl.LoginServicio;
 
 /**
  *
@@ -15,6 +18,10 @@ public class InicioSesion extends javax.swing.JFrame {
     /**
      * Creates new form InicioDeSesión
      */
+
+    public static ResponsableDTO dto;
+    public static LoginControlador controlador;
+
     public InicioSesion() {
         initComponents();
     }
@@ -32,8 +39,8 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         iniciarSesión = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        control_usuario = new javax.swing.JTextField();
+        control_contraseña = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,9 +78,9 @@ public class InicioSesion extends javax.swing.JFrame {
                         .addGap(105, 105, 105)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1)
+                            .addComponent(control_usuario)
                             .addComponent(jLabel5)
-                            .addComponent(jPasswordField1)
+                            .addComponent(control_contraseña)
                             .addComponent(iniciarSesión, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE))))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
@@ -85,11 +92,11 @@ public class InicioSesion extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(control_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(control_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
                 .addComponent(iniciarSesión, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(146, Short.MAX_VALUE))
@@ -112,9 +119,31 @@ public class InicioSesion extends javax.swing.JFrame {
 
     private void iniciarSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSesiónActionPerformed
         // TODO add your handling code here:
-        PanelInicio obj = new PanelInicio();
-        obj.setVisible(true);
-        dispose();
+
+
+        String usuario = control_usuario.getText().trim();
+        String contrasena = new String(control_contraseña.getPassword()).trim();
+
+        // Crear el DTO con los datos ingresados
+        dto = new ResponsableDTO();
+        dto.setUsuario(usuario);
+        dto.setContrsena(contrasena);
+
+        // Crear el servicio y controlador
+        LoginServicio servicio = new LoginServicio(dto);
+        controlador = new LoginControlador(servicio);
+
+
+        // Validar credenciales
+        boolean credencialesValidas = controlador.validarCredenciales(dto);
+
+        // Si las credenciales son válidas, abrir la siguiente ventana
+        if (credencialesValidas) {
+            PanelInicio obj = new PanelInicio(); // PASAS EL CONTROLADOR
+            obj.setVisible(true);
+            dispose(); // cerrar la ventana de login
+        }
+
     }//GEN-LAST:event_iniciarSesiónActionPerformed
 
     /**
@@ -156,12 +185,12 @@ public class InicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField control_contraseña;
+    private javax.swing.JTextField control_usuario;
     private javax.swing.JButton iniciarSesión;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

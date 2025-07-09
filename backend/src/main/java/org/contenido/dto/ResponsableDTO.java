@@ -89,4 +89,9 @@ public class ResponsableDTO {
     public void setContrsena(String contrsena) {
         this.contrsena = contrsena;
     }
+
+    @Override
+    public String toString() {
+        return this.getNombre();
+    }
 }

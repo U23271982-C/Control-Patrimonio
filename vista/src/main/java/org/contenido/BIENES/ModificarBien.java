@@ -4,9 +4,12 @@
  */
 package org.contenido.BIENES;
 
+import java.util.List;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.BienControlador;
+import org.contenido.controlador.controladorImpl.CategoriaControlador;
 import org.contenido.dto.BienDTO;
+import org.contenido.dto.CategoriaDTO;
 
 /**
  *
@@ -17,8 +20,26 @@ public class ModificarBien extends javax.swing.JFrame {
     /**
      * Creates new form ModificarBien
      */
+    
+    Controlador<BienDTO> controlador = new BienControlador();
+    BienDTO dto = new BienDTO();
+    
+    Controlador<CategoriaDTO> controladorc = new CategoriaControlador();
+    List<CategoriaDTO> listaCategoria = controladorc.listarTodo();
     public ModificarBien() {
         initComponents();
+        cargarCategoria();
+    }
+    public ModificarBien(BienDTO bienseleccionado) {
+        initComponents();
+        cargarCategoria();
+        this.dto = bienseleccionado;
+        id_bien.setText(String.valueOf(dto.getId()));
+        nombre_bien.setText(dto.getNombre());
+        descripcion_bien.setText(dto.getDescripcion());
+        BienesPrincipal obj = new BienesPrincipal();
+        obj.setVisible(true);
+        obj.dispose();
     }
 
     /**
@@ -38,17 +59,13 @@ public class ModificarBien extends javax.swing.JFrame {
         Cancelar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         Guardar = new javax.swing.JButton();
-        responsable_bien = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         descripcion_bien = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        ambiente_bien = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
 
         jMenu1.setText("jMenu1");
@@ -57,13 +74,13 @@ public class ModificarBien extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
+        id_bien.setEditable(false);
         id_bien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 id_bienActionPerformed(evt);
             }
         });
 
-        categoria_bien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Equipos Tecnológicos", "Mobiliario", "Infraestructura", "Material Didáctico", "Dispositivos Electrónicos", "Equipos de oficina", "Herramientas de mantenimiento", "Bienes en almacenamiento" }));
         categoria_bien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoria_bienActionPerformed(evt);
@@ -123,14 +140,6 @@ public class ModificarBien extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(204, 204, 204));
         jLabel13.setText("Categoría");
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI Semibold", 1, 15)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel14.setText("Responsable a cargo");
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI Semibold", 1, 15)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel15.setText("Ambiente");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -150,9 +159,7 @@ public class ModificarBien extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel15)
                             .addComponent(jLabel13)
-                            .addComponent(jLabel14)
                             .addComponent(jLabel12)
                             .addComponent(jLabel10)
                             .addComponent(jLabel11)
@@ -161,8 +168,6 @@ public class ModificarBien extends javax.swing.JFrame {
                         .addGap(0, 238, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ambiente_bien, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(responsable_bien, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(categoria_bien, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(descripcion_bien, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(id_bien, javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,15 +199,7 @@ public class ModificarBien extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(categoria_bien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(responsable_bien, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ambiente_bien, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -265,14 +262,14 @@ public class ModificarBien extends javax.swing.JFrame {
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
-        Controlador<BienDTO> controlador = new BienControlador();
-         BienDTO dto = new BienDTO();
+        
+        
         //dto.setId(id_bien.get);
+
         dto.setNombre(nombre_bien.getText());
         dto.setDescripcion(descripcion_bien.getText());
-        //dto.setCategoria(categoria_bien.getToolTipText());
-        //dto.setResponsableDTO(responsable_bien.getText());
-        //dto.setAmbienteDTO(ambiente_bien.getText());
+        CategoriaDTO categoriaseleccionada = (CategoriaDTO) categoria_bien.getSelectedItem();
+        dto.setCategoriaDTO(categoriaseleccionada);
         controlador.actualizar(dto);
     }//GEN-LAST:event_GuardarActionPerformed
 
@@ -280,6 +277,12 @@ public class ModificarBien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_categoria_bienActionPerformed
 
+    private void cargarCategoria(){
+            categoria_bien.removeAllItems(); // Limpiamos antes
+            for (CategoriaDTO cat : listaCategoria) {
+                categoria_bien.addItem(cat); // Agregamos cada rol al combo
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -318,8 +321,7 @@ public class ModificarBien extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton Guardar;
-    private javax.swing.JTextField ambiente_bien;
-    private javax.swing.JComboBox<String> categoria_bien;
+    private javax.swing.JComboBox<CategoriaDTO> categoria_bien;
     private javax.swing.JTextField descripcion_bien;
     private javax.swing.JTextField id_bien;
     private javax.swing.JButton jButton1;
@@ -327,14 +329,11 @@ public class ModificarBien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField nombre_bien;
-    private javax.swing.JTextField responsable_bien;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,10 +1,12 @@
 package PERSONAL_RESPONSABLE;
 
 import java.util.List;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+
+import org.contenido.INICIO_SESIÓN.InicioSesion;
 import reciclaje.EliminarResponsable;
 import org.contenido.PANEL_INICIO.PanelInicio;
 import org.contenido.controlador.Controlador;
@@ -120,7 +122,6 @@ public class PanelResponsables extends javax.swing.JFrame {
         Modificar1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla_Lista_Responsable = new org.jdesktop.swingx.JXTable();
-        Modificar2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -213,18 +214,6 @@ public class PanelResponsables extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(Tabla_Lista_Responsable);
 
-        Modificar2.setBackground(new java.awt.Color(255, 102, 0));
-        Modificar2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Modificar2.setForeground(new java.awt.Color(255, 255, 255));
-        Modificar2.setText("Crear rol");
-        Modificar2.setActionCommand("✓ Modificar");
-        Modificar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Modificar2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Modificar2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -236,11 +225,9 @@ public class PanelResponsables extends javax.swing.JFrame {
                         .addComponent(AñadirRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
                         .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(Modificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(194, 194, 194)
+                        .addGap(415, 415, 415)
                         .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(73, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,8 +267,7 @@ public class PanelResponsables extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AñadirRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Modificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
         );
 
@@ -360,35 +346,65 @@ public class PanelResponsables extends javax.swing.JFrame {
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         // TODO add your handling code here:
-        int filaSeleccionada = Tabla_Lista_Responsable.getSelectedRow();
-    
-        if (filaSeleccionada != -1) {
-            // Buscar el nombre del responsable en la tabla seleccionada
-            String nombreSeleccionado = Tabla_Lista_Responsable.getValueAt(filaSeleccionada, 0).toString();
-
-            // Buscar en la lista original el responsable que tiene ese nombre (u otro campo único)
-            ResponsableDTO seleccionado = null;
-            for (ResponsableDTO r : listaResponsables) {
-                if (r.getNombre().equals(nombreSeleccionado)) {
-                    seleccionado = r;
-                    break;
-                }
-            }
 
 
-            // Abrir la nueva interfaz y pasarle el objeto
-            ModificarPersonal obj = new ModificarPersonal(seleccionado);
-            obj.setVisible(true);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar un responsable primero.");
+
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ========================================= ARREGLAR ESTA PARTE =============================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+
+
+
+        JPasswordField passwordField = new JPasswordField();
+        Object[] message = {
+                "Ingrese su contraseña:", passwordField
+        };
+
+        int option = JOptionPane.showConfirmDialog(null, message, "Reautenticación", JOptionPane.OK_CANCEL_OPTION);
+        String contrasena = null;
+        if (option == JOptionPane.OK_OPTION) {
+            contrasena = new String(passwordField.getPassword());
+            InicioSesion.controlador.accesoSoloSuperUsuario(contrasena);
+            InicioSesion.dto.setContrsena(contrasena);
         }
+
+        boolean superusuario = InicioSesion.controlador.validarCredenciales(InicioSesion.dto);
+        if (superusuario){
+            int filaSeleccionada = Tabla_Lista_Responsable.getSelectedRow();
+
+            if (filaSeleccionada != -1) {
+                // Buscar el nombre del responsable en la tabla seleccionada
+                String nombreSeleccionado = Tabla_Lista_Responsable.getValueAt(filaSeleccionada, 0).toString();
+
+                // Buscar en la lista original el responsable que tiene ese nombre (u otro campo único)
+                ResponsableDTO seleccionado = null;
+                for (ResponsableDTO r : listaResponsables) {
+                    if (r.getNombre().equals(nombreSeleccionado)) {
+                        seleccionado = r;
+                        break;
+                    }
+                }
+
+                // Abrir la nueva interfaz y pasarle el objeto
+                ModificarPersonal obj = new ModificarPersonal(seleccionado);
+                obj.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Debes seleccionar un responsable primero.");
+            }
+        }
+
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void Modificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar1ActionPerformed
         // TODO add your handling code here:
 
-        // TODO add your handling code here:
+
         int filaSeleccionada = Tabla_Lista_Responsable.getSelectedRow();
 
         if (filaSeleccionada != -1) {
@@ -412,15 +428,13 @@ public class PanelResponsables extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Debes seleccionar un responsable primero.");
         }
-
-
     }//GEN-LAST:event_Modificar1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        PanelInicio obj = new PanelInicio();
+        PanelInicio obj = new PanelInicio(InicioSesion.controlador);
         obj.setVisible(true);
-        dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
@@ -428,13 +442,6 @@ public class PanelResponsables extends javax.swing.JFrame {
         // Obtener el rol seleccionado del combo box
         filtrarResponsables();
     }//GEN-LAST:event_BuscarActionPerformed
-
-    private void Modificar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar2ActionPerformed
-        // TODO add your handling code here:
-        CrearRol obj = new CrearRol();
-        obj.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_Modificar2ActionPerformed
 
     private void CargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargoActionPerformed
         // TODO add your handling code here:
@@ -496,7 +503,6 @@ public class PanelResponsables extends javax.swing.JFrame {
     private javax.swing.JComboBox<Rol_ResponsableDTO> Cargo;
     private javax.swing.JButton Modificar;
     private javax.swing.JButton Modificar1;
-    private javax.swing.JButton Modificar2;
     private javax.swing.JTextField Nombre_Filtro;
     private org.jdesktop.swingx.JXTable Tabla_Lista_Responsable;
     private javax.swing.JButton jButton1;

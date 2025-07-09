@@ -7,6 +7,7 @@ import org.contenido.excepcion.SuperAdminExcepcion;
 public class LoginServicio {
     private final ResponsableServicio servicio;
     private ResponsableDTO dto;
+    private static ResponsableDTO getDtoDevuelve;
 
     public LoginServicio(ResponsableDTO dto) {
         this.servicio = new ResponsableServicio();
@@ -14,16 +15,21 @@ public class LoginServicio {
     }
 
     public boolean validarCredenciales() throws LoginExcepcion{
-        ResponsableDTO r = servicio.leerPorUsuarioContrasena(dto);
+        this.getDtoDevuelve = servicio.leerPorUsuarioContrasena(dto);
         // Si no esta registrado las credenciales, arroga una excepcion
-        if (r == null) throw new LoginExcepcion(
+        if (getDtoDevuelve == null) throw new LoginExcepcion(
                     "Usuario o contraseña equivocadas. Intente de nuevamente.");
 
         return true;
     }
 
-    public void accesoSoloSuperUsuario() {
-        String rol = dto.getRol_ResponsableDTO().getNombreRol();
+    public void accesoSoloSuperUsuario(String contrasenaIngresada) {
+        // Verifica que la contraseña ingresada coincida con la del usuario actual
+        if (!getDtoDevuelve.getContrsena().equals(contrasenaIngresada)) {
+            throw new LoginExcepcion("Contraseña incorrecta.");
+        }
+
+        String rol = getDtoDevuelve.getRol_ResponsableDTO().getNombreRol();
         if (!rol.toLowerCase().contains("super")) {
             throw new SuperAdminExcepcion(String.format(
                     "Solo para 'Super Usuario'. Usted tiene permiso de '%s'", rol));
@@ -35,6 +41,6 @@ public class LoginServicio {
     }
 
     public ResponsableDTO getDto() {
-        return dto;
+        return getDtoDevuelve;
     }
 }

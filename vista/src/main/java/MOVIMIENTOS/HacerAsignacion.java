@@ -7,38 +7,41 @@ package MOVIMIENTOS;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.contenido.controlador.Controlador;
-import org.contenido.controlador.controladorImpl.AmbienteControlador;
+import org.contenido.controlador.controladorImpl.AsignacionControlador;
 import org.contenido.controlador.controladorImpl.BienControlador;
-import org.contenido.controlador.controladorImpl.RotacionControlador;
-import org.contenido.dto.AmbienteDTO;
+import org.contenido.controlador.controladorImpl.ResponsableControlador;
+import org.contenido.dto.AsignacionDTO;
 import org.contenido.dto.BienDTO;
-import org.contenido.dto.RotacionDTO;
+import org.contenido.dto.ResponsableDTO;
 
 /**
  *
- * @author SERT
+ * @author renzo
  */
-public class ModuloRotacion extends javax.swing.JFrame {
+public class HacerAsignacion extends javax.swing.JFrame {
 
     /**
-     * Creates new form MóduloTrasladoBienes
+     * Creates new form HacerAsignación
      */
+    Controlador<ResponsableDTO> controladorr = new ResponsableControlador();
+    List<ResponsableDTO> listares = controladorr.listarTodo();
+    
     Controlador<BienDTO> controlador = new BienControlador();
     BienDTO dto = new BienDTO();
     
-    Controlador<AmbienteDTO> controladora = new AmbienteControlador();
-    List<AmbienteDTO> listaambiente= controladora.listarTodo();
+    Controlador<AsignacionDTO> controladora = new AsignacionControlador();
+    AsignacionDTO dtoa = new AsignacionDTO();
     
-    Controlador<RotacionDTO> controladorr = new RotacionControlador();
-    RotacionDTO dtor = new RotacionDTO();
-    public ModuloRotacion() {
+    public HacerAsignacion() {
         initComponents();
     }
-    public ModuloRotacion(BienDTO b) {
+    public HacerAsignacion(BienDTO b) {
         initComponents();
         this.dto=b;
-        bien_nombre.setText(dto.getNombre());
+        bien_id.setText(String.valueOf(dto.getId()));
+        bien_responsable.setText(dto.getResponsableDTO().getDni());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,29 +51,26 @@ public class ModuloRotacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        bien_nombre = new javax.swing.JTextField();
+        bien_id = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        motivo_traslado = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        ambiente_destino = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        bien_responsable = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        jLabel4.setText("Inmueble Origen");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(608, 666));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1920, 1080));
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 24)); // NOI18N
-        jLabel1.setText("Módulo de Rotación de Bienes");
+        jLabel1.setText("Módulo de Asignación de Bienes");
 
         jLabel2.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jLabel2.setText("Formulario de Rotación");
@@ -91,9 +91,9 @@ public class ModuloRotacion extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setForeground(new java.awt.Color(51, 51, 51));
 
-        bien_nombre.addActionListener(new java.awt.event.ActionListener() {
+        bien_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bien_nombreActionPerformed(evt);
+                bien_idActionPerformed(evt);
             }
         });
 
@@ -101,19 +101,15 @@ public class ModuloRotacion extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Bien");
 
-        motivo_traslado.addActionListener(new java.awt.event.ActionListener() {
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Responsable");
+
+        bien_responsable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                motivo_trasladoActionPerformed(evt);
+                bien_responsableActionPerformed(evt);
             }
         });
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Motivo del Traslado");
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Ambiente Destino");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -122,38 +118,24 @@ public class ModuloRotacion extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ambiente_destino, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(motivo_traslado, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bien_nombre, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(0, 374, Short.MAX_VALUE)))
-                        .addGap(53, 53, 53))))
+                    .addComponent(bien_id)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bien_responsable)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE))
+                .addGap(53, 53, 53))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(bien_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bien_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel10)
+                .addComponent(jLabel9)
                 .addGap(18, 18, 18)
-                .addComponent(ambiente_destino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addComponent(motivo_traslado, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addComponent(bien_responsable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jButton1.setBackground(new java.awt.Color(255, 102, 0));
@@ -173,43 +155,45 @@ public class ModuloRotacion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 125, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(41, 41, 41)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1)))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(382, 382, 382)
-                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)))))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                                .addGap(369, 369, 369)
+                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(13, 13, 13))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(241, 241, 241)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 115, Short.MAX_VALUE)))
+                .addGap(26, 26, 26)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -220,64 +204,58 @@ public class ModuloRotacion extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bien_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bien_nombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bien_nombreActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Tabla_Rotacion obj = new Tabla_Rotacion(dto);
+        ModuloAsignacion obj = new ModuloAsignacion(dto);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void bien_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bien_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bien_idActionPerformed
+
+    private void bien_responsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bien_responsableActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bien_responsableActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String ambiente = ambiente_destino.getText();
-        AmbienteDTO ambEncontrado = null;
-        for(AmbienteDTO amb : listaambiente){
-            if(amb.getNombre().equals(ambiente)){
-                ambEncontrado = amb;
+        String responsable = bien_responsable.getText();
+        ResponsableDTO resEncontrado = null;
+        for(ResponsableDTO r : listares){
+            if(r.getDni().equals(responsable)){
+                resEncontrado = r;
                 break;
             }
         }
-        if(ambEncontrado!=null){
-            dto.setAmbienteDTO(ambEncontrado);
+        if(resEncontrado!=null){
+            dto.setResponsableDTO(resEncontrado);
             controlador.actualizar(dto);
-            
-            dtor.setBienDTO(dto);
-            dtor.setAmbienteDTO(ambEncontrado);
-            dtor.setMotivo(motivo_traslado.getText());
-            dtor.setResponsableDTO(dto.getResponsableDTO());
-            
-            controladorr.registrar(dtor);
+            dtoa.setBienDTO(dto);
+            dtoa.setResponsableDTO(resEncontrado);
+            controladora.registrar(dtoa);
         }else{
             JOptionPane.showMessageDialog(null,
-            "No se encontró un ambiente llamado: " + ambiente,
-            "Ambiente no encontrado",
+            "No se encontró un responsable con el DNI: " + responsable,
+            "DNI no encontrado",
             JOptionPane.WARNING_MESSAGE);
         }
         
         
-        
-        
-        
-        
-        Tabla_Rotacion obj = new Tabla_Rotacion(dto);
+        ModuloAsignacion obj = new ModuloAsignacion(dto);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void motivo_trasladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motivo_trasladoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_motivo_trasladoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,45 +274,36 @@ public class ModuloRotacion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModuloRotacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HacerAsignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModuloRotacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HacerAsignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModuloRotacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HacerAsignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModuloRotacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HacerAsignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModuloRotacion().setVisible(true);
+                new HacerAsignacion().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField ambiente_destino;
-    private javax.swing.JTextField bien_nombre;
+    private javax.swing.JTextField bien_id;
+    private javax.swing.JTextField bien_responsable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField motivo_traslado;
     // End of variables declaration//GEN-END:variables
 }

@@ -34,7 +34,6 @@ public class AsignacionMapper implements Convertidor<Asignacion, AsignacionDTO>,
                         responsableMapper.convertirDTO(modelo.getResponsable()) : null
         );
         dto.setFecha_inicio(modelo.getFechaInicio());
-        dto.setFecha_fin(modelo.getFechaFin());
         return dto;
     }
 
@@ -45,8 +44,7 @@ public class AsignacionMapper implements Convertidor<Asignacion, AsignacionDTO>,
                 dto.getId(),
                 dto.getBienDTO() != null ? bienMapper.convertirModelo(dto.getBienDTO()) : null,
                 dto.getResponsableDTO() != null ? responsableMapper.convertirModelo(dto.getResponsableDTO()) : null,
-                dto.getFecha_inicio(),
-                dto.getFecha_fin()
+                dto.getFecha_inicio()
         );
         return model;
     }
@@ -60,9 +58,7 @@ public class AsignacionMapper implements Convertidor<Asignacion, AsignacionDTO>,
                 rs.getInt(1),
                 bien,
                 responsable,
-                (rs.getDate(13)).toLocalDate(),
-                (rs.getDate(14)).toLocalDate()
-
+                (rs.getDate(13)).toLocalDate()
         );
         return entidad;
     }

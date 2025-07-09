@@ -16,6 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import org.contenido.INICIO_SESIÓN.InicioSesion;
+import org.contenido.controlador.controladorImpl.LoginControlador;
+import org.contenido.dto.ResponsableDTO;
+import org.contenido.servicio.servicioImpl.LoginServicio;
 
 /**
  *
@@ -26,10 +29,18 @@ public class PanelInicio extends javax.swing.JFrame {
     /**
      * Creates new form PanelInicio
      */
+    private LoginControlador controlador;
+
     public PanelInicio() {
         initComponents();
+        this.controlador = InicioSesion.controlador;
     }
-    
+
+    public PanelInicio(LoginControlador controlador) {
+        this.controlador = controlador;
+        initComponents();
+    }
+
     public JPanel panel(){//para el joptionpanel
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Contraseña:");
@@ -343,11 +354,20 @@ public class PanelInicio extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-                int option= JOptionPane.showOptionDialog(null, panel(), "Ingreso de contraseña", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, optiones, optiones[1]);
- 
-        PanelResponsables obj = new PanelResponsables();
-        obj.setVisible(true);
-        dispose();
+        JPasswordField passwordField = new JPasswordField();
+        Object[] message = {
+                "Ingrese su contraseña:", passwordField
+        };
+
+        int option = JOptionPane.showConfirmDialog(null, message, "Reautenticación", JOptionPane.OK_CANCEL_OPTION);
+
+        if (option == JOptionPane.OK_OPTION) {
+            String contrasena = new String(passwordField.getPassword());
+            controlador.accesoSoloSuperUsuario(contrasena);
+            PanelResponsables obj = new PanelResponsables();
+            obj.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed

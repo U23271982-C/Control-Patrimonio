@@ -4,6 +4,7 @@ import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -16,7 +17,7 @@ public class BienDTO {
     @NotNull( message = "La descripción no puede ser nula", groups = {EnCrear.class})
     @Size(max = 50, message = "La descripción no debe exceder los 50 caracteres")
     private String descripcion;
-    @NotNull( message = "La fecha de registro no puede ser nula", groups = {EnCrear.class})
+    @Null( message = "La fecha de registro no puede ser nula", groups = {EnCrear.class})
     private LocalDate fecha_registro;
     @NotNull( message = "El estado actual no puede ser nulo", groups = {EnCrear.class})
     private EstadoDTO estado_actualDTO;
@@ -91,5 +92,10 @@ public class BienDTO {
 
     public void setResponsableDTO(ResponsableDTO responsableDTO) {
         this.responsableDTO = responsableDTO;
+    }
+
+    @Override
+    public String toString(){
+        return this.getNombre();
     }
 }

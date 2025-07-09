@@ -4,7 +4,13 @@
  */
 package MOVIMIENTOS;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.contenido.PANEL_INICIO.PanelInicio;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.BienControlador;
+import org.contenido.dto.BienDTO;
 
 /**
  *
@@ -15,8 +21,12 @@ public class PanelMovimientos extends javax.swing.JFrame {
     /**
      * Creates new form PanelMovimientos
      */
+    Controlador<BienDTO> controlador = new BienControlador();
+    List<BienDTO> listabien = controlador.listarTodo();
+    
     public PanelMovimientos() {
         initComponents();
+        cargarBien();
     }
 
     /**
@@ -33,11 +43,11 @@ public class PanelMovimientos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        rotacion_bien = new javax.swing.JButton();
+        asignacion_bien = new javax.swing.JButton();
+        estado_bien = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jXTable1 = new org.jdesktop.swingx.JXTable();
+        tabla_bien = new org.jdesktop.swingx.JXTable();
         jTextField1 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
 
@@ -63,37 +73,37 @@ public class PanelMovimientos extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(102, 102, 102));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Rotación");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        rotacion_bien.setBackground(new java.awt.Color(102, 102, 102));
+        rotacion_bien.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        rotacion_bien.setForeground(new java.awt.Color(255, 255, 255));
+        rotacion_bien.setText("Rotación");
+        rotacion_bien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                rotacion_bienActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 102, 0));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Asignación");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        asignacion_bien.setBackground(new java.awt.Color(255, 102, 0));
+        asignacion_bien.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        asignacion_bien.setForeground(new java.awt.Color(255, 255, 255));
+        asignacion_bien.setText("Asignación");
+        asignacion_bien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                asignacion_bienActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(0, 0, 0));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Estado");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        estado_bien.setBackground(new java.awt.Color(0, 0, 0));
+        estado_bien.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        estado_bien.setForeground(new java.awt.Color(255, 255, 255));
+        estado_bien.setText("Estado");
+        estado_bien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                estado_bienActionPerformed(evt);
             }
         });
 
-        jXTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_bien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -104,7 +114,7 @@ public class PanelMovimientos extends javax.swing.JFrame {
                 "ID", "Nombre", "Descripción", "Categoría", "Estado", "Responsable a cargo", "Ambiente", "Fecha de Registro"
             }
         ));
-        jScrollPane2.setViewportView(jXTable1);
+        jScrollPane2.setViewportView(tabla_bien);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,9 +147,9 @@ public class PanelMovimientos extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(52, 52, 52)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                            .addComponent(estado_bien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rotacion_bien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(asignacion_bien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(39, 39, 39))
         );
@@ -156,11 +166,11 @@ public class PanelMovimientos extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(asignacion_bien, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rotacion_bien, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(estado_bien, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -197,31 +207,85 @@ public class PanelMovimientos extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void rotacion_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotacion_bienActionPerformed
         // TODO add your handling code here:
-        Tabla_Rotacion obj = new Tabla_Rotacion();
-        obj.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        int filaVisual = tabla_bien.getSelectedRow();  // Fila seleccionada en la vista
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        ModuloAsignacion obj = new ModuloAsignacion();
-        obj.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+        if (filaVisual == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un bien.");
+            return;
+        }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        ModuloEstado obj = new ModuloEstado();
+        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        int filaModelo = tabla_bien.convertRowIndexToModel(filaVisual);
+
+        // Obtenemos el objeto DTO desde la lista
+        BienDTO BienSeleccionada = listabien.get(filaModelo);
+        Tabla_Rotacion obj = new Tabla_Rotacion(BienSeleccionada);
         obj.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_rotacion_bienActionPerformed
+
+    private void asignacion_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignacion_bienActionPerformed
+        // TODO add your handling code here:
+        int filaVisual = tabla_bien.getSelectedRow();  // Fila seleccionada en la vista
+
+        if (filaVisual == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un bien.");
+            return;
+        }
+
+        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        int filaModelo = tabla_bien.convertRowIndexToModel(filaVisual);
+
+        // Obtenemos el objeto DTO desde la lista
+        BienDTO BienSeleccionada = listabien.get(filaModelo);
+        ModuloAsignacion obj = new ModuloAsignacion(BienSeleccionada);
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_asignacion_bienActionPerformed
+
+    private void estado_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estado_bienActionPerformed
+        int filaVisual = tabla_bien.getSelectedRow();  // Fila seleccionada en la vista
+
+        if (filaVisual == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un bien.");
+            return;
+        }
+
+        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        int filaModelo = tabla_bien.convertRowIndexToModel(filaVisual);
+
+        // Obtenemos el objeto DTO desde la lista
+        BienDTO BienSeleccionada = listabien.get(filaModelo);
+        HistorialEstado obj = new HistorialEstado(BienSeleccionada);
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_estado_bienActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void cargarBien(){
+            DefaultTableModel modelo = new DefaultTableModel(
+            new String[]{"ID", "Nombre","Descripcion", "Categoria","Estado","Responsable a cargo","Ambiente","Fecha Registro"}, 0
+            );
+
+            for (BienDTO bien : listabien) {
+                modelo.addRow(new Object[]{
+                    bien.getId(),
+                    bien.getNombre(),
+                    bien.getDescripcion(),
+                    bien.getCategoriaDTO().getNombre(),
+                    bien.getEstado_actualDTO().getTipo(),
+                    bien.getResponsableDTO().getNombre(),
+                    bien.getAmbienteDTO().getNombre(),
+                    bien.getFecha_registro(),
+                });
+            }
+            tabla_bien.setModel(modelo);
+    }
     /**
      * @param args the command line arguments
      */
@@ -258,10 +322,9 @@ public class PanelMovimientos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton asignacion_bien;
+    private javax.swing.JButton estado_bien;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -269,6 +332,7 @@ public class PanelMovimientos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
-    private org.jdesktop.swingx.JXTable jXTable1;
+    private javax.swing.JButton rotacion_bien;
+    private org.jdesktop.swingx.JXTable tabla_bien;
     // End of variables declaration//GEN-END:variables
 }

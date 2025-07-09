@@ -13,9 +13,8 @@ public class AsignacionDTO {
     private BienDTO bienDTO;
     @NotNull(message = "El responsable no puede ser nulo", groups = EnCrear.class)
     private ResponsableDTO responsableDTO;
-    @NotNull(message = "La fecha de inicio no puede ser nula", groups = EnCrear.class)
+
     private LocalDate fecha_inicio;
-    private LocalDate fecha_fin;
 
     public AsignacionDTO() {}
 
@@ -49,13 +48,5 @@ public class AsignacionDTO {
 
     public void setFecha_inicio(LocalDate fecha_inicio) {
         this.fecha_inicio = fecha_inicio;
-    }
-
-    public LocalDate getFecha_fin() {
-        return fecha_fin;
-    }
-
-    public void setFecha_fin(LocalDate fecha_fin) {
-        this.fecha_fin = fecha_fin;
     }
 }

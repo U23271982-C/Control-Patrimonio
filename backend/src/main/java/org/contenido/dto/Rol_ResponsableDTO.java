@@ -45,4 +45,7 @@ public class Rol_ResponsableDTO {
     public String toString() {
         return this.getNombreRol();
     }
+
+   
+
 }

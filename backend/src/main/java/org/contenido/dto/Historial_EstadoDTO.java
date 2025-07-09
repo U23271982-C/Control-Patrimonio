@@ -17,9 +17,7 @@ public class Historial_EstadoDTO {
     private EstadoDTO estadoDTO;
     @Size(max = 30, message = "El motivo no debe exceder los 30 caracteres")
     private String motivo;
-    @NotNull(message = "La fecha de cambio no puede ser nula", groups = {EnCrear.class})
     private LocalDate fecha_cambio;
-    @NotNull(message = "El id del responsable no puede ser nulo", groups = {EnCrear.class})
     private ResponsableDTO responsableDTO;
 
     public Historial_EstadoDTO() {}
