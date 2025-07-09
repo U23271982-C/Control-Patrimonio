@@ -32,7 +32,6 @@ public class LoginControlador {
             servicio.accesoSoloSuperUsuario(contrasenaIngresada);
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);
-            throw e; // vuelve a lanzar para que no se abra la interfaz
         }
     }
 

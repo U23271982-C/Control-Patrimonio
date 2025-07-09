@@ -7,7 +7,7 @@ import org.contenido.excepcion.SuperAdminExcepcion;
 public class LoginServicio {
     private final ResponsableServicio servicio;
     private ResponsableDTO dto;
-    private ResponsableDTO getDtoDevuelve;
+    private static ResponsableDTO getDtoDevuelve;
 
     public LoginServicio(ResponsableDTO dto) {
         this.servicio = new ResponsableServicio();

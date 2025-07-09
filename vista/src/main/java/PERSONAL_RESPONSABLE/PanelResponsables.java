@@ -1,10 +1,12 @@
 package PERSONAL_RESPONSABLE;
 
 import java.util.List;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+
+import org.contenido.INICIO_SESIÓN.InicioSesion;
 import reciclaje.EliminarResponsable;
 import org.contenido.PANEL_INICIO.PanelInicio;
 import org.contenido.controlador.Controlador;
@@ -344,35 +346,65 @@ public class PanelResponsables extends javax.swing.JFrame {
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         // TODO add your handling code here:
-        int filaSeleccionada = Tabla_Lista_Responsable.getSelectedRow();
-    
-        if (filaSeleccionada != -1) {
-            // Buscar el nombre del responsable en la tabla seleccionada
-            String nombreSeleccionado = Tabla_Lista_Responsable.getValueAt(filaSeleccionada, 0).toString();
-
-            // Buscar en la lista original el responsable que tiene ese nombre (u otro campo único)
-            ResponsableDTO seleccionado = null;
-            for (ResponsableDTO r : listaResponsables) {
-                if (r.getNombre().equals(nombreSeleccionado)) {
-                    seleccionado = r;
-                    break;
-                }
-            }
 
 
-            // Abrir la nueva interfaz y pasarle el objeto
-            ModificarPersonal obj = new ModificarPersonal(seleccionado);
-            obj.setVisible(true);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar un responsable primero.");
+
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ========================================= ARREGLAR ESTA PARTE =============================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+        // ===========================================================================================================
+
+
+
+        JPasswordField passwordField = new JPasswordField();
+        Object[] message = {
+                "Ingrese su contraseña:", passwordField
+        };
+
+        int option = JOptionPane.showConfirmDialog(null, message, "Reautenticación", JOptionPane.OK_CANCEL_OPTION);
+        String contrasena = null;
+        if (option == JOptionPane.OK_OPTION) {
+            contrasena = new String(passwordField.getPassword());
+            InicioSesion.controlador.accesoSoloSuperUsuario(contrasena);
+            InicioSesion.dto.setContrsena(contrasena);
         }
+
+        boolean superusuario = InicioSesion.controlador.validarCredenciales(InicioSesion.dto);
+        if (superusuario){
+            int filaSeleccionada = Tabla_Lista_Responsable.getSelectedRow();
+
+            if (filaSeleccionada != -1) {
+                // Buscar el nombre del responsable en la tabla seleccionada
+                String nombreSeleccionado = Tabla_Lista_Responsable.getValueAt(filaSeleccionada, 0).toString();
+
+                // Buscar en la lista original el responsable que tiene ese nombre (u otro campo único)
+                ResponsableDTO seleccionado = null;
+                for (ResponsableDTO r : listaResponsables) {
+                    if (r.getNombre().equals(nombreSeleccionado)) {
+                        seleccionado = r;
+                        break;
+                    }
+                }
+
+                // Abrir la nueva interfaz y pasarle el objeto
+                ModificarPersonal obj = new ModificarPersonal(seleccionado);
+                obj.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Debes seleccionar un responsable primero.");
+            }
+        }
+
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void Modificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar1ActionPerformed
         // TODO add your handling code here:
 
-        // TODO add your handling code here:
+
         int filaSeleccionada = Tabla_Lista_Responsable.getSelectedRow();
 
         if (filaSeleccionada != -1) {
@@ -400,7 +432,7 @@ public class PanelResponsables extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        PanelInicio obj = new PanelInicio();
+        PanelInicio obj = new PanelInicio(InicioSesion.controlador);
         obj.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
