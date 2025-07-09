@@ -354,20 +354,20 @@ public class PanelInicio extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        JPasswordField passwordField = new JPasswordField();
+        /*JPasswordField passwordField = new JPasswordField();
         Object[] message = {
                 "Ingrese su contraseña:", passwordField
         };
 
         int option = JOptionPane.showConfirmDialog(null, message, "Reautenticación", JOptionPane.OK_CANCEL_OPTION);
-
-        if (option == JOptionPane.OK_OPTION) {
-            String contrasena = new String(passwordField.getPassword());
-            controlador.accesoSoloSuperUsuario(contrasena);
+*/
+        //if (option == JOptionPane.OK_OPTION) {
+           // String contrasena = new String(passwordField.getPassword());
+            //controlador.accesoSoloSuperUsuario(contrasena);
             PanelResponsables obj = new PanelResponsables();
             obj.setVisible(true);
             this.setVisible(false);
-        }
+        //}
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed

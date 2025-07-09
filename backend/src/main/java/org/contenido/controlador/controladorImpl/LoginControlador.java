@@ -27,12 +27,13 @@ public class LoginControlador {
         return false;
     }
 
-    public void accesoSoloSuperUsuario(String contrasenaIngresada) {
+    public boolean accesoSoloSuperUsuario(String contrasenaIngresada) {
         try {
-            servicio.accesoSoloSuperUsuario(contrasenaIngresada);
+            return servicio.accesoSoloSuperUsuario(contrasenaIngresada);
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);
         }
+        return false;
     }
 
 }
