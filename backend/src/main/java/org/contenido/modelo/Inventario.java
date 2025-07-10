@@ -7,16 +7,14 @@ public class Inventario {
     private String nombre;
     private String descripcion;
     private LocalDate fechaInicio;
-    private LocalDate fechaFin;
 
     public Inventario() {}
 
-    public Inventario(int id, String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin) {
+    public Inventario(int id, String nombre, String descripcion, LocalDate fechaInicio) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
     }
 
     public int getId() {
@@ -51,11 +49,4 @@ public class Inventario {
         this.fechaInicio = fechaInicio;
     }
 
-    public LocalDate getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(LocalDate fechaFin) {
-        this.fechaFin = fechaFin;
-    }
 }

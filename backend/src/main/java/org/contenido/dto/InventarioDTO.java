@@ -16,9 +16,7 @@ public class InventarioDTO {
     @NotNull(message = "La descripción no puede ser nula", groups = EnCrear.class)
     @Size(max = 50, message = "La descripción no debe exceder los 50 caracteres")
     private String descripcion;
-    @NotNull(message = "La fecha de inicio no puede ser nula", groups = EnCrear.class)
     private LocalDate fechaInicio;
-    private LocalDate fechaFin;
 
     public InventarioDTO() {}
 
@@ -54,11 +52,8 @@ public class InventarioDTO {
         this.fechaInicio = fechaInicio;
     }
 
-    public LocalDate getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(LocalDate fechaFin) {
-        this.fechaFin = fechaFin;
+    @Override
+    public String toString(){
+        return this.nombre;
     }
 }

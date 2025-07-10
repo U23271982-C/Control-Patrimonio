@@ -7,7 +7,6 @@ package INVENTARIO;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.Detalle_InventarioControlador;
 import org.contenido.controlador.controladorImpl.InventarioControlador;
-import org.contenido.dto.Detalle_InventarioDTO;
 import org.contenido.dto.InventarioDTO;
 
 /**
@@ -21,9 +20,7 @@ public class AñadirInventario extends javax.swing.JFrame {
      */
     Controlador<InventarioDTO> controlador = new InventarioControlador();
     InventarioDTO dto = new InventarioDTO();
-    
-    Controlador<Detalle_InventarioDTO> controldordi = new Detalle_InventarioControlador();
-    Detalle_InventarioDTO dtodi = new Detalle_InventarioDTO();
+   
     
     public AñadirInventario() {
         initComponents();
@@ -185,11 +182,7 @@ public class AñadirInventario extends javax.swing.JFrame {
         dto.setNombre(nombre_inventario.getText());
         dto.setDescripcion(descripcion_inventario.getText());
         controlador.registrar(dto);
-        
-        Detalle_InventarioControlador controladord= new Detalle_InventarioControlador();
-        controladord.registrarDetalleInventarioBienesActivos(dto);
-        
-        DetalleInventario obj = new DetalleInventario();
+        ModuloDeInventario obj = new ModuloDeInventario();
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_guardar_inventarioActionPerformed

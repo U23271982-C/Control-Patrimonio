@@ -5,6 +5,7 @@
 package INVENTARIO;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.contenido.PANEL_INICIO.PanelInicio;
 import org.contenido.controlador.Controlador;
@@ -261,8 +262,21 @@ public class ModuloDeInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_AñadirRegistroActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+
         // TODO add your handling code here:
-        ModificarInventario obj = new ModificarInventario();
+        int filaVisual = tabla_inventario.getSelectedRow();  // Fila seleccionada en la vista
+
+        if (filaVisual == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un inventario.");
+            return;
+        }
+
+        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        int filaModelo = tabla_inventario.convertRowIndexToModel(filaVisual);
+
+        // Obtenemos el objeto DTO desde la lista
+        InventarioDTO InventarioSeleccionado = listainventario.get(filaModelo);
+        ModificarInventario obj = new ModificarInventario(InventarioSeleccionado);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_ModificarActionPerformed
@@ -279,23 +293,34 @@ public class ModuloDeInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_Modificar1ActionPerformed
 
     private void Modificar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar2ActionPerformed
-        // TODO add your handling code here:
-        DetalleInventario obj = new DetalleInventario();
+            // TODO add your handling code here:
+        int filaVisual = tabla_inventario.getSelectedRow();  // Fila seleccionada en la vista
+
+        if (filaVisual == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un inventario.");
+            return;
+        }
+
+        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        int filaModelo = tabla_inventario.convertRowIndexToModel(filaVisual);
+
+        // Obtenemos el objeto DTO desde la lista
+        InventarioDTO InventarioSeleccionado = listainventario.get(filaModelo);
+        DetalleInventario obj = new DetalleInventario(InventarioSeleccionado);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_Modificar2ActionPerformed
 
     private void cargarInventario(){
         DefaultTableModel modelo = new DefaultTableModel(
-        new String[]{"ID", "Codigo Inventario","descripcion", "Fecha realizada"}, 0
+        new String[]{"Codigo Inventario","descripcion", "Fecha realizada"}, 0
         );
 
         for (InventarioDTO inventario : listainventario) {
             modelo.addRow(new Object[]{
-                inventario.getId(),
                 inventario.getNombre(),
                 inventario.getDescripcion(),
-                inventario.getFechaFin()
+                inventario.getFechaInicio()
             });
         }
         tabla_inventario.setModel(modelo);

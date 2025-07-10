@@ -48,8 +48,9 @@ public class Detalle_InventarioMapper implements Convertidor<Detalle_Inventario,
 
     @Override
     public Detalle_Inventario mapDeResultSet(ResultSet rs) throws SQLException {
-        Inventario inventario = new Inventario(rs.getInt(15),rs.getString(16),rs.getString(17),(rs.getDate(18)).toLocalDate(),(rs.getDate(19)).toLocalDate());
-        Responsable responsable = new Responsable(rs.getInt(13),rs.getString(14),null,null,null,null,null);
+        Inventario inventario = new Inventario(rs.getInt(22),rs.getString(23),rs.getString(24),(rs.getDate(25)).toLocalDate());
+        Rol_Responsable rol= new Rol_Responsable(rs.getInt(19),rs.getString(20),rs.getString(21));
+        Responsable responsable = new Responsable(rs.getInt(13),rs.getString(14),rs.getString(15),rs.getString(16),rol,rs.getString(17),rs.getString(18));
         Ambiente ambiente= new Ambiente(rs.getInt(11),rs.getString(12), null);
         Categoria categoria = new Categoria(rs.getInt(8),rs.getString(9),rs.getString(10));
         Estado estado = new Estado(rs.getInt(6),rs.getString(7));

@@ -18,7 +18,6 @@ public class InventarioMapper implements Convertidor<Inventario, InventarioDTO>,
         dto.setNombre(modelo.getNombre());
         dto.setDescripcion(modelo.getDescripcion());
         dto.setFechaInicio(modelo.getFechaInicio());
-        dto.setFechaFin(modelo.getFechaFin());
 
         return dto;
     }
@@ -30,7 +29,6 @@ public class InventarioMapper implements Convertidor<Inventario, InventarioDTO>,
         modelo.setNombre(dto.getNombre());
         modelo.setDescripcion(dto.getDescripcion());
         modelo.setFechaInicio(dto.getFechaInicio());
-        modelo.setFechaFin(dto.getFechaFin());
 
         return modelo;
     }
@@ -42,7 +40,6 @@ public class InventarioMapper implements Convertidor<Inventario, InventarioDTO>,
         entidad.setNombre(rs.getString(2));
         entidad.setDescripcion(rs.getString(3));
         entidad.setFechaInicio(rs.getDate(4).toLocalDate());
-        entidad.setFechaFin(rs.getDate(5).toLocalDate());
 
         return entidad;
     }

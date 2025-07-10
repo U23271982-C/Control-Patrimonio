@@ -22,17 +22,12 @@ public class InventarioDAO implements DAO<Inventario> {
 
     @Override
     public void registrar(Inventario entidad) {
-        String sql = "{ CALL pa_Registrar_Inventario(?, ?, ?, ?) }";
+        String sql = "{ CALL pa_Registrar_Inventario(?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
             stmt.setString(1, entidad.getNombre());
             stmt.setString(2, entidad.getDescripcion());
-            stmt.setDate(3, java.sql.Date.valueOf
-                    (entidad.getFechaInicio()));
-            stmt.setDate(4, java.sql.Date.valueOf
-                    (entidad.getFechaFin()));
-
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -60,17 +55,13 @@ public class InventarioDAO implements DAO<Inventario> {
 
     @Override
     public void actualizar(Inventario entidad) {
-        String sql = "{ CALL pa_Actualizar_Inventario(?, ?, ?, ?, ?) }";
+        String sql = "{ CALL pa_Actualizar_Inventario(?, ?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
             stmt.setInt(1, entidad.getId());
             stmt.setString(2, entidad.getNombre());
             stmt.setString(3, entidad.getDescripcion());
-            stmt.setDate(4, java.sql.Date.valueOf
-                    (entidad.getFechaInicio()));
-            stmt.setDate(5, java.sql.Date.valueOf
-                    (entidad.getFechaFin()));
 
             stmt.executeUpdate();
 

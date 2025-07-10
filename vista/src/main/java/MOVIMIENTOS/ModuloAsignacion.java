@@ -212,7 +212,7 @@ public class ModuloAsignacion extends javax.swing.JFrame {
             new String[]{"Bien", "Responsable","Fecha"}, 0
             );
             for(AsignacionDTO asigs : listaasignacion.stream()
-                .filter(a -> a.getBienDTO().getId() == dto.getId())
+                .filter(a -> a.getBienDTO().getId() == b.getId())
                     .toList()){
                     modelo.addRow(new Object[]{
                         asigs.getBienDTO().getNombre(),

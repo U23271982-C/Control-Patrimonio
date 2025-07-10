@@ -179,16 +179,6 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="descripcion_inventario" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="fechainicio_inventario" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="fechafin_inventario" max="32767" attributes="0"/>
-                          </Group>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jButton7" min="-2" max="-2" attributes="0"/>
@@ -211,27 +201,17 @@
                       <Component id="jLabel14" alignment="3" min="-2" pref="12" max="-2" attributes="0"/>
                       <Component id="nombre_inventario" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel15" alignment="0" min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="fechainicio_inventario" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel16" alignment="0" min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="fechafin_inventario" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel13" alignment="3" min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="descripcion_inventario" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="descripcion_inventario" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton3" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="jButton7" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="62" max="32767" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -254,10 +234,6 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="descripcion_inventario">
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="fechainicio_inventario">
-        </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="fechafin_inventario">
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
@@ -331,28 +307,6 @@
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Nombre:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel15">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Semibold" size="14" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="33" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Fecha de Inicio:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel16">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Semibold" size="14" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="33" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Fecha de fin:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButton7">

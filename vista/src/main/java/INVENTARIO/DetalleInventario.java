@@ -4,6 +4,13 @@
  */
 package INVENTARIO;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.Detalle_InventarioControlador;
+import org.contenido.dto.Detalle_InventarioDTO;
+import org.contenido.dto.InventarioDTO;
+
 /**
  *
  * @author renzo
@@ -13,9 +20,22 @@ public class DetalleInventario extends javax.swing.JFrame {
     /**
      * Creates new form DetalleInventario
      */
+    InventarioDTO dto = new InventarioDTO();
+    
+    Controlador<Detalle_InventarioDTO> controladordi = new Detalle_InventarioControlador();
+    List<Detalle_InventarioDTO> listadetalle = controladordi.listarTodo();
+    
     public DetalleInventario() {
         initComponents();
     }
+    
+    public DetalleInventario(InventarioDTO in) {
+        initComponents();
+        this.dto = in;
+        cargarDetalle(dto);
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -160,6 +180,20 @@ public class DetalleInventario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void cargarDetalle(InventarioDTO in){
+            DefaultTableModel modelo = new DefaultTableModel(
+            new String[]{"Bien", "Cogido Inventario"}, 0
+            );
+            for(Detalle_InventarioDTO dt : listadetalle.stream()
+                .filter(a -> a.getInventarioDTO().getId() == in.getId())
+                    .toList()){
+                    modelo.addRow(new Object[]{
+                        dt.getBienDTO().getNombre(),
+                        dt.getInventarioDTO().getNombre(),
+                    });
+            }
+            TablaDetalleInventario1.setModel(modelo);
+    }
     /**
      * @param args the command line arguments
      */
