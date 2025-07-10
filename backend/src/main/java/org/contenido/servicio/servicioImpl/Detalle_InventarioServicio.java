@@ -2,9 +2,12 @@ package org.contenido.servicio.servicioImpl;
 
 import org.contenido.dao.daoImplementadoModelo.Detalle_InventarioDAO;
 import org.contenido.dto.Detalle_InventarioDTO;
+import org.contenido.dto.InventarioDTO;
 import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.mapeo.mapeoImpl.Detalle_InventarioMapper;
+import org.contenido.mapeo.mapeoImpl.InventarioMapper;
 import org.contenido.modelo.Detalle_Inventario;
+import org.contenido.modelo.Inventario;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
 import org.contenido.validacion.EnCrear;
@@ -60,11 +63,12 @@ public class Detalle_InventarioServicio implements Servicio<Detalle_InventarioDT
                 .toList();
     }
 
-    public void registrarDetalleInventarioBienesActivos(Detalle_InventarioDTO dto) {
-        if (dto.getInventarioDTO().getId() >= 0) {
+    public void registrarDetalleInventarioBienesActivos(InventarioDTO dto) {
+        if (dto.getId() >= 0) {
             throw new NegocioExcepcion("No se selecciono el id del Inventario para los bienes activos.");
         }
-        Detalle_Inventario model =detalle_InventarioMapper.convertirModelo(dto);
+        InventarioMapper inventrioMapper= new InventarioMapper();
+        Inventario model =inventrioMapper.convertirModelo(dto);
         detalleInventarioDAO.registrarDetalleInventarioBienesActivos(model);
     }
 }

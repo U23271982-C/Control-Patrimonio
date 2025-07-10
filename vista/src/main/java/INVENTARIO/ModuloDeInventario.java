@@ -4,7 +4,12 @@
  */
 package INVENTARIO;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import org.contenido.PANEL_INICIO.PanelInicio;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.InventarioControlador;
+import org.contenido.dto.InventarioDTO;
 
 /**
  *
@@ -15,8 +20,12 @@ public class ModuloDeInventario extends javax.swing.JFrame {
     /**
      * Creates new form ModuloDeInventario
      */
+    Controlador<InventarioDTO> controladori = new InventarioControlador();
+    List<InventarioDTO> listainventario = controladori.listarTodo();
+    
     public ModuloDeInventario() {
         initComponents();
+        cargarInventario();
     }
 
     /**
@@ -39,10 +48,10 @@ public class ModuloDeInventario extends javax.swing.JFrame {
         Modificar = new javax.swing.JButton();
         AñadirRegistro = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         Modificar1 = new javax.swing.JButton();
         Modificar2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla_inventario = new org.jdesktop.swingx.JXTable();
         jPanel3 = new javax.swing.JPanel();
 
         popupMenu1.setLabel("popupMenu1");
@@ -140,53 +149,6 @@ public class ModuloDeInventario extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(204, 204, 204));
         jLabel10.setText("Buscar por nombre de inventario:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Codigo", "Fecha de Inicio", "Fecha de fin", "Responsable"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
         Modificar1.setBackground(new java.awt.Color(255, 0, 0));
         Modificar1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Modificar1.setForeground(new java.awt.Color(255, 255, 255));
@@ -211,6 +173,19 @@ public class ModuloDeInventario extends javax.swing.JFrame {
             }
         });
 
+        tabla_inventario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Fecha de inicio", "Fecha de fin", "Responsable"
+            }
+        ));
+        jScrollPane2.setViewportView(tabla_inventario);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -218,7 +193,7 @@ public class ModuloDeInventario extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
@@ -247,9 +222,9 @@ public class ModuloDeInventario extends javax.swing.JFrame {
                         .addComponent(AñadirRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Modificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 196, 1205, 650));
@@ -305,8 +280,26 @@ public class ModuloDeInventario extends javax.swing.JFrame {
 
     private void Modificar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar2ActionPerformed
         // TODO add your handling code here:
+        DetalleInventario obj = new DetalleInventario();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_Modificar2ActionPerformed
 
+    private void cargarInventario(){
+        DefaultTableModel modelo = new DefaultTableModel(
+        new String[]{"ID", "Codigo Inventario","descripcion", "Fecha realizada"}, 0
+        );
+
+        for (InventarioDTO inventario : listainventario) {
+            modelo.addRow(new Object[]{
+                inventario.getId(),
+                inventario.getNombre(),
+                inventario.getDescripcion(),
+                inventario.getFechaFin()
+            });
+        }
+        tabla_inventario.setModel(modelo);
+    }
     /**
      * @param args the command line arguments
      */
@@ -355,9 +348,9 @@ public class ModuloDeInventario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private java.awt.PopupMenu popupMenu1;
+    private org.jdesktop.swingx.JXTable tabla_inventario;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,19 +4,29 @@
  */
 package ESTADO;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.EstadoControlador;
+import org.contenido.dto.EstadoDTO;
+
 /**
  *
  * @author renzo
  */
 public class PanelEstado extends javax.swing.JFrame {
+        Controlador <EstadoDTO> controlador = new EstadoControlador();    
+        List<EstadoDTO> listaestado = controlador.listarTodo();
 
     /**
      * Creates new form PanelEstado
      */
     public PanelEstado() {
         initComponents();
+        cargarEstados(listaestado);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,7 +38,7 @@ public class PanelEstado extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        tabla_estados = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -41,7 +51,7 @@ public class PanelEstado extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_estados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -52,7 +62,7 @@ public class PanelEstado extends javax.swing.JFrame {
                 "Estado"
             }
         ));
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(tabla_estados);
 
         jButton2.setBackground(new java.awt.Color(255, 51, 0));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -190,16 +200,66 @@ public class PanelEstado extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        int filaVisual = tabla_estados.getSelectedRow();  // Fila seleccionada en la vista
+
+        if (filaVisual == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un estado.");
+            return;
+        }
+
+        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        int filaModelo = tabla_estados.convertRowIndexToModel(filaVisual);
+
+        // Obtenemos el objeto DTO desde la lista
+        EstadoDTO estadoSeleccionado = listaestado.get(filaModelo);
+        
+        int resultado= JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este estado?","Confirmar eliminación",JOptionPane.OK_CANCEL_OPTION);
+        //si el usuario hace click en aceptar
+        if(resultado == JOptionPane.OK_OPTION){     
+        controlador.eliminar(estadoSeleccionado.getId());
+        List<EstadoDTO> LISTANUEVA = controlador.listarTodo();
+        cargarEstados(LISTANUEVA);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un estado primero.");
+        }
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        ModificarEstado obj = new ModificarEstado();
+        int filaVisual = tabla_estados.getSelectedRow();  // Fila seleccionada en la vista
+
+        if (filaVisual == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un Estado.");
+            return;
+        }
+
+        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        int filaModelo = tabla_estados.convertRowIndexToModel(filaVisual);
+
+        // Obtenemos el objeto DTO desde la lista
+        EstadoDTO estadoSeleccionado = listaestado.get(filaModelo);
+        
+        
+        ModificarEstado obj = new ModificarEstado(estadoSeleccionado);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void cargarEstados(List<EstadoDTO> lista) {
+        this.listaestado = lista;
+    DefaultTableModel modelo = new DefaultTableModel(
+    new String[]{"Estado"}, 0
+    );
+    
+    for (EstadoDTO estado : lista) {
+        modelo.addRow(new Object[]{
+            estado.getTipo(),
+        });
+    }
+    tabla_estados.setModel(modelo);
+    }
     /**
      * @param args the command line arguments
      */
@@ -244,6 +304,6 @@ public class PanelEstado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable5;
+    private javax.swing.JTable tabla_estados;
     // End of variables declaration//GEN-END:variables
 }

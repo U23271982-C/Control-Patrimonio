@@ -6,7 +6,7 @@ import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.mapeo.mapeoImpl.Detalle_InventarioMapper;
 import org.contenido.modelo.Detalle_Inventario;
 import org.contenido.persistencia.ConexionPool;
-
+import org.contenido.modelo.Inventario;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -110,12 +110,12 @@ public class Detalle_InventarioDAO implements DAO<Detalle_Inventario> {
     IN p_idInventario INT
 ) el procedimiento de registrar activos en detalle*/
 
-    public void registrarDetalleInventarioBienesActivos(Detalle_Inventario entidad) {
+    public void registrarDetalleInventarioBienesActivos(Inventario entidad) {
         String sql = "{ CALL pa_Registrar_Bienes_Activos_en_DetalleInventario(?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
-            stmt.setInt(1, entidad.getInventario().getId());
+            stmt.setInt(1, entidad.getId());
 
             stmt.executeUpdate();
 

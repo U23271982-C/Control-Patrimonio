@@ -4,17 +4,29 @@
  */
 package ESTADO;
 
+import org.contenido.controlador.Controlador;
+import org.contenido.controlador.controladorImpl.EstadoControlador;
+import org.contenido.dto.EstadoDTO;
+
 /**
  *
  * @author renzo
  */
 public class ModificarEstado extends javax.swing.JFrame {
 
+    Controlador<EstadoDTO> controlador = new EstadoControlador();
+    EstadoDTO dto = new EstadoDTO();
     /**
      * Creates new form ModificarEstado
      */
     public ModificarEstado() {
         initComponents();
+    }
+    
+    public ModificarEstado(EstadoDTO estado) {
+        initComponents();
+        this.dto = estado;
+        modificarEstado.setText(dto.getTipo());
     }
 
     /**
@@ -30,7 +42,7 @@ public class ModificarEstado extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        crearEstado = new javax.swing.JTextField();
+        modificarEstado = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -72,7 +84,7 @@ public class ModificarEstado extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(crearEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(modificarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(112, 112, 112))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -86,7 +98,7 @@ public class ModificarEstado extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(crearEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(modificarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(jButton1)
                 .addContainerGap(61, Short.MAX_VALUE))
@@ -135,15 +147,15 @@ public class ModificarEstado extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Controlador<EstadoDTO> controlador = new EstadoControlador();
-        EstadoDTO dto = new EstadoDTO();
-
-        dto.setTipo(crearEstado.getText());
-        controlador.registrar(dto);
+        dto.setTipo(modificarEstado.getText());
+        controlador.actualizar(dto);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        PanelEstado obj = new PanelEstado();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -182,12 +194,12 @@ public class ModificarEstado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField crearEstado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField modificarEstado;
     // End of variables declaration//GEN-END:variables
 }

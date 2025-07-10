@@ -21,6 +21,9 @@ public class ModificarInventario extends javax.swing.JFrame {
     public ModificarInventario() {
         initComponents();
     }
+    public ModificarInventario(InventarioDTO in) {
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
