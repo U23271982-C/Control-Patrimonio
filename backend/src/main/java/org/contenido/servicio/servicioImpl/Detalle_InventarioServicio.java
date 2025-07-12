@@ -10,6 +10,7 @@ import org.contenido.modelo.Detalle_Inventario;
 import org.contenido.modelo.Inventario;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
@@ -40,7 +41,7 @@ public class Detalle_InventarioServicio implements Servicio<Detalle_InventarioDT
 
     @Override
     public void actualizar(Detalle_InventarioDTO dto) {
-        ValidadorUtilidad.validar(dto, EnLeer.class); //  Validamos todos los campos del DTO
+        ValidadorUtilidad.validar(dto, EnLeer.class, EnActualizar.class); //  Validamos todos los campos del DTO
         Detalle_Inventario modelo = detalle_InventarioMapper.convertirModelo(dto); //  Convertimos el DTO en un modelo
         if (detalleInventarioDAO.leerPorId(modelo.getId()) == null) {
             throw new NegocioExcepcion("El detalle inventario con el id " + modelo.getId() + " no existe.");

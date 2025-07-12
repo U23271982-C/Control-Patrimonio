@@ -7,6 +7,7 @@ import org.contenido.mapeo.mapeoImpl.RotacionMapper;
 import org.contenido.modelo.Rotacion;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
@@ -37,7 +38,7 @@ public class RotacionServicio implements Servicio<RotacionDTO> {
 
     @Override
     public void actualizar(RotacionDTO dto) {
-        ValidadorUtilidad.validar(dto, EnLeer.class); //  Validamos todos los campos del DTO
+        ValidadorUtilidad.validar(dto, EnLeer.class, EnActualizar.class); //  Validamos todos los campos del DTO
         Rotacion modelo = rotacionMapper.convertirModelo(dto); //  Convertimos el DTO en un modelo
         if (rotacionDAO.leerPorId(modelo.getId()) == null) {
             throw new NegocioExcepcion("La rotación con el id " + modelo.getId() + " no existe.");

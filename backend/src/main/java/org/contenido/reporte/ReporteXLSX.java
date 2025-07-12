@@ -1,19 +1,22 @@
 package org.contenido.reporte;
 
 import org.apache.poi.ss.usermodel.Row;
-import org.contenido.dto.BienDTO;
 import org.contenido.utilidad.NotificacionUtil;
 import org.contenido.utilidad.exportar.Exportador;
 import org.contenido.utilidad.exportar.ExportarExcel;
 import org.contenido.utilidad.exportar.TipoDocumento;
 
-public class ReportePersonalizadoXLSX extends ReportePersonalizado {
+import java.util.List;
+
+public class ReporteXLSX extends ReportePlantilla {
     Row filaEncabezado;
 
-    public ReportePersonalizadoXLSX(String tituloHoja, String tituloLibro, String direccionGuardadp, BienDTO param) {
-        super(tituloHoja, TipoDocumento.XLSX, param);
+    public ReporteXLSX(String tituloHoja, String tituloLibro, String direccionGuardado, List<Object[]> datos) {
+        super(tituloHoja, TipoDocumento.XLSX, datos);
         super.direccionGuardado = String.format
-                ("%s%s%s", direccionGuardadp, tituloLibro, TipoDocumento.XLSX.getExtension());
+                ("%s%s%s", direccionGuardado, tituloLibro, TipoDocumento.XLSX.getExtension());
+        crearReporte();
+
     }
 
     private void formatearEncabezadoHojaCalculo() {
@@ -51,7 +54,6 @@ public class ReportePersonalizadoXLSX extends ReportePersonalizado {
         try {
             crearReporte();
             exportador.exportar( super.workbook , super.direccionGuardado);
-
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);
         }

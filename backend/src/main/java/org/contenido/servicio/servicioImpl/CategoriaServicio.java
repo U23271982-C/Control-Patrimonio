@@ -7,6 +7,7 @@ import org.contenido.mapeo.mapeoImpl.CategoriaMapper;
 import org.contenido.modelo.Categoria;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
@@ -35,7 +36,7 @@ public class CategoriaServicio implements Servicio<CategoriaDTO> {
 
     @Override
     public void actualizar(CategoriaDTO dto) {
-        ValidadorUtilidad.validar(dto, EnLeer.class); //  Validamos todos los campos del DTO
+        ValidadorUtilidad.validar(dto, EnLeer.class, EnActualizar.class); //  Validamos todos los campos del DTO
         Categoria modelo = categoriaMapper.convertirModelo(dto); //  Convertimos el DTO en un modelo
         if (categoriaDAO.leerPorId(modelo.getId()) == null) {
             throw new NegocioExcepcion("La categoría con el id " + modelo.getId() + " no existe.");

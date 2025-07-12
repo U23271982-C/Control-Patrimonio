@@ -1,17 +1,16 @@
 package org.contenido.reporte;
 
 import java.util.ArrayList;
-import org.contenido.dao.daoImplementadoReporte.RGeneralDAO;
-import org.contenido.dao.daoImplementadoReporte.RGeneralDAOImpl;
+import java.util.List;
+
 import org.contenido.utilidad.NotificacionUtil;
 import org.contenido.utilidad.exportar.TipoDocumento;
 
-public abstract class ReporteGeneral extends Reporte {
-    private final RGeneralDAO rGeneralDAO = new RGeneralDAOImpl();
+public abstract class ReportePlantilla extends Reporte {
 
-    public ReporteGeneral(String tituloHoja, TipoDocumento extencion) {
-        super(tituloHoja, extencion);
-        rellenarDatos();
+    public ReportePlantilla(String tituloHoja, TipoDocumento extencion, List<Object[]> listaTabla) {
+        super(tituloHoja, extencion, listaTabla);
+        //rellenarDatos();
         formatearReporte();
     }
 
@@ -25,7 +24,6 @@ public abstract class ReporteGeneral extends Reporte {
                     new Object[]{3, "Monitor", "Monitor Samsung 24p"}
             );*/
 
-            super.datos = rGeneralDAO.consultarSinParametros();
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);
         }

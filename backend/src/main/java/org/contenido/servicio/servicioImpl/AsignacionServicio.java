@@ -7,6 +7,7 @@ import org.contenido.mapeo.mapeoImpl.AsignacionMapper;
 import org.contenido.modelo.Asignacion;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
@@ -36,7 +37,7 @@ public class AsignacionServicio implements Servicio<AsignacionDTO> {
 
     @Override
     public void actualizar(AsignacionDTO dto) {
-        ValidadorUtilidad.validar(dto, EnLeer.class); //  Validamos todos los campos del DTO
+        ValidadorUtilidad.validar(dto, EnLeer.class, EnActualizar.class); //  Validamos todos los campos del DTO
         Asignacion modelo = asignacionMapper.convertirModelo(dto); //  Convertimos el DTO en un modelo
         if (asignacionDAO.leerPorId(modelo.getId()) == null) {
             throw new NegocioExcepcion("La asignación con el id " + modelo.getId() + " no existe.");

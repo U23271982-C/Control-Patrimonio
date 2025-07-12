@@ -7,6 +7,7 @@ import org.contenido.mapeo.mapeoImpl.Rol_ResponsableMapper;
 import org.contenido.modelo.Rol_Responsable;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
@@ -35,7 +36,7 @@ public class Rol_ResponsableServicio implements Servicio<Rol_ResponsableDTO> {
 
     @Override
     public void actualizar(Rol_ResponsableDTO dto) {
-        ValidadorUtilidad.validar(dto, EnLeer.class); //  Validamos todos los campos del DTO
+        ValidadorUtilidad.validar(dto, EnLeer.class, EnActualizar.class); //  Validamos todos los campos del DTO
         Rol_Responsable modelo = rol_responsableMapper.convertirModelo(dto); //  Convertimos el DTO en un modelo
         if (rol_responsableDAO.leerPorId(modelo.getId()) == null) {
             throw new NegocioExcepcion("El rol_responsable con el id " + modelo.getId() + " no existe.");
