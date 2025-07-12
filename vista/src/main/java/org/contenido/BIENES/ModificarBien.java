@@ -34,7 +34,7 @@ public class ModificarBien extends javax.swing.JFrame {
         initComponents();
         cargarCategoria();
         this.dto = bienseleccionado;
-        id_bien.setText(String.valueOf(dto.getId()));
+        codigo_bien.setText(dto.getCodigo());
         nombre_bien.setText(dto.getNombre());
         descripcion_bien.setText(dto.getDescripcion());
         BienesPrincipal obj = new BienesPrincipal();
@@ -53,7 +53,7 @@ public class ModificarBien extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
-        id_bien = new javax.swing.JTextField();
+        codigo_bien = new javax.swing.JTextField();
         nombre_bien = new javax.swing.JTextField();
         categoria_bien = new javax.swing.JComboBox<>();
         Cancelar = new javax.swing.JButton();
@@ -74,10 +74,10 @@ public class ModificarBien extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        id_bien.setEditable(false);
-        id_bien.addActionListener(new java.awt.event.ActionListener() {
+        codigo_bien.setEditable(false);
+        codigo_bien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                id_bienActionPerformed(evt);
+                codigo_bienActionPerformed(evt);
             }
         });
 
@@ -148,12 +148,6 @@ public class ModificarBien extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(27, 27, 27))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,9 +164,15 @@ public class ModificarBien extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(categoria_bien, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(descripcion_bien, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(id_bien, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(codigo_bien, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nombre_bien, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(103, 103, 103))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +186,7 @@ public class ModificarBien extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(jLabel10)
                 .addGap(13, 13, 13)
-                .addComponent(id_bien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(codigo_bien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -199,11 +199,11 @@ public class ModificarBien extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(categoria_bien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49))
+                    .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 0));
@@ -216,7 +216,7 @@ public class ModificarBien extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 734, Short.MAX_VALUE)
+            .addGap(0, 567, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -233,7 +233,7 @@ public class ModificarBien extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -242,9 +242,9 @@ public class ModificarBien extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void id_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_bienActionPerformed
+    private void codigo_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigo_bienActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_id_bienActionPerformed
+    }//GEN-LAST:event_codigo_bienActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -262,15 +262,18 @@ public class ModificarBien extends javax.swing.JFrame {
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
-        
-        
+              
         //dto.setId(id_bien.get);
-
+        dto.setCodigo(codigo_bien.getText());
         dto.setNombre(nombre_bien.getText());
         dto.setDescripcion(descripcion_bien.getText());
         CategoriaDTO categoriaseleccionada = (CategoriaDTO) categoria_bien.getSelectedItem();
         dto.setCategoriaDTO(categoriaseleccionada);
         controlador.actualizar(dto);
+        
+        BienesPrincipal obj = new BienesPrincipal();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void categoria_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoria_bienActionPerformed
@@ -322,8 +325,8 @@ public class ModificarBien extends javax.swing.JFrame {
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton Guardar;
     private javax.swing.JComboBox<CategoriaDTO> categoria_bien;
+    private javax.swing.JTextField codigo_bien;
     private javax.swing.JTextField descripcion_bien;
-    private javax.swing.JTextField id_bien;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

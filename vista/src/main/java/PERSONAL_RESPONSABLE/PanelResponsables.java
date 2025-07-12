@@ -10,7 +10,6 @@ import org.contenido.INICIO_SESIÓN.InicioSesion;
 import org.contenido.controlador.controladorImpl.LoginControlador;
 import org.contenido.excepcion.LoginExcepcion;
 import org.contenido.utilidad.NotificacionUtil;
-import reciclaje.EliminarResponsable;
 import org.contenido.PANEL_INICIO.PanelInicio;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.ResponsableControlador;
@@ -35,7 +34,22 @@ public class PanelResponsables extends javax.swing.JFrame {
 
     public PanelResponsables() {
         initComponents();
+            Cargo.setModel(new DefaultComboBoxModel<Rol_ResponsableDTO>());
         cargarResponsablesEnTabla();
+        Cargo.removeAllItems();
+        // Opción “Todos”
+        Rol_ResponsableDTO todos = new Rol_ResponsableDTO();
+        todos.setId(0);
+        todos.setNombreRol("Todos");
+        todos.setDescripcion("");
+        Cargo.addItem(todos);
+
+        // Ahora los roles reales
+        Controlador<Rol_ResponsableDTO> controladorRol = new Rol_ResponsableControlador();
+        List<Rol_ResponsableDTO> listaRoles = controladorRol.listarTodo();
+        for (Rol_ResponsableDTO rol : listaRoles) {
+            Cargo.addItem(rol);
+        }
         cargarRolesAlComboBox();
 
         Nombre_Filtro.getDocument().addDocumentListener(new DocumentListener() {
@@ -73,34 +87,39 @@ public class PanelResponsables extends javax.swing.JFrame {
     Tabla_Lista_Responsable.setModel(modelo);
     }
     
-    private void filtrarResponsables(){
+    private void filtrarResponsables() {
     String nombreFiltro = Nombre_Filtro.getText().trim().toLowerCase();
     Rol_ResponsableDTO rolSeleccionado = (Rol_ResponsableDTO) Cargo.getSelectedItem();
-    
-    //crear un modelo vacio con las columnas
+    int rolId = (rolSeleccionado != null) ? rolSeleccionado.getId() : 0;
+
+    // 1) Creamos el modelo, SIN asignarlo todavía a la tabla
     DefaultTableModel modelo = new DefaultTableModel(
-    new String[] {"Nombre", "DNI", "Correo", "Cargo", "Usuario", "Contraseña", "Descripción"}, 0
+        new String[] {"Nombre", "DNI", "Correo", "Cargo", "Usuario", "Contraseña", "Descripción"}, 
+        0
     );
 
-    for (ResponsableDTO responsable : listaResponsables) {
-    boolean coincideNombre =responsable.getNombre().toLowerCase().contains(nombreFiltro);
-    boolean coincideRol = (rolSeleccionado == null || responsable.getRol_responsableDTO().getId() == rolSeleccionado.getId());
-    
-        if (coincideNombre && coincideRol){
+    // 2) Recorremos todos los responsables y añadimos sólo los que cumplan
+    for (ResponsableDTO r : listaResponsables) {
+        boolean matchNombre = r.getNombre().toLowerCase().contains(nombreFiltro);
+        boolean matchRol    = (rolId == 0) || (r.getRol_responsableDTO().getId() == rolId);
+
+        if (matchNombre && matchRol) {
             modelo.addRow(new Object[]{
-                responsable.getNombre(),
-                responsable.getDni(),
-                responsable.getEmail(),
-                responsable.getRol_responsableDTO().getNombreRol(),
-                responsable.getUsuario(),
-                responsable.getContrsena(),
-                responsable.getRol_responsableDTO().getDescripcion()
+                r.getNombre(),
+                r.getDni(),
+                r.getEmail(),
+                r.getRol_responsableDTO().getNombreRol(),
+                r.getUsuario(),
+                r.getContrsena(),
+                r.getRol_responsableDTO().getDescripcion()
             });
         }
-        Tabla_Lista_Responsable.setModel(modelo);
     }
-   
-}
+    
+
+    // 3) ¡Sólo aquí asignamos el modelo a la tabla!
+    Tabla_Lista_Responsable.setModel(modelo);
+    }
 
 
     /**
@@ -120,7 +139,6 @@ public class PanelResponsables extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Nombre_Filtro = new javax.swing.JTextField();
         Cargo = new javax.swing.JComboBox<>();
-        Buscar = new javax.swing.JButton();
         AñadirRegistro = new javax.swing.JButton();
         Modificar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -153,20 +171,9 @@ public class PanelResponsables extends javax.swing.JFrame {
             }
         });
 
-
         Cargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CargoActionPerformed(evt);
-            }
-        });
-
-        Buscar.setBackground(new java.awt.Color(204, 0, 0));
-        Buscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Buscar.setForeground(new java.awt.Color(255, 255, 255));
-        Buscar.setText("Buscar");
-        Buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarActionPerformed(evt);
             }
         });
 
@@ -238,35 +245,32 @@ public class PanelResponsables extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(Nombre_Filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(280, 280, 280))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(Nombre_Filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(Cargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(136, 136, 136)))
                         .addGap(56, 56, 56))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Nombre_Filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Nombre_Filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -428,12 +432,6 @@ public class PanelResponsables extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-        // TODO add your handling code here:
-        // Obtener el rol seleccionado del combo box
-        filtrarResponsables();
-    }//GEN-LAST:event_BuscarActionPerformed
-
     private void CargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargoActionPerformed
         // TODO add your handling code here:
         
@@ -482,6 +480,11 @@ public class PanelResponsables extends javax.swing.JFrame {
     List<Rol_ResponsableDTO> listaRoles = controladorRol.listarTodo();
 
     Cargo.removeAllItems(); // Limpiamos antes
+    Rol_ResponsableDTO todos = new Rol_ResponsableDTO();
+        todos.setId(0);
+        todos.setNombreRol("Todos");
+        todos.setDescripcion("");
+    Cargo.addItem(todos);
     for (Rol_ResponsableDTO rol : listaRoles) {
         Cargo.addItem(rol); // Agregamos cada rol al combo
         }
@@ -490,7 +493,6 @@ public class PanelResponsables extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AñadirRegistro;
-    private javax.swing.JButton Buscar;
     private javax.swing.JComboBox<Rol_ResponsableDTO> Cargo;
     private javax.swing.JButton Modificar;
     private javax.swing.JButton Modificar1;

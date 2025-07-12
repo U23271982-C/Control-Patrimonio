@@ -186,6 +186,9 @@ public class CrearRol extends javax.swing.JFrame {
         dto.setNombreRol(nombre_rol.getText());
         dto.setDescripcion(descripcion_rol.getText());
         controlador.registrar(dto);
+        PanelRol obj = new PanelRol();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed

@@ -4,6 +4,7 @@
  */
 package org.contenido.BIENES;
 
+import java.awt.event.ActionListener;
 import org.contenido.PANEL_INICIO.PanelInicio;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.BienControlador;
@@ -11,7 +12,16 @@ import org.contenido.dto.BienDTO;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import org.contenido.controlador.controladorImpl.AmbienteControlador;
+import org.contenido.controlador.controladorImpl.CategoriaControlador;
+import org.contenido.controlador.controladorImpl.EstadoControlador;
+import org.contenido.controlador.controladorImpl.InmuebleControlador;
+import org.contenido.dto.AmbienteDTO;
 import org.contenido.dto.CategoriaDTO;
+import org.contenido.dto.EstadoDTO;
+import org.contenido.dto.InmuebleDTO;
 
 /**
  *
@@ -27,9 +37,56 @@ public class BienesPrincipal extends javax.swing.JFrame {
     
     public BienesPrincipal() {
         initComponents();
+       
+        jComboBox4.removeAllItems();
+        CategoriaDTO todosCat = new CategoriaDTO(); 
+        todosCat.setId(0); 
+        todosCat.setNombre("Todos");
+        jComboBox4.addItem(todosCat);
+        new CategoriaControlador().listarTodo().forEach(jComboBox4::addItem);
+        
+        jComboBox1.removeAllItems();
+        EstadoDTO todosEst = new EstadoDTO(); 
+        todosEst.setId(0); 
+        todosEst.setTipo("Todos");
+        jComboBox1.addItem(todosEst);
+        new EstadoControlador().listarTodo().forEach(jComboBox1::addItem);
+        
+        jComboBox2.removeAllItems();
+        AmbienteDTO todosAmb = new AmbienteDTO(); 
+        todosAmb.setId(0); 
+        todosAmb.setNombre("Todos");
+        jComboBox2.addItem(todosAmb);
+        new AmbienteControlador().listarTodo().forEach(jComboBox2::addItem);
+        
+        jComboBox3.removeAllItems();
+        InmuebleDTO todosInm = new InmuebleDTO(); 
+        todosInm.setId(0); 
+        todosInm.setNombre("Todos");
+        jComboBox3.addItem(todosInm);
+        new InmuebleControlador().listarTodo().forEach(jComboBox3::addItem);
+        
         cargarBien();
-    }
+        
+        DocumentListener dl = new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) { aplicarFiltros(); }
+            public void removeUpdate(DocumentEvent e){ aplicarFiltros(); }
+            public void changedUpdate(DocumentEvent e){ aplicarFiltros(); }
+        };
+        jTextField1.getDocument().addDocumentListener(dl);
+        jTextField6.getDocument().addDocumentListener(dl);
+        jTextField8.getDocument().addDocumentListener(dl);
 
+        // Cuando cambie cualquiera de los combos:
+        ActionListener al = e -> aplicarFiltros();
+        jComboBox1.addActionListener(al);
+        jComboBox2.addActionListener(al);
+        jComboBox3.addActionListener(al);
+        jComboBox4.addActionListener(al);
+        
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,26 +104,26 @@ public class BienesPrincipal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaBien = new org.jdesktop.swingx.JXTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txt_id_bien = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txt_inventario = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        txt_estado = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txt_ambiente = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 102, 0));
@@ -140,10 +197,6 @@ public class BienesPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("ID:");
-
         jButton2.setBackground(new java.awt.Color(255, 102, 0));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,7 +215,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Descripción", "Inventario", "Categoría", "Estado", "Responsable a cargo", "Ambiente", "Fecha de Registro"
+                "Código", "Nombre", "Descripción", "Categoría", "Estado", "Responsable a cargo", "Inmueble", "Ambiente", "Fecha de Registro"
             }
         ));
         jScrollPane2.setViewportView(TablaBien);
@@ -174,10 +227,6 @@ public class BienesPrincipal extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nombre:");
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Inventario:");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -209,52 +258,64 @@ public class BienesPrincipal extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Fecha de registro:");
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Inmueble:");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Código:");
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_id_bien))
+                .addGap(81, 81, 81)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField4))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(txt_inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
+                        .addComponent(jLabel13)
                         .addGap(18, 18, 18)
-                        .addComponent(txt_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(18, 18, 18)
-                        .addComponent(txt_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField8)))
-                .addGap(52, 72, Short.MAX_VALUE))
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(52, 73, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,7 +328,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 46, Short.MAX_VALUE))
+                .addGap(0, 50, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,32 +337,35 @@ public class BienesPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txt_id_bien, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(txt_inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(txt_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(txt_ambiente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel13)
+                        .addComponent(jLabel7)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -359,25 +423,57 @@ public class BienesPrincipal extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
-    private void cargarBien(){
-            DefaultTableModel modelo = new DefaultTableModel(
-            new String[]{"ID", "Nombre","Descripcion", "Categoria","Estado","Responsable","Ambiente","Fecha Registro"}, 0
-            );
 
-            for (BienDTO bien : listabien) {
-                modelo.addRow(new Object[]{
-                    bien.getId(),
-                    bien.getNombre(),
-                    bien.getDescripcion(),
-                    bien.getCategoriaDTO().getNombre(),
-                    bien.getEstado_actualDTO().getTipo(),
-                    bien.getResponsableDTO().getNombre(),
-                    bien.getAmbienteDTO().getNombre(),
-                    bien.getFecha_registro(),
-                });
-            }
-            TablaBien.setModel(modelo);
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void cargarBien() {
+    DefaultTableModel modelo = new DefaultTableModel(
+        new String[]{
+            "Código","Nombre","Descripción","Categoría","Estado",
+            "Responsable a cargo","Inmueble","Ambiente","Fecha Registro"
+        }, 0
+    );
+
+    for (BienDTO bien : listabien) {
+        // nombre del inmueble (o vacío si no existe)
+        String nombreInmueble = "";
+        if (bien.getAmbienteDTO() != null 
+            && bien.getAmbienteDTO().getInmuebleDTO() != null) {
+            nombreInmueble = bien.getAmbienteDTO()
+                                 .getInmuebleDTO()
+                                 .getNombre(); 
+        }
+
+        // nombre del ambiente (o vacío)
+        String nombreAmbiente = 
+            bien.getAmbienteDTO() != null 
+                ? bien.getAmbienteDTO().getNombre() 
+                : "";
+
+        modelo.addRow(new Object[]{
+            bien.getNombre(),
+            bien.getCodigo(),
+            bien.getDescripcion(),
+            bien.getCategoriaDTO()    != null 
+                ? bien.getCategoriaDTO().getNombre() 
+                : "",
+            bien.getEstado_actualDTO() != null 
+                ? bien.getEstado_actualDTO().getTipo()
+                : "",
+            bien.getResponsableDTO()   != null 
+                ? bien.getResponsableDTO().getNombre()
+                : "",
+            nombreInmueble,
+            nombreAmbiente,
+            bien.getFecha_registro()
+        });
     }
+
+    TablaBien.setModel(modelo);
+}
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -413,19 +509,141 @@ public class BienesPrincipal extends javax.swing.JFrame {
         });
     }
 
+    private void aplicarFiltros() {
+    // Lectura de los textos de filtro
+    String txtCodigo = jTextField2.getText().trim().toLowerCase();
+    String txtNombre = jTextField1.getText().trim().toLowerCase();
+    String txtResp   = jTextField6.getText().trim().toLowerCase();
+    String txtFecha  = jTextField8.getText().trim();
+
+    // Lectura de los combos (suponiendo que el índice 0 es "Todos" con id = 0)
+    CategoriaDTO catSel  = (CategoriaDTO) jComboBox4.getSelectedItem();
+    EstadoDTO   estSel  = (EstadoDTO)   jComboBox1.getSelectedItem();
+    AmbienteDTO ambSel  = (AmbienteDTO) jComboBox2.getSelectedItem();
+    InmuebleDTO inmSel  = (InmuebleDTO) jComboBox3.getSelectedItem();
+
+    int catId = (catSel   != null ? catSel.getId()   : 0);
+    int estId = (estSel   != null ? estSel.getId()   : 0);
+    int ambId = (ambSel   != null ? ambSel.getId()   : 0);
+    int inmId = (inmSel   != null ? inmSel.getId()   : 0);
+
+    // Preparamos el modelo de la tabla
+    DefaultTableModel model = new DefaultTableModel(
+        new String[]{
+            "Código",
+            "Nombre",
+            "Descripción",
+            "Categoría",
+            "Estado",
+            "Responsable",
+            "Inmueble",
+            "Ambiente",
+            "Fecha Registro"
+        },
+        0
+    );
+
+    // Recorremos todos los bienes y aplicamos cada filtro
+    for (BienDTO b : listabien) {
+        // 1) Filtrar por codigo
+        if (!txtCodigo.isEmpty() &&
+            !b.getCodigo().toLowerCase().contains(txtCodigo)) {
+            continue;
+        }
+        
+        // 2) Filtrar por nombre
+        if (!txtNombre.isEmpty() &&
+            !b.getNombre().toLowerCase().contains(txtNombre)) {
+            continue;
+        }
+
+        // 3) Filtrar por fecha (comparación por contains; adapta si quieres Date)
+        if (!txtFecha.isEmpty() &&
+            !b.getFecha_registro().toString().contains(txtFecha)) {
+            continue;
+        }
+
+        // 4) Filtrar por categoría
+        if (catId != 0 &&
+            (b.getCategoriaDTO() == null || b.getCategoriaDTO().getId() != catId)) {
+            continue;
+        }
+
+        // 5) Filtrar por estado
+        if (estId != 0 &&
+            (b.getEstado_actualDTO() == null || b.getEstado_actualDTO().getId() != estId)) {
+            continue;
+        }
+
+        // 6) Filtrar por responsable
+        if (!txtResp.isEmpty() &&
+            (b.getResponsableDTO() == null ||
+             !b.getResponsableDTO().getNombre().toLowerCase().contains(txtResp))) {
+            continue;
+        }
+
+        // 7) Filtrar por ambiente
+        if (ambId != 0 &&
+            (b.getAmbienteDTO() == null || b.getAmbienteDTO().getId() != ambId)) {
+            continue;
+        }
+
+        // 8) Filtrar por inmueble
+        if (inmId != 0 &&
+            (b.getAmbienteDTO() == null
+             || b.getAmbienteDTO().getInmuebleDTO() == null
+             || b.getAmbienteDTO().getInmuebleDTO().getId() != inmId)) {
+            continue;
+        }
+
+        // A estas alturas, el bien pasa todos los filtros → lo agregamos
+        // Primero obtenemos con seguridad los nombres de inmueble y ambiente
+        String nombreInmueble = "";
+        if (b.getAmbienteDTO() != null && b.getAmbienteDTO().getInmuebleDTO() != null) {
+            nombreInmueble = b.getAmbienteDTO().getInmuebleDTO().getNombre();
+        }
+
+        String nombreAmbiente = "";
+        if (b.getAmbienteDTO() != null) {
+            nombreAmbiente = b.getAmbienteDTO().getNombre();
+        }
+
+        // Agregamos la fila al modelo
+        model.addRow(new Object[]{
+            b.getCodigo(),
+            b.getNombre(),
+            b.getDescripcion(),
+            (b.getCategoriaDTO()    != null ? b.getCategoriaDTO().getNombre() : ""),
+            (b.getEstado_actualDTO() != null ? b.getEstado_actualDTO().getTipo() : ""),
+            (b.getResponsableDTO()   != null ? b.getResponsableDTO().getNombre() : ""),
+            nombreInmueble,
+            nombreAmbiente,
+            b.getFecha_registro()
+        });
+    }
+
+    // Asignamos el modelo resultante a la tabla
+    TablaBien.setModel(model);
+}
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdesktop.swingx.JXTable TablaBien;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<EstadoDTO> jComboBox1;
+    private javax.swing.JComboBox<AmbienteDTO> jComboBox2;
+    private javax.swing.JComboBox<InmuebleDTO> jComboBox3;
+    private javax.swing.JComboBox<CategoriaDTO> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -435,12 +653,8 @@ public class BienesPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField txt_ambiente;
-    private javax.swing.JTextField txt_estado;
-    private javax.swing.JTextField txt_id_bien;
-    private javax.swing.JTextField txt_inventario;
     // End of variables declaration//GEN-END:variables
 }

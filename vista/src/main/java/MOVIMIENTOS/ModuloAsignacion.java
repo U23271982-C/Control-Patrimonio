@@ -89,7 +89,7 @@ public class ModuloAsignacion extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Bien", "Responsable", "Fecha", "Motivo"
+                "Código", "Bien", "Responsable", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -209,12 +209,13 @@ public class ModuloAsignacion extends javax.swing.JFrame {
 
     private void cargarBien(BienDTO b){
             DefaultTableModel modelo = new DefaultTableModel(
-            new String[]{"Bien", "Responsable","Fecha"}, 0
+            new String[]{"Código","Bien", "Responsable","Fecha","Motivo"}, 0
             );
             for(AsignacionDTO asigs : listaasignacion.stream()
                 .filter(a -> a.getBienDTO().getId() == b.getId())
                     .toList()){
                     modelo.addRow(new Object[]{
+                        asigs.getBienDTO().getCodigo(),
                         asigs.getBienDTO().getNombre(),
                         asigs.getResponsableDTO().getNombre(),
                         asigs.getFecha_inicio(),

@@ -111,7 +111,7 @@ public class PanelMovimientos extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Descripción", "Categoría", "Estado", "Responsable a cargo", "Ambiente", "Fecha de Registro"
+                "Código", "Nombre", "Descripción", "Categoría", "Estado", "Responsable a cargo", "Ambiente", "Fecha de Registro"
             }
         ));
         jScrollPane2.setViewportView(tabla_bien);
@@ -123,7 +123,7 @@ public class PanelMovimientos extends javax.swing.JFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 1, 13)); // NOI18N
-        jLabel10.setText("Buscar por nombre de Bien:");
+        jLabel10.setText("Buscar por código de Bien:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -265,16 +265,17 @@ public class PanelMovimientos extends javax.swing.JFrame {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void cargarBien(){
             DefaultTableModel modelo = new DefaultTableModel(
-            new String[]{"ID", "Nombre","Descripcion", "Categoria","Estado","Responsable a cargo","Ambiente","Fecha Registro"}, 0
+            new String[]{"Código","Nombre","Descripcion", "Categoria","Estado","Responsable a cargo","Ambiente","Fecha Registro"}, 0
             );
 
             for (BienDTO bien : listabien) {
                 modelo.addRow(new Object[]{
-                    bien.getId(),
+                    bien.getCodigo(),
                     bien.getNombre(),
                     bien.getDescripcion(),
                     bien.getCategoriaDTO().getNombre(),

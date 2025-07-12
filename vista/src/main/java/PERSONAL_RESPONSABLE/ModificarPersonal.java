@@ -268,6 +268,9 @@ public class ModificarPersonal extends javax.swing.JFrame {
         
         Controlador<ResponsableDTO> controlador = new ResponsableControlador();
         controlador.actualizar(responsableSeleccionado);
+        PanelResponsables obj = new PanelResponsables();
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_RegistrarActionPerformed
 
     private void cargarRolesAlComboBox() {

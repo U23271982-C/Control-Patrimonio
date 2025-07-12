@@ -38,6 +38,7 @@ public class ModuloRotacion extends javax.swing.JFrame {
         initComponents();
         this.dto=b;
         bien_nombre.setText(dto.getNombre());
+        bien_codigo.setText(dto.getCodigo());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,6 +62,8 @@ public class ModuloRotacion extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         ambiente_destino = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        bien_codigo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         jLabel4.setText("Inmueble Origen");
@@ -115,6 +118,10 @@ public class ModuloRotacion extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Ambiente Destino");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Código");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -123,25 +130,29 @@ public class ModuloRotacion extends javax.swing.JFrame {
                 .addGap(49, 49, 49)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ambiente_destino, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(motivo_traslado, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bien_nombre, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ambiente_destino)
+                            .addComponent(motivo_traslado)
+                            .addComponent(bien_nombre)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
-                                .addGap(0, 374, Short.MAX_VALUE)))
+                                .addGap(0, 374, Short.MAX_VALUE))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7)
+                            .addComponent(bien_codigo))
                         .addGap(53, 53, 53))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(bien_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(bien_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,7 +164,7 @@ public class ModuloRotacion extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addComponent(motivo_traslado, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
 
         jButton1.setBackground(new java.awt.Color(255, 102, 0));
@@ -205,7 +216,7 @@ public class ModuloRotacion extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
+                .addGap(26, 26, 26)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,6 +263,7 @@ public class ModuloRotacion extends javax.swing.JFrame {
             dto.setAmbienteDTO(ambEncontrado);
             controlador.actualizar(dto);
             
+            
             dtor.setBienDTO(dto);
             dtor.setAmbienteDTO(ambEncontrado);
             dtor.setMotivo(motivo_traslado.getText());
@@ -264,10 +276,6 @@ public class ModuloRotacion extends javax.swing.JFrame {
             "Ambiente no encontrado",
             JOptionPane.WARNING_MESSAGE);
         }
-        
-        
-        
-        
         
         
         Tabla_Rotacion obj = new Tabla_Rotacion(dto);
@@ -323,12 +331,14 @@ public class ModuloRotacion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ambiente_destino;
+    private javax.swing.JTextField bien_codigo;
     private javax.swing.JTextField bien_nombre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;

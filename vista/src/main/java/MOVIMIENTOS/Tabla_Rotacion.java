@@ -86,13 +86,13 @@ public class Tabla_Rotacion extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Bien", "Responsable ", "Fecha de Rotación", "Motivo", "Ambiente", "Inmueble"
+                "Código", "Bien", "Responsable ", "Fecha de Rotación", "Motivo", "Ambiente", "Inmueble"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -102,18 +102,18 @@ public class Tabla_Rotacion extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(176, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(129, 129, 129)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 56, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(299, 299, 299)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -164,12 +164,13 @@ public class Tabla_Rotacion extends javax.swing.JFrame {
     
     private void cargarBien(BienDTO b){
             DefaultTableModel modelo = new DefaultTableModel(
-            new String[]{"Bien", "Responsable","Fecha Rotacion", "Motivo","Ambiente", "Inmueble"}, 0
+            new String[]{"Código","Bien", "Responsable","Fecha Rotacion", "Motivo","Ambiente", "Inmueble"}, 0
             );
             for(RotacionDTO rot : listarotacion.stream()
                 .filter(a -> a.getBienDTO().getId() == dto.getId())
                     .toList()){
                     modelo.addRow(new Object[]{
+                        rot.getBienDTO().getCodigo(),
                         rot.getBienDTO().getNombre(),
                         rot.getResponsableDTO().getNombre(),
                         rot.getFecha(),
