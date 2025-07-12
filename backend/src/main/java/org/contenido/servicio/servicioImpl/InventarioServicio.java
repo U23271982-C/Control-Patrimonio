@@ -7,6 +7,7 @@ import org.contenido.mapeo.mapeoImpl.InventarioMapper;
 import org.contenido.modelo.Inventario;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
@@ -36,7 +37,7 @@ public class InventarioServicio implements Servicio<InventarioDTO> {
 
     @Override
     public void actualizar(InventarioDTO dto) {
-        ValidadorUtilidad.validar(dto, EnLeer.class); //  Validamos todos los campos del DTO
+        ValidadorUtilidad.validar(dto, EnLeer.class, EnActualizar.class); //  Validamos todos los campos del DTO
         Inventario modelo = inventarioMapper.convertirModelo(dto); //  Convertimos el DTO en un modelo
         if (inventarioDAO.leerPorId(modelo.getId()) == null) {
             throw new NegocioExcepcion("El inventario con el id " + modelo.getId() + " no existe.");

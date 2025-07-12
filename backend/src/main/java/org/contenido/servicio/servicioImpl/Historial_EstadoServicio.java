@@ -7,6 +7,7 @@ import org.contenido.mapeo.mapeoImpl.Historial_EstadoMapper;
 import org.contenido.modelo.Historial_Estado;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
@@ -38,7 +39,7 @@ public class Historial_EstadoServicio implements Servicio<Historial_EstadoDTO> {
 
     @Override
     public void actualizar(Historial_EstadoDTO dto) {
-        ValidadorUtilidad.validar(dto, EnLeer.class); //  Validamos todos los campos del DTO
+        ValidadorUtilidad.validar(dto, EnLeer.class, EnActualizar.class); //  Validamos todos los campos del DTO
         Historial_Estado modelo = historial_estadoMapper.convertirModelo(dto); //  Convertimos el DTO en un modelo
         if (historial_estadoDAO.leerPorId(modelo.getId()) == null) {
             throw new NegocioExcepcion("El historial estado con el id " + modelo.getId() + " no existe.");

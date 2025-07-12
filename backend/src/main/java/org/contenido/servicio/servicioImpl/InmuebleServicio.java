@@ -7,6 +7,7 @@ import org.contenido.mapeo.mapeoImpl.InmuebleMapper;
 import org.contenido.modelo.Inmueble;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
@@ -35,7 +36,7 @@ public class InmuebleServicio implements Servicio<InmuebleDTO> {
 
     @Override
     public void actualizar(InmuebleDTO dto) {
-        ValidadorUtilidad.validar(dto, EnLeer.class); //  Validamos todos los campos del DTO
+        ValidadorUtilidad.validar(dto, EnLeer.class, EnActualizar.class); //  Validamos todos los campos del DTO
         Inmueble modelo = inmuebleMapper.convertirModelo(dto); //  Convertimos el DTO en un modelo
         if (inmuebleDAO.leerPorId(modelo.getId()) == null) {
             throw new NegocioExcepcion("El inmueble con el id " + modelo.getId() + " no existe.");

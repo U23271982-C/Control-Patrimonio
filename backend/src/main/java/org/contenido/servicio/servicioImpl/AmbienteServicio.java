@@ -7,6 +7,7 @@ import org.contenido.mapeo.mapeoImpl.AmbienteMapper;
 import org.contenido.modelo.Ambiente;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
@@ -35,7 +36,7 @@ public class AmbienteServicio implements Servicio<AmbienteDTO> {
 
     @Override
     public void actualizar(AmbienteDTO dto) {
-        ValidadorUtilidad.validar(dto, EnLeer.class); //  Validamos todos los campos del DTO
+        ValidadorUtilidad.validar(dto, EnLeer.class, EnActualizar.class); //  Validamos todos los campos del DTO
         Ambiente modelo = ambienteMapper.convertirModelo(dto); //  Convertimos el DTO en un modelo
         if (ambienteDAO.leerPorId(modelo.getId()) == null) {
             throw new NegocioExcepcion("El ambiente con el id " + modelo.getId() + " no existe.");

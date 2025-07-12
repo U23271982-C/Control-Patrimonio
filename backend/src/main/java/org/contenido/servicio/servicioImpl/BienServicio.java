@@ -7,6 +7,7 @@ import org.contenido.mapeo.mapeoImpl.BienMapper;
 import org.contenido.modelo.Bien;
 import org.contenido.servicio.Servicio;
 import org.contenido.utilidad.ValidadorUtilidad;
+import org.contenido.validacion.EnActualizar;
 import org.contenido.validacion.EnCrear;
 import org.contenido.validacion.EnLeer;
 
@@ -39,7 +40,7 @@ public class BienServicio implements Servicio<BienDTO> {
 
     @Override
     public void actualizar(BienDTO dto) {
-        ValidadorUtilidad.validar(dto, EnLeer.class); //  Validamos todos los campos del DTO
+        ValidadorUtilidad.validar(dto, EnLeer.class, EnActualizar.class); //  Validamos todos los campos del DTO
         Bien modelo = bienMapper.convertirModelo(dto); //  Convertimos el DTO en un modelo
         if (bienDAO.leerPorId(modelo.getId()) == null) {
             throw new NegocioExcepcion("El bien con el id " + modelo.getId() + " no existe.");
