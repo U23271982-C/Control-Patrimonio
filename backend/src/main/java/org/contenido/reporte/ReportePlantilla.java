@@ -1,43 +1,34 @@
 package org.contenido.reporte;
 
 import java.util.ArrayList;
-import org.contenido.dao.daoImplementadoReporte.RPersonalizadoDAO;
-import org.contenido.dao.daoImplementadoReporte.RPersonalizadoDAOImpl;
-import org.contenido.dto.BienDTO;
+import java.util.List;
+
 import org.contenido.utilidad.NotificacionUtil;
 import org.contenido.utilidad.exportar.TipoDocumento;
 
-import java.util.List;
+public abstract class ReportePlantilla extends Reporte {
 
-public abstract class ReportePersonalizado extends Reporte {
-    private final RPersonalizadoDAO rPersonalizadoDAO = new RPersonalizadoDAOImpl();
-    private BienDTO bienDTO;
-
-    public ReportePersonalizado(String tituloHoja, TipoDocumento extencion, BienDTO param, List<Object[]> d) {
-        super(tituloHoja, extencion, d);
-        
-        this.bienDTO = param;
-        rellenarDatos();
+    public ReportePlantilla(String tituloHoja, TipoDocumento extencion, List<Object[]> listaTabla) {
+        super(tituloHoja, extencion, listaTabla);
+        //rellenarDatos();
         formatearReporte();
     }
+
+
     private void rellenarDatos() {
         try {
-            super.datos = List.of(
+            /*this.datos = List.of(
                     new Object[]{"Orden", "Equipo", "Modelo"},
                     new Object[]{1, "Laptop", "Laptop HP i5"},
                     new Object[]{2, "Mouse", "Mouse inalámbrico"},
                     new Object[]{3, "Monitor", "Monitor Samsung 24p"}
-            );
+            );*/
 
-            //super.datos = rPersonalizadoDAO.consultarParametros(bienDTO);
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);
-            System.out.println("error en reportePersonalizado");
         }
-        
     }
     
-    // corta el encabezado de la consulta
     @Override
     protected void cortarEncabezado() {
         int numColumnas = this.datos.getFirst().length;
@@ -59,7 +50,7 @@ public abstract class ReportePersonalizado extends Reporte {
         }
     }
     
-    private void formatearReporte(){
+    private void formatearReporte() {
         cortarEncabezado();
         cortarCuerpo();
         // Ajustar el tamaño de las columnas
@@ -67,6 +58,5 @@ public abstract class ReportePersonalizado extends Reporte {
             hoja.autoSizeColumn(i);
         }
     }
-    
-    
+
 }
