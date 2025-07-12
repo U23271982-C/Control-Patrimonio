@@ -11,6 +11,8 @@ import java.time.LocalDate;
 public class BienDTO {
     @NotNull( message = "El id no puede ser nulo", groups = {EnActualizar.class})
     private int id;
+    @NotNull( message = "El codigo no puede ser nulo", groups = {EnCrear.class})
+    private String codigo;
     @NotNull( message = "El nombre no puede ser nulo", groups = {EnCrear.class})
     @Size(max = 50, message = "La descripción no debe exceder los 50 caracteres")
     private String nombre;
@@ -37,6 +39,10 @@ public class BienDTO {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getCodigo(){return codigo;}
+
+    public void setCodigo(String codigo){this.codigo = codigo;}
 
     public String getNombre() {
         return nombre;
@@ -93,6 +99,7 @@ public class BienDTO {
     public void setResponsableDTO(ResponsableDTO responsableDTO) {
         this.responsableDTO = responsableDTO;
     }
+
 
     @Override
     public String toString(){

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class Bien {
     private int id;
+    private String codigo;
     private String nombre;
     private String descripcion;
     private LocalDate fecha_registro;
@@ -12,8 +13,9 @@ public class Bien {
     private Ambiente ambiente;
     private Responsable responsable;
 
-    public Bien(int id, String nombre, String descripcion, LocalDate fecha_registro, Estado estado, Categoria categoria, Ambiente ambiente, Responsable responsable) {
+    public Bien(int id, String codigo, String nombre, String descripcion, LocalDate fecha_registro, Estado estado, Categoria categoria, Ambiente ambiente, Responsable responsable) {
         this.id = id;
+        this.codigo=codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fecha_registro = fecha_registro;
@@ -30,6 +32,10 @@ public class Bien {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getCodigo(){return codigo;}
+
+    public void setCodigo(String codigo){this.codigo=codigo;}
 
     public String getNombre() {
         return nombre;
