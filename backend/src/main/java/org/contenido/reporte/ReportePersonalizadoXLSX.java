@@ -7,11 +7,13 @@ import org.contenido.utilidad.exportar.Exportador;
 import org.contenido.utilidad.exportar.ExportarExcel;
 import org.contenido.utilidad.exportar.TipoDocumento;
 
+import java.util.List;
+
 public class ReportePersonalizadoXLSX extends ReportePersonalizado {
     Row filaEncabezado;
 
-    public ReportePersonalizadoXLSX(String tituloHoja, String tituloLibro, String direccionGuardadp, BienDTO param) {
-        super(tituloHoja, TipoDocumento.XLSX, param);
+    public ReportePersonalizadoXLSX(String tituloHoja, String tituloLibro, String direccionGuardadp, BienDTO param, List<Object[]> d) {
+        super(tituloHoja, TipoDocumento.XLSX, param, d);
         super.direccionGuardado = String.format
                 ("%s%s%s", direccionGuardadp, tituloLibro, TipoDocumento.XLSX.getExtension());
     }

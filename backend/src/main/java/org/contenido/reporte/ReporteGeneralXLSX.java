@@ -6,13 +6,16 @@ import org.contenido.utilidad.exportar.Exportador;
 import org.contenido.utilidad.exportar.ExportarExcel;
 import org.contenido.utilidad.exportar.TipoDocumento;
 
+import java.util.List;
+
 public class ReporteGeneralXLSX extends ReporteGeneral{
     Row filaEncabezado;
 
-    public ReporteGeneralXLSX(String tituloHoja, String tituloLibro, String direccionGuardado) {
-        super(tituloHoja, TipoDocumento.XLSX);
+    public ReporteGeneralXLSX(String tituloHoja, String tituloLibro, String direccionGuardado, List<Object[]> datos) {
+        super(tituloHoja, TipoDocumento.XLSX, datos);
         super.direccionGuardado = String.format
                 ("%s%s%s", direccionGuardado, tituloLibro, TipoDocumento.XLSX.getExtension());
+        crearReporte();
 
     }
 

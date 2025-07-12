@@ -13,8 +13,8 @@ public abstract class ReportePersonalizado extends Reporte {
     private final RPersonalizadoDAO rPersonalizadoDAO = new RPersonalizadoDAOImpl();
     private BienDTO bienDTO;
 
-    public ReportePersonalizado(String tituloHoja, TipoDocumento extencion, BienDTO param) {
-        super(tituloHoja, extencion);
+    public ReportePersonalizado(String tituloHoja, TipoDocumento extencion, BienDTO param, List<Object[]> d) {
+        super(tituloHoja, extencion, d);
         
         this.bienDTO = param;
         rellenarDatos();
