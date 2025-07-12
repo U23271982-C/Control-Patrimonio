@@ -48,13 +48,13 @@ public class Detalle_InventarioMapper implements Convertidor<Detalle_Inventario,
 
     @Override
     public Detalle_Inventario mapDeResultSet(ResultSet rs) throws SQLException {
-        Inventario inventario = new Inventario(rs.getInt(22),rs.getString(23),rs.getString(24),(rs.getDate(25)).toLocalDate());
-        Rol_Responsable rol= new Rol_Responsable(rs.getInt(19),rs.getString(20),rs.getString(21));
-        Responsable responsable = new Responsable(rs.getInt(13),rs.getString(14),rs.getString(15),rs.getString(16),rol,rs.getString(17),rs.getString(18));
-        Ambiente ambiente= new Ambiente(rs.getInt(11),rs.getString(12), null);
-        Categoria categoria = new Categoria(rs.getInt(8),rs.getString(9),rs.getString(10));
-        Estado estado = new Estado(rs.getInt(6),rs.getString(7));
-        Bien bien = new Bien(rs.getInt(2),rs.getString(3),rs.getString(4),(rs.getDate(5)).toLocalDate(),estado,categoria,ambiente, responsable);
+        Inventario inventario = new Inventario(rs.getInt(23),rs.getString(24),rs.getString(25),(rs.getDate(26)).toLocalDate());
+        Rol_Responsable rol= new Rol_Responsable(rs.getInt(20),rs.getString(21),rs.getString(22));
+        Responsable responsable = new Responsable(rs.getInt(14),rs.getString(15),rs.getString(16),rs.getString(17),rol,rs.getString(18),rs.getString(19));
+        Ambiente ambiente= new Ambiente(rs.getInt(12),rs.getString(13), null);
+        Categoria categoria = new Categoria(rs.getInt(9),rs.getString(10),rs.getString(11));
+        Estado estado = new Estado(rs.getInt(7),rs.getString(8));
+        Bien bien = new Bien(rs.getInt(2), rs.getString(3),rs.getString(4),rs.getString(5),(rs.getDate(6)).toLocalDate(),estado,categoria,ambiente, responsable);
         Detalle_Inventario entidad = new Detalle_Inventario(rs.getInt(1),bien,inventario);
         return entidad;
     }

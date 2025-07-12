@@ -56,11 +56,11 @@ public class Historial_EstadoMapper implements Convertidor<Historial_Estado, His
 
     @Override
     public Historial_Estado mapDeResultSet(ResultSet rs) throws SQLException {
-        Rol_Responsable rol_responsable= new Rol_Responsable(rs.getInt(12),rs.getString(14),rs.getString(13));
-        Responsable responsable= new Responsable(rs.getInt(6),rs.getString(7),rs.getString(8),rs.getString(9),rol_responsable,rs.getString(10),rs.getString(11));
-        Estado estado = new Estado(rs.getInt(4),rs.getString(5));
-        Bien bien = new Bien(rs.getInt(2),rs.getString(3),null,null,null,null,null,null);
-        Historial_Estado entidad = new Historial_Estado(rs.getInt(1),bien,estado,rs.getString(15),(rs.getDate(16)).toLocalDate(),responsable);
+        Rol_Responsable rol_responsable= new Rol_Responsable(rs.getInt(13),rs.getString(15),rs.getString(14));
+        Responsable responsable= new Responsable(rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),rol_responsable,rs.getString(11),rs.getString(12));
+        Estado estado = new Estado(rs.getInt(5),rs.getString(6));
+        Bien bien = new Bien(rs.getInt(2), rs.getString(3),rs.getString(4),null,null,null,null,null,null);
+        Historial_Estado entidad = new Historial_Estado(rs.getInt(1),bien,estado,rs.getString(16),(rs.getDate(17)).toLocalDate(),responsable);
         return entidad;
     }
 }

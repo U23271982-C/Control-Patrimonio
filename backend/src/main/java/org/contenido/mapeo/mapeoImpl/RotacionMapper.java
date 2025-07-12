@@ -57,11 +57,11 @@ public class RotacionMapper implements Convertidor<Rotacion, RotacionDTO>, Resul
 
     @Override
     public Rotacion mapDeResultSet(ResultSet rs) throws SQLException {
-        Inmueble inmueble = new Inmueble(rs.getInt(17),rs.getString(18),rs.getString(19));
-        Rol_Responsable rol_responsable= new Rol_Responsable(rs.getInt(14),rs.getString(15),rs.getString(16));
-        Responsable responsable= new Responsable(rs.getInt(8),rs.getString(9),rs.getString(10),rs.getString(11),rol_responsable,rs.getString(12),rs.getString(13));
-        Ambiente ambiente= new Ambiente(rs.getInt(6),rs.getString(7),inmueble);
-        Bien bien = new Bien(rs.getInt(4),rs.getString(5),null,null,null,null,null,null);
+        Inmueble inmueble = new Inmueble(rs.getInt(18),rs.getString(19),rs.getString(20));
+        Rol_Responsable rol_responsable= new Rol_Responsable(rs.getInt(15),rs.getString(16),rs.getString(17));
+        Responsable responsable= new Responsable(rs.getInt(9),rs.getString(10),rs.getString(11),rs.getString(12),rol_responsable,rs.getString(13),rs.getString(14));
+        Ambiente ambiente= new Ambiente(rs.getInt(7),rs.getString(8),inmueble);
+        Bien bien = new Bien(rs.getInt(4), rs.getString(5),rs.getString(6),null,null,null,null,null,null);
         Rotacion entidad = new Rotacion(rs.getInt(1),bien,ambiente, rs.getString(2),responsable,(rs.getDate(3)).toLocalDate());
         return entidad;
     }

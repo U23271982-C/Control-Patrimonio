@@ -51,14 +51,14 @@ public class AsignacionMapper implements Convertidor<Asignacion, AsignacionDTO>,
 
     @Override
     public Asignacion mapDeResultSet(ResultSet rs) throws SQLException {
-        Bien bien = new Bien(rs.getInt(2),rs.getString(3), null,null,null,null,null,null);
-        Rol_Responsable rol_responsable =new Rol_Responsable(rs.getInt(10),rs.getString(12),rs.getString(11));
-        Responsable responsable = new Responsable(rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rol_responsable,rs.getString(8),rs.getString(9));
+        Bien bien = new Bien(rs.getInt(2),rs.getString(3),rs.getString(4), null,null,null,null,null,null);
+        Rol_Responsable rol_responsable =new Rol_Responsable(rs.getInt(11),rs.getString(13),rs.getString(12));
+        Responsable responsable = new Responsable(rs.getInt(5),rs.getString(6),rs.getString(7),rs.getString(8),rol_responsable,rs.getString(9),rs.getString(10));
         Asignacion entidad = new Asignacion(
                 rs.getInt(1),
                 bien,
                 responsable,
-                (rs.getDate(13)).toLocalDate()
+                (rs.getDate(14)).toLocalDate()
         );
         return entidad;
     }
