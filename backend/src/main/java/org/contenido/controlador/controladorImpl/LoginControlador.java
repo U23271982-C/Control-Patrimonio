@@ -36,4 +36,7 @@ public class LoginControlador {
         return false;
     }
 
+    public LoginServicio getServicio() {
+        return servicio;
+    }
 }

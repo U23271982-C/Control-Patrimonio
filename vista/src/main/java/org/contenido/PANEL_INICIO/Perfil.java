@@ -23,11 +23,11 @@ public class Perfil extends javax.swing.JFrame {
         initComponents();
         this.controlador = InicioSesion.controlador;
       
-        usuario.setText(InicioSesion.dto.getUsuario());
-        nombre_personal.setText(InicioSesion.dto.getNombre());
-        cargo_personal.setText(InicioSesion.dto.getRol_ResponsableDTO().getNombreRol());
-        dni_personal.setText(InicioSesion.dto.getDni());
-        email_personal.setText(InicioSesion.dto.getEmail());
+        usuario.setText(controlador.getServicio().getDto().getUsuario());
+        nombre_personal.setText(controlador.getServicio().getDto().getNombre());
+        cargo_personal.setText(controlador.getServicio().getDto().getRol_ResponsableDTO().getNombreRol());
+        dni_personal.setText(controlador.getServicio().getDto().getDni());
+        email_personal.setText(controlador.getServicio().getDto().getEmail());
     }
         
    
