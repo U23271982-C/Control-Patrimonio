@@ -5,6 +5,7 @@
 package org.contenido.BIENES;
 
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.AmbienteControlador;
@@ -33,12 +34,28 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
         Controlador<CategoriaDTO> controladorc = new CategoriaControlador();
         List<CategoriaDTO> listaCategoria = controladorc.listarTodo();
         
+        Controlador<AmbienteDTO> controladorA = new AmbienteControlador();
+        List<AmbienteDTO> listaAmbiente = controladorA.listarTodo();
         
     public AñadirRegistroBien() {
         initComponents();
         cargarCategoria();
+        cargarAmbiente();
     }
     
+    private void cargarCategoria() {
+        categoria_bien.setModel(new DefaultComboBoxModel<>());
+        for (CategoriaDTO cat : listaCategoria) {
+            categoria_bien.addItem(cat);
+        }
+    }
+
+    private void cargarAmbiente() {
+        ambiente_bien.setModel(new DefaultComboBoxModel<>());
+        for (AmbienteDTO a : listaAmbiente) {
+            ambiente_bien.addItem(a);
+        }
+    }
     
 
     /**
@@ -64,9 +81,9 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
         Cancelar = new javax.swing.JButton();
         responsable_bien = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        ambiente_bien = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         codigo_bien = new javax.swing.JTextField();
+        ambiente_bien = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -137,12 +154,6 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(204, 204, 204));
         jLabel14.setText("Ambiente");
 
-        ambiente_bien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ambiente_bienActionPerformed(evt);
-            }
-        });
-
         jLabel12.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(204, 204, 204));
         jLabel12.setText("Descripción");
@@ -172,7 +183,6 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(responsable_bien)
-                    .addComponent(ambiente_bien)
                     .addComponent(descripcion_bien)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel14)
@@ -188,7 +198,8 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
                                     .addComponent(jLabel12))
                                 .addGap(169, 169, 169))))
                     .addComponent(categoria_bien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(codigo_bien))
+                    .addComponent(codigo_bien)
+                    .addComponent(ambiente_bien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -221,8 +232,8 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ambiente_bien, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(ambiente_bien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(GuardarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -267,67 +278,61 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
+        // 1. Cargo los campos básicos
         dto.setCodigo(codigo_bien.getText());
         dto.setNombre(nombre_bien.getText());
         dto.setDescripcion(descripcion_bien.getText());
-        
-        
-        CategoriaDTO categoriaseleccionada = (CategoriaDTO) categoria_bien.getSelectedItem();
-        dto.setCategoriaDTO(categoriaseleccionada);
-        
-        Controlador<EstadoDTO> controlamesta = new EstadoControlador();
-        EstadoDTO estado = new EstadoDTO();
-        estado = controlamesta.leerPorId(1);
+
+        // Categoría (ya lo tienes bien)
+        CategoriaDTO catSel = (CategoriaDTO) categoria_bien.getSelectedItem();
+        dto.setCategoriaDTO(catSel);
+
+        // Estado fijo
+        EstadoDTO estado = new EstadoControlador().leerPorId(1);
         dto.setEstado_actualDTO(estado);
-        
-        
-        String DNIresponsable = responsable_bien.getText();
-        String ambienteN = ambiente_bien.getText();
-        Controlador<ResponsableDTO> controladorR = new ResponsableControlador();
-        
-        List<ResponsableDTO> listaresponsable = controladorR.listarTodo(); 
-        
-        Controlador<AmbienteDTO> controladorA = new AmbienteControlador();
-        List<AmbienteDTO> listaambiente = controladorA.listarTodo();    
-        AmbienteDTO ambienteEncontrado = null;
-        ResponsableDTO responsableEncontrado = null;
-        for (ResponsableDTO r : listaresponsable) {
-            if (r.getDni().equals(DNIresponsable)) {
-                responsableEncontrado = r;
-                break; // Salimos del bucle al encontrar coincidencia
-            }
-        }
-        if(responsableEncontrado!= null){
-            dto.setResponsableDTO(responsableEncontrado);
-            for (AmbienteDTO a : listaambiente) {
-                if (a.getNombre().equals(ambienteN)) {
-                    ambienteEncontrado = a;
-                    break; // Salimos del bucle al encontrar coincidencia
-                }
-            }
-            if(ambienteEncontrado != null){ 
-                dto.setAmbienteDTO(ambienteEncontrado);
-                controlador.registrar(dto);
-            } else{
-                JOptionPane.showMessageDialog(null,
-                    "No se encontró un ambiente con el nombre: " + ambienteN,
-                    "Ambiente no encontrado",
-                    JOptionPane.WARNING_MESSAGE);
-            }    
-        } else {
-            JOptionPane.showMessageDialog(null,
-                "No se encontró un responsable con el DNI: " + DNIresponsable,
+
+        // Responsable por DNI (si aún lo quieres como JTextField)
+        String dniResp = responsable_bien.getText().trim();
+        ResponsableDTO resp = new ResponsableControlador()
+                                 .listarTodo()
+                                 .stream()
+                                 .filter(r -> r.getDni().equals(dniResp))
+                                 .findFirst()
+                                 .orElse(null);
+        if (resp == null) {
+            JOptionPane.showMessageDialog(this,
+                "No se encontró un responsable con el DNI: " + dniResp,
                 "DNI no encontrado",
                 JOptionPane.WARNING_MESSAGE);
+            return;
         }
+        dto.setResponsableDTO(resp);
+
+        // **Ambiente**: lo leemos directamente del combo
+        AmbienteDTO ambSel = (AmbienteDTO) ambiente_bien.getSelectedItem();
+        if (ambSel == null) {
+            JOptionPane.showMessageDialog(this,
+                "Debe seleccionar un ambiente.",
+                "Ambiente no seleccionado",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        dto.setAmbienteDTO(ambSel);
+
+        // Registrar
+        controlador.registrar(dto);
+
+        // Limpiar y volver
+        codigo_bien.setText("");
         nombre_bien.setText("");
         descripcion_bien.setText("");
         responsable_bien.setText("");
-        ambiente_bien.setText("");
-        
-        BienesPrincipal obj = new BienesPrincipal();
-        obj.setVisible(true);
+        // no hacemos ambiente_bien.setText(...) ya que es combo
+
+        new BienesPrincipal().setVisible(true);
         dispose();
+
+
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -352,20 +357,11 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_responsable_bienActionPerformed
 
-    private void ambiente_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ambiente_bienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ambiente_bienActionPerformed
-
     private void codigo_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigo_bienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_codigo_bienActionPerformed
 
-    private void cargarCategoria(){
-            categoria_bien.removeAllItems(); // Limpiamos antes
-            for (CategoriaDTO cat : listaCategoria) {
-                categoria_bien.addItem(cat); // Agregamos cada rol al combo
-        }
-    }
+    
     /**
      * @param args the command line arguments
      */
@@ -404,7 +400,7 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton GuardarRegistro;
-    private javax.swing.JTextField ambiente_bien;
+    private javax.swing.JComboBox<AmbienteDTO> ambiente_bien;
     private javax.swing.JComboBox<CategoriaDTO> categoria_bien;
     private javax.swing.JTextField codigo_bien;
     private javax.swing.JTextField descripcion_bien;

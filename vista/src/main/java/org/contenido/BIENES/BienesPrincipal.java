@@ -73,6 +73,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
             public void removeUpdate(DocumentEvent e){ aplicarFiltros(); }
             public void changedUpdate(DocumentEvent e){ aplicarFiltros(); }
         };
+        jTextField2.getDocument().addDocumentListener(dl);
         jTextField1.getDocument().addDocumentListener(dl);
         jTextField6.getDocument().addDocumentListener(dl);
         jTextField8.getDocument().addDocumentListener(dl);
@@ -399,7 +400,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
         int filaVisual = TablaBien.getSelectedRow();  // Fila seleccionada en la vista
 
         if (filaVisual == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione una categoría.");
+            JOptionPane.showMessageDialog(this, "Seleccione un Bien.");
             return;
         }
 
@@ -445,31 +446,28 @@ public class BienesPrincipal extends javax.swing.JFrame {
                                  .getNombre(); 
         }
 
-        // nombre del ambiente (o vacío)
-        String nombreAmbiente = 
-            bien.getAmbienteDTO() != null 
-                ? bien.getAmbienteDTO().getNombre() 
-                : "";
-
         modelo.addRow(new Object[]{
-            bien.getNombre(),
-            bien.getCodigo(),
-            bien.getDescripcion(),
+            bien.getCodigo(),                           // columna 0: Código
+            bien.getNombre(),                           // 1
+            bien.getDescripcion(),                      // 2
             bien.getCategoriaDTO()    != null 
-                ? bien.getCategoriaDTO().getNombre() 
+                ? bien.getCategoriaDTO().getNombre()    // 3
                 : "",
             bien.getEstado_actualDTO() != null 
-                ? bien.getEstado_actualDTO().getTipo()
+                ? bien.getEstado_actualDTO().getTipo()  // 4
                 : "",
             bien.getResponsableDTO()   != null 
-                ? bien.getResponsableDTO().getNombre()
+                ? bien.getResponsableDTO().getNombre()  // 5
                 : "",
-            nombreInmueble,
-            nombreAmbiente,
-            bien.getFecha_registro()
+            nombreInmueble,                             // 6: Inmueble
+            (bien.getAmbienteDTO() != null 
+                ? bien.getAmbienteDTO().getNombre() 
+                : ""),                                  // 7: Ambiente
+            bien.getFecha_registro()                    // 8
         });
     }
 
+    // 3) Asignamos el modelo actualizado a la tabla
     TablaBien.setModel(modelo);
 }
     

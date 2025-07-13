@@ -28,6 +28,7 @@ public class BienMapper implements Convertidor<Bien, BienDTO>, ResultSetMapper<B
 
         BienDTO dto = new BienDTO();
         dto.setId(modelo.getId());
+        dto.setCodigo(modelo.getCodigo()); 
         dto.setNombre(modelo.getNombre());
         dto.setDescripcion(modelo.getDescripcion());
         dto.setFecha_registro(modelo.getFecha_registro());
@@ -73,12 +74,15 @@ public class BienMapper implements Convertidor<Bien, BienDTO>, ResultSetMapper<B
 
     @Override
     public Bien mapDeResultSet(ResultSet rs) throws SQLException {
-        Estado estado = new Estado(rs.getInt(6),rs.getString(7));
-        Categoria categoria= new Categoria(rs.getInt(8),rs.getString(9),rs.getString(10));
-        Ambiente ambiente = new Ambiente(rs.getInt(11),rs.getString(12),null);
-        Rol_Responsable rol_responsable = new Rol_Responsable(rs.getInt(19),rs.getString(21),rs.getString(20));
-        Responsable responsable = new Responsable(rs.getInt(13),rs.getString(14),rs.getString(15),rs.getString(16),rol_responsable,rs.getString(17),rs.getString(18));
-        Bien entidad = new Bien(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),(rs.getDate(5)).toLocalDate(),estado,categoria,ambiente,responsable);
-        return entidad;
+    Estado estado = new Estado(rs.getInt(6),rs.getString(7));
+    Categoria categoria= new Categoria(rs.getInt(8),rs.getString(9),rs.getString(10));
+
+    Ambiente ambiente = new Ambiente(rs.getInt(11),rs.getString(12),null);
+    Rol_Responsable rol_responsable = new Rol_Responsable(rs.getInt(19),rs.getString(21),rs.getString(20));
+    Responsable responsable = new Responsable(rs.getInt(13),rs.getString(14),rs.getString(15),rs.getString(16),rol_responsable,rs.getString(17),rs.getString(18));
+    Bien entidad = new Bien(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),(rs.getDate(5)).toLocalDate(),estado,categoria,ambiente,responsable);
+    return entidad;
     }
+
+
 }

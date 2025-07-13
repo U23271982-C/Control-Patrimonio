@@ -27,8 +27,44 @@ public class PanelMovimientos extends javax.swing.JFrame {
     public PanelMovimientos() {
         initComponents();
         cargarBien();
+        jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        public void insertUpdate(javax.swing.event.DocumentEvent e) { filtrarPorCodigo(); }
+        public void removeUpdate(javax.swing.event.DocumentEvent e) { filtrarPorCodigo(); }
+        public void changedUpdate(javax.swing.event.DocumentEvent e) { filtrarPorCodigo(); }
+    });
+    }
+    
+    private void filtrarPorCodigo() {
+    String texto = jTextField1.getText().trim().toLowerCase();
+
+    DefaultTableModel modelo = new DefaultTableModel(
+        new String[]{
+            "Código","Nombre","Descripcion","Categoria",
+            "Estado","Responsable a cargo","Ambiente","Fecha Registro"
+        }, 0
+    );
+
+    for (BienDTO bien : listabien) {
+        String codigo = bien.getCodigo() != null
+            ? bien.getCodigo().toLowerCase()
+            : "";
+        // Si el campo está vacío, muestro todo; si no, sólo los que contengan el texto
+        if (texto.isEmpty() || codigo.contains(texto)) {
+            modelo.addRow(new Object[]{
+                bien.getCodigo(),
+                bien.getNombre(),
+                bien.getDescripcion(),
+                bien.getCategoriaDTO()    != null ? bien.getCategoriaDTO().getNombre() : "",
+                bien.getEstado_actualDTO() != null ? bien.getEstado_actualDTO().getTipo() : "",
+                bien.getResponsableDTO()   != null ? bien.getResponsableDTO().getNombre() : "",
+                bien.getAmbienteDTO()      != null ? bien.getAmbienteDTO().getNombre() : "",
+                bien.getFecha_registro()
+            });
+        }
     }
 
+    tabla_bien.setModel(modelo);
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
