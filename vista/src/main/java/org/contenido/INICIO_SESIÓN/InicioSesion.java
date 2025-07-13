@@ -19,7 +19,7 @@ public class InicioSesion extends javax.swing.JFrame {
      * Creates new form InicioDeSesión
      */
 
-    public static ResponsableDTO dto;
+    public static ResponsableDTO dto = new ResponsableDTO();;
     public static LoginControlador controlador;
 
     public InicioSesion() {
@@ -125,7 +125,7 @@ public class InicioSesion extends javax.swing.JFrame {
         String contrasena = new String(control_contraseña.getPassword()).trim();
 
         // Crear el DTO con los datos ingresados
-        dto = new ResponsableDTO();
+        //dto
         dto.setUsuario(usuario);
         dto.setContrsena(contrasena);
 

@@ -30,7 +30,7 @@ public class LoginServicio {
             throw new LoginExcepcion("Contraseña incorrecta.");
         }
         // Verifica si es superUsuario
-        String rol = getDtoDevuelve.getRol_ResponsableDTO().getNombreRol();
+        String rol = getDtoDevuelve.getRol_ResponsableDTO().getDescripcion();
         if (!rol.toLowerCase().contains("super")) {
             result = false;
             throw new SuperAdminExcepcion(String.format(
