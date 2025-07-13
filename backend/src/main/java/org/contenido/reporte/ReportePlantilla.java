@@ -8,8 +8,8 @@ import org.contenido.utilidad.exportar.TipoDocumento;
 
 public abstract class ReportePlantilla extends Reporte {
 
-    public ReportePlantilla(String tituloHoja, TipoDocumento extencion, List<Object[]> listaTabla) {
-        super(tituloHoja, extencion, listaTabla);
+    public ReportePlantilla(String tituloHoja, TipoDocumento extencion, String[] encabezado,List<Object[]> listaTabla) {
+        super(tituloHoja, extencion, encabezado,listaTabla);
         //rellenarDatos();
         formatearReporte();
     }
@@ -28,30 +28,16 @@ public abstract class ReportePlantilla extends Reporte {
             NotificacionUtil.mostrarError(e);
         }
     }
-    
-    @Override
-    protected void cortarEncabezado() {
-        int numColumnas = this.datos.getFirst().length;
-
-        this.encabezado = new String[numColumnas];
-        // se corta fila encabezados
-        for (int i = 0; i < numColumnas; i++) {
-            this.encabezado[i] = this.datos.getFirst()[i].toString();
-        }
-    }
 
     // corta el cuerpo de la consulta
     @Override
     protected void cortarCuerpo() {
         this.contenido = new ArrayList<>();
         // se corta solo datos cuerpo, pasa contenido
-        for (int i = 1; i < datos.size(); i++) {
-            this.contenido.add(datos.get(i));
-        }
+        this.contenido.addAll(datos);
     }
     
     private void formatearReporte() {
-        cortarEncabezado();
         cortarCuerpo();
         // Ajustar el tamaño de las columnas
         for(int i = 0; i < encabezado.length; i++){

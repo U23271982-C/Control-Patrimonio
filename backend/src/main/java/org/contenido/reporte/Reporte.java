@@ -20,15 +20,14 @@ public abstract class Reporte {
     protected final TipoDocumento extencion;
     protected String direccionGuardado;
 
-    public Reporte (String tituloHoja, TipoDocumento extencion, List<Object[]> datos) {
+    public Reporte (String tituloHoja, TipoDocumento extencion, String[] encabezado,List<Object[]> datos) {
         this.workbook = extencion.getDocumento();
         this.hoja = workbook.createSheet(tituloHoja);
         this.extencion = extencion;
         this.datos = datos;
+        this.encabezado = encabezado;
     }
 
-    abstract protected void cortarEncabezado();
-    
     abstract protected void cortarCuerpo();
     
     abstract public void exportarReporte();
