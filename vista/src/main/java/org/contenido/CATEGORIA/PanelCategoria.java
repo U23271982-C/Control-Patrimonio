@@ -13,7 +13,6 @@ import org.contenido.PANEL_INICIO.PanelInicio;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.CategoriaControlador;
 import org.contenido.dto.CategoriaDTO;
-import reciclaje.EliminarCategoria;
 
 
 
@@ -42,6 +41,20 @@ public class PanelCategoria extends javax.swing.JFrame {
         public void changedUpdate(DocumentEvent e){ filtrarCategoria();}
         });
     }
+    private void recargarTablaCategorias() {
+    DefaultTableModel modelo = new DefaultTableModel(
+        new String[]{"ID", "Nombre", "Descripción"},
+        0
+    );
+    for (CategoriaDTO cat : listacategorias) {
+        modelo.addRow(new Object[]{
+            cat.getId(),
+            cat.getNombre(),
+            cat.getDescripcion()
+        });
+    }
+    jXTableCategoria.setModel(modelo);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -267,23 +280,38 @@ public class PanelCategoria extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonModificarActionPerformed
 
     private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
-        int filaVisual = jXTableCategoria.getSelectedRow();  // Fila seleccionada en la vista
-
+         // 1) Obtengo la fila seleccionada en la vista
+        int filaVisual = jXTableCategoria.getSelectedRow();
         if (filaVisual == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione una categoría.");
             return;
         }
 
-        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        // 2) Convierto al índice del modelo (por si hay filtros/ordenamientos)
         int filaModelo = jXTableCategoria.convertRowIndexToModel(filaVisual);
 
-        // Obtenemos el objeto DTO desde la lista
+        // 3) Localizo el DTO correspondiente
         CategoriaDTO categoriaSeleccionada = listacategorias.get(filaModelo);
 
-        // Abrimos la ventana de modificación y le pasamos la categoría
-        EliminarCategoria eliminar = new EliminarCategoria(categoriaSeleccionada);
-        eliminar.setVisible(true);
-        dispose();
+        // 4) Pido confirmación
+        int respuesta = JOptionPane.showConfirmDialog(
+            this,
+            "¿Está seguro de eliminar la categoría \"" 
+                + categoriaSeleccionada.getNombre() + "\"?",
+            "Confirmar eliminación",
+            JOptionPane.OK_CANCEL_OPTION
+        );
+        if (respuesta != JOptionPane.OK_OPTION) {
+            return;  // si cancela, salimos
+        }
+
+        // 5) Elimino en la capa de negocio
+        controlador.eliminar(categoriaSeleccionada.getId());
+
+        // 6) Refresco lista y tabla
+        listacategorias = controlador.listarTodo();
+        recargarTablaCategorias();
+
     }//GEN-LAST:event_BotonEliminarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -299,12 +327,11 @@ public class PanelCategoria extends javax.swing.JFrame {
     
     private void cargarCategoriaTabla() {
     DefaultTableModel modelo = new DefaultTableModel(
-    new String[]{"ID", "Nombre", "Descripcion"}, 0
+    new String[]{"Nombre", "Descripcion"}, 0
     );
     
     for (CategoriaDTO categoria : listacategorias) {
         modelo.addRow(new Object[]{
-            categoria.getId(),
             categoria.getNombre(),
             categoria.getDescripcion()
         });
@@ -316,7 +343,7 @@ public class PanelCategoria extends javax.swing.JFrame {
     String nombreFiltro = FiltrarPorNombre.getText().trim().toLowerCase();
     
     DefaultTableModel modelo = new DefaultTableModel(
-    new String[]{"ID", "Nombre", "Descripcion"}, 0
+    new String[]{"Nombre", "Descripcion"}, 0
     );
     
     for (CategoriaDTO categoria : listacategorias) {
@@ -324,7 +351,6 @@ public class PanelCategoria extends javax.swing.JFrame {
 
         if (coincideNombre){
             modelo.addRow(new Object[]{
-                categoria.getId(),
                 categoria.getNombre(),
                 categoria.getDescripcion(),
             });

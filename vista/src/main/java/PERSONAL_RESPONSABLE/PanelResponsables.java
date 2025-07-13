@@ -415,16 +415,25 @@ public class PanelResponsables extends javax.swing.JFrame {
                 }
             }
 
+        int resultado = JOptionPane.showConfirmDialog(
+        this,
+        "¿Está seguro de eliminar este responsable?",
+        "Confirmar eliminación",
+        JOptionPane.OK_CANCEL_OPTION
+    );
+        if (resultado != JOptionPane.OK_OPTION) return;
 
-            // Abrir la nueva interfaz y pasarle el objeto
-            EliminarResponsable obj = new EliminarResponsable(seleccionado);
-            obj.setVisible(true);
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar un responsable primero.");
+        // 1) Elimino en la base
+        controlador.eliminar(seleccionado.getId());
+
+        // 2) Refresco la lista en memoria
+        listaResponsables = controlador.listarTodo();
+
+        // 3) Repopulo la tabla (sin filtro)
+        cargarResponsablesEnTabla();
         }
     }//GEN-LAST:event_Modificar1ActionPerformed
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         PanelInicio obj = new PanelInicio(InicioSesion.controlador);
