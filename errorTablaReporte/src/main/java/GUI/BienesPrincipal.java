@@ -306,7 +306,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PANEL_INICIO/logo1.jpg"))); // NOI18N
+        //jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PANEL_INICIO/logo1.jpg"))); // NOI18N
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 30)); // NOI18N
@@ -616,11 +616,12 @@ public class BienesPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < columnas; i++) {
             encabezado[i] = modelo.getColumnName(i);
         }
-
+        
         List<Object[]> datos = convertirTablaLista();
-
-        ReporteXLSX reporte = new ReporteXLSX("Filtrado", "Filtrado Bienes", "C:\\Users\\italo\\Downloads\\", encabezado, datos);
-        reporte.exportarReporte();
+        
+        exportar exp = new exportar(datos,encabezado);
+        exp.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
