@@ -10,10 +10,13 @@ import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.BienControlador;
 import org.contenido.dto.BienDTO;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.TableModel;
+
 import org.contenido.controlador.controladorImpl.AmbienteControlador;
 import org.contenido.controlador.controladorImpl.CategoriaControlador;
 import org.contenido.controlador.controladorImpl.EstadoControlador;
@@ -22,6 +25,7 @@ import org.contenido.dto.AmbienteDTO;
 import org.contenido.dto.CategoriaDTO;
 import org.contenido.dto.EstadoDTO;
 import org.contenido.dto.InmuebleDTO;
+import org.contenido.reporte.ReporteXLSX;
 
 /**
  *
@@ -420,8 +424,48 @@ public class BienesPrincipal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+
+    private List<Object[]> convertirTablaLista() {
+        List<Object[]> datosFiltrados = new ArrayList<>();
+
+        if (TablaBien == null) {
+            System.out.println("Tabla nula");
+            return datosFiltrados;
+        }
+
+        TableModel modelo = TablaBien.getModel();
+        int columnas = modelo.getColumnCount();
+
+
+
+        for (int i = 0; i < TablaBien.getRowCount(); i++) {
+            int modelIndex = TablaBien.convertRowIndexToModel(i);
+            Object[] fila = new Object[columnas];
+            for (int j = 0; j < columnas; j++) {
+                Object valor = modelo.getValueAt(modelIndex, j);
+                fila[j] = (valor != null) ? valor : "";  // evitar null
+            }
+            datosFiltrados.add(fila);
+        }
+
+        return datosFiltrados;
+    }
+
+
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        TableModel modelo = TablaBien.getModel();
+        int columnas = modelo.getColumnCount();
+
+        String[] encabezado = new String[columnas];
+        for (int i = 0; i < columnas; i++) {
+            encabezado[i] = modelo.getColumnName(i);
+        }
+
+        List<Object[]> datos = convertirTablaLista();
+
+        ReporteXLSX reporte = new ReporteXLSX("Filtrado", "Filtrado Bienes", "C:\\Users\\italo\\Downloads\\", encabezado, datos);
+        reporte.exportarReporte();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
