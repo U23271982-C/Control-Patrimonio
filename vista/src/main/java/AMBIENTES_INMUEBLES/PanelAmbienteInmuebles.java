@@ -23,14 +23,18 @@ import org.contenido.dto.ResponsableDTO;
  * @author renzo
  */
 public class PanelAmbienteInmuebles extends javax.swing.JFrame {
-
+    
+    Controlador<InmuebleDTO> controlador = new InmuebleControlador();
+    List<InmuebleDTO> listaInmuebles = controlador.listarTodo();
+    
+    
     /**
      * Creates new form PanelAmbiente
      */
     public PanelAmbienteInmuebles() {
         initComponents();
-        cargarInmueblesEnTabla();
-        cargarAmbientesEnTabla();
+        cargarInmueblesEnTabla(listaInmuebles);
+        cargarAmbientesEnTabla(listaAmbiente);
         buscar_inmuebles.getDocument().addDocumentListener(new DocumentListener() {
         public void insertUpdate(DocumentEvent e){ filtrarInmuebles();}
         public void removeUpdate(DocumentEvent e){ filtrarInmuebles();}
@@ -44,11 +48,9 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
         });
     }
     
-    Controlador<InmuebleDTO> controlador = new InmuebleControlador();
-    List<InmuebleDTO> listaInmuebles = controlador.listarTodo();
-    
-    private void cargarInmueblesEnTabla() {
+    private void cargarInmueblesEnTabla(List<InmuebleDTO> listanueva) {
     // Crear el modelo de la tabla con los nombres de columnas
+    this.listaInmuebles = listanueva;
     DefaultTableModel modelo = new DefaultTableModel(
         new String[]{"Nombre","Descripción"}, 0
     );
@@ -86,8 +88,9 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
     Controlador<AmbienteDTO> controlador2 = new AmbienteControlador();
     List<AmbienteDTO> listaAmbiente = controlador2.listarTodo();
     
-    private void cargarAmbientesEnTabla() {
+    private void cargarAmbientesEnTabla(List<AmbienteDTO> listanueva ) {
     // Crear el modelo de la tabla con los nombres de columnas
+    this.listaAmbiente = listanueva;
     DefaultTableModel modelo = new DefaultTableModel(
         new String[]{"Ambiente","Vinculado a"}, 0
     );
@@ -504,6 +507,8 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
         if(resultado == JOptionPane.OK_OPTION){
              Controlador<InmuebleDTO> controlador = new InmuebleControlador();
         controlador.eliminar(seleccionado.getId());
+        List<InmuebleDTO> listanueva = controlador.listarTodo();
+        cargarInmueblesEnTabla(listanueva);
         }
         
         } else {
@@ -562,6 +567,8 @@ public class PanelAmbienteInmuebles extends javax.swing.JFrame {
         if(resultado == JOptionPane.OK_OPTION){
              Controlador<AmbienteDTO> controlador = new AmbienteControlador();
         controlador.eliminar(seleccionado.getId());
+        List<AmbienteDTO> listanueva = controlador.listarTodo();
+        cargarAmbientesEnTabla(listanueva);
         }
         
         } else {

@@ -223,7 +223,7 @@ public class PanelRol extends javax.swing.JFrame {
                 }
             }
 
-            int resultado= JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este inmueble?","Confirmar eliminación",JOptionPane.OK_CANCEL_OPTION);
+            int resultado= JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este Rol?","Confirmar eliminación",JOptionPane.OK_CANCEL_OPTION);
         //si el usuario hace click en aceptar
         if(resultado == JOptionPane.OK_OPTION){
              Controlador<Rol_ResponsableDTO> controlador = new Rol_ResponsableControlador();
@@ -232,31 +232,28 @@ public class PanelRol extends javax.swing.JFrame {
         }
         
         } else {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar un inmueble primero.");
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un rol primero.");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        int filaSeleccionada = Tabla_ListaRolResponsables.getSelectedRow();
-        if (filaSeleccionada != -1) {
-            DefaultTableModel model = (DefaultTableModel) Tabla_ListaRolResponsables.getModel();
-            String nombreSeleccionado = model.getValueAt(filaSeleccionada, 0).toString();
+        int filaVisual = Tabla_ListaRolResponsables.getSelectedRow();  // Fila seleccionada en la vista
 
-            Rol_ResponsableDTO seleccionado = null;
-            for (Rol_ResponsableDTO r : controlador.listarTodo()) {  // pide lista fresca
-                if (r.getNombreRol().equals(nombreSeleccionado)) {
-                    seleccionado = r;
-                    break;
-                }
-            }
+        if (filaVisual == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un Rol.");
+            return;
+        }
 
-            CambioRol obj = new CambioRol(this, seleccionado);
+        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+        int filaModelo = Tabla_ListaRolResponsables.convertRowIndexToModel(filaVisual);
+
+        // Obtenemos el objeto DTO desde la lista
+        Rol_ResponsableDTO seleccionado = listaRolResponsables.get(filaModelo);
+            CambioRol obj = new CambioRol(seleccionado);
             obj.setVisible(true);
             this.setVisible(false);  // solo ocultas la ventana, no la destruyes
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar un responsable primero.");
-        } 
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

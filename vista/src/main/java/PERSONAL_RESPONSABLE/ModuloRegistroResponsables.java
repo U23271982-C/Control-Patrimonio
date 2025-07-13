@@ -321,9 +321,6 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
         usuario_personal.setText("");
         contrasena_personal.setText("");
         
-        PanelResponsables obj = new PanelResponsables();
-        obj.setVisible(true);
-        dispose();
     }//GEN-LAST:event_RegistrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
