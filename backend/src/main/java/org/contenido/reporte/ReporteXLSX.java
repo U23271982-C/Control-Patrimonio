@@ -11,8 +11,8 @@ import java.util.List;
 public class ReporteXLSX extends ReportePlantilla {
     Row filaEncabezado;
 
-    public ReporteXLSX(String tituloHoja, String tituloLibro, String direccionGuardado, String[] encabezado, List<Object[]> datos) {
-        super(tituloHoja, TipoDocumento.XLSX, encabezado,datos);
+    public ReporteXLSX(String tituloHoja, String tituloLibro, String direccionGuardado/*, String[] encabezado*/, List<Object[]> datos) {
+        super(tituloHoja, TipoDocumento.XLSX/*, encabezado*/,datos);
         super.direccionGuardado = String.format("%s%s%s", direccionGuardado, tituloLibro, TipoDocumento.XLSX.getExtension());
         crearReporte();
     }
