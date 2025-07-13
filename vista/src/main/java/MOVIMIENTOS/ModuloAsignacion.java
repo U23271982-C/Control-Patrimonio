@@ -209,7 +209,7 @@ public class ModuloAsignacion extends javax.swing.JFrame {
 
     private void cargarBien(BienDTO b){
             DefaultTableModel modelo = new DefaultTableModel(
-            new String[]{"Código","Bien", "Responsable","Fecha","Motivo"}, 0
+            new String[]{"Código","Bien", "Responsable","Fecha"}, 0
             );
             for(AsignacionDTO asigs : listaasignacion.stream()
                 .filter(a -> a.getBienDTO().getId() == b.getId())
