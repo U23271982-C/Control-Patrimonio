@@ -49,7 +49,6 @@ public class ModuloDeInventario extends javax.swing.JFrame {
         Modificar = new javax.swing.JButton();
         AñadirRegistro = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        Modificar1 = new javax.swing.JButton();
         Modificar2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_inventario = new org.jdesktop.swingx.JXTable();
@@ -155,19 +154,6 @@ public class ModuloDeInventario extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(204, 204, 204));
         jLabel10.setText("Buscar por nombre de inventario:");
 
-        Modificar1.setBackground(new java.awt.Color(255, 0, 0));
-        Modificar1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Modificar1.setForeground(new java.awt.Color(255, 255, 255));
-        Modificar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Inventario/eliminar.png"))); // NOI18N
-        Modificar1.setText("Eliminar");
-        Modificar1.setActionCommand("✓ Modificar");
-        Modificar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        Modificar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Modificar1ActionPerformed(evt);
-            }
-        });
-
         Modificar2.setBackground(new java.awt.Color(255, 102, 0));
         Modificar2.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         Modificar2.setForeground(new java.awt.Color(255, 255, 255));
@@ -208,12 +194,10 @@ public class ModuloDeInventario extends javax.swing.JFrame {
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(38, 38, 38)
                         .addComponent(Modificar2, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addGap(90, 90, 90)
                         .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(AñadirRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(90, 90, 90)
+                        .addComponent(AñadirRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(56, 56, 56))
         );
         jPanel2Layout.setVerticalGroup(
@@ -228,7 +212,6 @@ public class ModuloDeInventario extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(AñadirRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Modificar2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -295,10 +278,6 @@ public class ModuloDeInventario extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void Modificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Modificar1ActionPerformed
-
     private void Modificar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar2ActionPerformed
             // TODO add your handling code here:
         int filaVisual = tabla_inventario.getSelectedRow();  // Fila seleccionada en la vista
@@ -320,7 +299,7 @@ public class ModuloDeInventario extends javax.swing.JFrame {
 
     private void cargarInventario(){
         DefaultTableModel modelo = new DefaultTableModel(
-        new String[]{"Codigo Inventario","descripcion", "Fecha realizada"}, 0
+        new String[]{"Codigo Inventario","Descripcion", "Fecha realizada"}, 0
         );
 
         for (InventarioDTO inventario : listainventario) {
@@ -370,7 +349,6 @@ public class ModuloDeInventario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AñadirRegistro;
     private javax.swing.JButton Modificar;
-    private javax.swing.JButton Modificar1;
     private javax.swing.JButton Modificar2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
