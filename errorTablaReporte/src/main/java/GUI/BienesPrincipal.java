@@ -8,10 +8,13 @@ package GUI;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.*;
 import org.contenido.dto.*;
+import org.contenido.modelo.Estado;
+import org.contenido.modelo.Inmueble;
 import org.contenido.reporte.ReporteXLSX;
 
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -27,15 +30,189 @@ import javax.swing.table.TableModel;
  */
 public class BienesPrincipal extends javax.swing.JFrame {
 
+
+    BienDTO b1 = new BienDTO();
+    {
+        b1.setCodigo("pc");
+        b1.setNombre("pc");
+        b1.setDescripcion("de renzo");
+
+        CategoriaDTO c1 = new CategoriaDTO();
+        c1.setNombre("Dispositivo Electronico");
+
+        EstadoDTO e1 = new EstadoDTO();
+        e1.setTipo("En Mantenimiento");
+
+        ResponsableDTO r1 = new ResponsableDTO();
+        r1.setNombre("Italo Vasquez");
+
+        InmuebleDTO i1 = new InmuebleDTO();
+        i1.setNombre("Torre_A");
+
+        AmbienteDTO a1 = new AmbienteDTO();
+        a1.setNombre("A_101");
+        a1.setInmuebleDTO(i1);
+
+        b1.setFecha_registro(LocalDate.of(2025, 7, 13));
+
+        b1.setCategoriaDTO(c1);
+        b1.setEstado_actualDTO(e1);
+        b1.setResponsableDTO(r1);
+        b1.setAmbienteDTO(a1);
+    }
+
+    BienDTO b2 = new BienDTO();
+    {
+        b2.setCodigo("Laptop");
+        b2.setNombre("Laptop");
+        b2.setDescripcion("maquina superpotente");
+
+        CategoriaDTO c2 = new CategoriaDTO();
+        c2.setNombre("Dispositivo Electronico");
+
+        EstadoDTO e2 = new EstadoDTO();
+        e2.setTipo("De Baja");
+
+        ResponsableDTO r2 = new ResponsableDTO();
+        r2.setNombre("Italo Vasquez");
+
+        InmuebleDTO i2 = new InmuebleDTO();
+        i2.setNombre("Torre_A");
+
+        AmbienteDTO a2 = new AmbienteDTO();
+        a2.setNombre("A_101");
+        a2.setInmuebleDTO(i2);
+
+        b2.setFecha_registro(LocalDate.of(2025, 7, 13));
+
+        b2.setCategoriaDTO(c2);
+        b2.setEstado_actualDTO(e2);
+        b2.setResponsableDTO(r2);
+        b2.setAmbienteDTO(a2);
+    }
+
+    BienDTO b3 = new BienDTO();
+    {
+        b3.setCodigo("teclado");
+        b3.setNombre("teclado");
+        b3.setDescripcion("tecladomecánico");
+
+        CategoriaDTO c3 = new CategoriaDTO();
+        c3.setNombre("Dispositivo Electronico");
+
+        EstadoDTO e3 = new EstadoDTO();
+        e3.setTipo("De Baja");
+
+        ResponsableDTO r3 = new ResponsableDTO();
+        r3.setNombre("Italo Vasquez");
+
+        InmuebleDTO i3 = new InmuebleDTO();
+        i3.setNombre("Torre_A");
+
+        AmbienteDTO a3 = new AmbienteDTO();
+        a3.setNombre("A_101");
+        a3.setInmuebleDTO(i3);
+
+        b3.setFecha_registro(LocalDate.of(2025, 7, 13));
+
+        b3.setCategoriaDTO(c3);
+        b3.setEstado_actualDTO(e3);
+        b3.setResponsableDTO(r3);
+        b3.setAmbienteDTO(a3);
+    }
+    BienDTO b4 = new BienDTO();
+    {
+        b4.setCodigo("A_0002");
+        b4.setNombre("Computadora");
+        b4.setDescripcion("Computadora normal");
+        CategoriaDTO c4 = new CategoriaDTO();
+        c4.setNombre("Dispositivo Electronico");
+
+        EstadoDTO e4 = new EstadoDTO();
+        e4.setTipo("Activo");
+        ResponsableDTO r4 = new ResponsableDTO();
+        r4.setNombre("Italo Vasquez");
+
+        InmuebleDTO i4 = new InmuebleDTO();
+        i4.setNombre("Torre_A");
+        AmbienteDTO a4 = new AmbienteDTO();
+        a4.setNombre("A_102");
+        a4.setInmuebleDTO(i4);
+        b4.setFecha_registro(LocalDate.of(2025, 7, 13));
+
+        b4.setCategoriaDTO(c4);
+        b4.setEstado_actualDTO(e4);
+        b4.setResponsableDTO(r4);
+        b4.setAmbienteDTO(a4);
+    }
+
+    BienDTO b5 = new BienDTO();
+    {
+        b5.setCodigo("A_0002");
+        b5.setNombre("Computadora");
+        b5.setDescripcion("Computadora normal");
+        CategoriaDTO c5 = new CategoriaDTO();
+        c5.setNombre("Dispositivo Electronico");
+
+        EstadoDTO e5 = new EstadoDTO();
+        e5.setTipo("Activo");
+        ResponsableDTO r5 = new ResponsableDTO();
+        r5.setNombre("Italo Vasquez");
+
+        InmuebleDTO i5 = new InmuebleDTO();
+        i5.setNombre("Torre_A");
+        AmbienteDTO a5 = new AmbienteDTO();
+        a5.setNombre("A_102");
+        a5.setInmuebleDTO(i5);
+        b5.setFecha_registro(LocalDate.of(2025, 7, 13));
+
+        b5.setCategoriaDTO(c5);
+        b5.setEstado_actualDTO(e5);
+        b5.setResponsableDTO(r5);
+        b5.setAmbienteDTO(a5);
+    }
+
+    BienDTO b6 = new BienDTO();
+    {
+        b6.setCodigo("Cafetera");
+        b6.setNombre("Cafetera");
+        b6.setDescripcion("Cafetera que es para los docentes");
+
+        CategoriaDTO c6 = new CategoriaDTO();
+        c6.setNombre("Dispositivo Electronico");
+
+        EstadoDTO e6 = new EstadoDTO();
+        e6.setTipo("Activo");
+
+        ResponsableDTO r6 = new ResponsableDTO();
+        r6.setNombre("Victor Chung");
+
+        InmuebleDTO i6 = new InmuebleDTO();
+        i6.setNombre("Torre_A");
+
+        AmbienteDTO a6 = new AmbienteDTO();
+        a6.setNombre("A_101");
+        a6.setInmuebleDTO(i6);
+
+        b6.setFecha_registro(LocalDate.of(2025, 7, 13));
+
+        b6.setCategoriaDTO(c6);
+        b6.setEstado_actualDTO(e6);
+        b6.setResponsableDTO(r6);
+        b6.setAmbienteDTO(a6);
+    }
+
+
     /**
      * Creates new form BienesPrincipal
      */
     Controlador<BienDTO> controlador = new BienControlador();
-    List<BienDTO> listabien = controlador.listarTodo();
+    List<BienDTO> listabien = controlador.listarTodo(); //controlador.listarTodo();
     
     public BienesPrincipal() {
+        //listabien = List.of(b4, b5, b6, b1, b2, b3);
         initComponents();
-       
+
         jComboBox4.removeAllItems();
         CategoriaDTO todosCat = new CategoriaDTO();
         todosCat.setId(0); 
