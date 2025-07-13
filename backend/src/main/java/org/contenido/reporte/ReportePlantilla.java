@@ -8,8 +8,8 @@ import org.contenido.utilidad.exportar.TipoDocumento;
 
 public abstract class ReportePlantilla extends Reporte {
 
-    public ReportePlantilla(String tituloHoja, TipoDocumento extencion, List<Object[]> listaTabla) {
-        super(tituloHoja, extencion, listaTabla);
+    public ReportePlantilla(String tituloHoja, TipoDocumento extencion/*, String[] encabezado*/,List<Object[]> listaTabla) {
+        super(tituloHoja, extencion/*, encabezado*/,listaTabla);
         //rellenarDatos();
         formatearReporte();
     }
@@ -28,7 +28,7 @@ public abstract class ReportePlantilla extends Reporte {
             NotificacionUtil.mostrarError(e);
         }
     }
-    
+
     @Override
     protected void cortarEncabezado() {
         int numColumnas = this.datos.getFirst().length;
