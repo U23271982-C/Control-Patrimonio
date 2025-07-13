@@ -19,15 +19,15 @@ public class CambioRol extends javax.swing.JFrame {
     /**
      * Creates new form CambioRol
      */
-    private PanelRol parentPanel;                     // Referencia al panel que invocó
+
     private Controlador<Rol_ResponsableDTO> controlador = new Rol_ResponsableControlador();
-    private Rol_ResponsableDTO dto;                   // DTO que contiene el registro a modificar
+    private Rol_ResponsableDTO dto = new Rol_ResponsableDTO();                   // DTO que contiene el registro a modificar
           
-    public CambioRol(PanelRol parent, Rol_ResponsableDTO dtoObtenido) {
-        this.parentPanel = parent;
-        this.dto = dtoObtenido;
+    public CambioRol(Rol_ResponsableDTO dtoObtenido) {
         initComponents();
-        cargarRolesAlComboBox();
+        this.dto = dtoObtenido;
+        nombre_Rol.setText(dto.getNombreRol());
+        descripcion_Rol.setText(dto.getDescripcion());
     }
 
     /**
@@ -35,7 +35,7 @@ public class CambioRol extends javax.swing.JFrame {
      */
     public CambioRol() {
         initComponents();
-        cargarRolesAlComboBox();
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,8 +50,10 @@ public class CambioRol extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        cargo_personal = new javax.swing.JComboBox<>();
         Guardar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        nombre_Rol = new javax.swing.JTextField();
+        descripcion_Rol = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,13 +68,7 @@ public class CambioRol extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Rol:");
-
-        cargo_personal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cargo_personalActionPerformed(evt);
-            }
-        });
+        jLabel5.setText("Nombre Rol:");
 
         Guardar.setBackground(new java.awt.Color(204, 102, 0));
         Guardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -84,37 +80,50 @@ public class CambioRol extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Descripcion:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(cargo_personal, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(128, 128, 128))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(146, 146, 146))
+                .addGap(62, 62, 62))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nombre_Rol)
+                            .addComponent(descripcion_Rol, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(jLabel1)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(cargo_personal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                    .addComponent(nombre_Rol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(descripcion_Rol, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
                 .addComponent(Guardar)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -160,20 +169,21 @@ public class CambioRol extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
-        Rol_ResponsableDTO rolSeleccionado = (Rol_ResponsableDTO) cargo_personal.getSelectedItem();
+        
+        dto.setNombreRol(nombre_Rol.getText());
+        dto.setDescripcion(descripcion_Rol.getText());
 
-        // No cambies el id del dto original
-        dto.setNombreRol(rolSeleccionado.getNombreRol());
-
-        controlador.actualizar(dto); // hará UPDATE por id
-
-        parentPanel.recargarTablaRoles(); // recarga JTable
-        parentPanel.setVisible(true);
+        controlador.actualizar(dto); 
+        
+        PanelRol obj = new PanelRol();
+        obj.setVisible(true);
         dispose();
+
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -182,20 +192,9 @@ public class CambioRol extends javax.swing.JFrame {
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void cargo_personalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargo_personalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cargo_personalActionPerformed
     
     
-    private void cargarRolesAlComboBox() {
-        List<Rol_ResponsableDTO> listaRoles = controlador.listarTodo();
-        DefaultComboBoxModel<Rol_ResponsableDTO> model = new DefaultComboBoxModel<>();
-        for (Rol_ResponsableDTO rol : listaRoles) {
-            model.addElement(rol);
-        }
-        cargo_personal.setModel(model);
-    }
+    
     /**
      * @param args the command line arguments
      */
@@ -233,11 +232,13 @@ public class CambioRol extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Guardar;
-    private javax.swing.JComboBox<Rol_ResponsableDTO> cargo_personal;
+    private javax.swing.JTextField descripcion_Rol;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField nombre_Rol;
     // End of variables declaration//GEN-END:variables
 }
