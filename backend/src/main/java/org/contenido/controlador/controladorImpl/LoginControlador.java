@@ -16,7 +16,7 @@ public class LoginControlador {
             boolean validado = servicio.validarCredenciales();
             if (validado) {
                 NotificacionUtil.mostrarMensajeAfirmacionLogueo(
-                        servicio.getDto().getRol_ResponsableDTO().getNombreRol(),
+                        servicio.getDto().getRol_ResponsableDTO().getDescripcion(),
                         servicio.getDto().getNombre(),
                         "ASSET CONTROL");
                 return true;

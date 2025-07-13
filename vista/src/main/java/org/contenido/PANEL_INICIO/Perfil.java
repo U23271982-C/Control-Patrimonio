@@ -25,7 +25,7 @@ public class Perfil extends javax.swing.JFrame {
       
         usuario.setText(controlador.getServicio().getDto().getUsuario());
         nombre_personal.setText(controlador.getServicio().getDto().getNombre());
-        cargo_personal.setText(controlador.getServicio().getDto().getRol_ResponsableDTO().getNombreRol());
+        cargo_personal.setText(controlador.getServicio().getDto().getRol_ResponsableDTO().getDescripcion());
         dni_personal.setText(controlador.getServicio().getDto().getDni());
         email_personal.setText(controlador.getServicio().getDto().getEmail());
     }
