@@ -3,15 +3,15 @@ package org.contenido.utilidad.exportar;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public enum TipoDocumento {
-    XLSX(new ExportarExcel(), new XSSFWorkbook(), ".xlsx");
+    XLSX(new ExportarExcel(), XSSFWorkbook.class , ".xlsx");
 
     private Exportador exportador;
-    private Object documento; // Puede recibir cualquier tipo de documento, haciendolo más flexible
+    private Class<?> claseDocumento; // Puede recibir cualquier tipo de documento, haciendolo más flexible
     private String extension;
 
-    TipoDocumento(Exportador exportador, Object documento, String extension) {
+    TipoDocumento(Exportador exportador, Class<?> claseDocumento, String extension) {
         this.exportador = exportador;
-        this.documento = documento;
+        this.claseDocumento = claseDocumento;
         this.extension = extension;
     }
 
@@ -25,11 +25,15 @@ public enum TipoDocumento {
 
     @SuppressWarnings("unchecked")
     public <T> T getDocumento() {
-        return (T) documento;
+        try {
+            return (T) claseDocumento.getDeclaredConstructor().newInstance(); // ← Aquí se crea nuevo
+        } catch (Exception e) {
+            throw new RuntimeException("No se pudo crear instancia del documento", e);
+        }
     }
 
-    public void setDocumento(Object documento) {
-        this.documento = documento;
+    public void setClaseDocumento(Class<?> claseDocumento) {
+        this.claseDocumento = claseDocumento;
     }
 
     public String getExtension() {

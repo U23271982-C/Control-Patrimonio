@@ -22,10 +22,25 @@ public abstract class Reporte {
 
     public Reporte (String tituloHoja, TipoDocumento extencion/*, String[] encabezado*/, List<Object[]> datos) {
         this.workbook = extencion.getDocumento();
-        this.hoja = workbook.createSheet(tituloHoja);
+        createSheet(tituloHoja);
         this.extencion = extencion;
         this.datos = datos;
         //this.encabezado = encabezado;
+    }
+    private void createSheet(String titlteSheet) {
+        // Supón que workbook es tu XSSFWorkbook y sheetName es el nombre de la hoja
+        if (workbook.getSheet(titlteSheet) != null) {
+            // El nombre ya existe, puedes lanzar una excepción, renombrar, o eliminar la hoja
+            // Por ejemplo, renombrar:
+            int i = 1;
+            String newSheetName = titlteSheet;
+            while (workbook.getSheet(newSheetName) != null) {
+                newSheetName = titlteSheet + "_" + i;
+                i++;
+            }
+            titlteSheet = newSheetName;
+        }
+        this.hoja = workbook.createSheet(titlteSheet);
     }
     abstract protected void cortarEncabezado();
 
