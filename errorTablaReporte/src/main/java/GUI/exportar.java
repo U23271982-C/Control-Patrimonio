@@ -18,15 +18,13 @@ public class exportar extends javax.swing.JFrame {
     /**
      * Creates new form exportar
      */
-    String[] encabezado;
     List<Object[]> milista;
     public exportar() {
         initComponents();
     }
-    public exportar(List<Object[]> lista, String[] enca) {
+    public exportar(List<Object[]> lista) {
         initComponents();
         this.milista = lista;
-        this.encabezado=enca;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -221,8 +219,8 @@ public class exportar extends javax.swing.JFrame {
         String titulohoja = titulo_hoja.getText();
         String slash = "\\";
         String nuevaruta = ruta.getText()+slash;
-        
-        ReporteXLSX reporte = new ReporteXLSX(titulohoja, nombrearchivo,nuevaruta ,encabezado, milista);
+
+        ReporteXLSX reporte = new ReporteXLSX(titulohoja, nombrearchivo, nuevaruta, milista);
         reporte.exportarReporte();
     }//GEN-LAST:event_jButton4ActionPerformed
 
