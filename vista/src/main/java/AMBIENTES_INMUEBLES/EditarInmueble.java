@@ -73,7 +73,6 @@ public class EditarInmueble extends javax.swing.JFrame {
         GuardarRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro.setText("Guardar cambios");
-        GuardarRegistro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         GuardarRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardarRegistroActionPerformed(evt);
@@ -92,7 +91,6 @@ public class EditarInmueble extends javax.swing.JFrame {
         GuardarRegistro1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro1.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro1.setText("Cancelar");
-        GuardarRegistro1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         GuardarRegistro1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardarRegistro1ActionPerformed(evt);

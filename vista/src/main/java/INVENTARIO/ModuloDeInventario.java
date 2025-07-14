@@ -74,7 +74,6 @@ public class ModuloDeInventario extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Inventario/cerrar-sesion.png"))); // NOI18N
         jButton1.setText("Cerrar");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -131,7 +130,6 @@ public class ModuloDeInventario extends javax.swing.JFrame {
         Modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Inventario/anadir.png"))); // NOI18N
         Modificar.setText("Modificar");
         Modificar.setActionCommand("✓ Modificar");
-        Modificar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ModificarActionPerformed(evt);
@@ -143,7 +141,6 @@ public class ModuloDeInventario extends javax.swing.JFrame {
         AñadirRegistro.setForeground(new java.awt.Color(255, 255, 255));
         AñadirRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Inventario/nuevo.png"))); // NOI18N
         AñadirRegistro.setText("Añadir inventario");
-        AñadirRegistro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         AñadirRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AñadirRegistroActionPerformed(evt);
@@ -160,7 +157,6 @@ public class ModuloDeInventario extends javax.swing.JFrame {
         Modificar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Inventario/reporte1.png"))); // NOI18N
         Modificar2.setText("Visualizar inventario");
         Modificar2.setActionCommand("✓ Modificar");
-        Modificar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Modificar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Modificar2ActionPerformed(evt);

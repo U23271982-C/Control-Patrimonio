@@ -41,7 +41,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
     
     public BienesPrincipal() {
         initComponents();
-       
+        
         jComboBox4.removeAllItems();
         CategoriaDTO todosCat = new CategoriaDTO(); 
         todosCat.setId(0); 
@@ -665,6 +665,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
     TablaBien.setModel(model);
 }
 
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdesktop.swingx.JXTable TablaBien;

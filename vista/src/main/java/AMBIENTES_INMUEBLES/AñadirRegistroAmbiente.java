@@ -63,7 +63,6 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cerrar-sesion.png"))); // NOI18N
         jButton1.setText("Atrás");
-        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -88,7 +87,6 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
         GuardarRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro.setText("Guardar");
-        GuardarRegistro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         GuardarRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardarRegistroActionPerformed(evt);
@@ -107,7 +105,6 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
         GuardarRegistro2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         GuardarRegistro2.setForeground(new java.awt.Color(255, 255, 255));
         GuardarRegistro2.setText("Cancelar");
-        GuardarRegistro2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         GuardarRegistro2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GuardarRegistro2ActionPerformed(evt);
@@ -145,7 +142,7 @@ public class AñadirRegistroAmbiente extends javax.swing.JFrame {
         JPanel1Layout.setVerticalGroup(
             JPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPanel1Layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
+                .addContainerGap(55, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)

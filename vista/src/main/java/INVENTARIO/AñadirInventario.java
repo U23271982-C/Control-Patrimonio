@@ -87,7 +87,6 @@ public class AñadirInventario extends javax.swing.JFrame {
         guardar_inventario.setFont(new java.awt.Font("Segoe UI Semilight", 1, 13)); // NOI18N
         guardar_inventario.setForeground(new java.awt.Color(255, 255, 255));
         guardar_inventario.setText("Guardar Inventario");
-        guardar_inventario.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         guardar_inventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardar_inventarioActionPerformed(evt);
@@ -98,7 +97,6 @@ public class AñadirInventario extends javax.swing.JFrame {
         cancelar.setFont(new java.awt.Font("Segoe UI Semilight", 1, 13)); // NOI18N
         cancelar.setForeground(new java.awt.Color(255, 255, 255));
         cancelar.setText("Cancelar");
-        cancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelarActionPerformed(evt);

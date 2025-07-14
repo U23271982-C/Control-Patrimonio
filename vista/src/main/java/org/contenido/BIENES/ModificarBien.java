@@ -140,6 +140,12 @@ public class ModificarBien extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(204, 204, 204));
         jLabel13.setText("Categoría");
 
+        descripcion_bien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descripcion_bienActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -159,13 +165,13 @@ public class ModificarBien extends javax.swing.JFrame {
                             .addComponent(jLabel11)
                             .addComponent(jLabel3)
                             .addComponent(jLabel8))
-                        .addGap(0, 238, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(categoria_bien, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(descripcion_bien, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(codigo_bien, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nombre_bien, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(categoria_bien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(codigo_bien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombre_bien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descripcion_bien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(103, 103, 103))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -279,6 +285,10 @@ public class ModificarBien extends javax.swing.JFrame {
     private void categoria_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoria_bienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_categoria_bienActionPerformed
+
+    private void descripcion_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcion_bienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descripcion_bienActionPerformed
 
     private void cargarCategoria(){
             categoria_bien.removeAllItems(); // Limpiamos antes

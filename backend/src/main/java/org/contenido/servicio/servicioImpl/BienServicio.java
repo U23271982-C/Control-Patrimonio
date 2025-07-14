@@ -51,7 +51,7 @@ public class BienServicio implements Servicio<BienDTO> {
     @Override
     public void eliminar(int idDto) {
         if (bienDAO.leerPorId(idDto) == null) {
-            throw new NegocioExcepcion("El ambiente con el id " + idDto + " no existe.");
+            throw new NegocioExcepcion("El bien con el id " + idDto + " no existe.");
         }
         bienDAO.eliminar(idDto);
     }

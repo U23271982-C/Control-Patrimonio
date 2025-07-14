@@ -181,7 +181,6 @@ public class PanelResponsables extends javax.swing.JFrame {
         AñadirRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         AñadirRegistro.setForeground(new java.awt.Color(255, 255, 255));
         AñadirRegistro.setText("Registrar");
-        AñadirRegistro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         AñadirRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AñadirRegistroActionPerformed(evt);
@@ -193,7 +192,6 @@ public class PanelResponsables extends javax.swing.JFrame {
         Modificar.setForeground(new java.awt.Color(255, 255, 255));
         Modificar.setText("Modificar");
         Modificar.setActionCommand("✓ Modificar");
-        Modificar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ModificarActionPerformed(evt);
@@ -209,7 +207,6 @@ public class PanelResponsables extends javax.swing.JFrame {
         Modificar1.setForeground(new java.awt.Color(255, 255, 255));
         Modificar1.setText("Eliminar");
         Modificar1.setActionCommand("✓ Modificar");
-        Modificar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Modificar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Modificar1ActionPerformed(evt);
