@@ -5,6 +5,7 @@
 package INVENTARIO;
 
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.InventarioControlador;
 import org.contenido.dto.InventarioDTO;
@@ -260,12 +261,21 @@ public class ModificarInventario extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        dto.setNombre(nombre_inventario.getText());
-        dto.setDescripcion(descripcion_inventario.getText());
-        controlador.actualizar(dto);
-        ModuloDeInventario obj = new ModuloDeInventario();
-        obj.setVisible(true);
-        dispose();
+        String inventario = nombre_inventario.getText();
+        InventarioDTO inv = new InventarioControlador().listarTodo().stream().filter(i -> i.getNombre().equals(inventario)).findFirst().orElse(null);
+        if (inv != null){
+            JOptionPane.showMessageDialog(this,
+            "Ya existe un inventario con nombre: " + inventario,
+            "Inventario existente",
+            JOptionPane.WARNING_MESSAGE);
+        }else{
+            dto.setNombre(nombre_inventario.getText());
+            dto.setDescripcion(descripcion_inventario.getText());
+            controlador.actualizar(dto);
+            ModuloDeInventario obj = new ModuloDeInventario();
+            obj.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

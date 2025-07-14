@@ -268,18 +268,15 @@ public class ModificarBien extends javax.swing.JFrame {
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
-              
-        //dto.setId(id_bien.get);
-        dto.setCodigo(codigo_bien.getText());
-        dto.setNombre(nombre_bien.getText());
-        dto.setDescripcion(descripcion_bien.getText());
-        CategoriaDTO categoriaseleccionada = (CategoriaDTO) categoria_bien.getSelectedItem();
-        dto.setCategoriaDTO(categoriaseleccionada);
-        controlador.actualizar(dto);
-        
-        BienesPrincipal obj = new BienesPrincipal();
-        obj.setVisible(true);
-        dispose();
+            dto.setNombre(nombre_bien.getText());
+            dto.setDescripcion(descripcion_bien.getText());
+            CategoriaDTO categoriaseleccionada = (CategoriaDTO) categoria_bien.getSelectedItem();
+            dto.setCategoriaDTO(categoriaseleccionada);
+            controlador.actualizar(dto);
+
+            BienesPrincipal obj = new BienesPrincipal();
+            obj.setVisible(true);
+            dispose();
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void categoria_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoria_bienActionPerformed

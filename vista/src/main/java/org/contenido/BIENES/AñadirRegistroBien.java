@@ -280,60 +280,55 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
         // 1. Cargo los campos básicos
-        dto.setCodigo(codigo_bien.getText());
-        dto.setNombre(nombre_bien.getText());
-        dto.setDescripcion(descripcion_bien.getText());
-
-        // Categoría (ya lo tienes bien)
-        CategoriaDTO catSel = (CategoriaDTO) categoria_bien.getSelectedItem();
-        dto.setCategoriaDTO(catSel);
-
-        // Estado fijo
-        EstadoDTO estado = new EstadoControlador().leerPorId(1);
-        dto.setEstado_actualDTO(estado);
-
-        // Responsable por DNI (si aún lo quieres como JTextField)
-        String dniResp = responsable_bien.getText().trim();
-        ResponsableDTO resp = new ResponsableControlador()
+        String codigo = codigo_bien.getText();
+        BienDTO codigor = new BienControlador().listarTodo().stream().filter(c -> c.getCodigo().equals(codigo)).findFirst().orElse(null);
+        if (codigor != null){
+            JOptionPane.showMessageDialog(this,
+            "Ya existe un bien con codigo: " + codigor,
+            "Codigo existente",
+            JOptionPane.WARNING_MESSAGE);
+        }else{
+            String dniResp = responsable_bien.getText().trim();
+            ResponsableDTO resp = new ResponsableControlador()
                                  .listarTodo()
                                  .stream()
                                  .filter(r -> r.getDni().equals(dniResp))
                                  .findFirst()
                                  .orElse(null);
-        if (resp == null) {
+            if (resp == null) {
             JOptionPane.showMessageDialog(this,
                 "No se encontró un responsable con el DNI: " + dniResp,
                 "DNI no encontrado",
                 JOptionPane.WARNING_MESSAGE);
-            return;
+            } else{
+                AmbienteDTO ambSel = (AmbienteDTO) ambiente_bien.getSelectedItem();
+                if (ambSel == null) {
+                    JOptionPane.showMessageDialog(this,
+                        "Debe seleccionar un ambiente.",
+                        "Ambiente no seleccionado",
+                        JOptionPane.WARNING_MESSAGE);
+                }else{
+                    dto.setCodigo(codigo_bien.getText());
+                    dto.setNombre(nombre_bien.getText());
+                    dto.setDescripcion(descripcion_bien.getText());
+                    CategoriaDTO catSel = (CategoriaDTO) categoria_bien.getSelectedItem();
+                    dto.setCategoriaDTO(catSel);                
+                    EstadoDTO estado = new EstadoControlador().leerPorId(1);
+                    dto.setEstado_actualDTO(estado);                
+                    dto.setResponsableDTO(resp);
+                    dto.setAmbienteDTO(ambSel);
+                    controlador.registrar(dto);
+                    codigo_bien.setText("");
+                    nombre_bien.setText("");
+                    descripcion_bien.setText("");
+                    responsable_bien.setText("");
+                    // no hacemos ambiente_bien.setText(...) ya que es combo
+
+                    new BienesPrincipal().setVisible(true);
+                    dispose();
+                }
+            }
         }
-        dto.setResponsableDTO(resp);
-
-        // **Ambiente**: lo leemos directamente del combo
-        AmbienteDTO ambSel = (AmbienteDTO) ambiente_bien.getSelectedItem();
-        if (ambSel == null) {
-            JOptionPane.showMessageDialog(this,
-                "Debe seleccionar un ambiente.",
-                "Ambiente no seleccionado",
-                JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        dto.setAmbienteDTO(ambSel);
-
-        // Registrar
-        controlador.registrar(dto);
-
-        // Limpiar y volver
-        codigo_bien.setText("");
-        nombre_bien.setText("");
-        descripcion_bien.setText("");
-        responsable_bien.setText("");
-        // no hacemos ambiente_bien.setText(...) ya que es combo
-
-        new BienesPrincipal().setVisible(true);
-        dispose();
-
-
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
