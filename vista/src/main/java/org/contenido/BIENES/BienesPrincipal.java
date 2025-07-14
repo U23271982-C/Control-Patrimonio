@@ -461,11 +461,9 @@ public class BienesPrincipal extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         List<Object[]> datos = convertirTablaLista();
-
-        exportar obj = new exportar(datos);
+        exportar obj = new exportar(datos,this);
         obj.setVisible(true);
-        dispose();
-
+        this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed

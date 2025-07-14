@@ -6,7 +6,8 @@ package org.contenido.BIENES;
 
 import java.io.File;
 import java.util.List;
-import javax.swing.JFileChooser;
+import javax.swing.*;
+
 import org.contenido.reporte.ReporteXLSX;
 
 /**
@@ -19,10 +20,13 @@ public class exportar extends javax.swing.JFrame {
      * Creates new form exportar
      */
     List<Object[]> milista;
+    private javax.swing.JFrame ventanaAnterior;
+    
     public exportar() {
         initComponents();
     }
-    public exportar(List<Object[]> lista) {
+    public exportar(List<Object[]> lista, javax.swing.JFrame Ventanaanterior) {
+        this.ventanaAnterior=Ventanaanterior;
         initComponents();
         this.milista = lista;
     }
@@ -208,9 +212,10 @@ public class exportar extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        BienesPrincipal obj = new BienesPrincipal();
-        obj.setVisible(true);
-        dispose();
+        if(ventanaAnterior != null){
+            ventanaAnterior.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

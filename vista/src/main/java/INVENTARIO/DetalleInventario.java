@@ -240,10 +240,9 @@ public class DetalleInventario extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         List<Object[]> datos = convertirTablaLista();
-        exportar obj = new exportar(datos);
+        exportar obj = new exportar(datos,this);
         obj.setVisible(true);
-        dispose();
-        
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cargarDetalle(InventarioDTO in){
