@@ -43,12 +43,11 @@ public class PanelCategoria extends javax.swing.JFrame {
     }
     private void recargarTablaCategorias() {
     DefaultTableModel modelo = new DefaultTableModel(
-        new String[]{"ID", "Nombre", "Descripción"},
+        new String[]{"Nombre", "Descripción"},
         0
     );
     for (CategoriaDTO cat : listacategorias) {
         modelo.addRow(new Object[]{
-            cat.getId(),
             cat.getNombre(),
             cat.getDescripcion()
         });

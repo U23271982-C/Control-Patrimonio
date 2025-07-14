@@ -1,6 +1,7 @@
 package org.contenido.dao.daoImplementadoModelo;
 
 import org.contenido.dao.DAO;
+import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.excepcion.PersistenciaExcepcion;
 import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.mapeo.mapeoImpl.EstadoMapper;
@@ -32,7 +33,7 @@ public class EstadoDAO implements DAO<Estado> {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al registrar %s: ", Estado.class.getName()), e);
+            throw new PersistenciaExcepcion(String.format("Error al registrar %s: ", Estado.class.getSimpleName()), e);
         }
     }
 
@@ -81,7 +82,11 @@ public class EstadoDAO implements DAO<Estado> {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al eliminar %s: ", Estado.class.getName()), e);
+            if (e.getMessage().contains("foreign key constraint")) {
+                throw new NegocioExcepcion("No se puede eliminar el estado porque está asignado a uno o más bienes.");
+            } else {
+                throw new PersistenciaExcepcion(String.format("Error al eliminar %s: ", Estado.class.getName()), e);
+            }
         }
     }
 
