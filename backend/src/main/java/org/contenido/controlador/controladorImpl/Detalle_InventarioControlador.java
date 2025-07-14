@@ -63,7 +63,7 @@ public class Detalle_InventarioControlador implements Controlador<Detalle_Invent
     public List<Detalle_InventarioDTO> listarTodo() {
         try {
             List<Detalle_InventarioDTO> detalle_inventarios = detalle_InventarioServicio.listarTodo();
-            NotificacionUtil.mostrarMensajeAfirmacion("✅ Detalles de inventarios listados correctamente.");
+            //NotificacionUtil.mostrarMensajeAfirmacion("✅ Detalles de inventarios listados correctamente.");
             return detalle_inventarios;
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);
