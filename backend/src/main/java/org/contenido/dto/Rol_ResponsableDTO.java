@@ -9,9 +9,9 @@ import javax.validation.constraints.Size;
 public class Rol_ResponsableDTO {
     @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class})
     private int id;
-    @Size(max = 80, message = "La descripción no debe exceder los 80 caracteres")
+    @Size(max = 80, message = "La descripción no debe exceder los 80 caracteres", groups = {EnCrear.class , EnActualizar.class})
     private String descripcion;
-    @Size(max = 80, message = "El nombre rol no debe exceder los 80 caracteres")
+    @Size(max = 80, message = "El nombre rol no debe exceder los 80 caracteres", groups = {EnCrear.class , EnActualizar.class})
     private String nombreRol;
 
 

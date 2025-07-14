@@ -12,19 +12,20 @@ public class ResponsableDTO {
     @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class})
     private int id;
     @NotNull(message = "El nombre no puede ser nulo", groups = {EnCrear.class})
-    @Size(max = 30, message = "El nombre no debe exceder los 30 caracteres")
+    @Size(max = 30, message = "El nombre no debe exceder los 30 caracteres", groups = {EnCrear.class , EnActualizar.class})
     private String nombre;
-    @Size(max = 8, message = "El dni no debe exceder los 8 caracteres")
+    @Size(max = 8, message = "El dni no debe exceder los 8 caracteres", groups = {EnCrear.class , EnActualizar.class})
     private String dni;
     @Email(message = "El email no es valido")
+    @Size(max = 30, message = "El email no debe exceder los 30 caracteres", groups = {EnCrear.class , EnActualizar.class})
     private String email;
     @NotNull(message = "El Rol Responsable no puede ser nulo", groups = {EnCrear.class})
     private Rol_ResponsableDTO rol_responsableDTO;
     // corroborar Rol_Responsble
     //@NotBlank(message = "El usuario no puede estar en blanco", groups = {EnCrear.class, EnActualizar.class})
-    @Size(max = 30, message = "El usuario no debe exceder los 30 caracteres")
+    @Size(max = 30, message = "El usuario no debe exceder los 30 caracteres", groups = {EnCrear.class , EnActualizar.class})
     private String usuario;
-    @Size(max = 255, message = "La contraseña no debe exceder los 255 caracteres")
+    @Size(max = 255, message = "La contraseña no debe exceder los 255 caracteres", groups = {EnCrear.class , EnActualizar.class})
     //@NotBlank(message = "La contraseña no puede estar en blanco", groups = {EnCrear.class, EnActualizar.class})
     private String contrsena;
 
