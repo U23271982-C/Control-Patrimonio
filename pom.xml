@@ -12,7 +12,6 @@
     <modules>
         <module>vista</module>
         <module>backend</module>
-        <module>errorTablaReporte</module>
     </modules>
 
     <properties>
