@@ -10,10 +10,10 @@ public class CategoriaDTO {
     @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class})
     private int id;
     @NotNull(message = "El nombre no puede ser nulo", groups = {EnCrear.class})
-    @Size(max = 60, message = "La descripción no debe exceder los 60 caracteres", groups = {EnCrear.class, EnActualizar.class})
+    @Size(max = 60, message = "La nombre no debe exceder los 60 caracteres", groups = {EnCrear.class, EnActualizar.class})
     private String nombre;
     @NotNull(message = "La descripción no puede ser nula", groups = {EnCrear.class})
-    @Size(max = 60, message = "La descripción no debe exceder los 60 caracteres")
+    @Size(max = 60, message = "La descripción no debe exceder los 60 caracteres", groups = {EnCrear.class, EnActualizar.class})
     private String descripcion;
 
     public CategoriaDTO() {}
