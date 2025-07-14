@@ -437,7 +437,12 @@ public class BienesPrincipal extends javax.swing.JFrame {
         TableModel modelo = TablaBien.getModel();
         int columnas = modelo.getColumnCount();
 
-
+        // agregar encabezado a los datos
+        String[] encabezado = new String[columnas];
+        for (int i = 0; i < columnas; i++) {
+            encabezado[i] = modelo.getColumnName(i);
+        }
+        datosFiltrados.add(encabezado); //agregamos el encabezado a los datos
 
         for (int i = 0; i < TablaBien.getRowCount(); i++) {
             int modelIndex = TablaBien.convertRowIndexToModel(i);
@@ -455,19 +460,11 @@ public class BienesPrincipal extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        //Logica de GUI bien implementada
-        /*TableModel modelo = TablaBien.getModel();
-        int columnas = modelo.getColumnCount();
-
-        String[] encabezado = new String[columnas];
-        for (int i = 0; i < columnas; i++) {
-            encabezado[i] = modelo.getColumnName(i);
-
-        }*/
-
         List<Object[]> datos = convertirTablaLista();
-        ReporteXLSX reporte = new ReporteXLSX("Filtrado", "Filtrado Bienes", "/Users/isra-macbook/Documents/", datos);
-        reporte.exportarReporte();
+
+        exportar obj = new exportar(datos);
+        obj.setVisible(true);
+        dispose();
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
