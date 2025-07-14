@@ -50,11 +50,13 @@ public class BienDAO implements DAO<Bien> {
             stmt.setInt(1, idEntidad);
 
             ResultSet rs = stmt.executeQuery();
+
             if (rs.next()) {
                 return mapper.mapDeResultSet(rs);
             }
 
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new PersistenciaExcepcion(String.format("Error al leer %s: ", Bien.class.getName()), e);
         }
         return null;
@@ -62,23 +64,23 @@ public class BienDAO implements DAO<Bien> {
 
     @Override
     public void actualizar(Bien entidad) {
-        String sql = "{ CALL pa_Actualizar_Bien(?, ?, ?, ?, ?, ?, ?, ?, ?) }";
+        String sql = "{ CALL pa_Actualizar_Bien(?, ?, ?, ?, ?, ?, ?, ?) }";
         try (Connection conn = ConexionPool.getConnection();
              CallableStatement stmt = conn.prepareCall(sql)){
 
             stmt.setInt(1, entidad.getId());
-            stmt.setString(2, entidad.getCodigo());
-            stmt.setString(3, entidad.getNombre());
+            stmt.setString(2, entidad.getNombre());
+            stmt.setString(3, entidad.getCodigo());
             stmt.setString(4, entidad.getDescripcion());
-            stmt.setDate(5, java.sql.Date.valueOf(entidad.getFecha_registro()));
-            stmt.setInt(6, entidad.getEstado().getId());
-            stmt.setInt(7, entidad.getCategoria().getId());
-            stmt.setInt(8, entidad.getAmbiente().getId());
-            stmt.setInt(9, entidad.getResponsable().getId());
+            stmt.setInt(5, entidad.getEstado().getId());
+            stmt.setInt(6, entidad.getCategoria().getId());
+            stmt.setInt(7, entidad.getAmbiente().getId());
+            stmt.setInt(8, entidad.getResponsable().getId());
 
             stmt.executeUpdate();
 
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new PersistenciaExcepcion(String.format("Error al actualizar %s: ", Bien.class.getName()), e);
         }
     }

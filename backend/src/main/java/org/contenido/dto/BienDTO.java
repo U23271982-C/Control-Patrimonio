@@ -12,12 +12,13 @@ public class BienDTO {
     @NotNull( message = "El id no puede ser nulo", groups = {EnActualizar.class})
     private int id;
     @NotNull( message = "El codigo no puede ser nulo", groups = {EnCrear.class})
+    @Size(max = 30, message = "El codigo no debe exceder los 30 caracteres", groups = {EnCrear.class , EnActualizar.class})
     private String codigo;
     @NotNull( message = "El nombre no puede ser nulo", groups = {EnCrear.class})
-    @Size(max = 50, message = "La descripción no debe exceder los 50 caracteres")
+    @Size(max = 50, message = "El nombre no debe exceder los 50 caracteres", groups = {EnCrear.class , EnActualizar.class})
     private String nombre;
     @NotNull( message = "La descripción no puede ser nula", groups = {EnCrear.class})
-    @Size(max = 50, message = "La descripción no debe exceder los 50 caracteres")
+    @Size(max = 50, message = "La descripción no debe exceder los 50 caracteres", groups = {EnCrear.class , EnActualizar.class})
     private String descripcion;
     @Null( message = "La fecha de registro no puede ser nula", groups = {EnCrear.class})
     private LocalDate fecha_registro;
