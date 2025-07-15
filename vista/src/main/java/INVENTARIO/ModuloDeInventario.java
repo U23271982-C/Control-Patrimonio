@@ -23,10 +23,20 @@ public class ModuloDeInventario extends javax.swing.JFrame {
      */
     Controlador<InventarioDTO> controladori = new InventarioControlador();
     List<InventarioDTO> listainventario = controladori.listarTodo();
-    
+    private List<InventarioDTO> listaFiltradaInventario = new java.util.ArrayList<>();
     public ModuloDeInventario() {
         initComponents();
         cargarInventario();
+        
+            // Filtro dinámico por nombre
+        jTextField1.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) { filtrarPorNombre(); }
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) { filtrarPorNombre(); }
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) { filtrarPorNombre(); }
+        });
     }
 
     /**
@@ -248,20 +258,12 @@ public class ModuloDeInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_AñadirRegistroActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
-
-        // TODO add your handling code here:
-        int filaVisual = tabla_inventario.getSelectedRow();  // Fila seleccionada en la vista
-
+        int filaVisual = tabla_inventario.getSelectedRow();
         if (filaVisual == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione un inventario.");
             return;
         }
-
-        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
-        int filaModelo = tabla_inventario.convertRowIndexToModel(filaVisual);
-
-        // Obtenemos el objeto DTO desde la lista
-        InventarioDTO InventarioSeleccionado = listainventario.get(filaModelo);
+        InventarioDTO InventarioSeleccionado = listaFiltradaInventario.get(filaVisual);
         ModificarInventario obj = new ModificarInventario(InventarioSeleccionado);
         obj.setVisible(true);
         dispose();
@@ -275,36 +277,59 @@ public class ModuloDeInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Modificar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar2ActionPerformed
-            // TODO add your handling code here:
-        int filaVisual = tabla_inventario.getSelectedRow();  // Fila seleccionada en la vista
-
+        int filaVisual = tabla_inventario.getSelectedRow();
         if (filaVisual == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione un inventario.");
             return;
         }
-
-        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
-        int filaModelo = tabla_inventario.convertRowIndexToModel(filaVisual);
-
-        // Obtenemos el objeto DTO desde la lista
-        InventarioDTO InventarioSeleccionado = listainventario.get(filaModelo);
+        InventarioDTO InventarioSeleccionado = listaFiltradaInventario.get(filaVisual);
         DetalleInventario obj = new DetalleInventario(InventarioSeleccionado);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_Modificar2ActionPerformed
 
-    private void cargarInventario(){
+    private void cargarInventario() {
         DefaultTableModel modelo = new DefaultTableModel(
-        new String[]{"Codigo Inventario","Descripcion", "Fecha realizada"}, 0
+            new String[]{"Codigo Inventario", "Descripcion", "Fecha realizada"}, 0
         );
 
+        listaFiltradaInventario.clear();
+
         for (InventarioDTO inventario : listainventario) {
+            listaFiltradaInventario.add(inventario);
+
             modelo.addRow(new Object[]{
                 inventario.getNombre(),
                 inventario.getDescripcion(),
                 inventario.getFechaInicio()
             });
         }
+
+        tabla_inventario.setModel(modelo);
+    }
+    private void filtrarPorNombre() {
+        String texto = jTextField1.getText().trim().toLowerCase();
+
+        DefaultTableModel modelo = new DefaultTableModel(
+            new String[]{"Codigo Inventario", "Descripcion", "Fecha realizada"}, 0
+        );
+
+        listaFiltradaInventario.clear();
+
+        for (InventarioDTO inventario : listainventario) {
+            String nombre = inventario.getNombre() != null ? inventario.getNombre().toLowerCase() : "";
+
+            if (texto.isEmpty() || nombre.contains(texto)) {
+                listaFiltradaInventario.add(inventario);  // sincronizamos lista filtrada
+
+                modelo.addRow(new Object[]{
+                    inventario.getNombre(),
+                    inventario.getDescripcion(),
+                    inventario.getFechaInicio()
+                });
+            }
+        }
+
         tabla_inventario.setModel(modelo);
     }
     /**
