@@ -126,7 +126,7 @@
                               <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                               <Component id="Modificar" min="-2" pref="172" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="415" max="-2" attributes="0"/>
-                              <Component id="Modificar1" min="-2" pref="172" max="-2" attributes="0"/>
+                              <Component id="Eliminar" min="-2" pref="172" max="-2" attributes="0"/>
                               <EmptySpace pref="73" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -178,7 +178,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Modificar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           <Component id="AñadirRegistro" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                          <Component id="Modificar1" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="Eliminar" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
@@ -257,7 +257,7 @@
                 <Property name="text" type="java.lang.String" value="Cargo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="Modificar1">
+            <Component class="javax.swing.JButton" name="Eliminar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="66" red="ff" type="rgb"/>
@@ -272,7 +272,7 @@
                 <Property name="actionCommand" type="java.lang.String" value="&#x2713; Modificar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Modificar1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EliminarActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">

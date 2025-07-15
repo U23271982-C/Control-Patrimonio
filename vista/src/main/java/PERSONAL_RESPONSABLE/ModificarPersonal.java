@@ -269,7 +269,7 @@ public class ModificarPersonal extends javax.swing.JFrame {
                 break;
             }
         }
-        if(responsable!=null){
+        if(responsable!=null && responsable.getId()!=responsableSeleccionado.getId()){
             JOptionPane.showMessageDialog(null,
             "Ya existe el responsable con el DNI: " + dni,
             "DNI ya existente",

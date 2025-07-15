@@ -69,7 +69,7 @@ public class PanelResponsables extends javax.swing.JFrame {
     private void cargarResponsablesEnTabla() {
     // Crear el modelo de la tabla con los nombres de columnas
     DefaultTableModel modelo = new DefaultTableModel(
-        new String[]{"Nombre", "DNI", "Correo", "Cargo", "Usuario", "Contraseña", "Descripción"}, 0
+        new String[]{"Nombre", "DNI", "Correo", "Cargo", "Descripción"}, 0
     );
 
     for (ResponsableDTO responsable : listaResponsables) {
@@ -78,8 +78,6 @@ public class PanelResponsables extends javax.swing.JFrame {
             responsable.getDni(),
             responsable.getEmail(),
             responsable.getRol_responsableDTO().getNombreRol(),
-            responsable.getUsuario(),
-            responsable.getContrsena(),
             responsable.getRol_ResponsableDTO().getDescripcion()
         });
     }
@@ -142,7 +140,7 @@ public class PanelResponsables extends javax.swing.JFrame {
         AñadirRegistro = new javax.swing.JButton();
         Modificar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        Modificar1 = new javax.swing.JButton();
+        Eliminar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla_Lista_Responsable = new org.jdesktop.swingx.JXTable();
         jButton1 = new javax.swing.JButton();
@@ -202,14 +200,14 @@ public class PanelResponsables extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Cargo");
 
-        Modificar1.setBackground(new java.awt.Color(255, 102, 0));
-        Modificar1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Modificar1.setForeground(new java.awt.Color(255, 255, 255));
-        Modificar1.setText("Eliminar");
-        Modificar1.setActionCommand("✓ Modificar");
-        Modificar1.addActionListener(new java.awt.event.ActionListener() {
+        Eliminar.setBackground(new java.awt.Color(255, 102, 0));
+        Eliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        Eliminar.setText("Eliminar");
+        Eliminar.setActionCommand("✓ Modificar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Modificar1ActionPerformed(evt);
+                EliminarActionPerformed(evt);
             }
         });
 
@@ -235,7 +233,7 @@ public class PanelResponsables extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(415, 415, 415)
-                        .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(73, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -273,7 +271,7 @@ public class PanelResponsables extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AñadirRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Modificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
         );
 
@@ -344,10 +342,26 @@ public class PanelResponsables extends javax.swing.JFrame {
 
     private void AñadirRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadirRegistroActionPerformed
         // TODO add your handling code here:
-        ModuloRegistroResponsables obj = new ModuloRegistroResponsables();
-        obj.setVisible(true);
-        dispose();
-        
+            // Formato de JOptionPanel
+            JPasswordField passwordField = new JPasswordField();
+            Object[] message = {
+                    "Ingrese su contraseña:", passwordField
+            };
+            int option = JOptionPane.showConfirmDialog(null, message, "Reautenticación", JOptionPane.OK_CANCEL_OPTION);
+            boolean esSuperUsuario = false;
+            if (option == JOptionPane.OK_OPTION) {
+                String contrasena = new String(passwordField.getPassword());
+                esSuperUsuario = InicioSesion.controlador.accesoSoloSuperUsuario(contrasena);
+                InicioSesion.dto.setContrsena(contrasena);
+
+                // si es super usuario:
+                if (esSuperUsuario){
+                    // Abrir la nueva interfaz y pasarle el objeto
+                ModuloRegistroResponsables obj = new ModuloRegistroResponsables();
+                obj.setVisible(true);
+                dispose();
+                }
+            }
     }//GEN-LAST:event_AñadirRegistroActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
@@ -393,10 +407,8 @@ public class PanelResponsables extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ModificarActionPerformed
 
-    private void Modificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Modificar1ActionPerformed
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         // TODO add your handling code here:
-
-
         int filaSeleccionada = Tabla_Lista_Responsable.getSelectedRow();
 
         if (filaSeleccionada != -1) {
@@ -411,25 +423,38 @@ public class PanelResponsables extends javax.swing.JFrame {
                     break;
                 }
             }
+            JPasswordField passwordField = new JPasswordField();
+            Object[] message = {
+                    "Ingrese su contraseña:", passwordField
+            };
+            int option = JOptionPane.showConfirmDialog(null, message, "Reautenticación", JOptionPane.OK_CANCEL_OPTION);
+            boolean esSuperUsuario = false;
+            if (option == JOptionPane.OK_OPTION) {
+                String contrasena = new String(passwordField.getPassword());
+                esSuperUsuario = InicioSesion.controlador.accesoSoloSuperUsuario(contrasena);
+                InicioSesion.dto.setContrsena(contrasena);
+                
+                if (esSuperUsuario){
+                    int resultado = JOptionPane.showConfirmDialog(
+                    this,
+                    "¿Está seguro de eliminar este responsable?",
+                    "Confirmar eliminación",
+                    JOptionPane.OK_CANCEL_OPTION
+                    );
+                    if (resultado != JOptionPane.OK_OPTION) return;
 
-        int resultado = JOptionPane.showConfirmDialog(
-        this,
-        "¿Está seguro de eliminar este responsable?",
-        "Confirmar eliminación",
-        JOptionPane.OK_CANCEL_OPTION
-    );
-        if (resultado != JOptionPane.OK_OPTION) return;
+                    // 1) Elimino en la base
+                    controlador.eliminar(seleccionado.getId());
 
-        // 1) Elimino en la base
-        controlador.eliminar(seleccionado.getId());
+                    // 2) Refresco la lista en memoria
+                    listaResponsables = controlador.listarTodo();
 
-        // 2) Refresco la lista en memoria
-        listaResponsables = controlador.listarTodo();
-
-        // 3) Repopulo la tabla (sin filtro)
-        cargarResponsablesEnTabla();
+                    // 3) Repopulo la tabla (sin filtro)
+                    cargarResponsablesEnTabla();
+                }
+            }    
         }
-    }//GEN-LAST:event_Modificar1ActionPerformed
+    }//GEN-LAST:event_EliminarActionPerformed
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -500,8 +525,8 @@ public class PanelResponsables extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AñadirRegistro;
     private javax.swing.JComboBox<Rol_ResponsableDTO> Cargo;
+    private javax.swing.JButton Eliminar;
     private javax.swing.JButton Modificar;
-    private javax.swing.JButton Modificar1;
     private javax.swing.JTextField Nombre_Filtro;
     private org.jdesktop.swingx.JXTable Tabla_Lista_Responsable;
     private javax.swing.JButton jButton1;
