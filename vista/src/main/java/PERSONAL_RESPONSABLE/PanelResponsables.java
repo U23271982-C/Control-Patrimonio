@@ -36,7 +36,7 @@ public class PanelResponsables extends javax.swing.JFrame {
 
     public PanelResponsables() {
         initComponents();
-            Cargo.setModel(new DefaultComboBoxModel<Rol_ResponsableDTO>());
+        Cargo.setModel(new DefaultComboBoxModel<Rol_ResponsableDTO>());
         cargarResponsablesEnTabla();
         Cargo.removeAllItems();
         // Opción “Todos”
@@ -55,16 +55,15 @@ public class PanelResponsables extends javax.swing.JFrame {
         cargarRolesAlComboBox();
 
         Nombre_Filtro.getDocument().addDocumentListener(new DocumentListener() {
-        public void insertUpdate(DocumentEvent e){ filtrarResponsables();}
-        public void removeUpdate(DocumentEvent e){ filtrarResponsables();}
-        public void changedUpdate(DocumentEvent e){ filtrarResponsables();}
-        });
-        
-        Cargo.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                filtrarRolResponsable(); // o el método que desees ejecutar
-            }
+            public void insertUpdate(DocumentEvent e) { filtrarResponsables(); }
+            @Override
+            public void removeUpdate(DocumentEvent e) { filtrarResponsables(); }
+            @Override
+            public void changedUpdate(DocumentEvent e) { filtrarResponsables(); }
+        });
+        Cargo.addActionListener((ActionEvent e) -> {
+            filtrarResponsables();
         });
     }
     
@@ -94,32 +93,6 @@ public class PanelResponsables extends javax.swing.JFrame {
     
     private void filtrarResponsables() {
         String nombreFiltro = Nombre_Filtro.getText().trim().toLowerCase();
-
-        DefaultTableModel modelo = new DefaultTableModel(
-            new String[] {"Nombre", "DNI", "Correo", "Cargo", "Usuario", "Contraseña", "Descripción"}, 
-            0
-        );
-
-        for (ResponsableDTO r : listaResponsables) {
-            boolean matchNombre = r.getNombre().toLowerCase().contains(nombreFiltro);
-
-            if (matchNombre) {
-                modelo.addRow(new Object[] {
-                    r.getNombre(),
-                    r.getDni(),
-                    r.getEmail(),
-                    r.getRol_responsableDTO().getNombreRol(),
-                    r.getUsuario(),
-                    r.getContrsena(),
-                    r.getRol_responsableDTO().getDescripcion()
-                });
-            }
-        }
-
-        Tabla_Lista_Responsable.setModel(modelo); // <-- Cambia por tu JTable real
-    }
-
-    private void filtrarRolResponsable() {
         Rol_ResponsableDTO rolSeleccionado = (Rol_ResponsableDTO) Cargo.getSelectedItem();
         int rolId = (rolSeleccionado != null) ? rolSeleccionado.getId() : 0;
 
@@ -129,9 +102,10 @@ public class PanelResponsables extends javax.swing.JFrame {
         );
 
         for (ResponsableDTO r : listaResponsables) {
+            boolean matchNombre = r.getNombre().toLowerCase().contains(nombreFiltro);
             boolean matchRol = (rolId == 0) || (r.getRol_responsableDTO().getId() == rolId);
 
-            if (matchRol) {
+            if (matchNombre && matchRol) {
                 modelo.addRow(new Object[] {
                     r.getNombre(),
                     r.getDni(),
@@ -144,7 +118,7 @@ public class PanelResponsables extends javax.swing.JFrame {
             }
         }
 
-        Tabla_Lista_Responsable.setModel(modelo); // <-- Cambia por tu JTable real
+        Tabla_Lista_Responsable.setModel(modelo); // reemplaza por tu JTable real
     }
 
     
