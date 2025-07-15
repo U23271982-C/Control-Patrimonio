@@ -1,5 +1,7 @@
 package PERSONAL_RESPONSABLE;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -56,9 +58,14 @@ public class PanelResponsables extends javax.swing.JFrame {
         public void insertUpdate(DocumentEvent e){ filtrarResponsables();}
         public void removeUpdate(DocumentEvent e){ filtrarResponsables();}
         public void changedUpdate(DocumentEvent e){ filtrarResponsables();}
-
         });
-    
+        
+        Cargo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                filtrarRolResponsable(); // o el método que desees ejecutar
+            }
+        });
     }
     
 
@@ -86,39 +93,62 @@ public class PanelResponsables extends javax.swing.JFrame {
     }
     
     private void filtrarResponsables() {
-    String nombreFiltro = Nombre_Filtro.getText().trim().toLowerCase();
-    Rol_ResponsableDTO rolSeleccionado = (Rol_ResponsableDTO) Cargo.getSelectedItem();
-    int rolId = (rolSeleccionado != null) ? rolSeleccionado.getId() : 0;
+        String nombreFiltro = Nombre_Filtro.getText().trim().toLowerCase();
 
-    // 1) Creamos el modelo, SIN asignarlo todavía a la tabla
-    DefaultTableModel modelo = new DefaultTableModel(
-        new String[] {"Nombre", "DNI", "Correo", "Cargo", "Usuario", "Contraseña", "Descripción"}, 
-        0
-    );
+        DefaultTableModel modelo = new DefaultTableModel(
+            new String[] {"Nombre", "DNI", "Correo", "Cargo", "Usuario", "Contraseña", "Descripción"}, 
+            0
+        );
 
-    // 2) Recorremos todos los responsables y añadimos sólo los que cumplan
-    for (ResponsableDTO r : listaResponsables) {
-        boolean matchNombre = r.getNombre().toLowerCase().contains(nombreFiltro);
-        boolean matchRol    = (rolId == 0) || (r.getRol_responsableDTO().getId() == rolId);
+        for (ResponsableDTO r : listaResponsables) {
+            boolean matchNombre = r.getNombre().toLowerCase().contains(nombreFiltro);
 
-        if (matchNombre && matchRol) {
-            modelo.addRow(new Object[]{
-                r.getNombre(),
-                r.getDni(),
-                r.getEmail(),
-                r.getRol_responsableDTO().getNombreRol(),
-                r.getUsuario(),
-                r.getContrsena(),
-                r.getRol_responsableDTO().getDescripcion()
-            });
+            if (matchNombre) {
+                modelo.addRow(new Object[] {
+                    r.getNombre(),
+                    r.getDni(),
+                    r.getEmail(),
+                    r.getRol_responsableDTO().getNombreRol(),
+                    r.getUsuario(),
+                    r.getContrsena(),
+                    r.getRol_responsableDTO().getDescripcion()
+                });
+            }
         }
+
+        Tabla_Lista_Responsable.setModel(modelo); // <-- Cambia por tu JTable real
     }
+
+    private void filtrarRolResponsable() {
+        Rol_ResponsableDTO rolSeleccionado = (Rol_ResponsableDTO) Cargo.getSelectedItem();
+        int rolId = (rolSeleccionado != null) ? rolSeleccionado.getId() : 0;
+
+        DefaultTableModel modelo = new DefaultTableModel(
+            new String[] {"Nombre", "DNI", "Correo", "Cargo", "Usuario", "Contraseña", "Descripción"}, 
+            0
+        );
+
+        for (ResponsableDTO r : listaResponsables) {
+            boolean matchRol = (rolId == 0) || (r.getRol_responsableDTO().getId() == rolId);
+
+            if (matchRol) {
+                modelo.addRow(new Object[] {
+                    r.getNombre(),
+                    r.getDni(),
+                    r.getEmail(),
+                    r.getRol_responsableDTO().getNombreRol(),
+                    r.getUsuario(),
+                    r.getContrsena(),
+                    r.getRol_responsableDTO().getDescripcion()
+                });
+            }
+        }
+
+        Tabla_Lista_Responsable.setModel(modelo); // <-- Cambia por tu JTable real
+    }
+
     
-
-    // 3) ¡Sólo aquí asignamos el modelo a la tabla!
-    Tabla_Lista_Responsable.setModel(modelo);
-    }
-
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
