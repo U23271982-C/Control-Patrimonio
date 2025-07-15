@@ -4,6 +4,7 @@
  */
 package MOVIMIENTOS;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +24,7 @@ public class PanelMovimientos extends javax.swing.JFrame {
      */
     Controlador<BienDTO> controlador = new BienControlador();
     List<BienDTO> listabien = controlador.listarTodo();
+    private List<BienDTO> listaFiltrada = new ArrayList<>(); // NUEVA LÍNEA
     
     public PanelMovimientos() {
         initComponents();
@@ -35,36 +37,38 @@ public class PanelMovimientos extends javax.swing.JFrame {
     }
     
     private void filtrarPorCodigo() {
-    String texto = jTextField1.getText().trim().toLowerCase();
+        String texto = jTextField1.getText().trim().toLowerCase();
 
-    DefaultTableModel modelo = new DefaultTableModel(
-        new String[]{
-            "Código","Nombre","Descripcion","Categoria",
-            "Estado","Responsable a cargo","Ambiente","Fecha Registro"
-        }, 0
-    );
+        DefaultTableModel modelo = new DefaultTableModel(
+            new String[]{
+                "Código", "Nombre", "Descripcion", "Categoria",
+                "Estado", "Responsable a cargo", "Ambiente", "Fecha Registro"
+            }, 0
+        );
 
-    for (BienDTO bien : listabien) {
-        String codigo = bien.getCodigo() != null
-            ? bien.getCodigo().toLowerCase()
-            : "";
-        // Si el campo está vacío, muestro todo; si no, sólo los que contengan el texto
-        if (texto.isEmpty() || codigo.contains(texto)) {
-            modelo.addRow(new Object[]{
-                bien.getCodigo(),
-                bien.getNombre(),
-                bien.getDescripcion(),
-                bien.getCategoriaDTO()    != null ? bien.getCategoriaDTO().getNombre() : "",
-                bien.getEstado_actualDTO() != null ? bien.getEstado_actualDTO().getTipo() : "",
-                bien.getResponsableDTO()   != null ? bien.getResponsableDTO().getNombre() : "",
-                bien.getAmbienteDTO()      != null ? bien.getAmbienteDTO().getNombre() : "",
-                bien.getFecha_registro()
-            });
+        listaFiltrada.clear(); // limpiamos lo anterior
+
+        for (BienDTO bien : listabien) {
+            String codigo = bien.getCodigo() != null ? bien.getCodigo().toLowerCase() : "";
+
+            if (texto.isEmpty() || codigo.contains(texto)) {
+                listaFiltrada.add(bien); // mantenemos la lista filtrada sincronizada
+
+                modelo.addRow(new Object[]{
+                    bien.getCodigo(),
+                    bien.getNombre(),
+                    bien.getDescripcion(),
+                    bien.getCategoriaDTO().getNombre(),
+                    bien.getEstado_actualDTO().getTipo(),
+                    bien.getResponsableDTO().getNombre(),
+                    bien.getAmbienteDTO().getNombre(),
+                    bien.getFecha_registro()
+                });
+            }
         }
-    }
 
-    tabla_bien.setModel(modelo);
-}
+        tabla_bien.setModel(modelo);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -245,19 +249,15 @@ public class PanelMovimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void rotacion_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotacion_bienActionPerformed
-        // TODO add your handling code here:
-        int filaVisual = tabla_bien.getSelectedRow();  // Fila seleccionada en la vista
-
+                // TODO add your handling code here:
+        int filaVisual = tabla_bien.getSelectedRow();
         if (filaVisual == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione un bien.");
             return;
         }
 
-        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
-        int filaModelo = tabla_bien.convertRowIndexToModel(filaVisual);
+        BienDTO BienSeleccionada = listaFiltrada.get(filaVisual); // USAMOS listaFiltrada
 
-        // Obtenemos el objeto DTO desde la lista
-        BienDTO BienSeleccionada = listabien.get(filaModelo);
         Tabla_Rotacion obj = new Tabla_Rotacion(BienSeleccionada);
         obj.setVisible(true);
         dispose();
@@ -265,36 +265,28 @@ public class PanelMovimientos extends javax.swing.JFrame {
 
     private void asignacion_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignacion_bienActionPerformed
         // TODO add your handling code here:
-        int filaVisual = tabla_bien.getSelectedRow();  // Fila seleccionada en la vista
-
+        int filaVisual = tabla_bien.getSelectedRow();
         if (filaVisual == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione un bien.");
             return;
         }
 
-        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
-        int filaModelo = tabla_bien.convertRowIndexToModel(filaVisual);
+        BienDTO BienSeleccionada = listaFiltrada.get(filaVisual); // USAMOS listaFiltrada
 
-        // Obtenemos el objeto DTO desde la lista
-        BienDTO BienSeleccionada = listabien.get(filaModelo);
         ModuloAsignacion obj = new ModuloAsignacion(BienSeleccionada);
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_asignacion_bienActionPerformed
 
     private void estado_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estado_bienActionPerformed
-        int filaVisual = tabla_bien.getSelectedRow();  // Fila seleccionada en la vista
-
+        int filaVisual = tabla_bien.getSelectedRow();
         if (filaVisual == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione un bien.");
             return;
         }
 
-        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
-        int filaModelo = tabla_bien.convertRowIndexToModel(filaVisual);
+        BienDTO BienSeleccionada = listaFiltrada.get(filaVisual); // USAMOS listaFiltrada
 
-        // Obtenemos el objeto DTO desde la lista
-        BienDTO BienSeleccionada = listabien.get(filaModelo);
         HistorialEstado obj = new HistorialEstado(BienSeleccionada);
         obj.setVisible(true);
         dispose();
@@ -306,23 +298,28 @@ public class PanelMovimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void cargarBien(){
-            DefaultTableModel modelo = new DefaultTableModel(
+        DefaultTableModel modelo = new DefaultTableModel(
             new String[]{"Código","Nombre","Descripcion", "Categoria","Estado","Responsable a cargo","Ambiente","Fecha Registro"}, 0
-            );
+        );
 
-            for (BienDTO bien : listabien) {
-                modelo.addRow(new Object[]{
-                    bien.getCodigo(),
-                    bien.getNombre(),
-                    bien.getDescripcion(),
-                    bien.getCategoriaDTO().getNombre(),
-                    bien.getEstado_actualDTO().getTipo(),
-                    bien.getResponsableDTO().getNombre(),
-                    bien.getAmbienteDTO().getNombre(),
-                    bien.getFecha_registro(),
-                });
-            }
-            tabla_bien.setModel(modelo);
+        listaFiltrada.clear(); // NUEVO: sincronizar lista filtrada desde el inicio
+
+        for (BienDTO bien : listabien) {
+            listaFiltrada.add(bien); // NUEVO: copiar los datos iniciales
+
+            modelo.addRow(new Object[]{
+                bien.getCodigo(),
+                bien.getNombre(),
+                bien.getDescripcion(),
+                bien.getCategoriaDTO().getNombre(),
+                bien.getEstado_actualDTO().getTipo(),
+                bien.getResponsableDTO().getNombre(),
+                bien.getAmbienteDTO().getNombre(),
+                bien.getFecha_registro(),
+            });
+        }
+
+        tabla_bien.setModel(modelo);
     }
     /**
      * @param args the command line arguments
