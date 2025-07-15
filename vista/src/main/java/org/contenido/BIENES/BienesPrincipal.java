@@ -73,8 +73,11 @@ public class BienesPrincipal extends javax.swing.JFrame {
         cargarBien();
         
         DocumentListener dl = new DocumentListener() {
+            @Override
             public void insertUpdate(DocumentEvent e) { aplicarFiltros(); }
+            @Override
             public void removeUpdate(DocumentEvent e){ aplicarFiltros(); }
+            @Override
             public void changedUpdate(DocumentEvent e){ aplicarFiltros(); }
         };
         jTextField2.getDocument().addDocumentListener(dl);
