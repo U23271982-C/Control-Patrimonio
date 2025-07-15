@@ -25,7 +25,7 @@ import org.contenido.dto.AmbienteDTO;
 import org.contenido.dto.CategoriaDTO;
 import org.contenido.dto.EstadoDTO;
 import org.contenido.dto.InmuebleDTO;
-import org.contenido.reporte.ReporteXLSX;
+
 
 /**
  *
@@ -38,7 +38,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
      */
     Controlador<BienDTO> controlador = new BienControlador();
     List<BienDTO> listabien = controlador.listarTodo();
-    
+    List<BienDTO> listaFiltradaBien = new ArrayList<>();
     public BienesPrincipal() {
         initComponents();
         
@@ -412,7 +412,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
         int filaModelo = TablaBien.convertRowIndexToModel(filaVisual);
 
         // Obtenemos el objeto DTO desde la lista
-        BienDTO BienSeleccionada = listabien.get(filaModelo);
+        BienDTO BienSeleccionada = listaFiltradaBien.get(filaModelo);
         ModificarBien obj = new ModificarBien(BienSeleccionada);
         obj.setVisible(true);
         dispose();
@@ -476,7 +476,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
             "Responsable a cargo","Inmueble","Ambiente","Fecha Registro"
         }, 0
     );
-
+    listaFiltradaBien = new ArrayList<>(listabien); 
     for (BienDTO bien : listabien) {
         // nombre del inmueble (o vacío si no existe)
         String nombreInmueble = "";
@@ -581,7 +581,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
         },
         0
     );
-
+    listaFiltradaBien.clear();
     // Recorremos todos los bienes y aplicamos cada filtro
     for (BienDTO b : listabien) {
         // 1) Filtrar por codigo
@@ -659,6 +659,7 @@ public class BienesPrincipal extends javax.swing.JFrame {
             nombreAmbiente,
             b.getFecha_registro()
         });
+        listaFiltradaBien.add(b);
     }
 
     // Asignamos el modelo resultante a la tabla
