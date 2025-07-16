@@ -1,0 +1,210 @@
+-- Asegúrate de estar en la base de datos deseada antes de ejecutar esto
+-- USE tu_basedatos;
+
+DELIMITER $$
+
+CREATE PROCEDURE pa_Actualizar_Ambiente(
+    IN p_idAmbiente INT,
+    IN p_idInmueble INT,
+    IN p_nombre VARCHAR(40))
+BEGIN
+    UPDATE Ambiente
+    SET idInmueble = COALESCE(p_idInmueble, idInmueble),
+        nombre = COALESCE(NULLIF(p_nombre, ''), nombre)
+    WHERE idAmbiente = p_idAmbiente;
+END$$
+
+CREATE PROCEDURE pa_Actualizar_Asignacion(
+    IN p_idAsignacion INT,
+    IN p_idBien INT,
+    IN p_idResponsable INT,
+    IN p_fechainicio DATE,
+    IN p_fechafin DATE)
+BEGIN
+    UPDATE Asignacion
+    SET idBien = COALESCE(p_idBien, idBien),
+        idResponsable = COALESCE(p_idResponsable, idResponsable),
+        fechainicio = COALESCE(p_fechainicio, fechainicio),
+        fechafin = COALESCE(p_fechafin, fechafin)
+    WHERE idAsignacion = p_idAsignacion;
+END$$
+
+CREATE PROCEDURE pa_Actualizar_Bien(
+    IN p_idBien INT,
+    IN p_nombre VARCHAR(50),
+    IN p_codigo VARCHAR(30), 
+    IN p_descripcion VARCHAR(50),
+    IN p_idEstadoActual INT,
+    IN p_idCategoria INT,
+    IN p_idAmbiente INT,
+    IN p_idResponsableActual INT)
+BEGIN
+    UPDATE Bien
+    SET 
+        nombre = COALESCE(NULLIF(p_nombre, ''), nombre),
+        codigo = COALESCE(NULLIF(p_codigo, ''), codigo),
+        descripcion = COALESCE(NULLIF(p_descripcion, ''), descripcion),
+        idEstadoActual = COALESCE(p_idEstadoActual, idEstadoActual),
+        idCategoria = COALESCE(p_idCategoria, idCategoria),
+        idAmbiente = COALESCE(p_idAmbiente, idAmbiente),
+        idResponsableActual = p_idResponsableActual
+    WHERE idBien = p_idBien;
+END$$
+
+CREATE PROCEDURE pa_Actualizar_Bien_con_Historiales(
+    IN p_bien_id INT,
+    IN p_estado_id INT,
+    IN p_responsable_id INT,
+    IN p_ambiente_id INT,
+    IN p_motivo_estado VARCHAR(30),
+    IN p_motivo_responsable VARCHAR(30),
+    IN p_motivo_ambiente VARCHAR(30),
+    IN p_admin_id INT)
+BEGIN
+    IF p_estado_id IS NOT NULL THEN
+        UPDATE Bien
+        SET idEstadoActual = p_estado_id
+        WHERE idBien = p_bien_id;
+
+        INSERT INTO HistorialEstado (idBien, idEstado, motivo, fechaCambio, idResponsable)
+        VALUES (p_bien_id, p_estado_id, p_motivo_estado, NOW(), p_responsable_id);
+    END IF;
+
+    IF p_responsable_id IS NOT NULL THEN
+        UPDATE Bien
+        SET idResponsableActual = p_responsable_id
+        WHERE idBien = p_bien_id;
+
+        INSERT INTO Asignacion (idBien, idResponsable, fechainicio)
+        VALUES (p_bien_id, p_responsable_id, CURDATE());
+    END IF;
+
+    IF p_ambiente_id IS NOT NULL THEN
+        UPDATE Bien
+        SET idAmbiente = p_ambiente_id
+        WHERE idBien = p_bien_id;
+
+        INSERT INTO Rotacion (idBien, idAmbiente, motivo, idResponsable)
+        VALUES (p_bien_id, p_ambiente_id, p_motivo_ambiente, p_responsable_id);
+    END IF;
+END$$
+
+CREATE PROCEDURE pa_Actualizar_Categoria(
+    IN p_idCategoria INT,
+    IN p_nombre VARCHAR(60),
+    IN p_descripcion VARCHAR(60))
+BEGIN
+    UPDATE Categoria
+    SET nombre = COALESCE(NULLIF(p_nombre, ''), nombre),
+        descripcion = COALESCE(NULLIF(p_descripcion, ''), descripcion)
+    WHERE idCategoria = p_idCategoria;
+END$$
+
+CREATE PROCEDURE pa_Actualizar_Detalle_Inventario(
+    IN p_idDetalle_Inventario INT,
+    IN p_idBien INT,
+    IN p_idInventario INT)
+BEGIN
+    UPDATE Detalle_Inventario
+    SET idBien = COALESCE(p_idBien, idBien),
+        idInventario = COALESCE(p_idInventario, idInventario)
+    WHERE idDetalle_Inventario = p_idDetalle_Inventario;
+END$$
+
+CREATE PROCEDURE pa_Actualizar_Estado(
+    IN p_idEstado INT,
+    IN p_tipo VARCHAR(30))
+BEGIN
+    UPDATE Estado
+    SET tipo = COALESCE(NULLIF(p_tipo, ''), tipo)
+    WHERE idEstado = p_idEstado;
+END$$
+
+CREATE PROCEDURE pa_Actualizar_HistorialEstado(
+    IN p_idHistorialEstado INT,
+    IN p_idBien INT,
+    IN p_idEstado INT,
+    IN p_idResponsable INT,
+    IN p_motivo VARCHAR(30),
+    IN p_fechaCambio DATE)
+BEGIN
+    UPDATE HistorialEstado
+    SET idBien = COALESCE(p_idBien, idBien),
+        idEstado = COALESCE(p_idEstado, idEstado),
+        idResponsable = COALESCE(p_idResponsable, idResponsable),
+        motivo = COALESCE(NULLIF(p_motivo, ''), motivo),
+        fechaCambio = COALESCE(p_fechaCambio, fechaCambio)
+    WHERE idHistorialEstado = p_idHistorialEstado;
+END$$
+
+CREATE PROCEDURE pa_Actualizar_Inmueble(
+    IN p_idInmueble INT,
+    IN p_nombre VARCHAR(50),
+    IN p_descripcion VARCHAR(50))
+BEGIN
+    UPDATE Inmueble
+    SET nombre = COALESCE(NULLIF(p_nombre, ''), nombre),
+        descripcion = COALESCE(NULLIF(p_descripcion, ''), descripcion)
+    WHERE idInmueble = p_idInmueble;
+END$$
+
+CREATE PROCEDURE pa_Actualizar_Inventario(
+    IN p_idInventario INT,
+    IN p_nombre VARCHAR(50),
+    IN p_descripcion VARCHAR(50))
+BEGIN
+    UPDATE Inventario
+    SET nombre = COALESCE(NULLIF(p_nombre, ''), nombre),
+        descripcion = COALESCE(NULLIF(p_descripcion, ''), descripcion)
+    WHERE idInventario = p_idInventario;
+END$$
+
+CREATE PROCEDURE pa_Actualizar_Responsable(
+    IN p_idResponsable INT,
+    IN p_idRol_Responsable INT,
+    IN p_nombre VARCHAR(30),
+    IN p_dni VARCHAR(12),
+    IN p_mail VARCHAR(30),
+    IN p_usuario VARCHAR(30),
+    IN p_contrasena VARBINARY(255))
+BEGIN
+    UPDATE Responsable
+    SET nombre = COALESCE(NULLIF(p_nombre, ''), nombre),
+        idRol_Responsable = COALESCE(NULLIF(p_idRol_Responsable, 0), idRol_Responsable),
+        dni = COALESCE(NULLIF(p_dni, ''), dni),
+        mail = COALESCE(NULLIF(p_mail, ''), mail),
+        usuario = COALESCE(NULLIF(p_usuario, ''), usuario),
+        contrasena = COALESCE(
+            NULLIF(AES_ENCRYPT(p_contrasena, 'Clave123'), AES_ENCRYPT('', 'Clave123')),
+            contrasena
+        )
+    WHERE idResponsable = p_idResponsable;
+END$$
+
+CREATE PROCEDURE pa_Actualizar_Rol_Responsable(
+    IN p_idRol_Responsable INT,
+    IN p_descripcion VARCHAR(80),
+    IN p_nombrerol VARCHAR(80))
+BEGIN
+    UPDATE Rol_Responsable
+    SET descripcion = COALESCE(NULLIF(p_descripcion, ''), descripcion),
+        nombrerol = COALESCE(NULLIF(p_nombrerol, ''), nombrerol)
+    WHERE idRol_Responsable = p_idRol_Responsable;
+END$$
+
+CREATE PROCEDURE pa_Actualizar_Rotacion(
+    IN p_idRotacion INT,
+    IN p_idBien INT,
+    IN p_idAmbiente INT,
+    IN p_motivo VARCHAR(30),
+    IN p_idResponsable INT)
+BEGIN
+    UPDATE Rotacion
+    SET idBien = COALESCE(p_idBien, idBien),
+        idAmbiente = COALESCE(p_idAmbiente, idAmbiente),
+        motivo = COALESCE(NULLIF(p_motivo, ''), motivo),
+        idResponsable = COALESCE(p_idResponsable, idResponsable)
+    WHERE idRotacion = p_idRotacion;
+END$$
+
+DELIMITER ;

@@ -1,0 +1,223 @@
+-- ========================================
+-- CREACIÓN DE BASE DE DATOS
+-- ========================================
+CREATE DATABASE IF NOT EXISTS bdpatrimoniou;
+USE bdpatrimoniou;
+
+-- ========================================
+-- CREACIÓN DE TABLAS SIN CLAVES FORÁNEAS
+-- ========================================
+CREATE TABLE inmueble (
+  idInmueble INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50) NOT NULL,
+  descripcion VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE ambiente (
+  idAmbiente INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  idInmueble INT NOT NULL,
+  nombre VARCHAR(40) NOT NULL
+);
+
+CREATE TABLE inventario (
+  idInventario INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50) NOT NULL,
+  descripcion VARCHAR(50) NOT NULL,
+  fechainicio DATETIME NOT NULL
+);
+
+CREATE TABLE estado (
+  idEstado INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  tipo VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE categoria (
+  idCategoria INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(60) NOT NULL,
+  descripcion VARCHAR(60) NOT NULL
+);
+
+CREATE TABLE rol_responsable (
+  idRol_Responsable INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  descripcion VARCHAR(80),
+  nombrerol VARCHAR(80)
+);
+
+CREATE TABLE responsable (
+  idResponsable INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  idRol_Responsable INT NOT NULL,
+  nombre VARCHAR(30),
+  dni VARCHAR(12),
+  mail VARCHAR(30),
+  usuario VARCHAR(30),
+  contrasena VARBINARY(255)
+);
+
+CREATE TABLE bien (
+  idBien INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  Codigo VARCHAR(30) NOT NULL,
+  nombre VARCHAR(50) NOT NULL,
+  descripcion VARCHAR(50),
+  fecharegistro DATE NOT NULL,
+  idEstadoActual INT,
+  idCategoria INT,
+  idAmbiente INT,
+  idResponsableActual INT
+);
+
+CREATE TABLE detalle_inventario (
+  idDetalle_Inventario INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  idBien INT NOT NULL,
+  idInventario INT NOT NULL
+);
+
+CREATE TABLE historialestado (
+  idHistorialEstado INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  idBien INT,
+  idEstado INT,
+  idResponsable INT,
+  motivo VARCHAR(30),
+  fechaCambio DATE NOT NULL
+);
+
+CREATE TABLE asignacion (
+  idAsignacion INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  idBien INT NOT NULL,
+  idResponsable INT,
+  fechainicio DATE NOT NULL
+);
+
+CREATE TABLE rotacion (
+  idRotacion INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  idBien INT NOT NULL,
+  idAmbiente INT NOT NULL,
+  motivo VARCHAR(30) NOT NULL,
+  idResponsable INT NULL,
+  fecha DATE NOT NULL
+);
+
+-- ========================================
+-- AGREGAR CONSTRAINTS DE CLAVES FORÁNEAS
+-- ========================================
+ALTER TABLE ambiente
+  ADD CONSTRAINT fk_Ambiente_Inmueble
+  FOREIGN KEY (idInmueble) REFERENCES inmueble(idInmueble);
+
+ALTER TABLE responsable
+  ADD CONSTRAINT fk_Responsable_Rol
+  FOREIGN KEY (idRol_Responsable) REFERENCES rol_responsable(idRol_Responsable);
+
+ALTER TABLE bien
+  ADD CONSTRAINT fk_Bien_Estado
+  FOREIGN KEY (idEstadoActual) REFERENCES estado(idEstado),
+  ADD CONSTRAINT fk_Bien_Categoria
+  FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria),
+  ADD CONSTRAINT fk_Bien_Ambiente
+  FOREIGN KEY (idAmbiente) REFERENCES ambiente(idAmbiente),
+  ADD CONSTRAINT fk_Bien_Responsable
+  FOREIGN KEY (idResponsableActual) REFERENCES responsable(idResponsable);
+
+ALTER TABLE detalle_inventario
+  ADD CONSTRAINT fk_DetalleInventario_Bien
+  FOREIGN KEY (idBien) REFERENCES bien(idBien),
+  ADD CONSTRAINT fk_DetalleInventario_Inventario
+  FOREIGN KEY (idInventario) REFERENCES inventario(idInventario);
+
+ALTER TABLE historialestado
+  ADD CONSTRAINT fk_HistorialEstado_Bien
+  FOREIGN KEY (idBien) REFERENCES bien(idBien),
+  ADD CONSTRAINT fk_HistorialEstado_Estado
+  FOREIGN KEY (idEstado) REFERENCES estado(idEstado),
+  ADD CONSTRAINT fk_HistorialEstado_Responsable
+  FOREIGN KEY (idResponsable) REFERENCES responsable(idResponsable);
+
+ALTER TABLE asignacion
+  ADD CONSTRAINT fk_Asignacion_Bien
+  FOREIGN KEY (idBien) REFERENCES bien(idBien),
+  ADD CONSTRAINT fk_Asignacion_Responsable
+  FOREIGN KEY (idResponsable) REFERENCES responsable(idResponsable);
+
+ALTER TABLE rotacion
+  ADD CONSTRAINT fk_Rotacion_Bien
+  FOREIGN KEY (idBien) REFERENCES bien(idBien),
+  ADD CONSTRAINT fk_Rotacion_Ambiente
+  FOREIGN KEY (idAmbiente) REFERENCES ambiente(idAmbiente),
+  ADD CONSTRAINT fk_Rotacion_Responsable
+  FOREIGN KEY (idResponsable) REFERENCES responsable(idResponsable);
+
+-- ========================================
+-- DATOS INICIALES
+-- ========================================
+
+-- Roles
+INSERT INTO rol_responsable (descripcion, nombrerol) VALUES 
+  ('acceso total a la plataforma', 'Super Admin'),
+  ('acceso parcial a la plataforma', 'Admin'),
+  ('sin acceso a la plataforma', 'Trabajador');
+
+-- Responsable SuperAdmin (ID 1)
+INSERT INTO responsable (idRol_Responsable, nombre, dni, mail, usuario, contrasena) VALUES 
+  (1, 'Israel Cubas', '12345678', 'israelcubas@utp.edu.pe', 'isra123', AES_ENCRYPT('123456', 'clave_secreta'));
+
+-- Estado
+INSERT INTO estado (tipo) VALUES ('Activo');
+
+-- Inmueble
+INSERT INTO inmueble (nombre, descripcion) VALUES ('Torre_A', 'torre inicial');
+
+-- Ambiente (ID 1)
+INSERT INTO ambiente (idInmueble, nombre) VALUES (1, 'A_0101');
+
+-- Categoría
+INSERT INTO categoria (nombre, descripcion) VALUES ('Dispositivos Electronicos', 'Dispositivos de uso electrónico');
+
+
+-- Crear 10 bienes sin responsable
+INSERT INTO bien (Codigo, nombre, descripcion, fecharegistro, idEstadoActual, idCategoria, idAmbiente, idResponsableActual) VALUES
+  ('B001', 'Laptop Lenovo', 'Core i5 8GB RAM', NOW(), 1, 1, 1, NULL),
+  ('B002', 'Monitor Samsung', '24 pulgadas LED', NOW(), 1, 1, 1, NULL),
+  ('B003', 'Proyector Epson', 'HDMI y VGA', NOW(), 1, 1, 1, NULL),
+  ('B004', 'Impresora HP', 'LaserJet Pro', NOW(), 1, 1, 1, NULL),
+  ('B005', 'Switch TP-Link', '16 puertos', NOW(), 1, 1, 1, NULL),
+  ('B006', 'Tablet Samsung', 'Galaxy Tab 10"', NOW(), 1, 1, 1, NULL),
+  ('B007', 'Router Cisco', 'Modelo 2901', NOW(), 1, 1, 1, NULL),
+  ('B008', 'Servidor Dell', 'PowerEdge R630', NOW(), 1, 1, 1, NULL),
+  ('B009', 'Scanner Epson', 'Modelo V600', NOW(), 1, 1, 1, NULL),
+  ('B010', 'Cámara Logitech', 'HD 1080p', NOW(), 1, 1, 1, NULL);
+
+-- Insertar historiales sin responsable para cada bien
+INSERT INTO historialestado (idBien, idEstado, idResponsable, motivo, fechaCambio) VALUES
+  (1, 1, NULL, 'Se registró', NOW()),
+  (2, 1, NULL, 'Se registró', NOW()),
+  (3, 1, NULL, 'Se registró', NOW()),
+  (4, 1, NULL, 'Se registró', NOW()),
+  (5, 1, NULL, 'Se registró', NOW()),
+  (6, 1, NULL, 'Se registró', NOW()),
+  (7, 1, NULL, 'Se registró', NOW()),
+  (8, 1, NULL, 'Se registró', NOW()),
+  (9, 1, NULL, 'Se registró', NOW()),
+  (10, 1, NULL, 'Se registró', NOW());
+
+INSERT INTO asignacion (idBien, idResponsable, fechainicio) VALUES
+  (1, NULL, NOW()),
+  (2, NULL, NOW()),
+  (3, NULL, NOW()),
+  (4, NULL, NOW()),
+  (5, NULL, NOW()),
+  (6, NULL, NOW()),
+  (7, NULL, NOW()),
+  (8, NULL, NOW()),
+  (9, NULL, NOW()),
+  (10, NULL, NOW());
+
+INSERT INTO rotacion (idBien, idAmbiente, motivo, idResponsable, fecha) VALUES
+  (1, 1, 'Se registró', NULL, NOW()),
+  (2, 1, 'Se registró', NULL, NOW()),
+  (3, 1, 'Se registró', NULL, NOW()),
+  (4, 1, 'Se registró', NULL, NOW()),
+  (5, 1, 'Se registró', NULL, NOW()),
+  (6, 1, 'Se registró', NULL, NOW()),
+  (7, 1, 'Se registró', NULL, NOW()),
+  (8, 1, 'Se registró', NULL, NOW()),
+  (9, 1, 'Se registró', NULL, NOW()),
+  (10, 1, 'Se registró', NULL, NOW());
