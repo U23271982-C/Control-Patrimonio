@@ -4,9 +4,12 @@
  */
 package ROLES_PERSONAL;
 
+import PERSONAL_RESPONSABLE.ModuloRegistroResponsables;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.table.DefaultTableModel;
+import org.contenido.INICIO_SESIÓN.InicioSesion;
 import org.contenido.PANEL_INICIO.PanelInicio;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.Rol_ResponsableControlador;
@@ -201,36 +204,65 @@ public class PanelRol extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        CrearRol obj = new CrearRol();
-        obj.setVisible(true);
-        dispose();
+        JPasswordField passwordField = new JPasswordField();
+            Object[] message = {
+                    "Ingrese su contraseña:", passwordField
+            };
+            int option = JOptionPane.showConfirmDialog(null, message, "Reautenticación", JOptionPane.OK_CANCEL_OPTION);
+            boolean esSuperUsuario = false;
+            
+            if (option == JOptionPane.OK_OPTION) {
+                String contrasena = new String(passwordField.getPassword());
+                esSuperUsuario = InicioSesion.controlador.accesoSoloSuperUsuario(contrasena);
+                InicioSesion.dto.setContrsena(contrasena);
+                // si es super usuario:
+                if (esSuperUsuario){
+                    // Abrir la nueva interfaz y pasarle el objeto
+            CrearRol obj = new CrearRol();
+            obj.setVisible(true);
+            dispose();
+                }
+            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-         int filaSeleccionada = Tabla_ListaRolResponsables.getSelectedRow();
+        int filaSeleccionada = Tabla_ListaRolResponsables.getSelectedRow();
     
         if (filaSeleccionada != -1) {
-            // Buscar el nombre del responsable en la tabla seleccionada
-            String rolSeleccionado = Tabla_ListaRolResponsables.getValueAt(filaSeleccionada, 0).toString();
+        JPasswordField passwordField = new JPasswordField();
+            Object[] message = {
+                    "Ingrese su contraseña:", passwordField
+            };
+            int option = JOptionPane.showConfirmDialog(null, message, "Reautenticación", JOptionPane.OK_CANCEL_OPTION);
+            boolean esSuperUsuario = false;            
+            
+            if (option == JOptionPane.OK_OPTION) {
+                String contrasena = new String(passwordField.getPassword());
+                esSuperUsuario = InicioSesion.controlador.accesoSoloSuperUsuario(contrasena);
+                InicioSesion.dto.setContrsena(contrasena);
+                // si es super usuario:
+                if (esSuperUsuario){
+                    String rolSeleccionado = Tabla_ListaRolResponsables.getValueAt(filaSeleccionada, 0).toString();
 
-            // Buscar en la lista original el responsable que tiene ese nombre (u otro campo único)
-            Rol_ResponsableDTO seleccionado = null;
-            for (Rol_ResponsableDTO r :listaRolResponsables ) {
-                if (r.getNombreRol().equals(rolSeleccionado)) {
-                    seleccionado = r;
-                    break;
+                        // Buscar en la lista original el responsable que tiene ese nombre (u otro campo único)
+                    Rol_ResponsableDTO seleccionado = null;
+                        for (Rol_ResponsableDTO r :listaRolResponsables ) {
+                            if (r.getNombreRol().equals(rolSeleccionado)) {
+                                seleccionado = r;
+                                break;
+                            }
+                        }
+
+                    int resultado= JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este Rol?","Confirmar eliminación",JOptionPane.OK_CANCEL_OPTION);
+                    //si el usuario hace click en aceptar
+                    if(resultado == JOptionPane.OK_OPTION){
+                         Controlador<Rol_ResponsableDTO> controlador = new Rol_ResponsableControlador();
+                        controlador.eliminar(seleccionado.getId());
+                        recargarTablaRoles();
                 }
-            }
-
-            int resultado= JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este Rol?","Confirmar eliminación",JOptionPane.OK_CANCEL_OPTION);
-        //si el usuario hace click en aceptar
-        if(resultado == JOptionPane.OK_OPTION){
-             Controlador<Rol_ResponsableDTO> controlador = new Rol_ResponsableControlador();
-        controlador.eliminar(seleccionado.getId());
-        recargarTablaRoles();
+            }    
         }
-        
         } else {
             JOptionPane.showMessageDialog(null, "Debes seleccionar un rol primero.");
         }
@@ -244,16 +276,29 @@ public class PanelRol extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Seleccione un Rol.");
             return;
         }
+        JPasswordField passwordField = new JPasswordField();
+            Object[] message = {
+                    "Ingrese su contraseña:", passwordField
+            };
+            int option = JOptionPane.showConfirmDialog(null, message, "Reautenticación", JOptionPane.OK_CANCEL_OPTION);
+            boolean esSuperUsuario = false;
+            
+            if (option == JOptionPane.OK_OPTION) {
+                String contrasena = new String(passwordField.getPassword());
+                esSuperUsuario = InicioSesion.controlador.accesoSoloSuperUsuario(contrasena);
+                InicioSesion.dto.setContrsena(contrasena);
+                // si es super usuario:
+                if (esSuperUsuario){
+// Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
+                    int filaModelo = Tabla_ListaRolResponsables.convertRowIndexToModel(filaVisual);
 
-        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
-        int filaModelo = Tabla_ListaRolResponsables.convertRowIndexToModel(filaVisual);
-
-        // Obtenemos el objeto DTO desde la lista
-        Rol_ResponsableDTO seleccionado = listaRolResponsables.get(filaModelo);
-            CambioRol obj = new CambioRol(seleccionado);
-            obj.setVisible(true);
-            this.setVisible(false);  // solo ocultas la ventana, no la destruyes
-        
+                    // Obtenemos el objeto DTO desde la lista
+                    Rol_ResponsableDTO seleccionado = listaRolResponsables.get(filaModelo);
+                        CambioRol obj = new CambioRol(seleccionado);
+                        obj.setVisible(true);
+                        this.setVisible(false);  // solo ocultas la ventana, no la destruyes
+                }
+            }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
