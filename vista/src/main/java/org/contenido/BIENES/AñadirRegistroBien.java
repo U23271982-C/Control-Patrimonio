@@ -279,60 +279,83 @@ public class AñadirRegistroBien extends javax.swing.JFrame {
 
     private void GuardarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarRegistroActionPerformed
         // TODO add your handling code here:
-        // 1. Cargo los campos básicos
-        dto.setCodigo(codigo_bien.getText());
-        dto.setNombre(nombre_bien.getText());
-        dto.setDescripcion(descripcion_bien.getText());
+// 1. Cargo los campos básicos
+        String codigo = codigo_bien.getText().trim();
 
-        // Categoría (ya lo tienes bien)
-        CategoriaDTO catSel = (CategoriaDTO) categoria_bien.getSelectedItem();
-        dto.setCategoriaDTO(catSel);
+// Validar si el código del bien ya existe
+        BienDTO codigor = new BienControlador()
+                .listarTodo()
+                .stream()
+                .filter(c -> c.getCodigo().equals(codigo))
+                .findFirst()
+                .orElse(null);
 
-        // Estado fijo
-        EstadoDTO estado = new EstadoControlador().leerPorId(1);
-        dto.setEstado_actualDTO(estado);
-
-        // Responsable por DNI (si aún lo quieres como JTextField)
-        String dniResp = responsable_bien.getText().trim();
-        ResponsableDTO resp = new ResponsableControlador()
-                                 .listarTodo()
-                                 .stream()
-                                 .filter(r -> r.getDni().equals(dniResp))
-                                 .findFirst()
-                                 .orElse(null);
-        if (resp == null) {
+        if (codigor != null) {
             JOptionPane.showMessageDialog(this,
-                "No se encontró un responsable con el DNI: " + dniResp,
-                "DNI no encontrado",
-                JOptionPane.WARNING_MESSAGE);
-            return;
+                    "Ya existe un bien con código: " + codigor.getCodigo(),
+                    "Código existente",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            // Obtener y limpiar el campo DNI del responsable
+            String dniResp = responsable_bien.getText().trim();
+
+            // Buscar al responsable solo si se ingresó un DNI
+            ResponsableDTO resp = null;
+            if (!dniResp.isEmpty()) {
+                resp = new ResponsableControlador()
+                        .listarTodo()
+                        .stream()
+                        .filter(r -> r.getDni().equals(dniResp))
+                        .findFirst()
+                        .orElse(null);
+            }
+
+            // Validar las condiciones:
+            // - Si el campo está vacío → OK
+            // - Si el campo no está vacío y el DNI existe → OK
+            // - Si el campo no está vacío y el DNI NO existe → ERROR
+            if (dniResp.isEmpty() || resp != null) {
+                AmbienteDTO ambSel = (AmbienteDTO) ambiente_bien.getSelectedItem();
+
+                if (ambSel == null) {
+                    JOptionPane.showMessageDialog(this,
+                            "Debe seleccionar un ambiente.",
+                            "Ambiente no seleccionado",
+                            JOptionPane.WARNING_MESSAGE);
+                } else {
+                    dto.setCodigo(codigo);
+                    dto.setNombre(nombre_bien.getText().trim());
+                    dto.setDescripcion(descripcion_bien.getText().trim());
+
+                    CategoriaDTO catSel = (CategoriaDTO) categoria_bien.getSelectedItem();
+                    dto.setCategoriaDTO(catSel);
+
+                    EstadoDTO estado = new EstadoControlador().leerPorId(1); // Estado por defecto
+                    dto.setEstado_actualDTO(estado);
+
+                    dto.setResponsableDTO(resp); // Puede ser null si el campo está vacío
+                    dto.setAmbienteDTO(ambSel);
+
+                    // Registrar el bien
+                    controlador.registrar(dto);
+
+                    // Limpiar campos
+                    codigo_bien.setText("");
+                    nombre_bien.setText("");
+                    descripcion_bien.setText("");
+                    responsable_bien.setText("");
+
+                    // Regresar a la ventana principal
+                    new BienesPrincipal().setVisible(true);
+                    dispose();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "No se encontró un responsable con el DNI: " + dniResp,
+                        "DNI no encontrado",
+                        JOptionPane.WARNING_MESSAGE);
+            }
         }
-        dto.setResponsableDTO(resp);
-
-        // **Ambiente**: lo leemos directamente del combo
-        AmbienteDTO ambSel = (AmbienteDTO) ambiente_bien.getSelectedItem();
-        if (ambSel == null) {
-            JOptionPane.showMessageDialog(this,
-                "Debe seleccionar un ambiente.",
-                "Ambiente no seleccionado",
-                JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        dto.setAmbienteDTO(ambSel);
-
-        // Registrar
-        controlador.registrar(dto);
-
-        // Limpiar y volver
-        codigo_bien.setText("");
-        nombre_bien.setText("");
-        descripcion_bien.setText("");
-        responsable_bien.setText("");
-        // no hacemos ambiente_bien.setText(...) ya que es combo
-
-        new BienesPrincipal().setVisible(true);
-        dispose();
-
 
     }//GEN-LAST:event_GuardarRegistroActionPerformed
 

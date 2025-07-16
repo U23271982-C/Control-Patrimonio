@@ -60,7 +60,7 @@ public class ResponsableControlador implements Controlador<ResponsableDTO> {
     public List<ResponsableDTO> listarTodo() {
         try {
             List<ResponsableDTO> responsables = responsableServicio.listarTodo();
-            NotificacionUtil.mostrarMensajeAfirmacion("✅ Responsables listados correctamente.");
+            //NotificacionUtil.mostrarMensajeAfirmacion("✅ Responsables listados correctamente.");
             return responsables;
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);

@@ -28,7 +28,6 @@ public class BienDTO {
     private CategoriaDTO categoriaDTO;
     @NotNull( message = "El ambiente no puede ser nulo", groups = {EnCrear.class})
     private AmbienteDTO ambienteDTO;
-    @NotNull( message = "El responsable actual no puede ser nulo", groups = {EnCrear.class})
     private ResponsableDTO responsableDTO;
 
     public BienDTO() {}

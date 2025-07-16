@@ -1,0 +1,163 @@
+DELIMITER $$
+
+CREATE PROCEDURE pa_Registrar_Rotacion(
+    IN p_idBien INT,
+    IN p_idAmbiente INT,
+    IN p_motivo VARCHAR(30),
+    IN p_idResponsable INT
+)
+BEGIN
+    INSERT INTO Rotacion(idBien, idAmbiente, motivo, idResponsable, fecha)
+    VALUES(p_idBien, p_idAmbiente, p_motivo, p_idResponsable, NOW());
+END$$
+
+CREATE PROCEDURE pa_Registrar_Rol_Responsable(
+    IN p_descripcion VARCHAR(80),
+    IN p_nombrerol VARCHAR(80)
+)
+BEGIN
+    INSERT INTO Rol_Responsable(descripcion, nombrerol)
+    VALUES(p_descripcion, p_nombrerol);
+END$$
+
+CREATE PROCEDURE pa_Registrar_Responsable(
+    IN p_idRol_Responsable INT,
+    IN p_nombre VARCHAR(30),
+    IN p_dni VARCHAR(12),
+    IN p_mail VARCHAR(30),
+    IN p_usuario VARCHAR(30),
+    IN p_contrasena VARBINARY(255)
+)
+BEGIN
+    INSERT INTO Responsable(idRol_Responsable, nombre, dni, mail, usuario, contrasena)
+    VALUES(p_idRol_Responsable, p_nombre, p_dni, p_mail, p_usuario, AES_ENCRYPT(p_contrasena, 'Clave123'));
+END$$
+
+CREATE PROCEDURE pa_Registrar_Inventario(
+    IN p_nombre VARCHAR(50),
+    IN p_descripcion VARCHAR(50)
+)
+BEGIN
+    DECLARE v_idInventario INT;
+
+    INSERT INTO Inventario(nombre, descripcion, fechainicio)
+    VALUES(p_nombre, p_descripcion, NOW());
+
+    SET v_idInventario = LAST_INSERT_ID();
+
+    INSERT INTO Detalle_Inventario (idBien, idInventario)
+    SELECT b.idBien, v_idInventario
+    FROM Bien b
+    WHERE b.idEstadoActual = 1;
+END$$
+
+CREATE PROCEDURE pa_Registrar_Inmueble(
+    IN p_nombre VARCHAR(50),
+    IN p_descripcion VARCHAR(50)
+)
+BEGIN
+    INSERT INTO Inmueble(nombre, descripcion)
+    VALUES(p_nombre, p_descripcion);
+END$$
+
+CREATE PROCEDURE pa_Registrar_HistorialEstado(
+    IN p_idBien INT,
+    IN p_idEstado INT,
+    IN p_idResponsable INT,
+    IN p_motivo VARCHAR(30)
+)
+BEGIN
+    INSERT INTO HistorialEstado(idBien, idEstado, idResponsable, motivo, fechaCambio)
+    VALUES(p_idBien, p_idEstado, p_idResponsable, p_motivo, NOW());
+END$$
+
+CREATE PROCEDURE pa_Registrar_Estado(
+    IN p_tipo VARCHAR(30)
+)
+BEGIN
+    INSERT INTO Estado(tipo)
+    VALUES(p_tipo);
+END$$
+
+CREATE PROCEDURE pa_Registrar_Detalle_Inventario(
+    IN p_idBien INT,
+    IN p_idInventario INT
+)
+BEGIN
+    INSERT INTO Detalle_Inventario(idBien, idInventario)
+    VALUES(p_idBien, p_idInventario);
+END$$
+
+CREATE PROCEDURE pa_Registrar_Categoria(
+    IN p_nombre VARCHAR(60),
+    IN p_descripcion VARCHAR(60)
+)
+BEGIN
+    INSERT INTO Categoria(nombre, descripcion)
+    VALUES(p_nombre, p_descripcion);
+END$$
+
+CREATE PROCEDURE pa_Registrar_Bienes_Activos_en_DetalleInventario(
+    IN p_idInventario INT
+)
+BEGIN
+    INSERT INTO Detalle_Inventario (idInventario, idBien)
+    SELECT p_idInventario, b.idBien
+    FROM Bien b
+    WHERE b.idEstado = 1
+      AND NOT EXISTS (
+          SELECT 1
+          FROM Detalle_Inventario di
+          WHERE di.idInventario = p_idInventario
+            AND di.idBien = b.idBien
+      );
+END$$
+
+CREATE PROCEDURE pa_Registrar_Bien(
+    IN p_nombre VARCHAR(50),
+    IN p_codigo VARCHAR(20),
+    IN p_descripcion VARCHAR(50),
+    IN p_idEstadoActual INT,
+    IN p_idCategoria INT,
+    IN p_idAmbiente INT,
+    IN p_idResponsableActual INT
+)
+BEGIN
+    -- Insertar el bien
+    INSERT INTO Bien(nombre, codigo, descripcion, fecharegistro, idEstadoActual, idCategoria, idAmbiente, idResponsableActual)
+    VALUES(p_nombre, p_codigo, p_descripcion, NOW(), p_idEstadoActual, p_idCategoria, p_idAmbiente, p_idResponsableActual);
+
+    SET @ultimoIdBien := LAST_INSERT_ID();
+
+    -- Insertar en Rotacion
+    INSERT INTO Rotacion(idBien, idAmbiente, motivo, idResponsable, fecha)
+    VALUES(@ultimoIdBien, p_idAmbiente, 'se registro', p_idResponsableActual, NOW());
+
+    -- Insertar en HistorialEstado
+    INSERT INTO HistorialEstado(idBien, idEstado, idResponsable, motivo, fechaCambio)
+    VALUES(@ultimoIdBien, p_idEstadoActual, p_idResponsableActual, 'se registro', NOW());
+
+    -- Insertar en Asignacion
+    INSERT INTO Asignacion(idBien, idResponsable, fechainicio)
+    VALUES(@ultimoIdBien, p_idResponsableActual, NOW());
+END$$
+
+CREATE PROCEDURE pa_Registrar_Asignacion(
+    IN p_idBien INT,
+    IN p_idResponsable INT
+)
+BEGIN
+    INSERT INTO Asignacion(idBien, idResponsable, fechainicio)
+    VALUES(p_idBien, p_idResponsable, NOW());
+END$$
+
+CREATE PROCEDURE pa_Registrar_Ambiente(
+    IN p_idInmueble INT,
+    IN p_nombre VARCHAR(40)
+)
+BEGIN
+    INSERT INTO Ambiente(idInmueble, nombre)
+    VALUES(p_idInmueble, p_nombre);
+END$$
+
+DELIMITER ;

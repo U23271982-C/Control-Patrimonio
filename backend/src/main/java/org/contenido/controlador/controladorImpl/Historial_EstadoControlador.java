@@ -53,7 +53,7 @@ public class Historial_EstadoControlador implements Controlador<Historial_Estado
     public List<Historial_EstadoDTO> listarTodo() {
         try {
             List<Historial_EstadoDTO> historial_estados = historial_EstadoServicio.listarTodo();
-            NotificacionUtil.mostrarMensajeAfirmacion("✅ Historial de estados listados correctamente.");
+            //NotificacionUtil.mostrarMensajeAfirmacion("✅ Historial de estados listados correctamente.");
             return historial_estados;
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);

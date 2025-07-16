@@ -60,7 +60,7 @@ public class AmbienteControlador implements Controlador<AmbienteDTO> {
     public List<AmbienteDTO> listarTodo() {
         try {
             List<AmbienteDTO> ambientes = ambienteServicio.listarTodo();
-            NotificacionUtil.mostrarMensajeAfirmacion("✅ Ambientes listados correctamente.");
+            //NotificacionUtil.mostrarMensajeAfirmacion("✅ Ambientes listados correctamente.");
             return ambientes;
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);

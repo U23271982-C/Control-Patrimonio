@@ -1,6 +1,7 @@
 package PERSONAL_RESPONSABLE;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.ResponsableControlador;
@@ -291,35 +292,47 @@ public class ModuloRegistroResponsables extends javax.swing.JFrame {
         // TODO add your handling code here:
         Controlador<ResponsableDTO> controlador = new ResponsableControlador();
         ResponsableDTO dto = new ResponsableDTO();
-
-        dto.setNombre(nombre_personal.getText());
-        dto.setDni(dni_personal.getText());
-        dto.setEmail(correo_personal.getText());
-        // Obtener el rol seleccionado del combo box
-        Rol_ResponsableDTO rolSeleccionado = (Rol_ResponsableDTO) cargo_personal.getSelectedItem();
-        dto.setRol_responsableDTO(rolSeleccionado); // Asignar el rol al responsable
-        dto.setUsuario(usuario_personal.getText());
-        dto.setContrsena(contrasena_personal.getText());
-
-        controlador.registrar(dto);
+        List<ResponsableDTO> listares = controlador.listarTodo();
         
-        DefaultTableModel modelo = (DefaultTableModel) Tabla_CrearResponsable.getModel();
-        modelo.addRow(new Object[]{
-            dto.getNombre(),
-            dto.getDni(),
-            dto.getEmail(),
-            rolSeleccionado.getNombreRol(), // Aquí se muestra el nombre del rol
-            dto.getUsuario(),
-            dto.getContrsena()
+        String dni = dni_personal.getText();
+        ResponsableDTO responsable = null;
+        for(ResponsableDTO r : listares){
+            if(r.getDni().equals(dni)){
+                responsable = r;
+                break;
+            }
+        }
+        if(responsable!=null){
+            JOptionPane.showMessageDialog(null,
+            "Ya existe el responsable con el DNI: " + dni,
+            "DNI ya existente",
+            JOptionPane.WARNING_MESSAGE);
+        }else{
+             dto.setNombre(nombre_personal.getText());
+             dto.setDni(dni_personal.getText());
+             dto.setEmail(correo_personal.getText());
+                            // Obtener el rol seleccionado del combo box
+             Rol_ResponsableDTO rolSeleccionado = (Rol_ResponsableDTO) cargo_personal.getSelectedItem();
+             dto.setRol_responsableDTO(rolSeleccionado); // Asignar el rol al responsable
+             dto.setUsuario(usuario_personal.getText());
+             dto.setContrsena(contrasena_personal.getText());
+             controlador.registrar(dto);
+             DefaultTableModel modelo = (DefaultTableModel) Tabla_CrearResponsable.getModel();
+             modelo.addRow(new Object[]{
+             dto.getNombre(),
+             dto.getDni(),
+             dto.getEmail(),
+             rolSeleccionado.getNombreRol(), // Aquí se muestra el nombre del rol
+             dto.getUsuario(),
+             dto.getContrsena()
+                     
         });
-        
-        
-        nombre_personal.setText("");
-        dni_personal.setText("");
-        correo_personal.setText("");
-        usuario_personal.setText("");
-        contrasena_personal.setText("");
-        
+             nombre_personal.setText("");
+             dni_personal.setText("");
+             correo_personal.setText("");
+             usuario_personal.setText("");
+             contrasena_personal.setText("");
+        }
     }//GEN-LAST:event_RegistrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

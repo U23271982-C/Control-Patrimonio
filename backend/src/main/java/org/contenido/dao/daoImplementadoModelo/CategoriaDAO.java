@@ -1,10 +1,12 @@
 package org.contenido.dao.daoImplementadoModelo;
 
 import org.contenido.dao.DAO;
+import org.contenido.excepcion.NegocioExcepcion;
 import org.contenido.excepcion.PersistenciaExcepcion;
 import org.contenido.mapeo.ResultSetMapper;
 import org.contenido.mapeo.mapeoImpl.CategoriaMapper;
 import org.contenido.modelo.Categoria;
+import org.contenido.modelo.Estado;
 import org.contenido.persistencia.ConexionPool;
 
 import java.sql.CallableStatement;
@@ -83,7 +85,11 @@ public class CategoriaDAO implements DAO<Categoria> {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            throw new PersistenciaExcepcion(String.format("Error al eliminar %s: ", Categoria.class.getName()), e);
+            if (e.getMessage().contains("foreign key constraint")) {
+                throw new NegocioExcepcion("No se puede eliminar el categoria porque está asignado a uno o más bienes.");
+            } else {
+                throw new PersistenciaExcepcion(String.format("Error al eliminar %s: ", Categoria.class.getName()), e);
+            }
         }
     }
 

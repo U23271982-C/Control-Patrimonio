@@ -27,8 +27,7 @@ public class PanelCategoria extends javax.swing.JFrame {
      */
     Controlador<CategoriaDTO> controlador = new CategoriaControlador();
     List<CategoriaDTO> listacategorias = controlador.listarTodo();
-
-    
+    private List<CategoriaDTO> listaFiltradaCategoria = new java.util.ArrayList<>();
     public PanelCategoria() {
         initComponents();
         cargarCategoriaTabla();
@@ -41,20 +40,7 @@ public class PanelCategoria extends javax.swing.JFrame {
         public void changedUpdate(DocumentEvent e){ filtrarCategoria();}
         });
     }
-    private void recargarTablaCategorias() {
-    DefaultTableModel modelo = new DefaultTableModel(
-        new String[]{"ID", "Nombre", "Descripción"},
-        0
-    );
-    for (CategoriaDTO cat : listacategorias) {
-        modelo.addRow(new Object[]{
-            cat.getId(),
-            cat.getNombre(),
-            cat.getDescripcion()
-        });
-    }
-    jXTableCategoria.setModel(modelo);
-}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -260,58 +246,37 @@ public class PanelCategoria extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonAñadirActionPerformed
 
     private void BotonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModificarActionPerformed
-        int filaVisual = jXTableCategoria.getSelectedRow();  // Fila seleccionada en la vista
-
+        int filaVisual = jXTableCategoria.getSelectedRow();
         if (filaVisual == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione una categoría.");
             return;
         }
-
-        // Convertimos la fila visual a la del modelo, por si hay filtros/ordenamientos
-        int filaModelo = jXTableCategoria.convertRowIndexToModel(filaVisual);
-
-        // Obtenemos el objeto DTO desde la lista
-        CategoriaDTO categoriaSeleccionada = listacategorias.get(filaModelo);
-
-        // Abrimos la ventana de modificación y le pasamos la categoría
+        CategoriaDTO categoriaSeleccionada = listaFiltradaCategoria.get(filaVisual); // <- usa lista filtrada
         ModificarCategoria modificar = new ModificarCategoria(categoriaSeleccionada);
         modificar.setVisible(true);
         dispose();
     }//GEN-LAST:event_BotonModificarActionPerformed
 
     private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
-         // 1) Obtengo la fila seleccionada en la vista
         int filaVisual = jXTableCategoria.getSelectedRow();
         if (filaVisual == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione una categoría.");
             return;
         }
+        CategoriaDTO categoriaSeleccionada = listaFiltradaCategoria.get(filaVisual); // <- usa lista filtrada
 
-        // 2) Convierto al índice del modelo (por si hay filtros/ordenamientos)
-        int filaModelo = jXTableCategoria.convertRowIndexToModel(filaVisual);
-
-        // 3) Localizo el DTO correspondiente
-        CategoriaDTO categoriaSeleccionada = listacategorias.get(filaModelo);
-
-        // 4) Pido confirmación
         int respuesta = JOptionPane.showConfirmDialog(
             this,
-            "¿Está seguro de eliminar la categoría \"" 
-                + categoriaSeleccionada.getNombre() + "\"?",
+            "¿Está seguro de eliminar la categoría \"" + categoriaSeleccionada.getNombre() + "\"?",
             "Confirmar eliminación",
             JOptionPane.OK_CANCEL_OPTION
         );
-        if (respuesta != JOptionPane.OK_OPTION) {
-            return;  // si cancela, salimos
-        }
 
-        // 5) Elimino en la capa de negocio
+        if (respuesta != JOptionPane.OK_OPTION) return;
+
         controlador.eliminar(categoriaSeleccionada.getId());
-
-        // 6) Refresco lista y tabla
         listacategorias = controlador.listarTodo();
-        recargarTablaCategorias();
-
+        cargarCategoriaTabla();
     }//GEN-LAST:event_BotonEliminarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -326,38 +291,42 @@ public class PanelCategoria extends javax.swing.JFrame {
     }//GEN-LAST:event_FiltrarPorNombreActionPerformed
     
     private void cargarCategoriaTabla() {
-    DefaultTableModel modelo = new DefaultTableModel(
-    new String[]{"Nombre", "Descripcion"}, 0
-    );
-    
-    for (CategoriaDTO categoria : listacategorias) {
-        modelo.addRow(new Object[]{
-            categoria.getNombre(),
-            categoria.getDescripcion()
-        });
-    }
-    jXTableCategoria.setModel(modelo);
-    }
-    
-    private void filtrarCategoria(){
-    String nombreFiltro = FiltrarPorNombre.getText().trim().toLowerCase();
-    
-    DefaultTableModel modelo = new DefaultTableModel(
-    new String[]{"Nombre", "Descripcion"}, 0
-    );
-    
-    for (CategoriaDTO categoria : listacategorias) {
-    boolean coincideNombre =categoria.getNombre().toLowerCase().contains(nombreFiltro);
+        DefaultTableModel modelo = new DefaultTableModel(
+            new String[]{"Nombre", "Descripcion"}, 0
+        );
+        listaFiltradaCategoria.clear(); // importante
 
-        if (coincideNombre){
+        for (CategoriaDTO categoria : listacategorias) {
+            listaFiltradaCategoria.add(categoria); // sincroniza lista filtrada
             modelo.addRow(new Object[]{
                 categoria.getNombre(),
-                categoria.getDescripcion(),
+                categoria.getDescripcion()
             });
         }
         jXTableCategoria.setModel(modelo);
     }
-}
+    
+    private void filtrarCategoria(){
+        String nombreFiltro = FiltrarPorNombre.getText().trim().toLowerCase();
+
+        DefaultTableModel modelo = new DefaultTableModel(
+            new String[]{"Nombre", "Descripcion"}, 0
+        );
+        listaFiltradaCategoria.clear(); // limpia antes de llenar
+
+        for (CategoriaDTO categoria : listacategorias) {
+            boolean coincideNombre = categoria.getNombre().toLowerCase().contains(nombreFiltro);
+            if (coincideNombre) {
+                listaFiltradaCategoria.add(categoria); // sincroniza lista filtrada
+                modelo.addRow(new Object[]{
+                    categoria.getNombre(),
+                    categoria.getDescripcion()
+                });
+            }
+        }
+        jXTableCategoria.setModel(modelo);
+    }
+
     
         
     /**

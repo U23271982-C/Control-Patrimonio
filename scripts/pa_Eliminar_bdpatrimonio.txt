@@ -1,0 +1,77 @@
+-- Asegúrate de ejecutar: USE bdpatrimoniou; antes de este script si corresponde
+
+DELIMITER $$
+
+CREATE PROCEDURE pa_Eliminar_Detalle_Inventario(
+    IN p_idDetalle_Inventario INT)
+BEGIN
+    DELETE FROM Detalle_Inventario WHERE idDetalle_Inventario = p_idDetalle_Inventario;
+END$$
+
+CREATE PROCEDURE pa_Eliminar_Categoria(
+    IN p_idCategoria INT)
+BEGIN
+    DELETE FROM Categoria WHERE idCategoria = p_idCategoria;
+END$$
+
+CREATE PROCEDURE pa_Eliminar_Estado(
+    IN p_idEstado INT)
+BEGIN
+    DELETE FROM Estado WHERE idEstado = p_idEstado;
+END$$
+
+CREATE PROCEDURE pa_Eliminar_Rotacion(
+    IN p_idRotacion INT)
+BEGIN
+    DELETE FROM Rotacion WHERE idRotacion = p_idRotacion;
+END$$
+
+CREATE PROCEDURE pa_Eliminar_Rol_Responsable(
+    IN p_idRol_Responsable INT)
+BEGIN
+    DELETE FROM Rol_Responsable WHERE idRol_Responsable = p_idRol_Responsable;
+END$$
+
+CREATE PROCEDURE pa_Eliminar_Responsable(
+    IN p_idResponsable INT)
+BEGIN
+    DELETE FROM Responsable WHERE idResponsable = p_idResponsable;
+END$$
+
+CREATE PROCEDURE pa_Eliminar_Inventario(
+    IN p_idInventario INT)
+BEGIN
+    DELETE FROM Inventario WHERE idInventario = p_idInventario;
+END$$
+
+CREATE PROCEDURE pa_Eliminar_Inmueble(
+    IN p_idInmueble INT)
+BEGIN
+    DELETE FROM Inmueble WHERE idInmueble = p_idInmueble;
+END$$
+
+CREATE PROCEDURE pa_Eliminar_HistorialEstado(
+    IN p_idHistorialEstado INT)
+BEGIN
+    DELETE FROM HistorialEstado WHERE idHistorialEstado = p_idHistorialEstado;
+END$$
+
+CREATE PROCEDURE pa_Eliminar_Bien(
+    IN p_idBien INT)
+BEGIN
+    DELETE FROM Bien WHERE idBien = p_idBien;
+END$$
+
+CREATE PROCEDURE pa_Eliminar_Asignacion(
+    IN p_idAsignacion INT)
+BEGIN
+    DELETE FROM Asignacion WHERE idAsignacion = p_idAsignacion;
+END$$
+
+CREATE PROCEDURE pa_Eliminar_Ambiente(
+    IN p_idAmbiente INT)
+BEGIN
+    DELETE FROM Ambiente WHERE idAmbiente = p_idAmbiente;
+END$$
+
+DELIMITER ;

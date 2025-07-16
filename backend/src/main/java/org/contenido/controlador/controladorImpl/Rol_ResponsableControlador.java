@@ -60,7 +60,7 @@ public class Rol_ResponsableControlador implements Controlador<Rol_ResponsableDT
     public List<Rol_ResponsableDTO> listarTodo() {
         try {
             List<Rol_ResponsableDTO> rol_responsables = rol_ResponsableServicio.listarTodo();
-            NotificacionUtil.mostrarMensajeAfirmacion("✅ Rol responsables listados correctamente.");
+            //NotificacionUtil.mostrarMensajeAfirmacion("✅ Rol responsables listados correctamente.");
             return rol_responsables;
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);

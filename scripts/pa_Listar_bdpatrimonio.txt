@@ -1,0 +1,147 @@
+-- Asegúrate de estar en la base de datos correcta:
+-- USE bdpatrimoniou;
+
+DELIMITER $$
+
+CREATE PROCEDURE pa_Listar_Rotacion()
+BEGIN
+    SELECT R.idRotacion, R.motivo, R.fecha,
+           B.idBien, B.codigo, B.nombre AS Bien_nombre,
+           AMB.idAmbiente, AMB.nombre AS Ambiente_nombre,
+           RES.idResponsable, RES.nombre AS Responsable_nombre,
+           RES.dni, RES.mail, RES.usuario, RES.contrasena,
+           RES.idRol_Responsable, RR.nombrerol, RR.descripcion AS Rol_descripcion,
+           I.idInmueble AS id_inmueble, I.nombre AS Nombre_inmueble, I.descripcion AS Inmueble_Descripcion
+    FROM Rotacion R
+    INNER JOIN Bien B ON R.idBien = B.idBien
+    INNER JOIN Ambiente AMB ON R.idAmbiente = AMB.idAmbiente
+    INNER JOIN Responsable RES ON R.idResponsable = RES.idResponsable
+    INNER JOIN Rol_Responsable RR ON RES.idRol_Responsable = RR.idRol_Responsable
+    INNER JOIN Inmueble I ON AMB.idInmueble = I.idInmueble;
+END$$
+
+CREATE PROCEDURE pa_Listar_RolResponsable()
+BEGIN
+    SELECT RR.idRol_Responsable, RR.descripcion, RR.nombrerol
+    FROM Rol_Responsable RR;
+END$$
+
+CREATE PROCEDURE pa_Listar_Responsable()
+BEGIN
+    SELECT R.idResponsable,
+           RR.idRol_Responsable, R.nombre AS Responsable_nombre,
+           R.dni, R.mail, R.usuario,
+           CAST(AES_DECRYPT(R.contrasena, 'Clave123') AS CHAR) AS Contrasena,
+           RR.descripcion AS Rol_descripcion,
+           RR.nombrerol
+    FROM Responsable R
+    INNER JOIN Rol_Responsable RR ON R.idRol_Responsable = RR.idRol_Responsable
+    ORDER BY R.nombre ASC;
+END$$
+
+CREATE PROCEDURE pa_Listar_Inventario()
+BEGIN
+    SELECT I.idInventario, I.nombre AS Inventario_nombre, I.descripcion AS Inventario_descripcion, I.fechainicio
+    FROM Inventario I;
+END$$
+
+CREATE PROCEDURE pa_Listar_Inmueble()
+BEGIN
+    SELECT IM.idInmueble, IM.nombre AS Inmueble_nombre, IM.descripcion AS Inmueble_descripcion
+    FROM Inmueble IM;
+END$$
+
+CREATE PROCEDURE pa_Listar_HistorialEstado()
+BEGIN
+    SELECT H.idHistorialEstado,
+           B.idBien, B.codigo, B.nombre AS Bien_nombre,
+           EST.idEstado, EST.tipo AS Estado_tipo,
+           RES.idResponsable, RES.nombre AS Responsable_nombre,
+           RES.dni, RES.mail, RES.usuario, RES.contrasena,
+           RR.idRol_Responsable, RR.nombrerol, RR.descripcion AS Rol_descripcion,
+           H.motivo, H.fechaCambio
+    FROM HistorialEstado H
+    INNER JOIN Bien B ON H.idBien = B.idBien
+    INNER JOIN Estado EST ON H.idEstado = EST.idEstado
+    INNER JOIN Responsable RES ON H.idResponsable = RES.idResponsable
+    INNER JOIN Rol_Responsable RR ON RES.idRol_Responsable = RR.idRol_Responsable;
+END$$
+
+CREATE PROCEDURE pa_Listar_Estado()
+BEGIN
+    SELECT E.idEstado, E.tipo AS Estado_tipo
+    FROM Estado E;
+END$$
+
+CREATE PROCEDURE pa_Listar_DetalleInventario()
+BEGIN
+    SELECT D.idDetalle_Inventario,
+           B.idBien, B.codigo, B.nombre AS Bien_nombre,
+           B.descripcion AS Bien_descripcion, B.fecharegistro,
+           EST.idEstado, EST.tipo AS Estado_tipo,
+           CAT.idCategoria, CAT.nombre AS Categoria_nombre, CAT.descripcion AS Categoria_descripcion,
+           AMB.idAmbiente, AMB.nombre AS Ambiente_nombre,
+           RES.idResponsable, RES.nombre AS Responsable_nombre,
+           RES.dni, RES.mail, RES.usuario, RES.contrasena,
+           RR.idRol_Responsable, RR.nombrerol, RR.descripcion AS Rol_descripcion,
+           I.idInventario, I.nombre AS Inventario_nombre,
+           I.descripcion AS Inventario_descripcion, I.fechainicio
+    FROM Detalle_Inventario D
+    INNER JOIN Bien B ON D.idBien = B.idBien
+    INNER JOIN Estado EST ON B.idEstadoActual = EST.idEstado
+    INNER JOIN Categoria CAT ON B.idCategoria = CAT.idCategoria
+    INNER JOIN Ambiente AMB ON B.idAmbiente = AMB.idAmbiente
+    INNER JOIN Responsable RES ON B.idResponsableActual = RES.idResponsable
+    INNER JOIN Rol_Responsable RR ON RES.idRol_Responsable = RR.idRol_Responsable
+    INNER JOIN Inventario I ON D.idInventario = I.idInventario;
+END$$
+
+CREATE PROCEDURE pa_Listar_Categoria()
+BEGIN
+    SELECT C.idCategoria, C.nombre AS Categoria_nombre, C.descripcion AS Categoria_descripcion
+    FROM Categoria C;
+END$$
+
+CREATE PROCEDURE pa_Listar_Bien()
+BEGIN
+    SELECT B.idBien, B.codigo AS Codigo_Bien, B.nombre AS Bien_nombre,
+           B.descripcion AS Bien_descripcion, B.fecharegistro,
+           EST.idEstado, EST.tipo AS Estado_tipo,
+           CAT.idCategoria, CAT.nombre AS Categoria_nombre, CAT.descripcion AS Categoria_descripcion,
+           AMB.idAmbiente, AMB.nombre AS Ambiente_nombre,
+           IMB.idInmueble, IMB.nombre, IMB.descripcion,
+           RES.idResponsable, RES.nombre AS Responsable_nombre,
+           RES.dni, RES.mail, RES.usuario, RES.contrasena,
+           RR.idRol_Responsable, RR.nombrerol, RR.descripcion AS Rol_descripcion
+    FROM Bien B
+    INNER JOIN Estado EST ON B.idEstadoActual = EST.idEstado
+    INNER JOIN Categoria CAT ON B.idCategoria = CAT.idCategoria
+    INNER JOIN Ambiente AMB ON B.idAmbiente = AMB.idAmbiente
+    INNER JOIN Responsable RES ON B.idResponsableActual = RES.idResponsable
+    INNER JOIN Rol_Responsable RR ON RES.idRol_Responsable = RR.idRol_Responsable
+    INNER JOIN Inmueble IMB ON AMB.idInmueble = IMB.idInmueble;
+END$$
+
+CREATE PROCEDURE pa_Listar_Asignacion()
+BEGIN
+    SELECT A.idAsignacion,
+           B.idBien, B.codigo, B.nombre AS Bien_nombre,
+           RES.idResponsable, RES.nombre AS Responsable_nombre,
+           RES.dni, RES.mail, RES.usuario, RES.contrasena,
+           RR.idRol_Responsable, RR.nombrerol, RR.descripcion AS Rol_descripcion,
+           A.fechainicio
+    FROM Asignacion A
+    INNER JOIN Bien B ON A.idBien = B.idBien
+    INNER JOIN Responsable RES ON A.idResponsable = RES.idResponsable
+    INNER JOIN Rol_Responsable RR ON RES.idRol_Responsable = RR.idRol_Responsable;
+END$$
+
+CREATE PROCEDURE pa_Listar_Ambiente()
+BEGIN
+    SELECT A.idAmbiente, A.nombre AS Ambiente_nombre,
+           IM.idInmueble, IM.nombre AS Inmueble_nombre, IM.descripcion AS Inmueble_descripcion
+    FROM Ambiente A
+    INNER JOIN Inmueble IM ON A.idInmueble = IM.idInmueble;
+END$$
+
+DELIMITER ;

@@ -4,6 +4,7 @@
  */
 package INVENTARIO;
 
+import javax.swing.JOptionPane;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.Detalle_InventarioControlador;
 import org.contenido.controlador.controladorImpl.InventarioControlador;
@@ -198,12 +199,21 @@ public class AñadirInventario extends javax.swing.JFrame {
 
     private void guardar_inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_inventarioActionPerformed
         // TODO add your handling code here:
-        dto.setNombre(nombre_inventario.getText());
-        dto.setDescripcion(descripcion_inventario.getText());
-        controlador.registrar(dto);
-        ModuloDeInventario obj = new ModuloDeInventario();
-        obj.setVisible(true);
-        dispose();
+        String inventario = nombre_inventario.getText();
+        InventarioDTO inv = new InventarioControlador().listarTodo().stream().filter(i -> i.getNombre().equals(inventario)).findFirst().orElse(null);
+        if (inv != null){
+            JOptionPane.showMessageDialog(this,
+            "Ya existe un inventario con nombre: " + inventario,
+            "Inventario existente",
+            JOptionPane.WARNING_MESSAGE);
+        }else{
+            dto.setNombre(nombre_inventario.getText());
+            dto.setDescripcion(descripcion_inventario.getText());
+            controlador.registrar(dto);
+            ModuloDeInventario obj = new ModuloDeInventario();
+            obj.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_guardar_inventarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

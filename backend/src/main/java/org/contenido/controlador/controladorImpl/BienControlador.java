@@ -60,7 +60,7 @@ public class BienControlador implements Controlador<BienDTO> {
     public List<BienDTO> listarTodo() {
         try {
             List<BienDTO> bienes = bienServicio.listarTodo();
-            NotificacionUtil.mostrarMensajeAfirmacion("✅ Bienes listados correctamente.");
+            //NotificacionUtil.mostrarMensajeAfirmacion("✅ Bienes listados correctamente.");
             return bienes;
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);

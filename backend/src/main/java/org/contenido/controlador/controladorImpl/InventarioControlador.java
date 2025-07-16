@@ -60,7 +60,7 @@ public class InventarioControlador implements Controlador<InventarioDTO> {
     public List<InventarioDTO> listarTodo() {
         try {
             List<InventarioDTO> inventarios = inventarioServicio.listarTodo();
-            NotificacionUtil.mostrarMensajeAfirmacion("✅ Inventarios listados correctamente.");
+            //NotificacionUtil.mostrarMensajeAfirmacion("✅ Inventarios listados correctamente.");
             return inventarios;
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);

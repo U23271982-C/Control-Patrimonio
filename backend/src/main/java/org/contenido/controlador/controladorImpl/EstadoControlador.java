@@ -60,7 +60,7 @@ public class EstadoControlador implements Controlador<EstadoDTO> {
     public List<EstadoDTO> listarTodo() {
         try {
             List<EstadoDTO> estados = estadoServicio.listarTodo();
-            NotificacionUtil.mostrarMensajeAfirmacion("✅ Estados listados correctamente.");
+            //NotificacionUtil.mostrarMensajeAfirmacion("✅ Estados listados correctamente.");
             return estados;
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);

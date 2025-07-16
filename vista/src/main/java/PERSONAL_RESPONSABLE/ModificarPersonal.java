@@ -1,6 +1,7 @@
 package PERSONAL_RESPONSABLE;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.ResponsableControlador;
 import org.contenido.controlador.controladorImpl.Rol_ResponsableControlador;
@@ -258,21 +259,36 @@ public class ModificarPersonal extends javax.swing.JFrame {
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
         // TODO add your handling code here:
-        
-        responsableSeleccionado.setNombre(nombre_personal.getText());
-        responsableSeleccionado.setDni(dni_personal.getText());
-        responsableSeleccionado.setEmail(correo_personal.getText());
-        responsableSeleccionado.setUsuario(usuario_personal.getText());
-        responsableSeleccionado.setContrsena(contrasena_personal.getText());
-
-        Rol_ResponsableDTO rolSeleccionado = (Rol_ResponsableDTO) cargo_personal.getSelectedItem();
-        responsableSeleccionado.setRol_responsableDTO(rolSeleccionado);
-        
         Controlador<ResponsableDTO> controlador = new ResponsableControlador();
-        controlador.actualizar(responsableSeleccionado);
-        PanelResponsables obj = new PanelResponsables();
-        obj.setVisible(true);
-        dispose();
+        List<ResponsableDTO> listares = controlador.listarTodo();
+        String dni = dni_personal.getText();
+        ResponsableDTO responsable = null;
+        for(ResponsableDTO r : listares){
+            if(r.getDni().equals(dni)){
+                responsable = r;
+                break;
+            }
+        }
+        if(responsable!=null && responsable.getId()!=responsableSeleccionado.getId()){
+            JOptionPane.showMessageDialog(null,
+            "Ya existe el responsable con el DNI: " + dni,
+            "DNI ya existente",
+            JOptionPane.WARNING_MESSAGE);
+        }else{
+            responsableSeleccionado.setNombre(nombre_personal.getText());
+            responsableSeleccionado.setDni(dni_personal.getText());
+            responsableSeleccionado.setEmail(correo_personal.getText());
+            responsableSeleccionado.setUsuario(usuario_personal.getText());
+            responsableSeleccionado.setContrsena(contrasena_personal.getText());
+
+            Rol_ResponsableDTO rolSeleccionado = (Rol_ResponsableDTO) cargo_personal.getSelectedItem();
+            responsableSeleccionado.setRol_responsableDTO(rolSeleccionado);
+
+            controlador.actualizar(responsableSeleccionado);
+            PanelResponsables obj = new PanelResponsables();
+            obj.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_RegistrarActionPerformed
 
     private void cargarRolesAlComboBox() {

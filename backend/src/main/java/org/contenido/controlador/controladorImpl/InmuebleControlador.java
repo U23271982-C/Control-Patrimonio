@@ -60,7 +60,7 @@ public class InmuebleControlador implements Controlador<InmuebleDTO> {
     public List<InmuebleDTO> listarTodo() {
         try {
             List<InmuebleDTO> inmuebles = inmuebleServicio.listarTodo();
-            NotificacionUtil.mostrarMensajeAfirmacion("✅ Inmuebles listados correctamente.");
+            //NotificacionUtil.mostrarMensajeAfirmacion("✅ Inmuebles listados correctamente.");
             return inmuebles;
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);

@@ -245,14 +245,16 @@ public class DetalleInventario extends javax.swing.JFrame {
 
     private void cargarDetalle(InventarioDTO in){
             DefaultTableModel modelo = new DefaultTableModel(
-            new String[]{"Bien", "Cogido Inventario"}, 0
+            new String[]{"Codigo","Bien", "Codigo Inventario","Ambiente"}, 0
             );
             for(Detalle_InventarioDTO dt : listadetalle.stream()
                 .filter(a -> a.getInventarioDTO().getId() == in.getId())
                     .toList()){
                     modelo.addRow(new Object[]{
+                        dt.getBienDTO().getCodigo(),
                         dt.getBienDTO().getNombre(),
                         dt.getInventarioDTO().getNombre(),
+                        dt.getBienDTO().getAmbienteDTO().getNombre(),
                     });
             }
             TablaDetalleInventario1.setModel(modelo);

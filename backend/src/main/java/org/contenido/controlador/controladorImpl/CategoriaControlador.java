@@ -60,7 +60,7 @@ public class CategoriaControlador implements Controlador<CategoriaDTO> {
     public List<CategoriaDTO> listarTodo() {
         try {
             List<CategoriaDTO> categorias = categoriaServicio.listarTodo();
-            NotificacionUtil.mostrarMensajeAfirmacion("✅ Categorías listadas correctamente.");
+            //NotificacionUtil.mostrarMensajeAfirmacion("✅ Categorías listadas correctamente.");
             return categorias;
         } catch (Exception e) {
             NotificacionUtil.mostrarError(e);

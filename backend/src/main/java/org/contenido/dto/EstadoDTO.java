@@ -10,7 +10,7 @@ public class EstadoDTO {
     @NotNull(message = "El id no puede ser nulo", groups = {EnActualizar.class})
     private int id;
     @NotNull(message = "El tipo no puede ser nulo", groups = {EnCrear.class})
-    @Size(max = 30, message = "El tipo no debe exceder los 30 caracteres")
+    @Size(max = 30, message = "El tipo no debe exceder los 30 caracteres", groups = {EnCrear.class, EnActualizar.class})
     private String tipo;
 
     public EstadoDTO() {}
