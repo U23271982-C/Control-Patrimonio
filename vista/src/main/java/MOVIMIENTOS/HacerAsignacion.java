@@ -261,31 +261,39 @@ public class HacerAsignacion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String responsable = bien_responsable.getText();
-        ResponsableDTO resEncontrado = null;
-        for(ResponsableDTO r : listares){
-            if(r.getDni().equals(responsable)){
-                resEncontrado = r;
-                break;
+            String dniIngresado = bien_responsable.getText().trim();
+            ResponsableDTO resEncontrado = null;
+
+            // Si el DNI no está vacío, buscar en la lista
+            if (!dniIngresado.isEmpty()) {
+                for (ResponsableDTO r : listares) {
+                    if (r.getDni().equals(dniIngresado)) {
+                        resEncontrado = r;
+                        break;
+                    }
+                }
+
+                // Si no se encuentra el responsable, mostrar advertencia y detener
+                if (resEncontrado == null) {
+                    JOptionPane.showMessageDialog(null,
+                        "No se encontró un responsable con el DNI: " + dniIngresado,
+                        "DNI no encontrado",
+                        JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
             }
-        }
-        if(resEncontrado!=null){
-            dto.setResponsableDTO(resEncontrado);
+
+            // Si se llega aquí, se permite asignación (sea con responsable null o válido)
+            dto.setResponsableDTO(resEncontrado); // puede ser null si DNI vacío
             controlador.actualizar(dto);
+
             dtoa.setBienDTO(dto);
-            dtoa.setResponsableDTO(resEncontrado);
+            dtoa.setResponsableDTO(resEncontrado); // puede ser null
             controladora.registrar(dtoa);
-        }else{
-            JOptionPane.showMessageDialog(null,
-            "No se encontró un responsable con el DNI: " + responsable,
-            "DNI no encontrado",
-            JOptionPane.WARNING_MESSAGE);
-        }
-        
-        
-        ModuloAsignacion obj = new ModuloAsignacion(dto);
-        obj.setVisible(true);
-        dispose();
+
+            ModuloAsignacion obj = new ModuloAsignacion(dto);
+            obj.setVisible(true);
+            dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nombre_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_bienActionPerformed

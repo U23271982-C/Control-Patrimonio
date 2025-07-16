@@ -5,6 +5,7 @@
 package INVENTARIO;
 
 import java.time.LocalDate;
+import java.util.List;
 import javax.swing.JOptionPane;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.InventarioControlador;
@@ -261,9 +262,17 @@ public class ModificarInventario extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        Controlador<InventarioDTO> controladorinv= new InventarioControlador();
+        List<InventarioDTO> listainv = controladorinv.listarTodo();
         String inventario = nombre_inventario.getText();
-        InventarioDTO inv = new InventarioControlador().listarTodo().stream().filter(i -> i.getNombre().equals(inventario)).findFirst().orElse(null);
-        if (inv != null){
+        InventarioDTO inv = null;
+        for(InventarioDTO invf : listainv){
+            if(invf.getNombre().equals(inventario)){
+                inv=invf;
+                break;
+            }
+        }
+        if (inv != null && inv.getId()!=dto.getId()){
             JOptionPane.showMessageDialog(this,
             "Ya existe un inventario con nombre: " + inventario,
             "Inventario existente",

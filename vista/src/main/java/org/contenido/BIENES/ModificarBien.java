@@ -5,6 +5,7 @@
 package org.contenido.BIENES;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.contenido.controlador.Controlador;
 import org.contenido.controlador.controladorImpl.BienControlador;
 import org.contenido.controlador.controladorImpl.CategoriaControlador;
@@ -74,7 +75,6 @@ public class ModificarBien extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        codigo_bien.setEditable(false);
         codigo_bien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 codigo_bienActionPerformed(evt);
@@ -268,15 +268,29 @@ public class ModificarBien extends javax.swing.JFrame {
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // TODO add your handling code here:
-            dto.setNombre(nombre_bien.getText());
-            dto.setDescripcion(descripcion_bien.getText());
-            CategoriaDTO categoriaseleccionada = (CategoriaDTO) categoria_bien.getSelectedItem();
-            dto.setCategoriaDTO(categoriaseleccionada);
-            controlador.actualizar(dto);
-
-            BienesPrincipal obj = new BienesPrincipal();
-            obj.setVisible(true);
-            dispose();
+            List<BienDTO> listabienn = controlador.listarTodo();
+            String codigo = codigo_bien.getText();
+            BienDTO bdto = null;
+            for(BienDTO b:listabienn){
+                if(b.getCodigo().equals(dto.getCodigo())){
+                    bdto=b;
+                }
+            }
+            if(bdto!=null && bdto.getId()!=dto.getId()){
+                JOptionPane.showMessageDialog(null,
+                "Ya existe el Bien con el codigo: " + codigo,
+                "Codigo ya existente",
+                JOptionPane.WARNING_MESSAGE);                
+            }else{
+                dto.setNombre(nombre_bien.getText());
+                dto.setDescripcion(descripcion_bien.getText());
+                CategoriaDTO categoriaseleccionada = (CategoriaDTO) categoria_bien.getSelectedItem();
+                dto.setCategoriaDTO(categoriaseleccionada);
+                controlador.actualizar(dto);
+                BienesPrincipal obj = new BienesPrincipal();
+                obj.setVisible(true);
+                dispose();
+            }
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void categoria_bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoria_bienActionPerformed

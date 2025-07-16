@@ -11,7 +11,6 @@ public class AsignacionDTO {
     private int id;
     @NotNull(message = "El bien no puede ser nulo", groups = EnCrear.class)
     private BienDTO bienDTO;
-    @NotNull(message = "El responsable no puede ser nulo", groups = EnCrear.class)
     private ResponsableDTO responsableDTO;
 
     private LocalDate fecha_inicio;
